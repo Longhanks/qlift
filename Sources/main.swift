@@ -1,4 +1,14 @@
+#if os(Linux)
+import Glibc
+#else
+import Darwin
+#endif
+
 import CQlift
 
-let app = QApplication_ctor(CommandLine.argc, CommandLine.unsafeArgv)
-print("app is: \(String(describing: type(of: app)))")
+
+var argc = CommandLine.argc
+let app = QApplication_ctor(&argc, CommandLine.unsafeArgv)
+let returnValue = QApplication_exec(app)
+exit(returnValue)
+

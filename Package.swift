@@ -2,9 +2,15 @@
 
 import PackageDescription
 
+#if os(Linux)
+let packageURL = "https://github.com/Longhanks/CQlift-linux"
+#else
+let packageURL = "https://github.com/Longhanks/CQlift-mac"
+#endif
+
 let package = Package(
     name: "Qlift",
     dependencies: [
-        .Package(url: "https://github.com/Longhanks/CQlift", majorVersion: 1)
+        .Package(url: packageURL, majorVersion: 1)
     ]
 )
