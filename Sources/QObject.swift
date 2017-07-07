@@ -14,7 +14,9 @@ class QObject {
 
     deinit {
         if self.ptr != nil {
-            QObject_delete(self.ptr)
+            if QObject_parent(self.ptr) != nil {
+                QObject_delete(self.ptr)
+            }
         }
     }
 }

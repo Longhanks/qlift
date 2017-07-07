@@ -14,8 +14,10 @@ class QApplication: QGuiApplication {
 
     deinit {
         if self.ptr != nil {
-            QApplication_delete(self.ptr)
-            self.ptr = nil
+            if QObject_parent(self.ptr) != nil {
+                QApplication_delete(self.ptr)
+                self.ptr = nil
+            }
         }
     }
 }
