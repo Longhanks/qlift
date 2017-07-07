@@ -3,7 +3,6 @@ import Glibc
 #else
 import Darwin
 #endif
-import CQlift
 
 
 func main() -> Int32 {
