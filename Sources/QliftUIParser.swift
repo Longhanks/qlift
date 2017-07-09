@@ -35,7 +35,7 @@ extension QliftUIParser: XMLParserDelegate {
 
 // let parser = QliftUIParser()
 //
-// guard let document = try? String(contentsOf: URL(fileURLWithPath: CommandLine.arguments[1], isDirectory: false)) else {
+// guard let document = try? String(contentsOf: URL(fileURLWithPath: CommandLine.arguments[1], isDirectory: false), encoding: .utf8) else {
 //     print("Couldn't read file")
 //     exit(0)
 // }
