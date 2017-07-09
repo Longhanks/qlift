@@ -1,17 +1,7 @@
 # Qlift
 Swift API for Qt
 
-### Building
+### Usage
 
-Building with stdlib dynamically linked:
-
-```bash
-swift build
-```
-
-Building with stdlib statically linked and optimized:
-
-```bash
-swift build -c release -Xswiftc -static-stdlib
-```
+Example: [qlift-swift-example](https://github.com/Longhanks/qlift-swift-example "qlift-swift-example")
 
