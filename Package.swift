@@ -3,9 +3,9 @@
 import PackageDescription
 
 #if os(Linux)
-let packageURL = "https://github.com/Longhanks/CQlift-linux"
+let packageURL = "https://github.com/Longhanks/qlift-modulemap-linux"
 #else
-let packageURL = "https://github.com/Longhanks/CQlift-mac"
+let packageURL = "https://github.com/Longhanks/qlift-modulemap-mac"
 #endif
 
 let package = Package(
@@ -14,3 +14,4 @@ let package = Package(
         .Package(url: packageURL, majorVersion: 1)
     ]
 )
+
