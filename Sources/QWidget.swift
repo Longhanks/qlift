@@ -1,8 +1,8 @@
 import CQlift
 
 
-class QWidget: QObject {
-    init(parent: QWidget? = nil, flags: Int32 = 0) {
+open class QWidget: QObject {
+    public init(parent: QWidget? = nil, flags: Int32 = 0) {
         super.init(ptr: QWidget_new(parent?.ptr, flags))
     }
 
@@ -19,7 +19,7 @@ class QWidget: QObject {
         }
     }
 
-    func show() {
+    open func show() {
         QWidget_show(self.ptr)
     }
 }

@@ -1,10 +1,10 @@
 import CQlift
 
 
-class QCoreApplication: QObject {
+open class QCoreApplication: QObject {
     private var argc = CommandLine.argc
 
-    init() {
+    public init() {
         super.init(ptr: QCoreApplication_new(&argc, CommandLine.unsafeArgv))
     }
 
@@ -21,11 +21,11 @@ class QCoreApplication: QObject {
         }
     }
 
-    func exec() -> Int32 {
+    open func exec() -> Int32 {
         return QCoreApplication_exec(self.ptr)
     }
 
-    func exit(returnCode: Int32) {
+    open func exit(returnCode: Int32) {
         QCoreApplication_exit(self.ptr, returnCode)
     }
 }

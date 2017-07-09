@@ -1,8 +1,8 @@
 import CQlift
 
 
-class QPushButton: QAbstractButton {
-    init(text: String = "", parent: QWidget? = nil) {
+open class QPushButton: QAbstractButton {
+    public init(text: String = "", parent: QWidget? = nil) {
         super.init(ptr: QPushButton_new(nil, text, parent?.ptr))
     }
 

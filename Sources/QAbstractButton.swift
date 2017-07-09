@@ -1,12 +1,12 @@
 import CQlift
 
 
-class QAbstractButton: QWidget {
-    override init(ptr: UnsafeMutableRawPointer) {
+open class QAbstractButton: QWidget {
+    public override init(ptr: UnsafeMutableRawPointer) {
         super.init(ptr: ptr)
     }
 
-    func connectClicked(receiver: QObject? = nil, to slot: @escaping @convention(c) (Int32) -> Void) {
+    open func connectClicked(receiver: QObject? = nil, to slot: @escaping @convention(c) (Int32) -> Void) {
         var object: QObject = self
         if receiver != nil {
             object = receiver!

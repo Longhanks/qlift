@@ -1,14 +1,14 @@
 import CQlift
 
 
-class QLabel: QWidget {
+open class QLabel: QWidget {
     var alignment: Int32 = 0 {
         didSet {
             QLabel_setAlignment(self.ptr, alignment)
         }
     }
 
-    init(text: String = "", parent: QWidget?, flags: Int32 = 0) {
+    public init(text: String = "", parent: QWidget?, flags: Int32 = 0) {
         super.init(ptr: QLabel_new(text, parent?.ptr, flags))
     }
 

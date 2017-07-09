@@ -1,14 +1,14 @@
 import CQlift
 
 
-class QMainWindow: QWidget {
-    var centralWidget: QWidget? {
+open class QMainWindow: QWidget {
+    open var centralWidget: QWidget? {
         didSet {
             QMainWindow_setCentralWidget(self.ptr, centralWidget?.ptr)
         }
     }
 
-    override init(parent: QWidget? = nil, flags: Int32 = 0) {
+    public override init(parent: QWidget? = nil, flags: Int32 = 0) {
         super.init(ptr: QMainWindow_new(parent?.ptr, flags))
     }
 

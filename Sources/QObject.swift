@@ -1,10 +1,10 @@
 import CQlift
 
 
-class QObject {
+open class QObject {
     var ptr: UnsafeMutableRawPointer?
 
-    init(parent: QObject? = nil) {
+    public init(parent: QObject? = nil) {
         self.ptr = QObject_new(parent?.ptr)
     }
 

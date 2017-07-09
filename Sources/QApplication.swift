@@ -1,10 +1,10 @@
 import CQlift
 
 
-class QApplication: QGuiApplication {
+open class QApplication: QGuiApplication {
     private var argc = CommandLine.argc
 
-    override init() {
+    public override init() {
         super.init(ptr: QApplication_new(&argc, CommandLine.unsafeArgv))
     }
 
