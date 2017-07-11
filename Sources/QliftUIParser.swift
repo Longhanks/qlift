@@ -19,7 +19,7 @@ public class QliftUIParser: NSObject {
     }
 
     private func node2Swift(node: Node) -> String {
-        var swiftUI = "import Qlift\n\n"
+        var swiftUI = "import Qlift\n\n\n"
         let ui = node.children[0].children
         var rootWidgetNode: Node? = nil
 
@@ -55,7 +55,7 @@ public class QliftUIParser: NSObject {
             swiftUI += subNode2Swift(node: node)
         }
         // 2. Everything except actions
-        for node in rootWidgetNode!.children.filter({ $0.text != "action" && $0.text != "addaction" }) {
+        for node in rootWidgetNode!.children.filter({ $0.text != "action" }) {
             swiftUI += subNode2Swift(node: node)
         }
         swiftUI += "    }\n"
@@ -83,7 +83,7 @@ public class QliftUIParser: NSObject {
             }
         }
         else if node.text == "action" {
-            ui += "        \(node.attributes["name"]!) = QAction(\(node.parent!.attributes["name"]!))\n"
+            ui += "        \(node.attributes["name"]!) = QAction(parent: \(node.parent!.attributes["name"]!))\n"
             for subNode in node.children {
                 ui += subNode2Swift(node: subNode)
             }

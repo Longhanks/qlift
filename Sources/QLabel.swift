@@ -8,7 +8,7 @@ open class QLabel: QWidget {
         }
     }
 
-    public init(text: String = "", parent: QWidget?, flags: Int32 = 0) {
+    public init(text: String = "", parent: QWidget? = nil, flags: Int32 = 0) {
         super.init(ptr: QLabel_new(text, parent?.ptr, flags))
     }
 
