@@ -1,7 +1,7 @@
 import CQlift
 
 
-open class QLabel: QWidget {
+open class QLabel: QFrame {
     var alignment: Int32 = 0 {
         didSet {
             QLabel_setAlignment(self.ptr, alignment)
