@@ -2,9 +2,9 @@ import CQlift
 
 
 open class QLabel: QFrame {
-    public var alignment: Int32 = 0 {
+    public var alignment: Qt.Alignments = [.AlignLeft, .AlignVCenter] {
         didSet {
-            QLabel_setAlignment(self.ptr, alignment)
+            QLabel_setAlignment(self.ptr, alignment.rawValue)
         }
     }
 
