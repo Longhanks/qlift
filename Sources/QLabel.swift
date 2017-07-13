@@ -2,7 +2,7 @@ import CQlift
 
 
 open class QLabel: QFrame {
-    var alignment: Int32 = 0 {
+    public var alignment: Int32 = 0 {
         didSet {
             QLabel_setAlignment(self.ptr, alignment)
         }
