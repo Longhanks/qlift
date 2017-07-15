@@ -50,6 +50,7 @@ public class QliftUIParser: NSObject {
 
         swiftUI += "\n"
         swiftUI += "    init() {\n"
+        swiftUI += "        super.init()\n"
         // 1. Actions
         for node in rootWidgetNode!.children.filter({ $0.text == "action" }) {
             swiftUI += subNode2Swift(node: node)
