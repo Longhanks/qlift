@@ -9,9 +9,6 @@ let packageURL = "https://github.com/Longhanks/qlift-modulemap-mac"
 #endif
 
 let package = Package(
-    name: "Qlift",
-    dependencies: [
-        .Package(url: packageURL, majorVersion: 1)
-    ]
+    name: "Qlift"
 )
 
