@@ -1,9 +1,10 @@
 import CQlift
 
 
-open class QMenu: QWidget {
-    public init(title: String? = nil, parent: QWidget? = nil) {
-        super.init(ptr: QMenu_new(title, parent?.ptr))
+open class QAction: QObject {
+    // Icon not supported at the moment
+    public init(text: String? = nil, parent: QObject? = nil) {
+        super.init(ptr: QAction_new(nil, text, parent?.ptr))
     }
 
     override init(ptr: UnsafeMutableRawPointer) {
@@ -13,7 +14,7 @@ open class QMenu: QWidget {
     deinit {
         if self.ptr != nil {
             if QObject_parent(self.ptr) != nil {
-                QMenu_delete(self.ptr)
+                QAction_delete(self.ptr)
                 self.ptr = nil
             }
         }
