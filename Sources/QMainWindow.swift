@@ -2,9 +2,24 @@ import CQlift
 
 
 open class QMainWindow: QWidget {
-    open var centralWidget: QWidget? {
-        didSet {
-            QMainWindow_setCentralWidget(self.ptr, centralWidget?.ptr)
+    public var centralWidget: QWidget? {
+        get {
+            guard let widgetPtr = QMainWindow_centralWidget(self.ptr) else {
+                return nil
+            }
+            return QWidget(ptr: widgetPtr)
+        }
+        set(newCentralWidget) {
+            QMainWindow_setCentralWidget(self.ptr, newCentralWidget?.ptr)
+        }
+    }
+
+    public var menuBar: QMenuBar? {
+        get {
+            return QMenuBar(ptr: QMainWindow_menuBar(self.ptr))
+        }
+        set(newMenuBar) {
+            QMainWindow_setMenuBar(self.ptr, newMenuBar?.ptr)
         }
     }
 
