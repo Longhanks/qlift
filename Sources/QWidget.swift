@@ -11,7 +11,7 @@ open class QWidget: QObject {
         }
     }
 
-    public var geometry: QRect! {
+    public var geometry: QRect? {
         get {
             return QRect(ptr: QWidget_geometry(self.ptr))
         }
@@ -20,12 +20,14 @@ open class QWidget: QObject {
         }
     }
 
-    public init(parent: QWidget? = nil, flags: Int32 = 0) {
-        super.init(ptr: QWidget_new(parent?.ptr, flags))
+    public convenience init(parent: QWidget? = nil, flags: Int32 = 0) {
+        self.init(ptr: QWidget_new(parent?.ptr, flags))
     }
 
     override init(ptr: UnsafeMutableRawPointer) {
         super.init(ptr: ptr)
+        self.windowTitle = String(cString: QWidget_windowTitle(self.ptr))
+        self.geometry = QRect(ptr: QWidget_geometry(self.ptr))
     }
 
     public func add(action: QAction) {
