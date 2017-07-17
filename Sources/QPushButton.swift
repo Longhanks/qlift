@@ -3,8 +3,8 @@ import CQlift
 
 open class QPushButton: QAbstractButton {
     // Icon not supported at the moment
-    public init(text: String = "", parent: QWidget? = nil) {
-        super.init(ptr: QPushButton_new(nil, text, parent?.ptr))
+    public convenience init(text: String = "", parent: QWidget? = nil) {
+        self.init(ptr: QPushButton_new(nil, text, parent?.ptr))
     }
 
     override init(ptr: UnsafeMutableRawPointer) {
