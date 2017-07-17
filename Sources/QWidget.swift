@@ -2,12 +2,25 @@ import CQlift
 
 
 open class QWidget: QObject {
+    public var windowTitle: String {
+        get {
+            return String(cString: QWidget_windowTitle(self.ptr))
+        }
+        set(newWindowTitle) {
+            QWidget_setWindowTitle(self.ptr, newWindowTitle)
+        }
+    }
+
     public init(parent: QWidget? = nil, flags: Int32 = 0) {
         super.init(ptr: QWidget_new(parent?.ptr, flags))
     }
 
     override init(ptr: UnsafeMutableRawPointer) {
         super.init(ptr: ptr)
+    }
+
+    public func add(action: QAction) {
+        QWidget_addAction(self.ptr, action.ptr)
     }
 
     deinit {
