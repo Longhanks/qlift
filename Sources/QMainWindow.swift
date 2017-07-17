@@ -23,22 +23,16 @@ open class QMainWindow: QWidget {
         }
     }
 
-    public convenience init(parent: QWidget? = nil, flags: Int32 = 0) {
-        self.init(ptr: QMainWindow_new(parent?.ptr, flags))
+    public override init(parent: QWidget? = nil, flags: Int32 = 0) {
+        super.init(ptr: QMainWindow_new(parent?.ptr, flags))
+        self.centralWidget = nil
+        self.menuBar = nil
     }
 
     override init(ptr: UnsafeMutableRawPointer) {
         super.init(ptr: ptr)
-        if let widgetPtr = QMainWindow_centralWidget(self.ptr) {
-            self.centralWidget = QWidget(ptr: widgetPtr)
-        } else {
-            self.centralWidget = nil
-        }
-        if let menuBarPtr = QMainWindow_menuBar(self.ptr) {
-            self.menuBar = QMenuBar(ptr: menuBarPtr)
-        } else {
-            self.menuBar = nil
-        }
+        self.centralWidget = nil
+        self.menuBar = nil
     }
 
     deinit {

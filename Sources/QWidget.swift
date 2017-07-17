@@ -20,14 +20,16 @@ open class QWidget: QObject {
         }
     }
 
-    public convenience init(parent: QWidget? = nil, flags: Int32 = 0) {
-        self.init(ptr: QWidget_new(parent?.ptr, flags))
+    public init(parent: QWidget? = nil, flags: Int32 = 0) {
+        super.init(ptr: QWidget_new(parent?.ptr, flags))
+        self.windowTitle = ""
+        self.geometry = nil
     }
 
     override init(ptr: UnsafeMutableRawPointer) {
         super.init(ptr: ptr)
-        self.windowTitle = String(cString: QWidget_windowTitle(self.ptr))
-        self.geometry = QRect(ptr: QWidget_geometry(self.ptr))
+        self.windowTitle = ""
+        self.geometry = nil
     }
 
     public func add(action: QAction) {
