@@ -11,6 +11,15 @@ open class QWidget: QObject {
         }
     }
 
+    public var geometry: QRect! {
+        get {
+            return QRect(ptr: QWidget_geometry(self.ptr))
+        }
+        set(newGeometry) {
+            QWidget_setGeometry(self.ptr, newGeometry?.ptr)
+        }
+    }
+
     public init(parent: QWidget? = nil, flags: Int32 = 0) {
         super.init(ptr: QWidget_new(parent?.ptr, flags))
     }

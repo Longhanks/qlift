@@ -8,6 +8,10 @@ open class QRect {
         self.ptr = QRect_new(x, y, width, height)
     }
 
+    init(ptr: UnsafeMutableRawPointer) {
+        self.ptr = ptr
+    }
+
     deinit {
         if self.ptr != nil {
             QRect_delete(self.ptr)
