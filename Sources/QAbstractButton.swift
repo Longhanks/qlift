@@ -2,6 +2,15 @@ import CQlift
 
 
 open class QAbstractButton: QWidget {
+    public var text: String {
+        get {
+            return String(cString: QAbstractButton_text(self.ptr))
+        }
+        set(newText) {
+            QAbstractButton_setText(self.ptr, newText)
+        }
+    }
+
     public override init(ptr: UnsafeMutableRawPointer) {
         super.init(ptr: ptr)
     }
