@@ -45,7 +45,7 @@ public class QliftUIParser: NSObject {
             else if property.text == "action" {
                 cls = "QAction"
             }
-            swiftUI += "    var " + property.attributes["name"]! + ": " + cls + "\n"
+            swiftUI += "    var " + property.attributes["name"]! + ": " + cls + "!\n"
         }
 
         swiftUI += "\n"
