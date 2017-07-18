@@ -13,12 +13,10 @@ open class QMenu: QWidget {
 
     public init(title: String? = nil, parent: QWidget? = nil) {
         super.init(ptr: QMenu_new(title, parent?.ptr))
-        self.title = ""
     }
 
     override init(ptr: UnsafeMutableRawPointer) {
         super.init(ptr: ptr)
-        self.title = ""
     }
 
     public func menuAction() -> QAction {

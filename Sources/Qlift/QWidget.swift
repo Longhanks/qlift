@@ -22,14 +22,10 @@ open class QWidget: QObject {
 
     public init(parent: QWidget? = nil, flags: Int32 = 0) {
         super.init(ptr: QWidget_new(parent?.ptr, flags))
-        self.windowTitle = ""
-        self.geometry = nil
     }
 
     override init(ptr: UnsafeMutableRawPointer) {
         super.init(ptr: ptr)
-        self.windowTitle = ""
-        self.geometry = nil
     }
 
     public func add(action: QAction) {

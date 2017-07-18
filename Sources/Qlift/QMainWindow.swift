@@ -25,14 +25,10 @@ open class QMainWindow: QWidget {
 
     public override init(parent: QWidget? = nil, flags: Int32 = 0) {
         super.init(ptr: QMainWindow_new(parent?.ptr, flags))
-        self.centralWidget = nil
-        self.menuBar = nil
     }
 
     override init(ptr: UnsafeMutableRawPointer) {
         super.init(ptr: ptr)
-        self.centralWidget = nil
-        self.menuBar = nil
     }
 
     deinit {
