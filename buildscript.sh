@@ -1,13 +1,15 @@
 #!/bin/bash
 
-git clone https://github.com/Longhanks/qlift-c-api
-
-cd qlift-c-api
-mkdir build
-cd build
-cmake .. -DENABLE_SHARED=OFF -DENABLE_STATIC=ON
-make -j4
-cd ../..
+if [ ! -f qlift-c-api/build/bin/libqlift-c-api.a ]; then
+    rm -rf qlift-c-api
+    git clone https://github.com/Longhanks/qlift-c-api
+    cd qlift-c-api
+    mkdir build
+    cd build
+    cmake .. -DENABLE_SHARED=OFF -DENABLE_STATIC=ON
+    make -j4
+    cd ../..
+fi
 QLIFT_C_API=$(pwd)/qlift-c-api
 
 
@@ -21,6 +23,4 @@ fi
 
 
 swift build -Xcc -I$QLIFT_C_API/src $ADDITIONAL_FLAGS -Xlinker -L$QLIFT_C_API/build/bin $QT_FLAGS
-
-rm -rf qlift-c-api
 

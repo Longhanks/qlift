@@ -4,6 +4,10 @@ import PackageDescription
 
 
 let package = Package(
-    name: "Qlift"
+    name: "Qlift",
+    targets: [
+        Target(name: "Qlift"),
+        Target(name: "qlift-uic", dependencies: ["Qlift"])
+    ]
 )
 
