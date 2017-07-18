@@ -4,7 +4,7 @@ import CQlift
 open class QBoxLayout: QObject, QLayout {
     // Irrelevant because QBoxLayout is a QObject.
     public var needsDelete = false
-    
+
     public init(direction: Int32 = 0, parent: QWidget? = nil) {
         super.init(ptr: QBoxLayout_new(direction, parent?.ptr))
     }
@@ -32,10 +32,10 @@ open class QBoxLayout: QObject, QLayout {
 
     deinit {
         if self.ptr != nil {
-            if QObject_parent(self.ptr) != nil {
+            if QObject_parent(self.ptr) == nil {
                 QBoxLayout_delete(self.ptr)
-                self.ptr = nil
             }
+            self.ptr = nil
         }
     }
 }

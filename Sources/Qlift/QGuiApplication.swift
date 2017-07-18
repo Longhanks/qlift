@@ -14,10 +14,10 @@ open class QGuiApplication: QCoreApplication {
 
     deinit {
         if self.ptr != nil {
-            if QObject_parent(self.ptr) != nil {
+            if QObject_parent(self.ptr) == nil {
                 QGuiApplication_delete(self.ptr)
-                self.ptr = nil
             }
+            self.ptr = nil
         }
     }
 }

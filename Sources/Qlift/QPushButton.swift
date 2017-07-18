@@ -13,10 +13,10 @@ open class QPushButton: QAbstractButton {
 
     deinit {
         if self.ptr != nil {
-            if QObject_parent(self.ptr) != nil {
+            if QObject_parent(self.ptr) == nil {
                 QPushButton_delete(self.ptr)
-                self.ptr = nil
             }
+            self.ptr = nil
         }
     }
 }

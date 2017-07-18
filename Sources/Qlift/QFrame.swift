@@ -12,10 +12,10 @@ open class QFrame: QWidget {
 
     deinit {
         if self.ptr != nil {
-            if QObject_parent(self.ptr) != nil {
+            if QObject_parent(self.ptr) == nil {
                 QFrame_delete(self.ptr)
-                self.ptr = nil
             }
+            self.ptr = nil
         }
     }
 }

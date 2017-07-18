@@ -25,10 +25,10 @@ open class QMenu: QWidget {
 
     deinit {
         if self.ptr != nil {
-            if QObject_parent(self.ptr) != nil {
+            if QObject_parent(self.ptr) == nil {
                 QMenu_delete(self.ptr)
-                self.ptr = nil
             }
+            self.ptr = nil
         }
     }
 }
