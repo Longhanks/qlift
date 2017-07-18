@@ -81,6 +81,8 @@ public class QliftUIParser: NSObject {
             } else if namesOfQMenusForAddAction.contains(actionName) {
                 actionName = actionName + ".menuAction()"
                 ui += "        \(node.parent!.attributes["name"]!).add(action: \(actionName))\n"
+            } else {
+                ui += "        \(node.parent!.attributes["name"]!).add(action: \(actionName))\n"
             }
         }
         else if node.text == "action" {
