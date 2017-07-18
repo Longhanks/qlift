@@ -3,13 +3,16 @@ import CQlift
 
 open class QObject {
     public var ptr: UnsafeMutableRawPointer!
+    public var parent: QObject?
 
     public init(parent: QObject? = nil) {
         self.ptr = QObject_new(parent?.ptr)
+        self.parent = parent
     }
 
-    init(ptr: UnsafeMutableRawPointer) {
+    init(ptr: UnsafeMutableRawPointer, parent: QObject? = nil) {
         self.ptr = ptr
+        self.parent = parent
     }
 
     deinit {

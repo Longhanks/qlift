@@ -6,11 +6,11 @@ open class QBoxLayout: QObject, QLayout {
     public var needsDelete = false
 
     public init(direction: Int32 = 0, parent: QWidget? = nil) {
-        super.init(ptr: QBoxLayout_new(direction, parent?.ptr))
+        super.init(ptr: QBoxLayout_new(direction, parent?.ptr), parent: parent)
     }
 
-    override init(ptr: UnsafeMutableRawPointer) {
-        super.init(ptr: ptr)
+    init(ptr: UnsafeMutableRawPointer, parent: QWidget? = nil) {
+        super.init(ptr: ptr, parent: parent)
     }
 
     public func add(item: QLayoutItem) {

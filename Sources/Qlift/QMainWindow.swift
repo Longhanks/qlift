@@ -24,11 +24,11 @@ open class QMainWindow: QWidget {
     }
 
     public override init(parent: QWidget? = nil, flags: Int32 = 0) {
-        super.init(ptr: QMainWindow_new(parent?.ptr, flags))
+        super.init(ptr: QMainWindow_new(parent?.ptr, flags), parent: parent)
     }
 
-    override init(ptr: UnsafeMutableRawPointer) {
-        super.init(ptr: ptr)
+    override init(ptr: UnsafeMutableRawPointer, parent: QWidget? = nil) {
+        super.init(ptr: ptr, parent: parent)
     }
 
     deinit {

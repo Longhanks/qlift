@@ -11,8 +11,8 @@ open class QAbstractButton: QWidget {
         }
     }
 
-    public override init(ptr: UnsafeMutableRawPointer) {
-        super.init(ptr: ptr)
+    override init(ptr: UnsafeMutableRawPointer, parent: QWidget? = nil) {
+        super.init(ptr: ptr, parent: parent)
     }
 
     open func connectClicked(receiver: QObject? = nil, to slot: @escaping @convention(c) (Int32) -> Void) {

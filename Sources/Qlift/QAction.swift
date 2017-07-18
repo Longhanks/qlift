@@ -13,11 +13,11 @@ open class QAction: QObject {
 
     // Icon not supported at the moment
     public init(text: String? = nil, parent: QObject? = nil) {
-        super.init(ptr: QAction_new(nil, text, parent?.ptr))
+        super.init(ptr: QAction_new(nil, text, parent?.ptr), parent: parent)
     }
 
-    override init(ptr: UnsafeMutableRawPointer) {
-        super.init(ptr: ptr)
+    override init(ptr: UnsafeMutableRawPointer, parent: QObject? = nil) {
+        super.init(ptr: ptr, parent: parent)
     }
 
     deinit {

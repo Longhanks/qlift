@@ -8,8 +8,8 @@ open class QCoreApplication: QObject {
         super.init(ptr: QCoreApplication_new(&argc, CommandLine.unsafeArgv))
     }
 
-    override init(ptr: UnsafeMutableRawPointer) {
-        super.init(ptr: ptr)
+    init(ptr: UnsafeMutableRawPointer) {
+        super.init(ptr: ptr, parent: nil)
     }
 
     deinit {
