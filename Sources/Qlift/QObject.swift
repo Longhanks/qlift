@@ -8,6 +8,12 @@ open class QObject {
     public init(parent: QObject? = nil) {
         self.ptr = QObject_new(parent?.ptr)
         self.parent = parent
+        let rawSelf = Unmanaged.passUnretained(self).toOpaque()
+        QObject_destroyed_connect(self.ptr, self.ptr, rawSelf, { (raw) in
+            if raw != nil {
+                Unmanaged<QObject>.fromOpaque(raw!).takeUnretainedValue().ptr = nil
+            }
+        })
     }
 
     init(ptr: UnsafeMutableRawPointer, parent: QObject? = nil) {
