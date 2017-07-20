@@ -3,53 +3,25 @@ language: cpp
 dist: trusty
 osx_image: xcode8.3
 os:
-#  - linux
+  - linux
   - osx
+services:
+  - docker
 
 notifications:
   email: false
 
 before_install:
- - if [[ $TRAVIS_OS_NAME == "linux" ]]; then
-     sudo add-apt-repository -y ppa:beineri/opt-qt59-trusty;
-     sudo add-apt-repository -y ppa:ubuntu-toolchain-r/test;
-     sudo apt-get update;
-     sudo apt-get install -y g++-7 cmake;
-     echo "g++-7 done.";
-     sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-7 90;
-     sudo update-alternatives --set g++ "/usr/bin/g++-7";
-     g++ --version;
-     sudo apt-get install qt59-meta-full;
-     echo "qt59-meta-full done.";
-     QT_ENV_SCRIPT=$(find /opt -name 'qt*-env.sh');
-     source $QT_ENV_SCRIPT;
-     wget https://swift.org/builds/swift-3.1.1-release/ubuntu1404/swift-3.1.1-RELEASE/swift-3.1.1-RELEASE-ubuntu14.04.tar.gz;
-     tar xzf swift-3.1.1-RELEASE-ubuntu14.04.tar.gz;
-     git clone https://github.com/Longhanks/qlift-c-api;
-     cd qlift-c-api;
-     mkdir build;
-     cd build;
-     cmake .. -DCMAKE_INSTALL_PREFIX=/usr;
-     make;
-     sudo make install;
-     cd ../..;
-   fi
  - if [[ $TRAVIS_OS_NAME == "osx" ]]; then
      brew install qt cmake;
      brew link qt --force;
-     git clone https://github.com/Longhanks/qlift-c-api;
-     cd qlift-c-api;
-     mkdir build;
-     cd build;
-     cmake .. -DCMAKE_INSTALL_PREFIX=/usr/local;
-     make;
-     sudo make install;
-     cd ../..;
    fi
 
 script:
  - if [[ $TRAVIS_OS_NAME == "linux" ]]; then
-     export PATH=$PATH:swift-3.1.1-RELEASE-ubuntu14.04/usr/bin/;
+     docker run longhanks/qlift-builder;
    fi
- - ./buildscript.sh
+ - if [[ $TRAVIS_OS_NAME == "osx" ]]; then
+    ./buildscript.sh;
+   fi
 
