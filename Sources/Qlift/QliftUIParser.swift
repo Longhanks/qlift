@@ -69,7 +69,7 @@ public class QliftUIParser: NSObject {
         if node.text == "property" {
             let parentTag = node.parent!.text
             if parentTag == "item" {
-                ui += "        \(node.parent!.parent!.attributes["name"]!).addItem(\(propertyNode2Swift(node: node.children[0])))\n"
+                ui += "        \(node.parent!.parent!.attributes["name"]!).add(item: \(propertyNode2Swift(node: node.children[0])))\n"
             } else {
                 ui += "        \(node.parent!.attributes["name"]!).\(node.attributes["name"]!) = \(propertyNode2Swift(node: node.children[0]))\n"
             }
