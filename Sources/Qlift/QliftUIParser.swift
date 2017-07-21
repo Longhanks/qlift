@@ -51,14 +51,34 @@ public class QliftUIParser: NSObject {
         swiftUI += "\n"
         swiftUI += "    init() {\n"
         swiftUI += "        super.init()\n"
+
         // 1. Actions
         for node in rootWidgetNode!.children.filter({ $0.text == "action" }) {
             swiftUI += subNode2Swift(node: node)
         }
+
         // 2. Everything except actions
         for node in rootWidgetNode!.children.filter({ $0.text != "action" }) {
             swiftUI += subNode2Swift(node: node)
         }
+
+        // 3. Connections
+        let connectionsNodes = ui.filter({ $0.text == "connections" })
+        if connectionsNodes.count > 0 {
+            for connection in connectionsNodes[0].children {
+                let sender = connection.children[0].value
+                let signalWithBraces = connection.children[1].value.capitalized
+                let signal = signalWithBraces.substring(to: signalWithBraces.index(signalWithBraces.endIndex, offsetBy: -2))
+                var receiver = connection.children[2].value
+                if receiver == className {
+                    receiver = "self"
+                }
+                let slotWithBraces = connection.children[3].value
+                let slot = slotWithBraces.substring(to: slotWithBraces.index(slotWithBraces.endIndex, offsetBy: -2))
+                swiftUI += "        \(sender).connect\(signal)(to: \(receiver).\(slot))\n"
+            }
+        }
+
         swiftUI += "    }\n"
         swiftUI += "}\n"
         return swiftUI
