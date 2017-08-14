@@ -22,5 +22,13 @@ open class QDialog: QWidget {
     open func exec() -> Int32 {
         return QDialog_exec(self.ptr)
     }
+
+    open func accept() {
+        QDialog_accept(self.ptr)
+    }
+
+    open func reject() {
+        QDialog_reject(self.ptr)
+    }
 }
 

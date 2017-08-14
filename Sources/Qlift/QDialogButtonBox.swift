@@ -2,6 +2,28 @@ import CQlift
 
 
 open class QDialogButtonBox: QWidget {
+    var acceptedCallback: (() -> Void)?
+    var rejectedCallback: (() -> Void)?
+
+    public init(parent: QWidget? = nil) {
+        super.init(ptr: QDialogButtonBox_new(parent?.ptr), parent: parent)
+    }
+
+    override init(ptr: UnsafeMutableRawPointer, parent: QWidget? = nil) {
+        super.init(ptr: ptr, parent: parent)
+    }
+
+    deinit {
+        if self.ptr != nil {
+            if QObject_parent(self.ptr) == nil {
+                QDialogButtonBox_delete(self.ptr)
+            }
+            self.ptr = nil
+        }
+    }
+}
+
+extension QDialogButtonBox {
     public var standardButtons: StandardButton {
         get {
             return StandardButton(rawValue: QDialogButtonBox_standardButtons(self.ptr))
@@ -19,22 +41,45 @@ open class QDialogButtonBox: QWidget {
             QDialogButtonBox_setOrientation(self.ptr, newOrientation.rawValue)
         }
     }
+}
 
-    public init(parent: QWidget? = nil) {
-        super.init(ptr: QDialogButtonBox_new(parent?.ptr), parent: parent)
-    }
-
-    override init(ptr: UnsafeMutableRawPointer, parent: QWidget? = nil) {
-        super.init(ptr: ptr, parent: parent)
-    }
-
-    deinit {
-        if self.ptr != nil {
-            if QObject_parent(self.ptr) == nil {
-                QDialogButtonBox_delete(self.ptr)
-            }
-            self.ptr = nil
+extension QDialogButtonBox {
+    open func connectAccepted(receiver: QObject? = nil, to slot: @escaping (() -> Void)) {
+        var object: QObject = self
+        if receiver != nil {
+            object = receiver!
         }
+
+        self.acceptedCallback = slot
+
+        let functor: @convention(c) (UnsafeMutableRawPointer?) -> Void = { raw in
+            if raw != nil {
+                let _self = Unmanaged<QDialogButtonBox>.fromOpaque(raw!).takeUnretainedValue()
+                _self.acceptedCallback!()
+            }
+        }
+
+        let rawSelf = Unmanaged.passUnretained(self).toOpaque()
+        QDialogButtonBox_accepted_connect(self.ptr, object.ptr, rawSelf, functor)
+    }
+
+    open func connectRejected(receiver: QObject? = nil, to slot: @escaping (() -> Void)) {
+        var object: QObject = self
+        if receiver != nil {
+            object = receiver!
+        }
+
+        self.rejectedCallback = slot
+
+        let functor: @convention(c) (UnsafeMutableRawPointer?) -> Void = { raw in
+            if raw != nil {
+                let _self = Unmanaged<QDialogButtonBox>.fromOpaque(raw!).takeUnretainedValue()
+                _self.rejectedCallback!()
+            }
+        }
+
+        let rawSelf = Unmanaged.passUnretained(self).toOpaque()
+        QDialogButtonBox_rejected_connect(self.ptr, object.ptr, rawSelf, functor)
     }
 }
 
