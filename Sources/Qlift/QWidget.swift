@@ -20,6 +20,24 @@ open class QWidget: QObject {
         }
     }
 
+    public var enabled: Bool {
+        get {
+            let _enabled = QWidget_isEnabled(self.ptr)
+            if _enabled == 0 {
+                return false
+            } else {
+                return true
+            }
+        }
+        set(newEnabled) {
+            if newEnabled {
+                QWidget_setEnabled(self.ptr, 1)
+            } else {
+                QWidget_setEnabled(self.ptr, 0)
+            }
+        }
+    }
+
     public init(parent: QWidget? = nil, flags: Int32 = 0) {
         super.init(ptr: QWidget_new(parent?.ptr, flags), parent: parent)
     }
