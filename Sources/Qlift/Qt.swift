@@ -19,5 +19,16 @@ public struct Qt {
         public static let AlignHorizontal_Mask: Alignments  = [.AlignLeft, .AlignRight, .AlignHCenter, .AlignJustify, .AlignAbsolute]
         public static let AlignVertical_Mask: Alignments = [.AlignTop, .AlignBottom, .AlignVCenter, .AlignBaseline]
     }
+
+    public struct Orientation: OptionSet {
+        public let rawValue: Int32
+        
+        public init(rawValue: Int32) {
+            self.rawValue = rawValue
+        }
+
+        public static let Horizontal = Orientation(rawValue: 1)
+        public static let Vertical = Orientation(rawValue: 2)
+    }
 }
 
