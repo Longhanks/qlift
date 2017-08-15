@@ -27,7 +27,7 @@ func main() {
         content += "/********************************************************************************\n"
         content += "** Form generated from reading UI file '\(fileURL.lastPathComponent)'\n"
         content += "**\n"
-        content += "** Created by: Qlift User Interface Compiler version 0.0.51\n"
+        content += "** Created by: Qlift User Interface Compiler version 0.0.52\n"
         content += "**\n"
         content += "** WARNING! All changes made in this file will be lost when recompiling UI file!\n"
         content += "********************************************************************************/\n"

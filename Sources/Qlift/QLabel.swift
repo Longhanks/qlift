@@ -2,7 +2,7 @@ import CQlift
 
 
 open class QLabel: QFrame {
-    public var alignment: Qt.Alignments = [.AlignLeft, .AlignVCenter] {
+    public var alignment: Qt.Alignment = [.AlignLeft, .AlignVCenter] {
         didSet {
             QLabel_setAlignment(self.ptr, alignment.rawValue)
         }
@@ -17,8 +17,8 @@ open class QLabel: QFrame {
         }
     }
 
-    public init(text: String = "", parent: QWidget? = nil, flags: Int32 = 0) {
-        super.init(ptr: QLabel_new(text, parent?.ptr, flags), parent: parent)
+    public init(text: String = "", parent: QWidget? = nil, flags: Qt.WindowFlags = .Widget) {
+        super.init(ptr: QLabel_new(text, parent?.ptr, flags.rawValue), parent: parent)
     }
 
     override init(ptr: UnsafeMutableRawPointer, parent: QWidget? = nil) {

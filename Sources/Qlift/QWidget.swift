@@ -38,8 +38,8 @@ open class QWidget: QObject {
         }
     }
 
-    public init(parent: QWidget? = nil, flags: Int32 = 0) {
-        super.init(ptr: QWidget_new(parent?.ptr, flags), parent: parent)
+    public init(parent: QWidget? = nil, flags: Qt.WindowFlags = .Widget) {
+        super.init(ptr: QWidget_new(parent?.ptr, flags.rawValue), parent: parent)
     }
 
     public init(ptr: UnsafeMutableRawPointer, parent: QWidget? = nil) {

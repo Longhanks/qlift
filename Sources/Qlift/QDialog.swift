@@ -2,8 +2,8 @@ import CQlift
 
 
 open class QDialog: QWidget {
-    public override init(parent: QWidget? = nil, flags: Int32 = 0) {
-        super.init(ptr: QDialog_new(parent?.ptr, flags), parent: parent)
+    public override init(parent: QWidget? = nil, flags: Qt.WindowFlags = .Widget) {
+        super.init(ptr: QDialog_new(parent?.ptr, flags.rawValue), parent: parent)
     }
 
     override init(ptr: UnsafeMutableRawPointer, parent: QWidget? = nil) {
@@ -42,7 +42,6 @@ extension QDialog {
 
         public static let Accepted = DialogCode(rawValue: 1)
         public static let Rejected = DialogCode(rawValue: 0)
-
     }
 }
 

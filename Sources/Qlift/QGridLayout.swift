@@ -21,7 +21,7 @@ open class QGridLayout: QObject, QLayout {
         // Not implemented
     }
 
-    public func add(item: QLayoutItem, row: Int32, column: Int32, rowSpan: Int32 = 1, columnSpan: Int32 = 1, alignment: Qt.Alignments? = nil) {
+    public func add(item: QLayoutItem, row: Int32, column: Int32, rowSpan: Int32 = 1, columnSpan: Int32 = 1, alignment: Qt.Alignment? = nil) {
         var align: Int32 = 0
         if let alignment = alignment {
             align = alignment.rawValue
@@ -29,7 +29,7 @@ open class QGridLayout: QObject, QLayout {
         QGridLayout_addItem(self.ptr, item.ptr, row, column, rowSpan, columnSpan, align)
     }
 
-    public func add(layout: QLayout, row: Int32, column: Int32, alignment: Qt.Alignments? = nil) {
+    public func add(layout: QLayout, row: Int32, column: Int32, alignment: Qt.Alignment? = nil) {
         var align: Int32 = 0
         if let alignment = alignment {
             align = alignment.rawValue
@@ -37,7 +37,7 @@ open class QGridLayout: QObject, QLayout {
         QGridLayout_addLayout(self.ptr, layout.ptr, row, column, align)
     }
 
-    public func add(layout: QLayout, row: Int32, column: Int32, rowSpan: Int32, columnSpan: Int32, alignment: Qt.Alignments? = nil) {
+    public func add(layout: QLayout, row: Int32, column: Int32, rowSpan: Int32, columnSpan: Int32, alignment: Qt.Alignment? = nil) {
         var align: Int32 = 0
         if let alignment = alignment {
             align = alignment.rawValue
@@ -45,7 +45,7 @@ open class QGridLayout: QObject, QLayout {
         QGridLayout_addLayoutWithSpan(self.ptr, layout.ptr, row, column, rowSpan, columnSpan, align)
     }
 
-    public func add(widget: QWidget, row: Int32, column: Int32, alignment: Qt.Alignments? = nil) {
+    public func add(widget: QWidget, row: Int32, column: Int32, alignment: Qt.Alignment? = nil) {
         var align: Int32 = 0
         if let alignment = alignment {
             align = alignment.rawValue
@@ -53,7 +53,7 @@ open class QGridLayout: QObject, QLayout {
         QGridLayout_addWidget(self.ptr, widget.ptr, row, column, align)
     }
 
-    public func add(widget: QWidget, fromRow: Int32, fromColumn: Int32, rowSpan: Int32, columnSpan: Int32, alignment: Qt.Alignments? = nil) {
+    public func add(widget: QWidget, fromRow: Int32, fromColumn: Int32, rowSpan: Int32, columnSpan: Int32, alignment: Qt.Alignment? = nil) {
         var align: Int32 = 0
         if let alignment = alignment {
             align = alignment.rawValue

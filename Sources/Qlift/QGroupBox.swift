@@ -2,7 +2,7 @@ import CQlift
 
 
 open class QGroupBox: QWidget {
-    public var alignment: Qt.Alignments = .AlignLeft {
+    public var alignment: Qt.Alignment = .AlignLeft {
         didSet {
             QGroupBox_setAlignment(self.ptr, alignment.rawValue)
         }

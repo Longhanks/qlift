@@ -2,8 +2,8 @@ import CQlift
 
 
 open class QFrame: QWidget {
-    public override init(parent: QWidget? = nil, flags: Int32 = 0) {
-        super.init(ptr: QFrame_new(parent?.ptr, flags), parent: parent)
+    public override init(parent: QWidget? = nil, flags: Qt.WindowFlags = .Widget) {
+        super.init(ptr: QFrame_new(parent?.ptr, flags.rawValue), parent: parent)
     }
 
     override init(ptr: UnsafeMutableRawPointer, parent: QWidget? = nil) {
