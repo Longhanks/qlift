@@ -5,8 +5,8 @@ public class QApplication: QGuiApplication {
     private var argc = CommandLine.argc
 
     public override init() {
-        super.init(other: self)
-        self.ptr = QApplication_new(&argc, CommandLine.unsafeArgv)
+        super.init(ptr: QApplication_new(&argc, CommandLine.unsafeArgv))
+        QCoreApplication.instance = self
     }
 
     deinit {

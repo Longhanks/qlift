@@ -10,9 +10,8 @@ public class QCoreApplication: QObject {
         QCoreApplication.instance = self
     }
 
-    init(other: QCoreApplication) {
-        super.init(ptr: other.ptr)
-        QCoreApplication.instance = other
+    init(ptr: UnsafeMutableRawPointer) {
+        super.init(ptr: ptr)
     }
 
     deinit {

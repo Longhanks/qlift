@@ -5,12 +5,12 @@ public class QGuiApplication: QCoreApplication {
     private var argc = CommandLine.argc
 
     public override init() {
-        super.init(other: self)
-        self.ptr = QGuiApplication_new(&argc, CommandLine.unsafeArgv)
+        super.init(ptr: QGuiApplication_new(&argc, CommandLine.unsafeArgv))
+        QCoreApplication.instance = self
     }
 
-    override init(other: QCoreApplication) {
-        super.init(other: other)
+    override init(ptr: UnsafeMutableRawPointer) {
+        super.init(ptr: ptr)
     }
 
     deinit {
