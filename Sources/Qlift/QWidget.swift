@@ -59,6 +59,15 @@ open class QWidget: QObject {
         }
     }
 
+    open func close() -> Bool {
+        let i = QWidget_close(self.ptr)
+        if i == 0 {
+            return false
+        } else {
+            return true
+        }
+    }
+
     open func show() {
         QWidget_show(self.ptr)
     }
