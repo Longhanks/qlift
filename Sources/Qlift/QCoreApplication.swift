@@ -24,6 +24,10 @@ public class QCoreApplication: QObject {
         }
     }
 
+    public func quit() {
+        exit(returnCode: 0)
+    }
+
     public func exec() -> Int32 {
         return QCoreApplication_exec(self.ptr)
     }
