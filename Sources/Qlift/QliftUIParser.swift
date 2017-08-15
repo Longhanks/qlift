@@ -49,8 +49,8 @@ public class QliftUIParser: NSObject {
         }
 
         swiftUI += "\n"
-        swiftUI += "    init() {\n"
-        swiftUI += "        super.init()\n"
+        swiftUI += "    init(parent: QWidget? = nil, flags: Int32 = 0) {\n"
+        swiftUI += "        super.init(parent: parent, flags: flags)\n"
 
         // 1. Actions
         for node in rootWidgetNode!.children.filter({ $0.text == "action" }) {
