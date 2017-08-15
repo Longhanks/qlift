@@ -19,8 +19,8 @@ open class QDialog: QWidget {
         }
     }
 
-    open func exec() -> Int32 {
-        return QDialog_exec(self.ptr)
+    open func exec() -> DialogCode {
+        return DialogCode(rawValue: QDialog_exec(self.ptr))
     }
 
     open func accept() {
@@ -29,6 +29,20 @@ open class QDialog: QWidget {
 
     open func reject() {
         QDialog_reject(self.ptr)
+    }
+}
+
+extension QDialog {
+    public struct DialogCode: OptionSet {
+        public let rawValue: Int32
+
+        public init(rawValue: Int32) {
+            self.rawValue = rawValue
+        }
+
+        public static let Accepted = DialogCode(rawValue: 1)
+        public static let Rejected = DialogCode(rawValue: 0)
+
     }
 }
 
