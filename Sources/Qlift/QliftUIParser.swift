@@ -49,7 +49,7 @@ public class QliftUIParser: NSObject {
         }
 
         swiftUI += "\n"
-        swiftUI += "    init(parent: QWidget? = nil, flags: Int32 = 0) {\n"
+        swiftUI += "    override init(parent: QWidget? = nil, flags: Int32 = 0) {\n"
         swiftUI += "        super.init(parent: parent, flags: flags)\n"
 
         // 1. Actions
