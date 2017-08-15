@@ -1,15 +1,12 @@
 import CQlift
 
 
-open class QApplication: QGuiApplication {
+public class QApplication: QGuiApplication {
     private var argc = CommandLine.argc
 
     public override init() {
-        super.init(ptr: QApplication_new(&argc, CommandLine.unsafeArgv))
-    }
-
-    override init(ptr: UnsafeMutableRawPointer) {
-        super.init(ptr: ptr)
+        super.init(other: self)
+        self.ptr = QApplication_new(&argc, CommandLine.unsafeArgv)
     }
 
     deinit {

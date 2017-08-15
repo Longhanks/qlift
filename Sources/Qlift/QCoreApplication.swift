@@ -1,15 +1,18 @@
 import CQlift
 
 
-open class QCoreApplication: QObject {
+public class QCoreApplication: QObject {
     private var argc = CommandLine.argc
+    public static weak var instance: QCoreApplication!
 
     public init() {
         super.init(ptr: QCoreApplication_new(&argc, CommandLine.unsafeArgv))
+        QCoreApplication.instance = self
     }
 
-    init(ptr: UnsafeMutableRawPointer) {
-        super.init(ptr: ptr, parent: nil)
+    init(other: QCoreApplication) {
+        super.init(ptr: other.ptr)
+        QCoreApplication.instance = other
     }
 
     deinit {
@@ -21,11 +24,11 @@ open class QCoreApplication: QObject {
         }
     }
 
-    open func exec() -> Int32 {
+    public func exec() -> Int32 {
         return QCoreApplication_exec(self.ptr)
     }
 
-    open func exit(returnCode: Int32) {
+    public func exit(returnCode: Int32) {
         QCoreApplication_exit(self.ptr, returnCode)
     }
 }
