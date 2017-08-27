@@ -22,19 +22,10 @@ open class QWidget: QObject {
 
     public var enabled: Bool {
         get {
-            let _enabled = QWidget_isEnabled(self.ptr)
-            if _enabled == 0 {
-                return false
-            } else {
-                return true
-            }
+            return QWidget_isEnabled(self.ptr)
         }
         set(newEnabled) {
-            if newEnabled {
-                QWidget_setEnabled(self.ptr, 1)
-            } else {
-                QWidget_setEnabled(self.ptr, 0)
-            }
+            QWidget_setEnabled(self.ptr, newEnabled)
         }
     }
 
@@ -60,12 +51,7 @@ open class QWidget: QObject {
     }
 
     open func close() -> Bool {
-        let i = QWidget_close(self.ptr)
-        if i == 0 {
-            return false
-        } else {
-            return true
-        }
+        return QWidget_close(self.ptr)
     }
 
     open func show() {

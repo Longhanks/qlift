@@ -25,14 +25,10 @@ open class QAbstractButton: QWidget {
 
         self.clickedCallback = slot
 
-        let functor: @convention(c) (UnsafeMutableRawPointer?, Int32) -> Void = { raw, checked in
+        let functor: @convention(c) (UnsafeMutableRawPointer?, Bool) -> Void = { raw, checked in
             if raw != nil {
                 let _self = Unmanaged<QAbstractButton>.fromOpaque(raw!).takeUnretainedValue()
-                if checked == 0 {
-                    _self.clickedCallback!(false)
-                } else {
-                    _self.clickedCallback!(true)
-                }
+                _self.clickedCallback!(checked)
             }
         }
 
