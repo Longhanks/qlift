@@ -22,6 +22,12 @@ public class QPoint {
         }
     }
 
+    public var manhattanLength: Int32 {
+        get {
+            return QPoint_manhattanLength(self.ptr)
+        }
+    }
+
     public init(x: Int32, y: Int32) {
         self.ptr = QPoint_new(x, y)
     }
@@ -40,9 +46,23 @@ public class QPoint {
     public func isNull() -> Bool {
         return QPoint_isNull(self.ptr)
     }
+}
 
-    public func manhattanLength() -> Int32 {
-        return QPoint_manhattanLength(self.ptr)
+extension QPoint {
+    public static func == (left: QPoint, right: QPoint) -> Bool {
+        return QPoint_equal(left.ptr, right.ptr)
+    }
+
+    public static func != (left: QPoint, right: QPoint) -> Bool {
+        return QPoint_unequal(left.ptr, right.ptr)
+    }
+
+    public static func + (left: QPoint, right: QPoint) -> QPoint {
+        return QPoint(ptr: QPoint_add(left.ptr, right.ptr))
+    }
+
+    public static func - (left: QPoint, right: QPoint) -> QPoint {
+        return QPoint(ptr: QPoint_substract(left.ptr, right.ptr))
     }
 }
 
