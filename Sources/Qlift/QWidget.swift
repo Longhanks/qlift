@@ -47,6 +47,24 @@ open class QWidget: QObject {
         }
     }
 
+    public var window: QWidget {
+        get {
+            return QWidget(ptr: QWidget_window(self.ptr))
+        }
+    }
+
+    public var rect: QRect {
+        get {
+            return QRect(ptr: QWidget_rect(self.ptr))
+        }
+    }
+
+    public var frameGeometry: QRect {
+        get {
+            return QRect(ptr: QWidget_frameGeometry(self.ptr))
+        }
+    }
+
     public init(parent: QWidget? = nil, flags: Qt.WindowFlags = .Widget) {
         super.init(ptr: QWidget_new(parent?.ptr, flags.rawValue), parent: parent)
     }
