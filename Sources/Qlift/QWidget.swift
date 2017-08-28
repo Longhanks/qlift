@@ -29,6 +29,24 @@ open class QWidget: QObject {
         }
     }
 
+    public var height: Int32 {
+        get {
+            return QWidget_height(self.ptr)
+        }
+    }
+
+    public var width: Int32 {
+        get {
+            return QWidget_width(self.ptr)
+        }
+    }
+
+    public var pos: QPoint {
+        get {
+            return QPoint(ptr: QWidget_pos(self.ptr))
+        }
+    }
+
     public init(parent: QWidget? = nil, flags: Qt.WindowFlags = .Widget) {
         super.init(ptr: QWidget_new(parent?.ptr, flags.rawValue), parent: parent)
     }
@@ -48,6 +66,10 @@ open class QWidget: QObject {
             }
             self.ptr = nil
         }
+    }
+
+    public func move(to: QPoint) {
+        QWidget_move(self.ptr, to.ptr)
     }
 
     open func close() -> Bool {
