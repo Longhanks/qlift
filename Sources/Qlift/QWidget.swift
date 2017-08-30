@@ -47,12 +47,6 @@ open class QWidget: QObject {
         }
     }
 
-    public var window: QWidget {
-        get {
-            return QWidget(ptr: QWidget_window(self.ptr))
-        }
-    }
-
     public var rect: QRect {
         get {
             return QRect(ptr: QWidget_rect(self.ptr))
@@ -62,6 +56,12 @@ open class QWidget: QObject {
     public var frameGeometry: QRect {
         get {
             return QRect(ptr: QWidget_frameGeometry(self.ptr))
+        }
+    }
+
+    public var isWindow: Bool {
+        get {
+            return QWidget_isWindow(self.ptr)
         }
     }
 
@@ -96,6 +96,29 @@ open class QWidget: QObject {
 
     open func show() {
         QWidget_show(self.ptr)
+    }
+}
+
+extension QWidget {
+    public var window: QWidget {
+        get {
+            var w: QWidget = self
+            var p: QWidget? = self.parentWidget()
+            while !w.isWindow && p != nil {
+                w = p!
+                p = p!.parentWidget()
+            }
+            return w
+        }
+    }
+
+    private func parentWidget() -> QWidget? {
+        if let p = self.parent {
+            if let w = p as? QWidget {
+                return w;
+            }
+        }
+        return nil;
     }
 }
 
