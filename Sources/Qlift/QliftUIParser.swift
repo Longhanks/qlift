@@ -68,13 +68,13 @@ public class QliftUIParser: NSObject {
             for connection in connectionsNodes[0].children {
                 let sender = connection.children[0].value
                 let signalWithBraces = connection.children[1].value.capitalized
-                let signal = signalWithBraces.substring(to: signalWithBraces.index(signalWithBraces.endIndex, offsetBy: -2))
+                let signal = String(signalWithBraces[..<signalWithBraces.index(signalWithBraces.endIndex, offsetBy: -2)])
                 var receiver = connection.children[2].value
                 if receiver == className {
                     receiver = "self"
                 }
                 let slotWithBraces = connection.children[3].value
-                let slot = slotWithBraces.substring(to: slotWithBraces.index(slotWithBraces.endIndex, offsetBy: -2))
+                let slot = String(slotWithBraces[..<slotWithBraces.index(slotWithBraces.endIndex, offsetBy: -2)])
                 swiftUI += "        \(sender).connect\(signal)(to: \(receiver).\(slot))\n"
             }
         }
@@ -141,7 +141,7 @@ public class QliftUIParser: NSObject {
                 for subNode in node.children.filter({ $0.text == "attribute" }) {
                     if subNode.attributes["name"]! == "toolBarArea" {
                         let val = subNode.children[0].value
-                        area = "." + val.substring(to: val.index(val.endIndex, offsetBy: -"ToolBarArea".characters.count))
+                        area = "." + String(val[..<val.index(val.endIndex, offsetBy: -"ToolBarArea".characters.count)])
                     }
                 }
                 for subNode in node.children.filter({ $0.text != "attribute" }) {
