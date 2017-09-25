@@ -16,7 +16,7 @@ let package = Package(
         .target(
             name: "qlift-uic",
             dependencies: [
-                "Qlift"
+                .targetItem(name: "Qlift")
             ])
     ]
 )
