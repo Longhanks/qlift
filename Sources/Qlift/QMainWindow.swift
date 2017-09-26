@@ -12,15 +12,13 @@ open class QMainWindow: QWidget {
 
     public var menuBar: QMenuBar! {
         get {
-            if let bar = self._menuBar {
-                return bar
-            } else {
+            if self._menuBar == nil {
                 self._menuBar = QMenuBar(ptr: QMainWindow_menuBar(self.ptr))
-                return self._menuBar!
             }
+            return self._menuBar!
         }
         set {
-            QMainWindow_setMenuBar(self.ptr, menuBar.ptr)
+            QMainWindow_setMenuBar(self.ptr, newValue?.ptr)
             self._menuBar = newValue
         }
     }
