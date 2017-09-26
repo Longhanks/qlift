@@ -91,6 +91,10 @@ open class QWidget: QObject {
         return QWidget_close(self.ptr)
     }
 
+    public func resize(width: Int32, height: Int32) {
+        QWidget_resize(self.ptr, width, height)
+    }
+
     open func show() {
         QWidget_show(self.ptr)
     }
