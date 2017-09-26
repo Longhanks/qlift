@@ -11,11 +11,12 @@ open class QTimer: QObject {
     public static func singleShot(msec: Int32, timerType: Qt.TimerType, handler: @escaping () -> Void) {
         let functor: @convention(c) (UnsafeMutableRawPointer?) -> Void = { raw in
             if raw != nil {
-                let box = Unmanaged<ClosureBox>.fromOpaque(raw!).takeUnretainedValue()
+                let box = Unmanaged<ClosureBox>.fromOpaque(raw!).takeRetainedValue()
                 box.closure()
             }
         }
-        let rawClosure = Unmanaged.passUnretained(ClosureBox(handler)).toOpaque()
+        let box = ClosureBox(handler)
+        let rawClosure = Unmanaged.passRetained(box).toOpaque()
         QTimer_singleShot(msec, timerType.rawValue, rawClosure, functor)
     }
 }
