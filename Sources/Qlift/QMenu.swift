@@ -2,16 +2,14 @@ import CQlift
 
 
 open class QMenu: QWidget {
-    public var title: String {
-        get {
-            return String(cString: QMenu_title(self.ptr))
-        }
-        set(newTitle) {
-            QMenu_setTitle(self.ptr, newTitle)
+    public var title: String = "" {
+        didSet {
+            QMenu_setTitle(self.ptr, title)
         }
     }
 
-    public init(title: String? = nil, parent: QWidget? = nil) {
+    public init(title: String = "", parent: QWidget? = nil) {
+        self.title = title
         super.init(ptr: QMenu_new(title, parent?.ptr), parent: parent)
     }
 

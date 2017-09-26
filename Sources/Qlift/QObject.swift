@@ -3,7 +3,7 @@ import CQlift
 
 open class QObject {
     public var ptr: UnsafeMutableRawPointer!
-    public var parent: QObject?
+    public weak var parent: QObject?
 
     public init(parent: QObject? = nil) {
         self.ptr = QObject_new(parent?.ptr)

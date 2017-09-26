@@ -8,16 +8,14 @@ open class QLabel: QFrame {
         }
     }
 
-    public var text: String {
-        get {
-            return String(cString: QLabel_text(self.ptr))
-        }
-        set(newText) {
-            QLabel_setText(self.ptr, newText)
+    public var text: String = "" {
+        didSet {
+            QLabel_setText(self.ptr, text)
         }
     }
 
     public init(text: String = "", parent: QWidget? = nil, flags: Qt.WindowFlags = .Widget) {
+        self.text = text
         super.init(ptr: QLabel_new(text, parent?.ptr, flags.rawValue), parent: parent)
     }
 

@@ -4,12 +4,9 @@ import CQlift
 open class QAbstractButton: QWidget {
     var clickedCallback: ((Bool) -> Void)?
 
-    public var text: String {
-        get {
-            return String(cString: QAbstractButton_text(self.ptr))
-        }
-        set(newText) {
-            QAbstractButton_setText(self.ptr, newText)
+    public var text: String = "" {
+        didSet {
+            QAbstractButton_setText(self.ptr, text)
         }
     }
 

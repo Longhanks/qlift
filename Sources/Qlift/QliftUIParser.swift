@@ -2,8 +2,8 @@ import Foundation
 
 
 public class QliftUIParser: NSObject {
-    fileprivate var rootNode = Node(parent: nil, text: "root")
-    fileprivate var currentNode: Node?
+    private var rootNode = Node(parent: nil, text: "root")
+    private var currentNode: Node?
     private var namesOfQMenusForAddAction = [String]()
 
 

@@ -1,6 +1,6 @@
 public struct QLayoutSizeConstraint: OptionSet {
     public let rawValue: Int32
-    
+
     public init(rawValue: Int32) {
         self.rawValue = rawValue
     }

@@ -4,17 +4,15 @@ import CQlift
 open class QAction: QObject {
     var triggeredCallback: ((Bool) -> Void)?
 
-    public var text: String {
-        get {
-            return String(cString: QAction_text(self.ptr))
-        }
-        set(newText) {
-            QAction_setText(self.ptr, newText)
+    public var text: String = "" {
+        didSet {
+            QAction_setText(self.ptr, text)
         }
     }
 
     // Icon not supported at the moment
-    public init(text: String? = nil, parent: QObject? = nil) {
+    public init(text: String = "", parent: QObject? = nil) {
+        self.text = text
         super.init(ptr: QAction_new(nil, text, parent?.ptr), parent: parent)
     }
 

@@ -2,30 +2,21 @@ import CQlift
 
 
 open class QSpinBox: QAbstractSpinBox {
-    public var value: Int32 {
-        get {
-            return QSpinBox_value(self.ptr)
-        }
-        set(newValue) {
-            QSpinBox_setValue(self.ptr, newValue)
+    public var value: Int32 = 0 {
+        didSet {
+            QSpinBox_setValue(self.ptr, value)
         }
     }
 
-    public var minimum: Int32 {
-        get {
-            return QSpinBox_minimum(self.ptr)
-        }
-        set(newMinimum) {
-            QSpinBox_setMinimum(self.ptr, newMinimum)
+    public var minimum: Int32 = 0 {
+        didSet {
+            QSpinBox_setMinimum(self.ptr, minimum)
         }
     }
 
-    public var maximum: Int32 {
-        get {
-            return QSpinBox_maximum(self.ptr)
-        }
-        set(newMaximum) {
-            QSpinBox_setValue(self.ptr, newMaximum)
+    public var maximum: Int32 = 99 {
+        didSet {
+            QSpinBox_setValue(self.ptr, maximum)
         }
     }
 

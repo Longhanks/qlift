@@ -2,12 +2,9 @@ import CQlift
 
 
 open class QWidget: QObject {
-    public var windowTitle: String {
-        get {
-            return String(cString: QWidget_windowTitle(self.ptr))
-        }
-        set(newWindowTitle) {
-            QWidget_setWindowTitle(self.ptr, newWindowTitle)
+    public var windowTitle: String = "" {
+        didSet {
+            QWidget_setWindowTitle(self.ptr, windowTitle)
         }
     }
 
@@ -115,7 +112,7 @@ extension QWidget {
     private func parentWidget() -> QWidget? {
         if let p = self.parent {
             if let w = p as? QWidget {
-                return w;
+                return w
             }
         }
         return nil;
