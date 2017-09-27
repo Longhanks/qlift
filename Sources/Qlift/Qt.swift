@@ -91,5 +91,17 @@ public struct Qt {
         public static let CoarseTimer = TimerType(rawValue: 1)
         public static let VeryCoarseTimer = TimerType(rawValue: 2)
     }
+
+    public struct MouseButton: OptionSet {
+        public let rawValue: Int32
+
+        public init(rawValue: Int32) {
+            self.rawValue = rawValue
+        }
+
+        public static let NoButton = MouseButton(rawValue: 0)
+        public static let LeftButton = MouseButton(rawValue: 1)
+        public static let RightButton = MouseButton(rawValue: 2)
+    }
 }
 
