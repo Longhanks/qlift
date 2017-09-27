@@ -11,7 +11,7 @@ open class QPushButton: QAbstractButton {
         let functor: @convention(c) (UnsafeMutableRawPointer?, UnsafeMutableRawPointer?) -> Void = { context, mouseEvent in
             if context != nil {
                 let _self = Unmanaged<QPushButton>.fromOpaque(context!).takeUnretainedValue()
-                _self.mousePressEvent(event: mouseEvent)
+                _self.mousePressEvent(event: QMouseEvent(ptr: mouseEvent!))
             }
         }
 
@@ -31,8 +31,8 @@ open class QPushButton: QAbstractButton {
         }
     }
 
-    open func mousePressEvent(event: UnsafeMutableRawPointer?) {
-        QPushButton_mousePressEvent(self.ptr, event)
+    open func mousePressEvent(event: QMouseEvent) {
+        QPushButton_mousePressEvent(self.ptr, event.ptr)
     }
 }
 
