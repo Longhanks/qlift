@@ -25,6 +25,17 @@ open class QMainWindow: QWidget {
 
     public override init(parent: QWidget? = nil, flags: Qt.WindowFlags = .Widget) {
         super.init(ptr: QMainWindow_new(parent?.ptr, flags.rawValue), parent: parent)
+
+        let rawSelf = Unmanaged.passUnretained(self).toOpaque()
+
+        let functor: @convention(c) (UnsafeMutableRawPointer?, UnsafeMutableRawPointer?) -> Void = { context, closeEvent in
+            if context != nil {
+                let _self = Unmanaged<QMainWindow>.fromOpaque(context!).takeUnretainedValue()
+                _self.closeEvent(event: QCloseEvent(ptr: closeEvent!))
+            }
+        }
+
+        QMainWindow_closeEvent_Override(self.ptr, rawSelf, functor)
     }
 
     override init(ptr: UnsafeMutableRawPointer, parent: QWidget? = nil) {
@@ -38,6 +49,10 @@ open class QMainWindow: QWidget {
             }
             self.ptr = nil
         }
+    }
+
+    open func closeEvent(event: QCloseEvent) {
+        QMainWindow_closeEvent(self.ptr, event.ptr)
     }
 }
 

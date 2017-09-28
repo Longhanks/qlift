@@ -14,5 +14,13 @@ public class QEvent {
             QEvent_delete(self.ptr)
         }
     }
+
+    public func accept() {
+        QEvent_accept(self.ptr)
+    }
+
+    public func ignore() {
+        QEvent_ignore(self.ptr)
+    }
 }
 
