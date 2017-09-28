@@ -4,8 +4,12 @@ import CQlift
 open class QWidget: QObject {
     public var windowTitle: String = "" {
         didSet {
-            QWidget_setWindowTitle(self.ptr, windowTitle)
+            setWindowTitle()
         }
+    }
+
+    func setWindowTitle() {
+        QWidget_setWindowTitle(self.ptr, windowTitle)
     }
 
     public var geometry: QRect? {

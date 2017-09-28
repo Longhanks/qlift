@@ -102,6 +102,19 @@ public struct Qt {
         public static let NoButton = MouseButton(rawValue: 0)
         public static let LeftButton = MouseButton(rawValue: 1)
         public static let RightButton = MouseButton(rawValue: 2)
+        // Incomplete!
+    }
+
+    public struct WindowModality: OptionSet {
+        public let rawValue: Int32
+
+        public init(rawValue: Int32) {
+            self.rawValue = rawValue
+        }
+
+        public static let NonModal = WindowModality(rawValue: 0)
+        public static let WindowModal = WindowModality(rawValue: 1)
+        public static let ApplicationModal = WindowModality(rawValue: 2)
     }
 }
 
