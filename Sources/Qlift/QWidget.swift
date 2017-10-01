@@ -24,6 +24,15 @@ open class QWidget: QObject {
         }
     }
 
+    public var styleSheet: String {
+        get {
+            return String(cString: QWidget_styleSheet(self.ptr))
+        }
+        set {
+            QWidget_setStyleSheet(self.ptr, newValue)
+        }
+    }
+
     public var geometry: QRect? {
         get {
             return QRect(ptr: QWidget_geometry(self.ptr))
