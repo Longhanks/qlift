@@ -12,6 +12,18 @@ open class QWidget: QObject {
         QWidget_setWindowTitle(self.ptr, windowTitle)
     }
 
+    public var maximumSize: QSize {
+        get {
+            let sizePtr = QWidget_maximumSize(self.ptr)!
+            let size = QSize(ptr: sizePtr)
+            size.needsDelete = false
+            return size
+        }
+        set {
+            QWidget_setMaximumSize(self.ptr, newValue.ptr)
+        }
+    }
+
     public var geometry: QRect? {
         get {
             return QRect(ptr: QWidget_geometry(self.ptr))
