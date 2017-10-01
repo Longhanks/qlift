@@ -1,12 +1,8 @@
 sudo: enabled
 language: cpp
-dist: trusty
-osx_image: xcode8.3
+osx_image: xcode9
 os:
-  - linux
   - osx
-services:
-  - docker
 
 notifications:
   email: false
@@ -18,9 +14,6 @@ before_install:
    fi
 
 script:
- - if [[ $TRAVIS_OS_NAME == "linux" ]]; then
-     docker run longhanks/qlift-builder;
-   fi
  - if [[ $TRAVIS_OS_NAME == "osx" ]]; then
     ./buildscript.sh;
    fi
