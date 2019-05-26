@@ -43,7 +43,7 @@ public class QPoint {
         }
     }
 
-    public func isNull() -> Bool {
+    public var isNull: Bool {
         return QPoint_isNull(self.ptr)
     }
 }
