@@ -141,7 +141,7 @@ public class QliftUIParser: NSObject {
                 for subNode in node.children.filter({ $0.text == "attribute" }) {
                     if subNode.attributes["name"]! == "toolBarArea" {
                         let val = subNode.children[0].value
-                        area = "." + String(val[..<val.index(val.endIndex, offsetBy: -"ToolBarArea".characters.count)])
+                        area = "." + String(val[..<val.index(val.endIndex, offsetBy: -"ToolBarArea".count)])
                     }
                 }
                 for subNode in node.children.filter({ $0.text != "attribute" }) {

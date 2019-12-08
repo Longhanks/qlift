@@ -19,7 +19,7 @@ public class QSize {
             return QSize_height(self.ptr)
         }
         set {
-            QSize_setHeight(self.ptr, height)
+            QSize_setHeight(self.ptr, newValue)
         }
     }
 
