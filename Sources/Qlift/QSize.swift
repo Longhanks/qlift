@@ -3,7 +3,6 @@ import CQlift
 
 public class QSize {
     var ptr: UnsafeMutableRawPointer!
-    var needsDelete = false
 
     public var width: Int32 {
         get {
@@ -25,7 +24,6 @@ public class QSize {
 
     public init(width: Int32, height: Int32) {
         self.ptr = QSize_new(width, height)
-        self.needsDelete = true
     }
 
     init(ptr: UnsafeMutableRawPointer) {
@@ -39,4 +37,3 @@ public class QSize {
         }
     }
 }
-

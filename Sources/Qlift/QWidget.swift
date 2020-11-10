@@ -14,10 +14,7 @@ open class QWidget: QObject {
 
     public var maximumSize: QSize {
         get {
-            let sizePtr = QWidget_maximumSize(self.ptr)!
-            let size = QSize(ptr: sizePtr)
-            size.needsDelete = false
-            return size
+            return QSize(ptr: QWidget_maximumSize(self.ptr))
         }
         set {
             QWidget_setMaximumSize(self.ptr, newValue.ptr)
@@ -147,4 +144,3 @@ extension QWidget {
         return nil;
     }
 }
-
