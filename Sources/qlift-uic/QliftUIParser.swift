@@ -61,6 +61,7 @@ public class QliftUIParser: NSObject {
         }
 
         // 2. Everything except actions
+        swiftUI += preextractContentsMargins(node: rootWidgetNode!)
         for node in rootWidgetNode!.children.filter({ $0.text != "action" }) {
             swiftUI += subNode2Swift(node: node)
         }
@@ -87,14 +88,65 @@ public class QliftUIParser: NSObject {
         return swiftUI
     }
 
+    private func isMarginPropertyName(_ name: String) -> Bool {
+        return name == "leftMargin" || name == "topMargin" || name == "rightMargin" || name == "bottomMargin"
+    }
+
+    private func preextractContentsMargins(node: Node) -> String {
+        var left = -1
+        var top = -1
+        var right = -1
+        var bottom = -1
+        var foundOneMargin = false
+        for subNode in node.children {
+            guard subNode.text == "property" else { continue }
+            guard isMarginPropertyName(subNode.attributes["name"]!) else { continue }
+
+            if subNode.attributes["name"]! == "leftMargin" {
+                left = Int(subNode.children[0].value)!
+                foundOneMargin = true
+                continue
+            }
+
+            if subNode.attributes["name"]! == "topMargin" {
+                top = Int(subNode.children[0].value)!
+                foundOneMargin = true
+                continue
+            }
+
+            if subNode.attributes["name"]! == "rightMargin" {
+                right = Int(subNode.children[0].value)!
+                foundOneMargin = true
+                continue
+            }
+
+            if subNode.attributes["name"]! == "bottomMargin" {
+                bottom = Int(subNode.children[0].value)!
+                foundOneMargin = true
+                continue
+            }
+        }
+
+        if !foundOneMargin {
+            return ""
+        }
+
+        return "        \(node.attributes["name"]!).contentsMargins = QMargins(left: \(left), top: \(top), right: \(right), bottom: \(bottom))\n"
+    }
+
     private func subNode2Swift(node: Node) -> String {
         var ui = ""
+
+        ui += preextractContentsMargins(node: node)
+
         if node.text == "property" {
-            let parentTag = node.parent!.text
-            if parentTag == "item" {
-                ui += "        \(node.parent!.parent!.attributes["name"]!).add(item: \(propertyNode2Swift(node: node.children[0])))\n"
-            } else {
-                ui += "        \(node.parent!.attributes["name"]!).\(node.attributes["name"]!) = \(propertyNode2Swift(node: node.children[0]))\n"
+            if !isMarginPropertyName(node.attributes["name"]!) {
+                let parentTag = node.parent!.text
+                if parentTag == "item" {
+                    ui += "        \(node.parent!.parent!.attributes["name"]!).add(item: \(propertyNode2Swift(node: node.children[0])))\n"
+                } else {
+                    ui += "        \(node.parent!.attributes["name"]!).\(node.attributes["name"]!) = \(propertyNode2Swift(node: node.children[0]))\n"
+                }
             }
         }
         else if node.text == "addaction" {
@@ -402,4 +454,3 @@ extension QliftUIParser: XMLParserDelegate {
         }
     }
 }
-
