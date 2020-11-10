@@ -21,6 +21,15 @@ open class QWidget: QObject {
         }
     }
 
+    public var sizePolicy: QSizePolicy {
+        get {
+            return QSizePolicy(ptr: QWidget_sizePolicy(self.ptr))
+        }
+        set {
+            QWidget_setSizePolicy(self.ptr, newValue.ptr)
+        }
+    }
+
     public var styleSheet: String {
         get {
             return String(cString: QWidget_styleSheet(self.ptr))
