@@ -28,11 +28,10 @@ public class QCoreApplication: QObject {
     }
 
     public func exec() -> Int32 {
-        return QCoreApplication_exec(self.ptr)
+        return QCoreApplication_exec()
     }
 
     public func exit(returnCode: Int32) {
-        QCoreApplication_exit(self.ptr, returnCode)
+        QCoreApplication_exit(returnCode)
     }
 }
-

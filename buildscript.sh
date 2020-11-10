@@ -1,6 +1,6 @@
 #!/bin/bash
 
-if [ ! -f qlift-c-api/build/bin/libqlift-c-api.a ]; then
+if [ ! -f qlift-c-api/build/libqlift-c-api.a ]; then
     rm -rf qlift-c-api
     git clone https://github.com/Longhanks/qlift-c-api
     cd qlift-c-api
