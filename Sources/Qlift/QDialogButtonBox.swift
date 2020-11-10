@@ -83,7 +83,7 @@ extension QDialogButtonBox {
             self.rawValue = rawValue
         }
 
-        public static let NoButton = StandardButton(rawValue: 0)
+        public static let NoButton: StandardButton = []
         public static let Ok = StandardButton(rawValue: 1024)
         public static let Save = StandardButton(rawValue: 2048)
         public static let SaveAll = StandardButton(rawValue: 4096)

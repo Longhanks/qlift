@@ -1,4 +1,4 @@
-// swift-tools-version:5.0
+// swift-tools-version:5.3
 
 import PackageDescription
 
@@ -12,10 +12,9 @@ let package = Package(
     targets: [
         .target(
             name: "Qlift"
-            ),
+        ),
         .target(
             name: "qlift-uic"
-            )
+        )
     ]
 )
-

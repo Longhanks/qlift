@@ -38,7 +38,7 @@ public struct Qt {
             self.rawValue = rawValue
         }
 
-        public static let Widget = WindowFlags(rawValue: 0)
+        public static let Widget: WindowFlags = []
         public static let Window = WindowFlags(rawValue: 1)
         public static let Dialog = WindowFlags(rawValue: 3)
         public static let Sheet = WindowFlags(rawValue: 5)
@@ -87,7 +87,7 @@ public struct Qt {
             self.rawValue = rawValue
         }
 
-        public static let PreciseTimer = TimerType(rawValue: 0)
+        public static let PreciseTimer: TimerType = []
         public static let CoarseTimer = TimerType(rawValue: 1)
         public static let VeryCoarseTimer = TimerType(rawValue: 2)
     }
@@ -99,7 +99,7 @@ public struct Qt {
             self.rawValue = rawValue
         }
 
-        public static let NoButton = MouseButton(rawValue: 0)
+        public static let NoButton: MouseButton = []
         public static let LeftButton = MouseButton(rawValue: 1)
         public static let RightButton = MouseButton(rawValue: 2)
         // Incomplete!
@@ -112,9 +112,8 @@ public struct Qt {
             self.rawValue = rawValue
         }
 
-        public static let NonModal = WindowModality(rawValue: 0)
+        public static let NonModal: WindowModality = []
         public static let WindowModal = WindowModality(rawValue: 1)
         public static let ApplicationModal = WindowModality(rawValue: 2)
     }
 }
-

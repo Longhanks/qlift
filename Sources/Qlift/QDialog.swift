@@ -41,7 +41,6 @@ extension QDialog {
         }
 
         public static let Accepted = DialogCode(rawValue: 1)
-        public static let Rejected = DialogCode(rawValue: 0)
+        public static let Rejected: DialogCode = []
     }
 }
-
