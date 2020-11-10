@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "CQlift",
+        "repositoryURL": "https://github.com/Longhanks/qlift-c-api",
+        "state": {
+          "branch": "master",
+          "revision": "79b126b260aae95f4737dba5041201e03cb83015",
+          "version": null
+        }
+      }
+    ]
+  },
+  "version": 1
+}
