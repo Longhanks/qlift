@@ -21,7 +21,7 @@ open class QWidget: QObject {
         }
     }
 
-    public var sizeHint: QSize {
+    open var sizeHint: QSize {
         get {
             return QSize(ptr: QWidget_sizeHint(self.ptr))
         }
