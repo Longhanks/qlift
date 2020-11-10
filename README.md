@@ -10,14 +10,8 @@ This package provides two things:
 
 ## Building
 
-To build with [qlift-c-api](https://github.com/Longhanks/qlift-c-api/) statically embedded, use the provided `buildscript.sh`.
-
-Linking [qlift-c-api](https://github.com/Longhanks/qlift-c-api/) dynamically requires you to provide the paths where you installed it, if not in LD_LIBRARY_PATH (e.g. when you passed `CMAKE_INSTALL_PREFIX=/usr`, you can just `swift build`).
-
-For exmaple, if you've built qlift-c-api on macOS with the default configuration (which installs to `/usr/local`), pass these flags:
-
 ```bash
-swift build -Xcc -I/usr/local/include -Xlinker -L/usr/local/lib
+swift build
 ```
 
 ### Examples
