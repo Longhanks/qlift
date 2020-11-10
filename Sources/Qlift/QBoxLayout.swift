@@ -39,5 +39,3 @@ open class QBoxLayout: QObject, QLayout {
         }
     }
 }
-
-

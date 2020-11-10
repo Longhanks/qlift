@@ -75,6 +75,25 @@ open class QWidget: QObject {
         }
     }
 
+    private var _layout: QLayout? = nil
+
+    public var layout: QLayout? {
+        get {
+            return self._layout
+        }
+        set {
+            guard let newLayout = newValue else {
+                self._layout = nil
+                QWidget_setLayout(self.ptr, nil)
+                return
+            }
+
+            self._layout = newLayout
+            self._layout!.needsDelete = false
+            QWidget_setLayout(self.ptr, self._layout!.ptr)
+        }
+    }
+
     public var pos: QPoint {
         get {
             return QPoint(ptr: QWidget_pos(self.ptr))
@@ -104,12 +123,19 @@ open class QWidget: QObject {
 
         let rawSelf = Unmanaged.passUnretained(self).toOpaque()
 
-        let functor: @convention(c) (UnsafeMutableRawPointer?) -> UnsafeMutableRawPointer? = { context in
+        let functorSizeHint: @convention(c) (UnsafeMutableRawPointer?) -> UnsafeMutableRawPointer? = { context in
             let _self = Unmanaged<QWidget>.fromOpaque(context!).takeUnretainedValue()
             return Unmanaged.passUnretained(_self.sizeHint).toOpaque()
         }
 
-        QWidget_sizeHint_Override(self.ptr, rawSelf, functor)
+        QWidget_sizeHint_Override(self.ptr, rawSelf, functorSizeHint)
+
+        let functorMousePressEvent: @convention(c) (UnsafeMutableRawPointer?, UnsafeMutableRawPointer?) -> Void = { context, mouseEvent in
+            let _self = Unmanaged<QWidget>.fromOpaque(context!).takeUnretainedValue()
+            _self.mousePressEvent(event: QMouseEvent(ptr: mouseEvent!))
+        }
+
+        QWidget_mousePressEvent_Override(self.ptr, rawSelf, functorMousePressEvent)
     }
 
     public init(ptr: UnsafeMutableRawPointer, parent: QWidget? = nil) {
@@ -127,6 +153,10 @@ open class QWidget: QObject {
             }
             self.ptr = nil
         }
+    }
+
+    open func mousePressEvent(event: QMouseEvent) {
+        QWidget_mousePressEvent(self.ptr, event.ptr)
     }
 
     public func move(to: QPoint) {

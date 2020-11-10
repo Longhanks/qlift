@@ -29,7 +29,7 @@ open class QPushButton: QAbstractButton {
         }
     }
 
-    open func mousePressEvent(event: QMouseEvent) {
+    open override func mousePressEvent(event: QMouseEvent) {
         QPushButton_mousePressEvent(self.ptr, event.ptr)
     }
 }
