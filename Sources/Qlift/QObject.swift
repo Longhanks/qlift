@@ -30,4 +30,3 @@ open class QObject {
         }
     }
 }
-

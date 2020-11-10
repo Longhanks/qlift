@@ -61,10 +61,10 @@ public class QliftUIParser: NSObject {
         }
 
         // 2. Everything except actions
-        swiftUI += preextractContentsMargins(node: rootWidgetNode!)
         for node in rootWidgetNode!.children.filter({ $0.text != "action" }) {
             swiftUI += subNode2Swift(node: node)
         }
+        swiftUI += preextractContentsMargins(node: rootWidgetNode!)
 
         // 3. Connections
         let connectionsNodes = ui.filter({ $0.text == "connections" })
@@ -136,8 +136,6 @@ public class QliftUIParser: NSObject {
 
     private func subNode2Swift(node: Node) -> String {
         var ui = ""
-
-        ui += preextractContentsMargins(node: node)
 
         if node.text == "property" {
             if !isMarginPropertyName(node.attributes["name"]!) {
@@ -288,6 +286,9 @@ public class QliftUIParser: NSObject {
         else {
             ui += "        \(node.description)\n"
         }
+
+        ui += preextractContentsMargins(node: node)
+
         return ui
     }
 
