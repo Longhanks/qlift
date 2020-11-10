@@ -29,10 +29,8 @@ open class QMainWindow: QWidget {
         let rawSelf = Unmanaged.passUnretained(self).toOpaque()
 
         let functor: @convention(c) (UnsafeMutableRawPointer?, UnsafeMutableRawPointer?) -> Void = { context, closeEvent in
-            if context != nil {
-                let _self = Unmanaged<QMainWindow>.fromOpaque(context!).takeUnretainedValue()
-                _self.closeEvent(event: QCloseEvent(ptr: closeEvent!))
-            }
+            let _self = Unmanaged<QMainWindow>.fromOpaque(context!).takeUnretainedValue()
+            _self.closeEvent(event: QCloseEvent(ptr: closeEvent!))
         }
 
         QMainWindow_closeEvent_Override(self.ptr, rawSelf, functor)
@@ -55,4 +53,3 @@ open class QMainWindow: QWidget {
         QMainWindow_closeEvent(self.ptr, event.ptr)
     }
 }
-

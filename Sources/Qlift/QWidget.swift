@@ -21,6 +21,12 @@ open class QWidget: QObject {
         }
     }
 
+    public var sizeHint: QSize {
+        get {
+            return QSize(ptr: QWidget_sizeHint(self.ptr))
+        }
+    }
+
     public var sizePolicy: QSizePolicy {
         get {
             return QSizePolicy(ptr: QWidget_sizePolicy(self.ptr))
@@ -95,6 +101,15 @@ open class QWidget: QObject {
 
     public init(parent: QWidget? = nil, flags: Qt.WindowFlags = .Widget) {
         super.init(ptr: QWidget_new(parent?.ptr, flags.rawValue), parent: parent)
+
+        let rawSelf = Unmanaged.passUnretained(self).toOpaque()
+
+        let functor: @convention(c) (UnsafeMutableRawPointer?) -> UnsafeMutableRawPointer? = { context in
+            let _self = Unmanaged<QWidget>.fromOpaque(context!).takeUnretainedValue()
+            return Unmanaged.passUnretained(_self.sizeHint).toOpaque()
+        }
+
+        QWidget_sizeHint_Override(self.ptr, rawSelf, functor)
     }
 
     public init(ptr: UnsafeMutableRawPointer, parent: QWidget? = nil) {

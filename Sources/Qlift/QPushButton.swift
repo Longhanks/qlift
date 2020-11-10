@@ -9,10 +9,8 @@ open class QPushButton: QAbstractButton {
         let rawSelf = Unmanaged.passUnretained(self).toOpaque()
 
         let functor: @convention(c) (UnsafeMutableRawPointer?, UnsafeMutableRawPointer?) -> Void = { context, mouseEvent in
-            if context != nil {
-                let _self = Unmanaged<QPushButton>.fromOpaque(context!).takeUnretainedValue()
-                _self.mousePressEvent(event: QMouseEvent(ptr: mouseEvent!))
-            }
+            let _self = Unmanaged<QPushButton>.fromOpaque(context!).takeUnretainedValue()
+            _self.mousePressEvent(event: QMouseEvent(ptr: mouseEvent!))
         }
 
         QPushButton_mousePressEvent_Override(self.ptr, rawSelf, functor)
@@ -35,4 +33,3 @@ open class QPushButton: QAbstractButton {
         QPushButton_mousePressEvent(self.ptr, event.ptr)
     }
 }
-
