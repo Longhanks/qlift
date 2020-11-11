@@ -171,6 +171,10 @@ open class QWidget: QObject {
         QWidget_resize(self.ptr, width, height)
     }
 
+    public func setFixedSize(_ size: QSize) {
+        QWidget_setFixedSize(self.ptr, size.ptr)
+    }
+
     open func show() {
         QWidget_show(self.ptr)
     }
