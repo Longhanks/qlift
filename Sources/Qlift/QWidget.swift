@@ -106,6 +106,12 @@ open class QWidget: QObject {
         }
     }
 
+    public var size: QSize {
+        get {
+            return QSize(ptr: QWidget_size(self.ptr))
+        }
+    }
+
     public var frameGeometry: QRect {
         get {
             return QRect(ptr: QWidget_frameGeometry(self.ptr))
