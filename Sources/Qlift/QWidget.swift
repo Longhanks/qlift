@@ -125,7 +125,7 @@ open class QWidget: QObject {
 
         let functorSizeHint: @convention(c) (UnsafeMutableRawPointer?) -> UnsafeMutableRawPointer? = { context in
             let _self = Unmanaged<QWidget>.fromOpaque(context!).takeUnretainedValue()
-            return Unmanaged.passUnretained(_self.sizeHint).toOpaque()
+            return _self.sizeHint.ptr
         }
 
         QWidget_sizeHint_Override(self.ptr, rawSelf, functorSizeHint)
