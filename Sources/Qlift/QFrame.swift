@@ -12,14 +12,14 @@ open class QFrame: QWidget {
             return Unmanaged.passUnretained(_self.sizeHint).toOpaque()
         }
 
-        QWidget_sizeHint_Override(self.ptr, rawSelf, functorSizeHint)
+        QFrame_sizeHint_Override(self.ptr, rawSelf, functorSizeHint)
 
         let functorMousePressEvent: @convention(c) (UnsafeMutableRawPointer?, UnsafeMutableRawPointer?) -> Void = { context, mouseEvent in
             let _self = Unmanaged<QFrame>.fromOpaque(context!).takeUnretainedValue()
             _self.mousePressEvent(event: QMouseEvent(ptr: mouseEvent!))
         }
 
-        QWidget_mousePressEvent_Override(self.ptr, rawSelf, functorMousePressEvent)
+        QFrame_mousePressEvent_Override(self.ptr, rawSelf, functorMousePressEvent)
     }
 
     override init(ptr: UnsafeMutableRawPointer, parent: QWidget? = nil) {
