@@ -20,8 +20,8 @@ let package = Package(
     dependencies: [
         .package(
             name: "CQlift",
-            url: "https://github.com/Longhanks/qlift-c-api",
-            .branch("master")
+            url: "https://github.com/DimaRU/qlift-c-api",
+            .branch("qt5")
         )
     ],
     targets: [
@@ -32,19 +32,19 @@ let package = Package(
             ],
             cxxSettings: [
                 .unsafeFlags([
-                        "-I/usr/local/opt/qt/lib/QtCore.framework/Headers",
-                        "-I/usr/local/opt/qt/lib/QtGui.framework/Headers",
-                        "-I/usr/local/opt/qt/lib/QtWidgets.framework/Headers",
-                        "-I/usr/local/opt/qt/include"
+                        "-I/usr/local/opt/qt@5/lib/QtCore.framework/Headers",
+                        "-I/usr/local/opt/qt@5/lib/QtGui.framework/Headers",
+                        "-I/usr/local/opt/qt@5/lib/QtWidgets.framework/Headers",
+                        "-I/usr/local/opt/qt@5/include"
                     ],
                     .when(platforms: [.macOS])
                 )
             ],
             linkerSettings: [
                 .unsafeFlags([
-                        "/usr/local/opt/qt/lib/QtCore.framework/QtCore",
-                        "/usr/local/opt/qt/lib/QtGui.framework/QtGui",
-                        "/usr/local/opt/qt/lib/QtWidgets.framework/QtWidgets",
+                        "/usr/local/opt/qt@5/lib/QtCore.framework/QtCore",
+                        "/usr/local/opt/qt@5/lib/QtGui.framework/QtGui",
+                        "/usr/local/opt/qt@5/lib/QtWidgets.framework/QtWidgets",
                     ],
                     .when(platforms: [.macOS])
                 )

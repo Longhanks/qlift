@@ -3,10 +3,10 @@
     "pins": [
       {
         "package": "CQlift",
-        "repositoryURL": "https://github.com/Longhanks/qlift-c-api",
+        "repositoryURL": "https://github.com/DimaRU/qlift-c-api",
         "state": {
-          "branch": "master",
-          "revision": "a5900ae0a3b85230573255fb46774eb8223696ba",
+          "branch": "qt5",
+          "revision": "99ffa13fc4adf09e3eb05b1cdd2a66062cd17fe3",
           "version": null
         }
       }
