@@ -14,6 +14,15 @@ open class QLabel: QFrame {
         }
     }
 
+    public var isScaledContents: Bool {
+        get {
+            QLabel_hasScaledContents(ptr)
+        }
+        set {
+            QLabel_setScaledContents(ptr, newValue)
+        }
+    }
+
     public func setPixmap(pixmap: QPixmap) {
         QLabel_setPixmap(ptr, pixmap.ptr)
     }
