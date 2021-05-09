@@ -37,3 +37,12 @@
 [[maybe_unused]] void QLabel_setScaledContents(void *label, bool isScaled) {
     static_cast<QLabel *>(label)->setScaledContents(isScaled);
 }
+
+
+LIBRARY_API bool QLabel_openExternalLinks(void *label) {
+    return static_cast<QLabel *>(label)->openExternalLinks();
+}
+
+LIBRARY_API void QLabel_setOpenExternalLinks(void *label, bool open) {
+    static_cast<QLabel *>(label)->setOpenExternalLinks(open);
+}

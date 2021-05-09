@@ -22,6 +22,10 @@ LIBRARY_API bool QLabel_hasScaledContents(void *label);
 
 LIBRARY_API void QLabel_setScaledContents(void *label, bool isScaled);
 
+LIBRARY_API bool QLabel_openExternalLinks(void *label);
+
+LIBRARY_API void QLabel_setOpenExternalLinks(void *label, bool open);
+
 #ifdef __cplusplus
 }
 #endif

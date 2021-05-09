@@ -23,6 +23,15 @@ open class QLabel: QFrame {
         }
     }
 
+    public var openExternalLinks: Bool {
+        get {
+            QLabel_openExternalLinks(ptr)
+        }
+        set {
+            QLabel_setOpenExternalLinks(ptr, newValue)
+        }
+    }
+
     public func setPixmap(pixmap: QPixmap) {
         QLabel_setPixmap(ptr, pixmap.ptr)
     }
