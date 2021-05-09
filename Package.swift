@@ -6,33 +6,27 @@ let package = Package(
     products: [
         .executable(
             name: "qlift-uic",
-            targets: [
-                "qlift-uic"
-            ]
+            targets: ["qlift-uic"]
         ),
         .library(
             name: "Qlift",
-            targets: [
-                "Qlift"
-            ]
-        ),
-    ],
-    dependencies: [
-        .package(
-            name: "CQlift",
-            url: "https://github.com/DimaRU/qlift-c-api",
-            .branch("qt5")
-        )
+            targets: ["Qlift"]),
     ],
     targets: [
         .target(
             name: "Qlift",
-            dependencies: [
-                "CQlift"
-            ]
-        ),
+            dependencies: ["CQlift"],
+            path: "Sources/Qlift"),
         .target(
-            name: "qlift-uic"
-        )
-    ]
+            name: "CQlift",
+            dependencies: [
+                .target(name: "CQt5Widgets")
+            ],
+            path: "Sources/qlift-c-api"),
+        .systemLibrary(
+            name: "CQt5Widgets", pkgConfig: "Qt5Widgets"),
+        .target(
+            name: "qlift-uic")
+    ],
+    cxxLanguageStandard: .cxx1z
 )
