@@ -25,3 +25,9 @@
         static_cast<QObject *>(receiver),
         [context, slot_ptr](bool checked) { (*slot_ptr)(context, checked); });
 }
+
+[[maybe_unused]] void QAbstractButton_setIcon(void *abstractButton,
+                                              void *icon) {
+    return static_cast<QAbstractButton *>(abstractButton)
+    ->setIcon(*static_cast<QIcon *>(icon));
+}

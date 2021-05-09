@@ -17,6 +17,9 @@ LIBRARY_API void QAbstractButton_clicked_connect(void *abstractButton,
                                                  void (*slot_ptr)(void *,
                                                                   bool));
 
+LIBRARY_API void QAbstractButton_setIcon(void *abstractButton,
+                                         void *icon);
+
 #ifdef __cplusplus
 }
 #endif

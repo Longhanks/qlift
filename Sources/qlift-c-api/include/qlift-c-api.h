@@ -20,6 +20,7 @@
 #include "../qlift-QGroupBox.h"
 #include "../qlift-QGuiApplication.h"
 #include "../qlift-QHBoxLayout.h"
+#include "../qlift-QIcon.h"
 #include "../qlift-QInputEvent.h"
 #include "../qlift-QLabel.h"
 #include "../qlift-QLayout.h"

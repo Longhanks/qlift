@@ -14,6 +14,10 @@ open class QAbstractButton: QWidget {
         super.init(ptr: ptr, parent: parent)
     }
 
+    public func addIcon(icon: QIcon) {
+        QAbstractButton_setIcon(ptr, icon.ptr)
+    }
+
     open func connectClicked(receiver: QObject? = nil, to slot: @escaping ((Bool) -> Void)) {
         var object: QObject = self
         if receiver != nil {
