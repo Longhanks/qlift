@@ -14,6 +14,10 @@ open class QLabel: QFrame {
         }
     }
 
+    public func setPixmap(pixmap: QPixmap) {
+        QLabel_setPixmap(ptr, pixmap.ptr)
+    }
+
     public init(text: String = "", parent: QWidget? = nil, flags: Qt.WindowFlags = .Widget) {
         self.text = text
         super.init(ptr: QLabel_new(text, parent?.ptr, flags.rawValue), parent: parent)
