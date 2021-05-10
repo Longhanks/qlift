@@ -88,10 +88,6 @@ public class QliftUIParser: NSObject {
         return swiftUI
     }
 
-    private func isMarginPropertyName(_ name: String) -> Bool {
-        return name == "leftMargin" || name == "topMargin" || name == "rightMargin" || name == "bottomMargin"
-    }
-
     private func preextractContentsMargins(node: Node) -> String {
         var left = -1
         var top = -1
