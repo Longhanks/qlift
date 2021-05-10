@@ -9,6 +9,7 @@
 #include "../qlift-QApplication.h"
 #include "../qlift-QBoxLayout.h"
 #include "../qlift-QCloseEvent.h"
+#include "../qlift-QColor.h"
 #include "../qlift-QComboBox.h"
 #include "../qlift-QCoreApplication.h"
 #include "../qlift-QDesktopWidget.h"
