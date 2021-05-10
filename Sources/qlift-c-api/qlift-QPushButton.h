@@ -10,6 +10,10 @@ LIBRARY_API void *QPushButton_new(void *icon, const char *text, void *parent);
 
 LIBRARY_API void QPushButton_delete(void *pushButton);
 
+LIBRARY_API void QPushButton_setFlat(void *pushButton, bool enabled);
+
+LIBRARY_API bool QPushButton_isFlat(void *pushButton);
+
 LIBRARY_API void QPushButton_mousePressEvent(void *pushButton,
                                              void *mouseEvent);
 

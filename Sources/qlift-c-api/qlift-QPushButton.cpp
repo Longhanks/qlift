@@ -24,6 +24,14 @@ QPushButton_new(void *icon, const char *text, void *parent) {
     delete static_cast<QliftPushButton *>(pushButton);
 }
 
+[[maybe_unused]] void QPushButton_setFlat(void *pushButton, bool enabled) {
+    static_cast<QliftPushButton *>(pushButton)->setFlat(enabled);
+}
+
+[[maybe_unused]] bool QPushButton_isFlat(void *pushButton) {
+    static_cast<QliftPushButton *>(pushButton)->isFlat();
+}
+
 [[maybe_unused]] void QPushButton_mousePressEvent(void *pushButton,
                                                   void *mouseEvent) {
     static_cast<QliftPushButton *>(pushButton)

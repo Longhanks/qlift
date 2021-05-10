@@ -202,6 +202,14 @@
                                                          sizeHint_Functor);
 }
 
+[[maybe_unused]] void QWidget_setAutoFillBackground(void *widget, bool enabled) {
+    static_cast<QWidget *>(widget)->setAutoFillBackground(enabled);
+}
+
+[[maybe_unused]] bool QWidget_autoFillBackground(void *widget) {
+    return static_cast<QWidget *>(widget)->autoFillBackground();
+}
+
 W_OBJECT_IMPL(QliftWidget)
 
 [[maybe_unused]] void

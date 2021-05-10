@@ -73,6 +73,10 @@ LIBRARY_API void QWidget_mousePressEvent_Override(
 
 LIBRARY_API void *QWidget_sizeHint(void *widget);
 
+LIBRARY_API void QWidget_setAutoFillBackground(void *widget, bool enable);
+
+LIBRARY_API bool QWidget_autoFillBackground(void *widget);
+
 LIBRARY_API void QWidget_sizeHint_Override(void *widget,
                                            void *context,
                                            void *(*sizeHint_Functor)(void *));

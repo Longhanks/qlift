@@ -124,6 +124,15 @@ open class QWidget: QObject {
         }
     }
 
+    public var autoFillBackground: Bool {
+        get {
+            QWidget_autoFillBackground(self.ptr)
+        }
+        set {
+            QWidget_setAutoFillBackground(self.ptr, newValue)
+        }
+    }
+
     public init(parent: QWidget? = nil, flags: Qt.WindowFlags = .Widget) {
         super.init(ptr: QWidget_new(parent?.ptr, flags.rawValue), parent: parent)
 

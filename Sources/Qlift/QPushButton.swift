@@ -32,4 +32,13 @@ open class QPushButton: QAbstractButton {
     open override func mousePressEvent(event: QMouseEvent) {
         QPushButton_mousePressEvent(self.ptr, event.ptr)
     }
+
+    public var isFlat: Bool {
+        get {
+            QPushButton_isFlat(self.ptr)
+        }
+        set {
+            QPushButton_setFlat(self.ptr, newValue)
+        }
+    }
 }
