@@ -75,6 +75,11 @@ open class QWidget: QObject {
         }
     }
 
+    public func setPallette(palette: QPalette)
+    {
+        QWidget_setPalette(ptr, palette.ptr)
+    }
+
     private var _layout: QLayout? = nil
 
     public var layout: QLayout? {
@@ -176,6 +181,10 @@ open class QWidget: QObject {
 
     public func move(to: QPoint) {
         QWidget_move(self.ptr, to.ptr)
+    }
+
+    public func move(x: Int, y: Int) {
+        QWidget_movexy(self.ptr, Int32(x), Int32(y))
     }
 
     open func close() -> Bool {

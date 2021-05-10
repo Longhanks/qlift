@@ -40,6 +40,8 @@ LIBRARY_API void *QWidget_pos(void *widget);
 
 LIBRARY_API void QWidget_move(void *widget, void *point);
 
+LIBRARY_API void QWidget_movexy(void *widget, int x, int y);
+
 LIBRARY_API void *QWidget_window(void *widget);
 
 LIBRARY_API void *QWidget_rect(void *widget);
@@ -88,6 +90,8 @@ LIBRARY_API void QWidget_setSizePolicy(void *widget, void *policy);
 LIBRARY_API const char *QWidget_styleSheet(void *widget);
 
 LIBRARY_API void QWidget_setStyleSheet(void *widget, const char *styleSheet);
+
+LIBRARY_API void QWidget_setPalette(void *widget, const void *palette);
 
 #ifdef __cplusplus
 }

@@ -34,6 +34,7 @@
 #include "../qlift-QMenuBar.h"
 #include "../qlift-QMessageBox.h"
 #include "../qlift-QMouseEvent.h"
+#include "../qlift-QPalette.h"
 #include "../qlift-QObject.h"
 #include "../qlift-QPixmap.h"
 #include "../qlift-QPoint.h"

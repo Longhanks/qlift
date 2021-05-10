@@ -90,6 +90,10 @@
     }
 }
 
+[[maybe_unused]]  void QWidget_movexy(void *widget, int x, int y) {
+    static_cast<QWidget *>(widget)->move(x, y);
+}
+
 [[maybe_unused]] void *QWidget_window(void *widget) {
     return static_cast<void *>(static_cast<QWidget *>(widget)->window());
 }
@@ -208,6 +212,10 @@
 
 [[maybe_unused]] bool QWidget_autoFillBackground(void *widget) {
     return static_cast<QWidget *>(widget)->autoFillBackground();
+}
+
+[[maybe_unused]] void QWidget_setPalette(void *widget, const void *palette) {
+    static_cast<QWidget *>(widget)->setPalette(*static_cast<const QPalette *>(palette));
 }
 
 W_OBJECT_IMPL(QliftWidget)

@@ -26,8 +26,8 @@ public class QBrush {
         case fDiagPattern = 13              //    Forward diagonal lines.
         case diagCrossPattern = 14          //    Crossing diagonal lines.
         case linearGradientPattern = 15     //    Linear gradient (set using a dedicated QBrush constructor).
-        case conicalGradientPattern = 17    //    Conical gradient (set using a dedicated QBrush constructor).
         case radialGradientPattern = 16     //    Radial gradient (set using a dedicated QBrush constructor).
+        case conicalGradientPattern = 17    //    Conical gradient (set using a dedicated QBrush constructor).
         case texturePattern = 24            //    Custom pattern (see QBrush::setTexture()).
     }
 
@@ -45,7 +45,7 @@ public class QBrush {
     }
 
     public init(brush: QBrush) {
-        self.ptr = QBrush_new_brush(brush.ptr);
+        self.ptr = QBrush_new_brush(brush.ptr)
     }
 
     public init(pixmap: QPixmap) {
