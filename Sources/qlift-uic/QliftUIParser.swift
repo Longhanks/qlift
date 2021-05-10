@@ -98,36 +98,27 @@ public class QliftUIParser: NSObject {
         var right = -1
         var bottom = -1
         var foundOneMargin = false
-        for subNode in node.children {
-            guard subNode.text == "property" else { continue }
-            guard isMarginPropertyName(subNode.attributes["name"]!) else { continue }
 
-            if subNode.attributes["name"]! == "leftMargin" {
+        for subNode in node.children where subNode.text == "property" {
+            switch subNode.attributes["name"]! {
+            case "leftMargin":
                 left = Int(subNode.children[0].value)!
                 foundOneMargin = true
-                continue
-            }
-
-            if subNode.attributes["name"]! == "topMargin" {
+            case "topMargin":
                 top = Int(subNode.children[0].value)!
                 foundOneMargin = true
-                continue
-            }
-
-            if subNode.attributes["name"]! == "rightMargin" {
+            case "rightMargin":
                 right = Int(subNode.children[0].value)!
                 foundOneMargin = true
-                continue
-            }
-
-            if subNode.attributes["name"]! == "bottomMargin" {
+            case "bottomMargin":
                 bottom = Int(subNode.children[0].value)!
                 foundOneMargin = true
+            default:
                 continue
             }
         }
 
-        if !foundOneMargin {
+        guard foundOneMargin else {
             return ""
         }
 
@@ -139,7 +130,17 @@ public class QliftUIParser: NSObject {
 
         switch node.text {
         case "property":
-            if !isMarginPropertyName(node.attributes["name"]!) {
+            switch node.attributes["name"]! {
+            case "palette":
+                // TODO: Pallette make
+                break
+            case "autoFillBackground":
+                ui += "        \(node.parent!.attributes["name"]!).autoFillBackground = \(propertyNode2Swift(node: node.children[0]))\n"
+            case "flat":
+                ui += "        \(node.parent!.attributes["name"]!).isFlat = \(propertyNode2Swift(node: node.children[0]))\n"
+            case "leftMargin", "topMargin", "rightMargin", "bottomMargin":
+                break
+            default:
                 let parentTag = node.parent!.text
                 if parentTag == "item" {
                     ui += "        \(node.parent!.parent!.attributes["name"]!).add(item: \(propertyNode2Swift(node: node.children[0])))\n"
@@ -245,12 +246,14 @@ public class QliftUIParser: NSObject {
                 }
 
                 // Determine if parent is a QDockWidget or QMainWindow -> needs to set widget / centralWidget
-                else if node.parent!.attributes["class"] != nil {
-                    if node.parent!.attributes["class"]! == "QDockWidget" {
+                else {
+                    switch node.parent!.attributes["class"] {
+                    case "QDockWidget"?:
                         ui += "        \(node.parent!.attributes["name"]!).widget = \(node.attributes["name"]!)\n"
-                    }
-                    else if node.parent!.attributes["class"]! == "QMainWindow" {
+                    case "QMainWindow"?:
                         ui += "        \(node.parent!.attributes["name"]!).centralWidget = \(node.attributes["name"]!)\n"
+                    default:
+                        break
                     }
                 }
             }
