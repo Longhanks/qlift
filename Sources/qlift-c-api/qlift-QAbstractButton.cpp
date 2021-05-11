@@ -31,3 +31,9 @@
     return static_cast<QAbstractButton *>(abstractButton)
     ->setIcon(*static_cast<QIcon *>(icon));
 }
+
+[[maybe_unused]] void QAbstractButton_setIconSize(void *abstractButton,
+                                              void *size) {
+    return static_cast<QAbstractButton *>(abstractButton)
+    ->setIconSize(*static_cast<QSize *>(size));
+}

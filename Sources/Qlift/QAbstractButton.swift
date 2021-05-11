@@ -18,6 +18,10 @@ open class QAbstractButton: QWidget {
         QAbstractButton_setIcon(ptr, icon.ptr)
     }
 
+    public func setIconSize(size: QSize) {
+        QAbstractButton_setIconSize(ptr, size.ptr)
+    }
+
     open func connectClicked(receiver: QObject? = nil, to slot: @escaping ((Bool) -> Void)) {
         var object: QObject = self
         if receiver != nil {

@@ -20,6 +20,9 @@ LIBRARY_API void QAbstractButton_clicked_connect(void *abstractButton,
 LIBRARY_API void QAbstractButton_setIcon(void *abstractButton,
                                          void *icon);
 
+LIBRARY_API void QAbstractButton_setIconSize(void *abstractButton,
+                                             void *size);
+
 #ifdef __cplusplus
 }
 #endif

@@ -45,5 +45,6 @@
 #include "../qlift-QSpacerItem.h"
 #include "../qlift-QSpinBox.h"
 #include "../qlift-QTimer.h"
+#include "../qlift-QToolButton.h"
 #include "../qlift-QVBoxLayout.h"
 #include "../qlift-QWidget.h"
