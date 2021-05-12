@@ -32,8 +32,8 @@ public class QPalette {
         case toolTipText
         case placeholderText = 20
 
-        public var backgorund: ColorRole { .window }
-        public var foreground: ColorRole { .windowText }
+        public static var backgorund: ColorRole { .window }
+        public static var foreground: ColorRole { .windowText }
     }
 
     public enum ColorGroup: Int32 {
@@ -44,7 +44,7 @@ public class QPalette {
         case current
         case all
 
-        public var normal: ColorGroup { .active }
+        public static var normal: ColorGroup { .active }
     }
 
     public var ptr: UnsafeMutableRawPointer!

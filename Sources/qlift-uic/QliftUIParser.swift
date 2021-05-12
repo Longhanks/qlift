@@ -127,9 +127,15 @@ public class QliftUIParser: NSObject {
         switch node.text {
         case "property":
             switch node.attributes["name"]! {
-            case "palette":
+            case "palette", "icon":
                 // TODO: Pallette make
                 break
+            case "sizePolicy":
+                break;
+            case "pixmap":
+                ui += "        \(node.parent!.attributes["name"]!).setPixmap(QPixmap(fileName: \(propertyNode2Swift(node: node.children[0]))))\n"
+            case "iconSize":
+                ui += "        \(node.parent!.attributes["name"]!).setIconSize(\(propertyNode2Swift(node: node.children[0])))\n"
             case "autoFillBackground":
                 ui += "        \(node.parent!.attributes["name"]!).autoFillBackground = \(propertyNode2Swift(node: node.children[0]))\n"
             case "flat":
@@ -304,7 +310,7 @@ public class QliftUIParser: NSObject {
 
     private func propertyNode2Swift(node: Node) -> String {
         switch node.text {
-        case "string":
+        case "string", "pixmap":
             return "\"" + node.value + "\""
 
         case "enum":
@@ -345,6 +351,21 @@ public class QliftUIParser: NSObject {
                 }
             }
             return "QRect(x: \(x), y: \(y), width: \(width), height: \(height))"
+
+        case "size":
+            var width = 0
+            var height = 0
+            for child in node.children {
+                switch child.text {
+                case "width":
+                    width = Int(child.value)!
+                case "height":
+                    height = Int(child.value)!
+                default:
+                    print("unknown size:", child.text)
+                }
+            }
+            return "QSize(width: \(width), height: \(height))"
 
         default:
             return node.text
