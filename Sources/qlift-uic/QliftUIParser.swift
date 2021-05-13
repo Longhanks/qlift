@@ -8,6 +8,7 @@ public class QliftUIParser: NSObject {
     private var rootNode = Node(parent: nil, text: "root")
     private var currentNode: Node?
     private var namesOfQMenusForAddAction = [String]()
+    private var widgetCount = 1
 
 
     public func parseUI(data: Data) -> String? {
@@ -48,12 +49,18 @@ public class QliftUIParser: NSObject {
             else if property.text == "action" {
                 cls = "QAction"
             }
+            if property.attributes["name"]!.isEmpty {
+                property.attributes["name"] = "widget\(widgetCount)"
+                widgetCount += 1
+            }
             swiftUI += "    var " + property.attributes["name"]! + ": " + cls + "!\n"
         }
 
-        swiftUI += "\n"
-        swiftUI += "    override init(parent: QWidget? = nil, flags: Qt.WindowFlags = .Widget) {\n"
-        swiftUI += "        super.init(parent: parent, flags: flags)\n"
+        swiftUI += """
+
+            override init(parent: QWidget? = nil, flags: Qt.WindowFlags = .Widget) {
+                super.init(parent: parent, flags: flags)
+        """
 
         // 1. Actions
         for node in rootWidgetNode!.children.filter({ $0.text == "action" }) {
