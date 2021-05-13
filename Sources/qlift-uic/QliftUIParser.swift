@@ -60,6 +60,7 @@ public class QliftUIParser: NSObject {
 
             override init(parent: QWidget? = nil, flags: Qt.WindowFlags = .Widget) {
                 super.init(parent: parent, flags: flags)
+
         """
 
         // 1. Actions
@@ -142,7 +143,7 @@ public class QliftUIParser: NSObject {
             case "pixmap":
                 ui += "        \(node.parent!.attributes["name"]!).setPixmap(QPixmap(fileName: \(propertyNode2Swift(node: node.children[0]))))\n"
             case "iconSize":
-                ui += "        \(node.parent!.attributes["name"]!).setIconSize(\(propertyNode2Swift(node: node.children[0])))\n"
+                ui += "        \(node.parent!.attributes["name"]!).setIconSize(size: \(propertyNode2Swift(node: node.children[0])))\n"
             case "autoFillBackground":
                 ui += "        \(node.parent!.attributes["name"]!).autoFillBackground = \(propertyNode2Swift(node: node.children[0]))\n"
             case "flat":
