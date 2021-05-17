@@ -141,7 +141,7 @@ public class QliftUIParser: NSObject {
             case "sizePolicy":
                 break;
             case "pixmap":
-                ui += "        \(node.parent!.attributes["name"]!).setPixmap(QPixmap(fileName: \(propertyNode2Swift(node: node.children[0]))))\n"
+                ui += "        \(node.parent!.attributes["name"]!).setPixmap(pixmap: QPixmap(fileName: \(propertyNode2Swift(node: node.children[0]))))\n"
             case "iconSize":
                 ui += "        \(node.parent!.attributes["name"]!).setIconSize(size: \(propertyNode2Swift(node: node.children[0])))\n"
             case "autoFillBackground":
