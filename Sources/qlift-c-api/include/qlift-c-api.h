@@ -39,6 +39,7 @@
 #include "../qlift-QObject.h"
 #include "../qlift-QPixmap.h"
 #include "../qlift-QPoint.h"
+#include "../qlift-QProgressBar.h"
 #include "../qlift-QPushButton.h"
 #include "../qlift-QRect.h"
 #include "../qlift-QResource.h"
