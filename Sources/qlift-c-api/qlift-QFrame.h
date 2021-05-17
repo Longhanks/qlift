@@ -23,6 +23,14 @@ LIBRARY_API void QFrame_sizeHint_Override(void *frame,
                                           void *context,
                                           void *(*sizeHint_Functor)(void *));
 
+LIBRARY_API int QFrame_shape(void *frame);
+
+LIBRARY_API void QFrame_setShape(void *frame, int shape);
+
+LIBRARY_API int QFrame_shadow(void *frame);
+
+LIBRARY_API void QFrame_setShadow(void *frame, int shadow);
+
 #ifdef __cplusplus
 }
 #endif

@@ -43,6 +43,22 @@
                                                        sizeHint_Functor);
 }
 
+[[maybe_unused]] int QFrame_shape(void *frame) {
+    return static_cast<QliftFrame *>(frame)->frameShape();
+}
+
+[[maybe_unused]] void QFrame_setShape(void *frame, int shape) {
+    static_cast<QliftFrame *>(frame)->setFrameShape(static_cast<QFrame::Shape>(shape));
+}
+
+[[maybe_unused]] int QFrame_shadow(void *frame) {
+    return static_cast<QliftFrame *>(frame)->frameShadow();
+}
+
+[[maybe_unused]] void QFrame_setShadow(void *frame, int shadow) {
+    static_cast<QliftFrame *>(frame)->setFrameShadow(static_cast<QFrame::Shadow>(shadow));
+}
+
 W_OBJECT_IMPL(QliftFrame)
 
 [[maybe_unused]] void
