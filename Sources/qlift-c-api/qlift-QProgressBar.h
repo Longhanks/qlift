@@ -28,6 +28,10 @@ LIBRARY_API bool QProgressBar_isTextVisible(void *progressBar);
 
 LIBRARY_API void QProgressBar_setTextVisible(void *progressBar, bool visible);
 
+LIBRARY_API int QProgressBar_orientation(void *progressBar);
+
+LIBRARY_API void QProgressBar_setOrientation(void *progressBar, int orientation);
+
 #ifdef __cplusplus
 }
 #endif

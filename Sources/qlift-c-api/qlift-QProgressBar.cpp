@@ -45,3 +45,11 @@
 [[maybe_unused]] void QProgressBar_setTextVisible(void *progressBar, bool visible) {
     static_cast<QProgressBar *>(progressBar)->setTextVisible(visible);
 }
+
+[[maybe_unused]] int QProgressBar_orientation(void *progressBar) {
+    return static_cast<QProgressBar *>(progressBar)->orientation();
+}
+
+[[maybe_unused]] void QProgressBar_setOrientation(void *progressBar, int orientation) {
+    static_cast<QProgressBar *>(progressBar)->setOrientation(static_cast<Qt::Orientation>(orientation));
+}

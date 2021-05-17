@@ -2,6 +2,11 @@ import CQlift
 
 
 open class QProgressBar: QWidget {
+    public enum Direction: Int32 {
+        case TopToBottom = 0
+        case BottomToTop = 1
+    }
+
     public var value: Int32 {
         get {
             return QProgressBar_value(self.ptr)
@@ -41,6 +46,15 @@ open class QProgressBar: QWidget {
         }
         set {
             QProgressBar_setTextVisible(ptr, newValue)
+        }
+    }
+
+    public var orientation: Qt.Orientation {
+        get {
+            Qt.Orientation(rawValue: QProgressBar_orientation(ptr)) ?? .Horizontal
+        }
+        set {
+            QProgressBar_setOrientation(ptr, newValue.rawValue)
         }
     }
 
