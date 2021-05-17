@@ -23,6 +23,7 @@
 #include "../qlift-QHBoxLayout.h"
 #include "../qlift-QBrush.h"
 #include "../qlift-QIcon.h"
+#include "../qlift-QImage.h"
 #include "../qlift-QInputEvent.h"
 #include "../qlift-QLabel.h"
 #include "../qlift-QLayout.h"

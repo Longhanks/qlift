@@ -18,6 +18,8 @@ LIBRARY_API void QLabel_setText(void *label, const char *text);
 
 LIBRARY_API void QLabel_setPixmap(void *label, const void *pixmap);
 
+LIBRARY_API void QLabel_setImage(void *label, const void *image);
+
 LIBRARY_API bool QLabel_hasScaledContents(void *label);
 
 LIBRARY_API void QLabel_setScaledContents(void *label, bool isScaled);

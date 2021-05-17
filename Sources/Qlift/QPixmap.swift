@@ -19,13 +19,17 @@ open class QPixmap {
         self.ptr = QPixmap_from_file(fileName, format)
     }
 
+    public init(image: QImage) {
+        self.ptr = QPixmap_from_image(image.ptr)
+    }
+
     public func loadFrom(fileName: String, format: String? = nil) -> Bool {
         QPixmap_loadfromfile(ptr, fileName, format)
     }
 
     public func loadFrom(data: Data, format: String? = nil) -> Bool {
         return data.withUnsafeBytes { buf in
-            QPixmap_loadFromData(ptr, buf.baseAddress!.assumingMemoryBound(to: UInt8.self), UInt32(buf.count), format)
+            QPixmap_loadFromData(ptr, buf.baseAddress!, UInt32(buf.count), format)
         }
     }
 

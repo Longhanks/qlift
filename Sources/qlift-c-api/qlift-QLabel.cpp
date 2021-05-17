@@ -30,6 +30,10 @@
     static_cast<QLabel *>(label)->setPixmap(*(static_cast<QPixmap const*>(pixmap)));
 }
 
+[[maybe_unused]] void QLabel_setImage(void *label, const void *image) {
+    static_cast<QLabel *>(label)->setPixmap(QPixmap::fromImage(*static_cast<QImage const*>(image)));
+}
+
 [[maybe_unused]] bool QLabel_hasScaledContents(void *label) {
     return static_cast<QLabel *>(label)->hasScaledContents();
 }

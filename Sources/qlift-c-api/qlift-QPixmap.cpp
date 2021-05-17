@@ -17,12 +17,16 @@
     return static_cast<void *>( new QPixmap {fileName, format, Qt::AutoColor} );
 }
 
+[[maybe_unused]] void *QPixmap_from_image(void *image) {
+    return static_cast<void *>( new QPixmap { QPixmap::fromImage(*static_cast<QImage *>(image), Qt::AutoColor) });
+}
+
 [[maybe_unused]] bool QPixmap_loadfromfile(void *pixmap, const char *fileName, const char *format) {
     return static_cast<QPixmap *>(pixmap)->load(fileName, format, Qt::AutoColor);
 }
 
-[[maybe_unused]] bool QPixmap_loadFromData(void *pixmap, const uchar *data, uint len, const char *format) {
-    return static_cast<QPixmap *>(pixmap)->loadFromData(data, len, format, Qt::AutoColor);
+[[maybe_unused]] bool QPixmap_loadFromData(void *pixmap, const void *data, uint len, const char *format) {
+    return static_cast<QPixmap *>(pixmap)->loadFromData(static_cast<const uchar *>(data), len, format, Qt::AutoColor);
 }
 
 [[maybe_unused]] void QPixmap_delete(void *pixmap) {
