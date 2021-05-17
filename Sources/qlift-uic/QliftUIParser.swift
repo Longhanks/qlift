@@ -56,6 +56,13 @@ public class QliftUIParser: NSObject {
             swiftUI += "    var " + property.attributes["name"]! + ": " + cls + "!\n"
         }
 
+        if let slotsNode = ui.first(where: { $0.text == "slots" }) {
+            swiftUI += "\n"
+            for slot in slotsNode.children {
+                swiftUI += "    open func \(slot.value) {}\n"
+            }
+        }
+
         swiftUI += """
 
             override init(parent: QWidget? = nil, flags: Qt.WindowFlags = .Widget) {
