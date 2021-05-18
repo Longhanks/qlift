@@ -18,6 +18,12 @@ LIBRARY_API void QTimer_connect(void *timer,
                                 void *context,
                                 void (*slot_ptr)(void *));
 
+LIBRARY_API void QTimer_startms(void *timer, int msec);
+
+LIBRARY_API void QTimer_start(void *timer);
+
+LIBRARY_API void QTimer_stop(void *timer);
+
 #ifdef __cplusplus
 }
 #endif

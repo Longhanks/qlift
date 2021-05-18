@@ -30,3 +30,15 @@
                      static_cast<QObject *>(receiver),
                      [context, slot_ptr]() { (*slot_ptr)(context); });
 }
+
+[[maybe_unused]] void QTimer_startms(void *timer, int msec) {
+    static_cast<QTimer *>(timer)->start(msec);
+}
+
+[[maybe_unused]] void QTimer_start(void *timer) {
+    static_cast<QTimer *>(timer)->start();
+}
+
+[[maybe_unused]] void QTimer_stop(void *timer) {
+    static_cast<QTimer *>(timer)->stop();
+}

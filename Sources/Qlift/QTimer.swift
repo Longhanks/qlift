@@ -27,6 +27,18 @@ open class QTimer: QObject {
         }
     }
 
+    public func start(msec: Int32) {
+        QTimer_startms(ptr, msec)
+    }
+
+    public func start() {
+        QTimer_start(ptr)
+    }
+
+    public func stop() {
+        QTimer_stop(ptr)
+    }
+
     public static func singleShot(msec: Int32, timerType: Qt.TimerType, handler: @escaping () -> Void) {
         let functor: @convention(c) (UnsafeMutableRawPointer?) -> Void = { raw in
             if raw != nil {
