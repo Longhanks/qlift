@@ -39,21 +39,24 @@ public class QliftUIParser: NSObject {
         rootWidgetNode!.attributes["name"] = "self"
         let properties = InstancePropertyNodeFinder().getInstancePropertyNodes(root: rootWidgetNode!)
         for property in properties {
-            var cls = ""
+            var className = ""
             if property.attributes["class"] != nil {
-                cls = property.attributes["class"]!
+                className = property.attributes["class"]!
             }
             else if property.text == "spacer" {
-                cls = "QSpacerItem"
+                className = "QSpacerItem"
             }
             else if property.text == "action" {
-                cls = "QAction"
+                className = "QAction"
             }
             if property.attributes["name"]!.isEmpty {
                 property.attributes["name"] = "widget\(widgetCount)"
                 widgetCount += 1
             }
-            swiftUI += "    var " + property.attributes["name"]! + ": " + cls + "!\n"
+            if className == "Line" {
+                continue
+            }
+            swiftUI += "    var " + property.attributes["name"]! + ": " + className + "!\n"
         }
 
         if let slotsNode = ui.first(where: { $0.text == "slots" }) {
@@ -182,6 +185,9 @@ public class QliftUIParser: NSObject {
             }
         case "widget":
             // 1. Determine if constructor should be passed a parent variable.
+            guard node.attributes["class"]! != "Line" else {
+                break
+            }
             var parentName = "nil"
             if let parentWidget = getParentWidget(node: node) {
                 parentName = parentWidget.attributes["name"]!
