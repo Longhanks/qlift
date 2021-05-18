@@ -2,22 +2,31 @@ import Foundation
 
 
 func main() {
-    if CommandLine.arguments.count != 2 {
+    if CommandLine.arguments.count < 2 {
         print("Needs path to exactly one file")
         return
     }
 
     let fileURL = URL(fileURLWithPath: CommandLine.arguments[1], isDirectory: false)
     guard fileURL.pathExtension == "ui" else {
-        print(CommandLine.arguments[1])
         print("File \(fileURL.path) must have extension 'ui'")
         exit(1)
     }
-    let outputURL = fileURL.deletingPathExtension().appendingPathExtension("swift")
+
+    let outputURL: URL
+    if CommandLine.arguments.count == 2 {
+        outputURL = fileURL.deletingPathExtension().appendingPathExtension("swift")
+    } else {
+        outputURL = URL(fileURLWithPath: CommandLine.arguments[2], isDirectory: false)
+    }
 
     guard let document = try? String(contentsOf: fileURL, encoding: .utf8) else {
         print("Could not read \(fileURL.path)")
         return
+    }
+    guard outputURL.pathExtension == "swift" else {
+        print("File \(outputURL.path) must have extension 'swift'")
+        exit(1)
     }
 
     guard let xml = document.data(using: .utf8) else {
