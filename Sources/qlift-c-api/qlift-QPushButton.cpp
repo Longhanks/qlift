@@ -29,7 +29,7 @@ QPushButton_new(void *icon, const char *text, void *parent) {
 }
 
 [[maybe_unused]] bool QPushButton_isFlat(void *pushButton) {
-    static_cast<QliftPushButton *>(pushButton)->isFlat();
+    return static_cast<QliftPushButton *>(pushButton)->isFlat();
 }
 
 [[maybe_unused]] void QPushButton_mousePressEvent(void *pushButton,
