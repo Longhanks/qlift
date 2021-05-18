@@ -14,6 +14,10 @@
     return static_cast<QObject *>(object)->parent();
 }
 
+[[maybe_unused]] void QObject_setObjectName(void *object, const char *name) {
+    static_cast<QObject *>(object)->setObjectName(name);
+}
+
 [[maybe_unused]] void QObject_destroyed_connect(void *object,
                                                 void *receiver,
                                                 void *context,

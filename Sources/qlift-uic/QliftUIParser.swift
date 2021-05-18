@@ -188,7 +188,7 @@ public class QliftUIParser: NSObject {
             }
             // 2. Construct widget itself.
             ui += "        \(node.attributes["name"]!) = \(node.attributes["class"]!)(parent: \(parentName))\n"
-
+            ui += "        \(node.attributes["name"]!).name = \"\(node.attributes["name"]!)\"\n"
 
             // 3. Handle special cases: QMenuBar, QMenu, QToolBar, QStatusBar, QDockWidget
             switch node.attributes["class"]! {

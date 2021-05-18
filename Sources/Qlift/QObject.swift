@@ -21,6 +21,12 @@ open class QObject {
         self.parent = parent
     }
 
+    public var name: String = "" {
+        didSet {
+            QObject_setObjectName(ptr, name)
+        }
+    }
+
     deinit {
         if self.ptr != nil {
             if QObject_parent(self.ptr) == nil {
