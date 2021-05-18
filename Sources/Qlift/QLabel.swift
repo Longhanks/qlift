@@ -14,7 +14,7 @@ open class QLabel: QFrame {
         }
     }
 
-    public var isScaledContents: Bool {
+    public var scaledContents: Bool {
         get {
             QLabel_hasScaledContents(ptr)
         }
