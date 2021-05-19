@@ -18,6 +18,7 @@ LIBRARY_API void QImage_delete(void *image);
 
 LIBRARY_API void *QImage_new_data(const void *data, int width, int height, int format, void *cleanupInfo);
 LIBRARY_API void *QImage_new_data_bpl(const void *data, int width, int height, int bytesPerLine, int format, void *cleanupInfo);
+LIBRARY_API void QImage_convertTo(void *image, int format);
 
 #ifdef __cplusplus
 }

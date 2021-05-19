@@ -63,6 +63,10 @@ open class QImage {
         }
     }
 
+    public func convertTo(format: Format) {
+        QImage_convertTo(ptr, format.rawValue)
+    }
+
     deinit {
         guard self.ptr != nil else {
             return
