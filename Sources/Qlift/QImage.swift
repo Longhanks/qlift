@@ -51,9 +51,6 @@ open class QImage {
         self.ptr = QImage_new()
     }
 
-//    QImage_new_data(const uchar *data, int width, int height, int format, void *cleanupInfo);
-//    QImage_new_data_bpl(const uchar *data, int width, int height, int bytesPerLine, void *cleanupInfo);
-
     public init(data: Data, width: Int, height: Int, format: Format) {
         self.ptr = data.withUnsafeBytes { ptr in
             QImage_new_data(ptr.baseAddress!, Int32(width), Int32(height), format.rawValue, nil)

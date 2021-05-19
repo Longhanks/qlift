@@ -3,6 +3,8 @@
 // NOLINTNEXTLINE(hicpp-deprecated-headers, modernize-deprecated-headers)
 #include <stdbool.h>
 
+#include "../qlift-dispatchToQThread.h"
+
 #include "../qlift-QAbstractButton.h"
 #include "../qlift-QAbstractSpinBox.h"
 #include "../qlift-QAction.h"
