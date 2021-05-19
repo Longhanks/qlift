@@ -51,6 +51,11 @@ open class QImage {
         self.ptr = QImage_new()
     }
 
+    public init(ptr: UnsafeMutableRawPointer) {
+        self.ptr = ptr
+    }
+
+
     public init(data: Data, width: Int, height: Int, format: Format) {
         self.ptr = data.withUnsafeBytes { ptr in
             QImage_new_data(ptr.baseAddress!, Int32(width), Int32(height), format.rawValue, nil)
@@ -63,8 +68,8 @@ open class QImage {
         }
     }
 
-    public func convertTo(format: Format) {
-        QImage_convertTo(ptr, format.rawValue)
+    public func convertToFormat(format: Format) -> QImage {
+        QImage(ptr: QImage_convertToFormat(ptr, format.rawValue))
     }
 
     deinit {

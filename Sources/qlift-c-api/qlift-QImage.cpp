@@ -25,6 +25,8 @@
     return static_cast<void *>( new QImage { static_cast<const uchar *>(data), width, height, bytesPerLine, static_cast<QImage::Format>(format)} );
 }
 
-[[maybe_unused]] void QImage_convertTo(void *image, int format) {
-    static_cast<QImage *>(image)->convertTo(static_cast<QImage::Format>(format), Qt::AutoColor);
+[[maybe_unused]] void *QImage_convertToFormat(const void *image, int format) {
+    QImage *new_image = new QImage();
+    *new_image = static_cast<const QImage *>(image)->convertToFormat(static_cast<QImage::Format>(format), Qt::AutoColor);
+    return new_image;
 }
