@@ -15,11 +15,11 @@ open class QAbstractButton: QWidget {
         super.init(ptr: ptr, parent: parent)
     }
 
-    public func addIcon(icon: QIcon) {
+    public func addIcon(_ icon: QIcon) {
         QAbstractButton_setIcon(ptr, icon.ptr)
     }
 
-    public func setIconSize(size: QSize) {
+    public func setIconSize(_ size: QSize) {
         QAbstractButton_setIconSize(ptr, size.ptr)
     }
 

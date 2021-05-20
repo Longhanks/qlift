@@ -150,16 +150,16 @@ public class QliftUIParser: NSObject {
                 break
             case "sizePolicy":
                 break;
+            case "leftMargin", "topMargin", "rightMargin", "bottomMargin":
+                break
             case "pixmap":
-                ui += "        \(node.parent!.attributes["name"]!).setPixmap(pixmap: QPixmap(fileName: \(propertyNode2Swift(node: node.children[0]))))\n"
+                ui += "        \(node.parent!.attributes["name"]!).setPixmap(QPixmap(fileName: \(propertyNode2Swift(node: node.children[0]))))\n"
             case "iconSize":
-                ui += "        \(node.parent!.attributes["name"]!).setIconSize(size: \(propertyNode2Swift(node: node.children[0])))\n"
+                ui += "        \(node.parent!.attributes["name"]!).setIconSize(\(propertyNode2Swift(node: node.children[0])))\n"
             case "autoFillBackground":
                 ui += "        \(node.parent!.attributes["name"]!).autoFillBackground = \(propertyNode2Swift(node: node.children[0]))\n"
             case "flat":
                 ui += "        \(node.parent!.attributes["name"]!).isFlat = \(propertyNode2Swift(node: node.children[0]))\n"
-            case "leftMargin", "topMargin", "rightMargin", "bottomMargin":
-                break
             default:
                 let parentTag = node.parent!.text
                 if parentTag == "item" {

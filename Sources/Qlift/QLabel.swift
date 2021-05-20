@@ -32,11 +32,11 @@ open class QLabel: QFrame {
         }
     }
 
-    public func setPixmap(pixmap: QPixmap) {
+    public func setPixmap(_ pixmap: QPixmap) {
         QLabel_setPixmap(ptr, pixmap.ptr)
     }
 
-    public func setImage(image: QImage) {
+    public func setImage(_ image: QImage) {
         QLabel_setImage(ptr, image.ptr)
     }
 
