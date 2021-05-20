@@ -53,6 +53,10 @@ public class QliftUIParser: NSObject {
                 property.attributes["name"] = "widget\(widgetCount)"
                 widgetCount += 1
             }
+            if property.attributes["name"]! == "layoutWidget" {
+                property.attributes["name"] = "layoutWidget\(widgetCount)"
+                widgetCount += 1
+            }
             if className == "Line" {
                 continue
             }
