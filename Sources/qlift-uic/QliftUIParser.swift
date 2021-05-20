@@ -265,7 +265,14 @@ public class QliftUIParser: NSObject {
 
                 // Determine if parent is item (in layout) -> needs to add the widget to the layout via add(item:)
                 if node.parent!.text == "item" {
-                    ui += "        \(node.parent!.parent!.attributes["name"]!).add(widget: \(node.attributes["name"]!))\n"
+                    if let row = node.parent!.attributes["row"],
+                       let column = node.parent!.attributes["column"] {
+                        // add(widget: QWidget, row: Int32, column: Int32, alignment: Qt.Alignment? = nil)
+                        ui += "        \(node.parent!.parent!.attributes["name"]!).add(widget: \(node.attributes["name"]!), row: \(row), column: \(column))\n"
+                    }
+                    else {
+                        ui += "        \(node.parent!.parent!.attributes["name"]!).add(widget: \(node.attributes["name"]!))\n"
+                    }
                 }
 
                 // Determine if parent is a QDockWidget or QMainWindow -> needs to set widget / centralWidget

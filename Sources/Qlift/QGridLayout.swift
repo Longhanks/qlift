@@ -14,11 +14,11 @@ open class QGridLayout: QObject, QLayout {
     }
 
     public func add(item: QLayoutItem) {
-        // Not implemented
+        fatalError("Not implemented")
     }
 
     public func add(widget: QWidget) {
-        // Not implemented
+        fatalError("Not implemented")
     }
 
     public func add(item: QLayoutItem, row: Int32, column: Int32, rowSpan: Int32 = 1, columnSpan: Int32 = 1, alignment: Qt.Alignment? = nil) {
