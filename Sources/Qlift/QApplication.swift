@@ -19,5 +19,10 @@ public class QApplication: QGuiApplication {
             self.ptr = nil
         }
     }
+
+    @discardableResult
+    public func setStype(_ style: String) -> Bool {
+        QApplication_set_style(ptr, style)
+    }
 }
 
