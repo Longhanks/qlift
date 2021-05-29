@@ -48,3 +48,21 @@
     return static_cast<QAbstractButton *>(abstractButton)
     ->setIconSize(*static_cast<QSize *>(size));
 }
+
+[[maybe_unused]] void QAbstractButton_setCheckable(void *abstractButton,
+                                                   bool checkable) {
+    static_cast<QAbstractButton *>(abstractButton)->setCheckable(checkable);
+}
+
+[[maybe_unused]] bool QAbstractButton_getCheckable(void *abstractButton) {
+    return static_cast<QAbstractButton *>(abstractButton)->isCheckable();
+}
+
+[[maybe_unused]] void QAbstractButton_setChecked(void *abstractButton,
+                                                 bool checked) {
+    static_cast<QAbstractButton *>(abstractButton)->setChecked(checked);
+}
+
+[[maybe_unused]] bool QAbstractButton_getChecked(void *abstractButton) {
+    return static_cast<QAbstractButton *>(abstractButton)->isChecked();
+}

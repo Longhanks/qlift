@@ -23,6 +23,24 @@ open class QAbstractButton: QWidget {
         QAbstractButton_setIconSize(ptr, size.ptr)
     }
 
+    public var checkable: Bool {
+        get {
+            QAbstractButton_getCheckable(ptr)
+        }
+        set {
+            QAbstractButton_setCheckable(ptr, newValue)
+        }
+    }
+
+    public var checked: Bool {
+        get {
+            QAbstractButton_getChecked(ptr)
+        }
+        set {
+            QAbstractButton_setChecked(ptr, newValue)
+        }
+    }
+
     open func connectClicked(receiver: QObject? = nil, to slot: @escaping ((Bool) -> Void)) {
         var object: QObject = self
         if receiver != nil {

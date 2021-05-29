@@ -27,6 +27,16 @@ LIBRARY_API void QAbstractButton_setIcon(void *abstractButton,
 LIBRARY_API void QAbstractButton_setIconSize(void *abstractButton,
                                              void *size);
 
+LIBRARY_API void QAbstractButton_setCheckable(void *abstractButton,
+                                              bool checkable);
+
+LIBRARY_API bool QAbstractButton_getCheckable(void *abstractButton);
+
+LIBRARY_API void QAbstractButton_setChecked(void *abstractButton,
+                                              bool checked);
+
+LIBRARY_API bool QAbstractButton_getChecked(void *abstractButton);
+
 #ifdef __cplusplus
 }
 #endif
