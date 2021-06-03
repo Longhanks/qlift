@@ -10,3 +10,11 @@
 [[maybe_unused]] void QGuiApplication_delete(void *guiApplication) {
     delete static_cast<QGuiApplication *>(guiApplication);
 }
+
+[[maybe_unused]] void QGuiApplication_setAttribute(int attribute, bool on) {
+    QCoreApplication::setAttribute(static_cast<Qt::ApplicationAttribute>(attribute), on);
+}
+
+[[maybe_unused]] bool QGuiApplication_testAttribute(int attribute) {
+    return QCoreApplication::testAttribute(static_cast<Qt::ApplicationAttribute>(attribute));
+}

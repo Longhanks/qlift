@@ -110,4 +110,40 @@ public struct Qt {
         public static let WindowModal = WindowModality(rawValue: 1)
         public static let ApplicationModal = WindowModality(rawValue: 2)
     }
+
+    public enum ApplicationAttribute: Int32 {
+        case AA_ImmediateWidgetCreation = 0
+        case AA_MSWindowsUseDirect3DByDefault = 1
+        case AA_DontShowIconsInMenus = 2
+        case AA_NativeWindows = 3
+        case AA_DontCreateNativeWidgetSiblings = 4
+        case AA_PluginApplication = 5
+        case AA_DontUseNativeMenuBar = 6
+        case AA_MacDontSwapCtrlAndMeta = 7
+        case AA_Use96Dpi = 8
+        case AA_DisableNativeVirtualKeyboard = 9
+        case AA_X11InitThreads = 10
+        case AA_SynthesizeTouchForUnhandledMouseEvents = 11
+        case AA_SynthesizeMouseForUnhandledTouchEvents = 12
+        case AA_UseHighDpiPixmaps = 13
+        case AA_ForceRasterWidgets = 14
+        case AA_UseDesktopOpenGL = 15
+        case AA_UseOpenGLES = 16
+        case AA_UseSoftwareOpenGL = 17
+        case AA_ShareOpenGLContexts = 18
+        case AA_SetPalette = 19
+        case AA_EnableHighDpiScaling = 20
+        case AA_DisableHighDpiScaling = 21
+        case AA_UseStyleSheetPropagationInWidgetStyles = 22
+        case AA_DontUseNativeDialogs = 23
+        case AA_SynthesizeMouseForUnhandledTabletEvents = 24
+        case AA_CompressHighFrequencyEvents = 25
+        case AA_DontCheckOpenGLContextThreadAffinity = 26
+        case AA_DisableShaderDiskCache = 27
+        case AA_DontShowShortcutsInContextMenus = 28
+        case AA_CompressTabletEvents = 29
+        case AA_DisableWindowContextHelpButton = 30
+        case AA_DisableSessionManager = 31
+    }
+
 }

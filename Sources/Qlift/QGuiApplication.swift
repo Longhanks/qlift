@@ -21,5 +21,14 @@ public class QGuiApplication: QCoreApplication {
             self.ptr = nil
         }
     }
+
+    static func setAttribute(attribute: Qt.ApplicationAttribute, on: Bool) {
+        QGuiApplication_setAttribute(attribute.rawValue, on)
+    }
+
+    static func testAttribute(attribute: Qt.ApplicationAttribute) {
+        QGuiApplication_testAttribute(attribute.rawValue)
+    }
+
 }
 
