@@ -8,6 +8,15 @@ open class QLabel: QFrame {
         }
     }
 
+    public var wordWrap: Bool {
+        get {
+            QLabel_wordWrap(ptr)
+        }
+        set {
+            QLabel_setWordWrap(ptr, newValue)
+        }
+    }
+
     public var text: String = "" {
         didSet {
             QLabel_setText(self.ptr, text)

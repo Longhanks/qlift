@@ -13,6 +13,24 @@ open class QGridLayout: QObject, QLayout {
         super.init(ptr: ptr, parent: parent)
     }
 
+    public var horizontalSpacing: Int32 {
+        get {
+            QGridLayout_horizontalSpacing(ptr)
+        }
+        set {
+            QGridLayout_setHorizontalSpacing(ptr, newValue)
+        }
+    }
+
+    public var verticalSpacing: Int32 {
+        get {
+            QGridLayout_verticalSpacing(ptr)
+        }
+        set {
+            QGridLayout_setVerticalSpacing(ptr, spacing)
+        }
+    }
+
     public func add(item: QLayoutItem) {
         fatalError("Not implemented")
     }

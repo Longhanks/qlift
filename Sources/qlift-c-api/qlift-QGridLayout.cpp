@@ -76,3 +76,19 @@
                     columnSpan,
                     static_cast<QFlags<Qt::AlignmentFlag>>(alignment));
 }
+
+[[maybe_unused]] void QGridLayout_setHorizontalSpacing(void *gridLayout, int spacing) {
+    static_cast<QGridLayout *>(gridLayout)->setHorizontalSpacing(spacing);
+}
+
+[[maybe_unused]] int QGridLayout_horizontalSpacing(void *gridLayout) {
+    return static_cast<QGridLayout *>(gridLayout)->horizontalSpacing();
+}
+
+[[maybe_unused]] void QGridLayout_setVerticalSpacing(void *gridLayout, int spacing) {
+    static_cast<QGridLayout *>(gridLayout)->setVerticalSpacing(spacing);
+}
+
+[[maybe_unused]] int QGridLayout_verticalSpacing(void *gridLayout) {
+    return static_cast<QGridLayout *>(gridLayout)->verticalSpacing();
+}

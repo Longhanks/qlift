@@ -43,10 +43,18 @@
 }
 
 
-LIBRARY_API bool QLabel_openExternalLinks(void *label) {
+[[maybe_unused]] bool QLabel_openExternalLinks(void *label) {
     return static_cast<QLabel *>(label)->openExternalLinks();
 }
 
-LIBRARY_API void QLabel_setOpenExternalLinks(void *label, bool open) {
+[[maybe_unused]] void QLabel_setOpenExternalLinks(void *label, bool open) {
     static_cast<QLabel *>(label)->setOpenExternalLinks(open);
+}
+
+[[maybe_unused]] bool QLabel_wordWrap(void *label) {
+    return static_cast<QLabel *>(label)->wordWrap();
+}
+
+[[maybe_unused]] void QLabel_setWordWrap(void *label, bool on) {
+    static_cast<QLabel *>(label)->setWordWrap(on);
 }

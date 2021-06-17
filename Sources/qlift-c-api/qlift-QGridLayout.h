@@ -39,6 +39,11 @@ LIBRARY_API void QGridLayout_addWidgetWithSpan(void *gridLayout,
                                                int columnSpan,
                                                int alignment);
 
+LIBRARY_API void QGridLayout_setHorizontalSpacing(void *gridLayout, int spacing);
+LIBRARY_API int QGridLayout_horizontalSpacing(void *gridLayout);
+LIBRARY_API void QGridLayout_setVerticalSpacing(void *gridLayout, int spacing);
+LIBRARY_API int QGridLayout_verticalSpacing(void *gridLayout);
+
 #ifdef __cplusplus
 }
 #endif

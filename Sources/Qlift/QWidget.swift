@@ -21,6 +21,15 @@ open class QWidget: QObject {
         }
     }
 
+    public var minimumSize: QSize {
+        get {
+            return QSize(ptr: QWidget_minimumSize(self.ptr))
+        }
+        set {
+            QWidget_setMinimumSize(self.ptr, newValue.ptr)
+        }
+    }
+
     open var sizeHint: QSize {
         get {
             return QSize(ptr: QWidget_sizeHint(self.ptr))
