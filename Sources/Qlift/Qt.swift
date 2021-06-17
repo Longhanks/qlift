@@ -15,6 +15,8 @@ public struct Qt {
         public static let AlignBottom = Alignment(rawValue: 64)
         public static let AlignVCenter = Alignment(rawValue: 128)
         public static let AlignBaseline = Alignment(rawValue: 256)
+        public static let AlignLeading = AlignLeft
+        public static let AlignTrailing = AlignRight
         public static let AlignCenter: Alignment = [.AlignVCenter, .AlignHCenter]
         public static let AlignHorizontal_Mask: Alignment  = [.AlignLeft, .AlignRight, .AlignHCenter, .AlignJustify, .AlignAbsolute]
         public static let AlignVertical_Mask: Alignment = [.AlignTop, .AlignBottom, .AlignVCenter, .AlignBaseline]
