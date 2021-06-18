@@ -24,6 +24,7 @@
 #include "../qlift-QGuiApplication.h"
 #include "../qlift-QHBoxLayout.h"
 #include "../qlift-QBrush.h"
+#include "../qlift-QButtonGroup.h"
 #include "../qlift-QIcon.h"
 #include "../qlift-QImage.h"
 #include "../qlift-QInputEvent.h"
