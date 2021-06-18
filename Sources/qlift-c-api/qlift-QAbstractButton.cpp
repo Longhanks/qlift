@@ -17,11 +17,21 @@
 [[maybe_unused]] void QAbstractButton_clicked_connect(void *abstractButton,
                                                       void *receiver,
                                                       void *context,
-                                                      void (*slot_ptr)(void *,
-                                                                       bool)) {
+                                                      void (*slot_ptr)(void *, bool)) {
     QObject::connect(
         static_cast<QAbstractButton *>(abstractButton),
         &QAbstractButton::clicked,
+        static_cast<QObject *>(receiver),
+        [context, slot_ptr](bool checked) { (*slot_ptr)(context, checked); });
+}
+
+[[maybe_unused]] void QAbstractButton_toggled_connect(void *abstractButton,
+                                                      void *receiver,
+                                                      void *context,
+                                                      void (*slot_ptr)(void *, bool)) {
+    QObject::connect(
+        static_cast<QAbstractButton *>(abstractButton),
+        &QAbstractButton::toggled,
         static_cast<QObject *>(receiver),
         [context, slot_ptr](bool checked) { (*slot_ptr)(context, checked); });
 }

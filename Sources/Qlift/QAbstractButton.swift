@@ -3,6 +3,7 @@ import CQlift
 
 open class QAbstractButton: QWidget {
     var clickedCallback: ((Bool) -> Void)?
+    var toggledCallback: ((Bool) -> Void)?
     var pressedCallback: (() -> Void)?
 
     public var text: String = "" {
@@ -59,6 +60,26 @@ open class QAbstractButton: QWidget {
         let rawSelf = Unmanaged.passUnretained(self).toOpaque()
 
         QAbstractButton_clicked_connect(self.ptr, object.ptr, rawSelf, functor)
+    }
+
+    open func connectToggled(receiver: QObject? = nil, to slot: @escaping ((Bool) -> Void)) {
+        var object: QObject = self
+        if receiver != nil {
+            object = receiver!
+        }
+
+        self.toggledCallback = slot
+
+        let functor: @convention(c) (UnsafeMutableRawPointer?, Bool) -> Void = { raw, checked in
+            if raw != nil {
+                let _self = Unmanaged<QAbstractButton>.fromOpaque(raw!).takeUnretainedValue()
+                _self.toggledCallback!(checked)
+            }
+        }
+
+        let rawSelf = Unmanaged.passUnretained(self).toOpaque()
+
+        QAbstractButton_toggled_connect(self.ptr, object.ptr, rawSelf, functor)
     }
 
     open func connectPressed(receiver: QObject? = nil, to slot: @escaping (() -> Void)) {
