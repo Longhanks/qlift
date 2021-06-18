@@ -63,6 +63,13 @@ public class QliftUIParser: NSObject {
             swiftUI += "    var " + property.attributes["name"]! + ": " + className + "!\n"
         }
 
+        if let buttonGroupsNode = ui.first(where: { $0.text == "buttongroups" }) {
+            for group in buttonGroupsNode.children {
+                let name = group.attributes["name"]!
+                swiftUI += "    var \(name): QButtonGroup!\n"
+            }
+        }
+
         if let slotsNode = ui.first(where: { $0.text == "slots" }) {
             swiftUI += "\n"
             for slot in slotsNode.children {
@@ -81,6 +88,13 @@ public class QliftUIParser: NSObject {
 
         """
 
+        if let buttonGroupsNode = ui.first(where: { $0.text == "buttongroups" }) {
+            for group in buttonGroupsNode.children {
+                let name = group.attributes["name"]!
+                swiftUI += "        \(name) = QButtonGroup(parent: self)\n"
+            }
+        }
+
         // 1. Actions
         for node in rootWidgetNode!.children.filter({ $0.text == "action" }) {
             swiftUI += subNode2Swift(node: node)
@@ -94,7 +108,7 @@ public class QliftUIParser: NSObject {
 
         // 3. Connections
         let connectionsNodes = ui.filter({ $0.text == "connections" })
-        if connectionsNodes.count > 0 {
+        if !connectionsNodes.isEmpty {
             for connection in connectionsNodes[0].children {
                 let sender = connection.children[0].value
                 let signalWithBraces = connection.children[1].value.capitalized
@@ -316,6 +330,12 @@ public class QliftUIParser: NSObject {
             }
         case "spacer":
             ui += spacerNode2Swift(node: node)
+        case "attribute":
+            guard
+                node.attributes["name"] == "buttonGroup",
+                let group = node.children.first?.value
+            else { fallthrough }
+            ui += "        \(group).addButton(\(node.parent!.attributes["name"]!))\n"
         default:
             ui += "        \(node.description)\n"
         }
