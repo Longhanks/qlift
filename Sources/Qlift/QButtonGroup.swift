@@ -1,13 +1,26 @@
 import CQlift
 
-open class QButtonGroup: QWidget {
+open class QButtonGroup: QObject {
     var idClickedCallback: ((Int32) -> Void)?
     var idToggledCallback: ((Int32, Bool) -> Void)?
     var idPressedCallback: ((Int32) -> Void)?
     var idReleasedCallback: ((Int32) -> Void)?
 
-    override init(ptr: UnsafeMutableRawPointer, parent: QWidget? = nil) {
+    override init(ptr: UnsafeMutableRawPointer, parent: QObject? = nil) {
         super.init(ptr: ptr, parent: parent)
+    }
+
+    public init(parent: QWidget? = nil) {
+        super.init(ptr: QButtonGroup_new(parent?.ptr), parent: parent)
+    }
+
+    deinit {
+        if self.ptr != nil {
+            if QObject_parent(self.ptr) == nil {
+                QButtonGroup_delete(self.ptr)
+            }
+            self.ptr = nil
+        }
     }
 
     public func addButton(_ button: QAbstractButton, id: Int32 = -1) {

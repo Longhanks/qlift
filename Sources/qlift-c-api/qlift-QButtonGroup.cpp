@@ -65,3 +65,12 @@
 [[maybe_unused]] void QButtonGroup_setId(void *buttonGroup, void *abstractButton, int id) {
     static_cast<QButtonGroup *>(buttonGroup)->setId(static_cast<QAbstractButton *>(abstractButton), id);
 }
+
+[[maybe_unused]] void *QButtonGroup_new(void *parent) {
+    return static_cast<void *>(
+        new QButtonGroup{static_cast<QObject *>(parent)});
+}
+
+[[maybe_unused]] void QButtonGroup_delete(void *buttonGroup) {
+    delete static_cast<QButtonGroup *>(buttonGroup);
+}
