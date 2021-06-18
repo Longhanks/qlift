@@ -66,7 +66,11 @@ public class QliftUIParser: NSObject {
         if let slotsNode = ui.first(where: { $0.text == "slots" }) {
             swiftUI += "\n"
             for slot in slotsNode.children {
-                swiftUI += "    open func \(slot.value) {}\n"
+                var signature = slot.value
+                if signature.hasSuffix("(bool)") {
+                    signature = signature.prefix { $0 != "(" }.appending("(_ state: Bool)")
+                }
+                swiftUI += "    open func \(signature) {}\n"
             }
         }
 
@@ -94,13 +98,13 @@ public class QliftUIParser: NSObject {
             for connection in connectionsNodes[0].children {
                 let sender = connection.children[0].value
                 let signalWithBraces = connection.children[1].value.capitalized
-                let signal = String(signalWithBraces[..<signalWithBraces.index(signalWithBraces.endIndex, offsetBy: -2)])
+                let signal = signalWithBraces.prefix { $0 != "(" }
                 var receiver = connection.children[2].value
                 if receiver == className {
                     receiver = "self"
                 }
                 let slotWithBraces = connection.children[3].value
-                let slot = String(slotWithBraces[..<slotWithBraces.index(slotWithBraces.endIndex, offsetBy: -2)])
+                let slot = slotWithBraces.prefix { $0 != "(" }
                 swiftUI += "        \(sender).connect\(signal)(to: \(receiver).\(slot))\n"
             }
         }
