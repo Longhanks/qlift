@@ -93,6 +93,9 @@ LIBRARY_API void QWidget_setStyleSheet(void *widget, const char *styleSheet);
 
 LIBRARY_API void QWidget_setPalette(void *widget, const void *palette);
 
+LIBRARY_API bool QWidget_isVisible(void *widget);
+LIBRARY_API void QWidget_setVisible(void *widget, bool visible);
+
 #ifdef __cplusplus
 }
 #endif

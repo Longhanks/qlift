@@ -147,6 +147,15 @@ open class QWidget: QObject {
         }
     }
 
+    public var visible: Bool {
+        get {
+            QWidget_isVisible(ptr)
+        }
+        set {
+            QWidget_setVisible(ptr, newValue)
+        }
+    }
+
     public init(parent: QWidget? = nil, flags: Qt.WindowFlags = .Widget) {
         super.init(ptr: QWidget_new(parent?.ptr, flags.rawValue), parent: parent)
 

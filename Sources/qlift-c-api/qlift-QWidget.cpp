@@ -218,6 +218,15 @@
     static_cast<QWidget *>(widget)->setPalette(*static_cast<const QPalette *>(palette));
 }
 
+[[maybe_unused]] bool QWidget_isVisible(void *widget) {
+    return static_cast<QWidget *>(widget)->isVisible();
+}
+
+[[maybe_unused]] void QWidget_setVisible(void *widget, bool visible) {
+    static_cast<QWidget *>(widget)->setVisible(visible);
+}
+
+
 W_OBJECT_IMPL(QliftWidget)
 
 [[maybe_unused]] void
