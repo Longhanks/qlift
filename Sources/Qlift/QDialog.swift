@@ -19,6 +19,24 @@ open class QDialog: QWidget {
         }
     }
 
+    public var modal: Bool {
+        get {
+            QDialog_isModal(ptr)
+        }
+        set {
+            QDialog_setModal(ptr, newValue)
+        }
+    }
+
+    public var sizeGripEnabled: Bool {
+        get {
+            QDialog_isSizeGripEnabled(ptr)
+        }
+        set {
+            QDialog_setSizeGripEnabled(ptr, newValue)
+        }
+    }
+
     open func exec() -> DialogCode {
         return DialogCode(rawValue: QDialog_exec(self.ptr))
     }
