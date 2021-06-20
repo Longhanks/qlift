@@ -311,7 +311,7 @@ public class QliftUIParser: NSObject {
             }
         case "layout":
             let parent = node.parent!.text == "widget" ? node.parent!.attributes["name"]! : "nil"
-            ui += "        \(node.attributes["name"]!) = \(node.attributes["class"]!)(parent: \(parent)\n"
+            ui += "        \(node.attributes["name"]!) = \(node.attributes["class"]!)(parent: \(parent))\n"
             if let contentMargins =  preextractContentsMargins(node: node) {
                 ui += contentMargins
             } else {
