@@ -30,6 +30,8 @@ LIBRARY_API void QLabel_setOpenExternalLinks(void *label, bool open);
 
 LIBRARY_API bool QLabel_wordWrap(void *label);
 LIBRARY_API void QLabel_setWordWrap(void *label, bool on);
+LIBRARY_API int QLabel_indent(void *label);
+LIBRARY_API void QLabel_setIndent(void *label, int indent);
 
 #ifdef __cplusplus
 }

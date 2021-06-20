@@ -32,6 +32,15 @@ open class QLabel: QFrame {
         }
     }
 
+    public var indent: Int32 {
+        get {
+            QLabel_indent(ptr)
+        }
+        set {
+            QLabel_setIndent(ptr, newValue)
+        }
+    }
+
     public var openExternalLinks: Bool {
         get {
             QLabel_openExternalLinks(ptr)

@@ -58,3 +58,12 @@
 [[maybe_unused]] void QLabel_setWordWrap(void *label, bool on) {
     static_cast<QLabel *>(label)->setWordWrap(on);
 }
+
+[[maybe_unused]] int QLabel_indent(void *label) {
+    return static_cast<QLabel *>(label)->indent();
+}
+
+[[maybe_unused]] void QLabel_setIndent(void *label, int indent) {
+    static_cast<QLabel *>(label)->setIndent(indent);
+}
+
