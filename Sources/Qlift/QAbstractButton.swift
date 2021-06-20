@@ -2,7 +2,8 @@ import CQlift
 
 
 open class QAbstractButton: QWidget {
-    var clickedCallback: ((Bool) -> Void)?
+    var clickedBoolCallback: ((Bool) -> Void)?
+    var clickedCallback: (() -> Void)?
     var toggledCallback: ((Bool) -> Void)?
     var pressedCallback: (() -> Void)?
 
@@ -48,12 +49,32 @@ open class QAbstractButton: QWidget {
             object = receiver!
         }
 
+        self.clickedBoolCallback = slot
+
+        let functor: @convention(c) (UnsafeMutableRawPointer?, Bool) -> Void = { raw, checked in
+            if raw != nil {
+                let _self = Unmanaged<QAbstractButton>.fromOpaque(raw!).takeUnretainedValue()
+                _self.clickedBoolCallback!(checked)
+            }
+        }
+
+        let rawSelf = Unmanaged.passUnretained(self).toOpaque()
+
+        QAbstractButton_clicked_connect(self.ptr, object.ptr, rawSelf, functor)
+    }
+
+    open func connectClicked(receiver: QObject? = nil, to slot: @escaping (() -> Void)) {
+        var object: QObject = self
+        if receiver != nil {
+            object = receiver!
+        }
+
         self.clickedCallback = slot
 
         let functor: @convention(c) (UnsafeMutableRawPointer?, Bool) -> Void = { raw, checked in
             if raw != nil {
                 let _self = Unmanaged<QAbstractButton>.fromOpaque(raw!).takeUnretainedValue()
-                _self.clickedCallback!(checked)
+                _self.clickedCallback!()
             }
         }
 
