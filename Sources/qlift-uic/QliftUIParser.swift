@@ -104,7 +104,7 @@ public class QliftUIParser: NSObject {
         for node in rootWidgetNode!.children.filter({ $0.text != "action" }) {
             swiftUI += subNode2Swift(node: node)
         }
-        swiftUI += preextractContentsMargins(node: rootWidgetNode!)
+        swiftUI += preextractContentsMargins(node: rootWidgetNode!) ?? ""
 
         // 3. Connections
         let connectionsNodes = ui.filter({ $0.text == "connections" })
@@ -128,7 +128,7 @@ public class QliftUIParser: NSObject {
         return swiftUI
     }
 
-    private func preextractContentsMargins(node: Node) -> String {
+    private func preextractContentsMargins(node: Node) -> String? {
         var left = -1
         var top = -1
         var right = -1
@@ -155,7 +155,7 @@ public class QliftUIParser: NSObject {
         }
 
         guard foundOneMargin else {
-            return ""
+            return nil
         }
 
         return "        \(node.attributes["name"]!).contentsMargins = QMargins(left: \(left), top: \(top), right: \(right), bottom: \(bottom))\n"
@@ -310,19 +310,20 @@ public class QliftUIParser: NSObject {
                 }
             }
         case "layout":
-            ui += "        \(node.attributes["name"]!) = \(node.attributes["class"]!)(parent: "
-            if node.parent!.text == "widget" {
-                ui += node.parent!.attributes["name"]!
+            let parent = node.parent!.text == "widget" ? node.parent!.attributes["name"]! : "nil"
+            ui += "        \(node.attributes["name"]!) = \(node.attributes["class"]!)(parent: \(parent)\n"
+            if let contentMargins =  preextractContentsMargins(node: node) {
+                ui += contentMargins
             } else {
-                ui += "nil"
+                ui += "        \(node.attributes["name"]!).contentsMargins = QMargins(left: 0, top: 0, right: 0, bottom: 0)\n"
             }
-            ui += ")\n"
             for subNode in node.children {
                 ui += subNode2Swift(node: subNode)
             }
             if node.parent!.text == "item" {
                 ui += "        \(node.parent!.parent!.attributes["name"]!).add(layout: \(node.attributes["name"]!))\n"
             }
+            return ui
 
         case "item":
             for subNode in node.children {
@@ -340,7 +341,7 @@ public class QliftUIParser: NSObject {
             ui += "        \(node.description)\n"
         }
 
-        ui += preextractContentsMargins(node: node)
+        ui += preextractContentsMargins(node: node) ?? ""
 
         return ui
     }
