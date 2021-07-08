@@ -148,4 +148,16 @@ public struct Qt {
         case AA_DisableSessionManager = 31
     }
 
+    public struct WindowStates: OptionSet {
+        public let rawValue: Int32
+
+        public init(rawValue: Int32) {
+            self.rawValue = rawValue
+        }
+        public static let WindowNoState: WindowStates = []
+        public static let WindowMinimized = WindowStates(rawValue: 1)
+        public static let WindowMaximized = WindowStates(rawValue: 2)
+        public static let WindowFullScreen = WindowStates(rawValue: 4)
+        public static let WindowActive = WindowStates(rawValue: 8)
+    }
 }

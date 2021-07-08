@@ -226,6 +226,30 @@
     static_cast<QWidget *>(widget)->setVisible(visible);
 }
 
+[[maybe_unused]] bool QWidget_isMinimized(void *widget) {
+    return static_cast<QWidget *>(widget)->isMinimized();
+}
+
+[[maybe_unused]] bool QWidget_isMaximized(void *widget) {
+    return static_cast<QWidget *>(widget)->isMaximized();
+}
+
+[[maybe_unused]] bool QWidget_isFullScreen(void *widget) {
+    return static_cast<QWidget *>(widget)->isFullScreen();
+}
+
+[[maybe_unused]] void QWidget_setWindowState(void *widget, int state) {
+    static_cast<QWidget *>(widget)->setWindowState(static_cast<Qt::WindowStates>(state));
+}
+
+[[maybe_unused]] void QWidget_overrideWindowState(void *widget, int state) {
+    static_cast<QWidget *>(widget)->overrideWindowState(static_cast<Qt::WindowStates>(state));
+}
+
+[[maybe_unused]] int QWidget_windowState(void *widget) {
+    return static_cast<QWidget *>(widget)->windowState();
+}
+
 
 W_OBJECT_IMPL(QliftWidget)
 

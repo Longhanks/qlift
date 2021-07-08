@@ -95,6 +95,12 @@ LIBRARY_API void QWidget_setPalette(void *widget, const void *palette);
 
 LIBRARY_API bool QWidget_isVisible(void *widget);
 LIBRARY_API void QWidget_setVisible(void *widget, bool visible);
+LIBRARY_API bool QWidget_isMinimized(void *widget);
+LIBRARY_API bool QWidget_isMaximized(void *widget);
+LIBRARY_API bool QWidget_isFullScreen(void *widget);
+LIBRARY_API void QWidget_setWindowState(void *widget, int state);
+LIBRARY_API void QWidget_overrideWindowState(void *widget, int state);
+LIBRARY_API int QWidget_windowState(void *widget);
 
 #ifdef __cplusplus
 }

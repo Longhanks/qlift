@@ -156,6 +156,30 @@ open class QWidget: QObject {
         }
     }
 
+    public var isMinimized: Bool {
+        QWidget_isMinimized(ptr)
+    }
+
+    public var isMaximized: Bool {
+        QWidget_isMaximized(ptr)
+    }
+
+    public var isFullScreen: Bool {
+        QWidget_isFullScreen(ptr)
+    }
+
+    public func setWindowState(state: Qt.WindowStates) {
+        QWidget_setWindowState(ptr, state.rawValue)
+    }
+
+    public func overrideWindowState(state: Qt.WindowStates) {
+        QWidget_overrideWindowState(ptr, state.rawValue)
+    }
+
+    public var windowState: Qt.WindowStates {
+        Qt.WindowStates(rawValue: QWidget_windowState(ptr))
+    }
+
     public init(parent: QWidget? = nil, flags: Qt.WindowFlags = .Widget) {
         super.init(ptr: QWidget_new(parent?.ptr, flags.rawValue), parent: parent)
 
