@@ -13,17 +13,11 @@
 // callback(void *object)
 [[maybe_unused]] void DispatchToQTMainThread(void *callBackObject, void (*callback)(void *))
 {
-    // any thread
-    QTimer* timer = new QTimer();
-    timer->moveToThread(QApplication::instance()->thread());
-    timer->setSingleShot(true);
-    QObject::connect(timer,
-                     &QTimer::timeout,
-                     [=]()
+    // start on any thread (from QT 5.10)
+    QMetaObject::invokeMethod(QApplication::instance(),
+                              [=]()
     {
-        // main thread
+        // invoke on the main thread
         callback(callBackObject);
-        timer->deleteLater();
     });
-    QMetaObject::invokeMethod(timer, "start", Qt::QueuedConnection, Q_ARG(int, 0));
 }
