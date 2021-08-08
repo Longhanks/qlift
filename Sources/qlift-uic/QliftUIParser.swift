@@ -441,17 +441,33 @@ public class QliftUIParser: NSObject {
         var height: Int = 0
         var horizontalPolicy: String = ""
         var verticalPolicy: String = ""
+        var orientation = ""
+
         for subNode in node.children {
-            if subNode.attributes["name"]! == "orientation" {
-                if subNode.children[0].value == "Qt::Horizontal" {
+            switch subNode.attributes["name"]! {
+            case "orientation":
+                orientation = subNode.children[0].value
+                switch orientation {
+                case "Qt::Horizontal":
                     horizontalPolicy = ".Expanding"
                     verticalPolicy = ".Minimum"
-                } else if subNode.children[0].value == "Qt::Vertical" {
+                case "Qt::Vertical":
                     horizontalPolicy = ".Minimum"
                     verticalPolicy = ".Expanding"
+                default:
+                    break
                 }
-            }
-            else if subNode.attributes["name"]! == "sizeHint" {
+            case "sizeType":
+                let sizeType = subNode.children[0].value.replacingOccurrences(of: "QSizePolicy::", with: ".")
+                switch orientation {
+                case "Qt::Horizontal":
+                    horizontalPolicy = sizeType
+                case "Qt::Vertical":
+                    verticalPolicy = sizeType
+                default:
+                    break
+                }
+            case "sizeHint":
                 let sizeNode = subNode.children[0]
                 for sizeSubNode in sizeNode.children {
                     if sizeSubNode.text == "width" {
@@ -460,6 +476,8 @@ public class QliftUIParser: NSObject {
                         height = Int(sizeSubNode.value)!
                     }
                 }
+            default:
+                break
             }
         }
 
