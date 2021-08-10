@@ -102,6 +102,13 @@ LIBRARY_API void QWidget_setWindowState(void *widget, int state);
 LIBRARY_API void QWidget_overrideWindowState(void *widget, int state);
 LIBRARY_API int QWidget_windowState(void *widget);
 
+LIBRARY_API void *QWidget_mapToGlobal(void *widget, void *point);
+LIBRARY_API void *QWidget_mapFromGlobal(void *widget, void *point);
+LIBRARY_API void *QWidget_mapToParent(void *widget, void *point);
+LIBRARY_API void *QWidget_mapFromParent(void *widget, void *point);
+LIBRARY_API void *QWidget_mapTo(void *widget, void *parentWidget, void *point);
+LIBRARY_API void *QWidget_mapFrom(void *widget, void *parentWidget, void *point);
+
 #ifdef __cplusplus
 }
 #endif

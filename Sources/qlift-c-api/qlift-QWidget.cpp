@@ -250,6 +250,35 @@
     return static_cast<QWidget *>(widget)->windowState();
 }
 
+[[maybe_unused]] void *QWidget_mapToGlobal(void *widget, void *point) {
+    auto mapPoint = static_cast<QWidget *>(widget)->mapToGlobal(*static_cast<QPoint *>(point));
+    return static_cast<void *>(new QPoint{mapPoint.x(), mapPoint.y()});
+}
+
+[[maybe_unused]] void *QWidget_mapFromGlobal(void *widget, void *point) {
+    auto mapPoint = static_cast<QWidget *>(widget)->mapFromGlobal(*static_cast<QPoint *>(point));
+    return static_cast<void *>(new QPoint{mapPoint.x(), mapPoint.y()});
+}
+
+[[maybe_unused]] void *QWidget_mapToParent(void *widget, void *point) {
+    auto mapPoint = static_cast<QWidget *>(widget)->mapToParent(*static_cast<QPoint *>(point));
+    return static_cast<void *>(new QPoint{mapPoint.x(), mapPoint.y()});
+}
+
+[[maybe_unused]] void *QWidget_mapFromParent(void *widget, void *point) {
+    auto mapPoint = static_cast<QWidget *>(widget)->mapFromParent(*static_cast<QPoint *>(point));
+    return static_cast<void *>(new QPoint{mapPoint.x(), mapPoint.y()});
+}
+
+[[maybe_unused]] void *QWidget_mapTo(void *widget, void *parentWidget, void *point) {
+    auto mapPoint = static_cast<QWidget *>(widget)->mapTo(static_cast<QWidget *>(parentWidget), *static_cast<QPoint *>(point));
+    return static_cast<void *>(new QPoint{mapPoint.x(), mapPoint.y()});
+}
+
+[[maybe_unused]] void *QWidget_mapFrom(void *widget, void *parentWidget, void *point) {
+    auto mapPoint = static_cast<QWidget *>(widget)->mapFrom(static_cast<QWidget *>(parentWidget), *static_cast<QPoint *>(point));
+    return static_cast<void *>(new QPoint{mapPoint.x(), mapPoint.y()});
+}
 
 W_OBJECT_IMPL(QliftWidget)
 

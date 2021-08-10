@@ -248,6 +248,31 @@ open class QWidget: QObject {
     open func show() {
         QWidget_show(self.ptr)
     }
+    
+    public func mapToGlobal(point: QPoint) -> QPoint {
+        QPoint(ptr: QWidget_mapToGlobal(self.ptr, point.ptr))
+    }
+    
+    public func mapFromGlobal(point: QPoint) -> QPoint {
+        QPoint(ptr: QWidget_mapFromGlobal(self.ptr, point.ptr))
+    }
+    
+    public func mapToParent(point: QPoint) -> QPoint {
+        QPoint(ptr: QWidget_mapToParent(self.ptr, point.ptr))
+    }
+    
+    public func mapFromParent(point: QPoint) -> QPoint {
+        QPoint(ptr: QWidget_mapFromParent(self.ptr, point.ptr))
+    }
+    
+    public func mapTo(parent: QWidget, point: QPoint) -> QPoint {
+        QPoint(ptr: QWidget_mapTo(self.ptr, parent.ptr, point.ptr))
+    }
+    
+    public func mapFrom(parent: QWidget, point: QPoint) -> QPoint {
+        QPoint(ptr: QWidget_mapFrom(self.ptr, parent.ptr, point.ptr))
+    }
+
 }
 
 extension QWidget {
