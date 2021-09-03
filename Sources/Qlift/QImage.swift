@@ -62,10 +62,18 @@ open class QImage {
         }
     }
 
+    public init(data: UnsafePointer<UInt8>, width: Int, height: Int, format: Format) {
+        QImage_new_data(data, Int32(width), Int32(height), format.rawValue, nil)
+    }
+
     public init(data: Data, width: Int, height: Int, format: Format, bytesPerLine: Int) {
         self.ptr = data.withUnsafeBytes { ptr in
             QImage_new_data_bpl(ptr.baseAddress!, Int32(width), Int32(height), Int32(bytesPerLine), format.rawValue, nil)
         }
+    }
+
+    public init(data: UnsafePointer<UInt8>, width: Int, height: Int, format: Format, bytesPerLine: Int) {
+        QImage_new_data_bpl(data, Int32(width), Int32(height), Int32(bytesPerLine), format.rawValue, nil)
     }
 
     public func convertToFormat(format: Format) -> QImage {
