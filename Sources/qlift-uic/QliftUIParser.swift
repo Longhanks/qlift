@@ -210,12 +210,13 @@ public class QliftUIParser: NSObject {
             guard node.attributes["class"]! != "Line" else {
                 break
             }
-            var parentName = "nil"
-            if let parentWidget = getParentWidget(node: node) {
-                parentName = parentWidget.attributes["name"]!
-            }
+            let parentName = getParentWidget(node: node)?.attributes["name"] ?? "nil"
             // 2. Construct widget itself.
-            ui += "        \(node.attributes["name"]!) = \(node.attributes["class"]!)(parent: \(parentName))\n"
+            if node.parent?.attributes["class"] == "QScrollArea" {
+                ui += "        \(node.attributes["name"]!) = \(node.attributes["class"]!)()\n"
+            } else {
+                ui += "        \(node.attributes["name"]!) = \(node.attributes["class"]!)(parent: \(parentName))\n"
+            }
             ui += "        \(node.attributes["name"]!).name = \"\(node.attributes["name"]!)\"\n"
 
             // 3. Handle special cases: QMenuBar, QMenu, QToolBar, QStatusBar, QDockWidget
@@ -304,6 +305,8 @@ public class QliftUIParser: NSObject {
                         ui += "        \(node.parent!.attributes["name"]!).widget = \(node.attributes["name"]!)\n"
                     case "QMainWindow"?:
                         ui += "        \(node.parent!.attributes["name"]!).centralWidget = \(node.attributes["name"]!)\n"
+                    case "QScrollArea"?:
+                        ui += "        \(node.parent!.attributes["name"]!).setWidget(\(node.attributes["name"]!))\n"
                     default:
                         break
                     }
