@@ -66,4 +66,3 @@
 [[maybe_unused]] void QLabel_setIndent(void *label, int indent) {
     static_cast<QLabel *>(label)->setIndent(indent);
 }
-

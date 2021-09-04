@@ -160,4 +160,18 @@ public struct Qt {
         public static let WindowFullScreen = WindowStates(rawValue: 4)
         public static let WindowActive = WindowStates(rawValue: 8)
     }
+
+    public enum ScrollBarPolicy: Int32 {
+        case ScrollBarAsNeeded = 0
+        case ScrollBarAlwaysOff
+        case ScrollBarAlwaysOn
+    }
+
+    public enum ScrollPhase: Int32 {
+        case NoScrollPhase = 0
+        case ScrollBegin
+        case ScrollUpdate
+        case ScrollEnd
+        case ScrollMomentum
+    }
 }

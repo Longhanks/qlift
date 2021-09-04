@@ -48,6 +48,7 @@
 #include "../qlift-QPushButton.h"
 #include "../qlift-QRect.h"
 #include "../qlift-QResource.h"
+#include "../qlift-QScrollArea.h"
 #include "../qlift-QSize.h"
 #include "../qlift-QSizePolicy.h"
 #include "../qlift-QSpacerItem.h"
