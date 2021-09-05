@@ -30,3 +30,27 @@
     *new_image = static_cast<const QImage *>(image)->convertToFormat(static_cast<QImage::Format>(format), Qt::AutoColor);
     return new_image;
 }
+
+[[maybe_unused]] void *QImage_scaled(void *image, int w, int h, int aspectMode, int mode) {
+    return static_cast<void *>(new QImage(static_cast<QImage *>(image)->
+                                          scaled(w, h,
+                                                 static_cast<Qt::AspectRatioMode>(aspectMode),
+                                                 static_cast<Qt::TransformationMode>(mode)) ));
+}
+
+[[maybe_unused]] void *QImage_scaledQsize(void *image, void *s, int aspectMode, int mode) {
+    return static_cast<void *>(new QImage(static_cast<QImage *>(image)->
+                                          scaled(*static_cast<const QSize *>(s),
+                                                 static_cast<Qt::AspectRatioMode>(aspectMode),
+                                                 static_cast<Qt::TransformationMode>(mode)) ));
+}
+
+[[maybe_unused]] void *QImage_scaledToWidth(void *image, int w, int mode) {
+    return static_cast<void *>(new QImage(static_cast<QImage *>(image)->
+                                          scaledToWidth(w, static_cast<Qt::TransformationMode>(mode)) ));
+}
+
+[[maybe_unused]] void *QImage_scaledToHeight(void *image, int h, int mode) {
+    return static_cast<void *>(new QImage(static_cast<QImage *>(image)->
+                                          scaledToHeight(h, static_cast<Qt::TransformationMode>(mode)) ));
+}

@@ -55,7 +55,6 @@ open class QImage {
         self.ptr = ptr
     }
 
-
     public init(data: Data, width: Int, height: Int, format: Format) {
         self.ptr = data.withUnsafeBytes { ptr in
             QImage_new_data(ptr.baseAddress!, Int32(width), Int32(height), format.rawValue, nil)
@@ -76,15 +75,37 @@ open class QImage {
         self.ptr = QImage_new_data_bpl(data, Int32(width), Int32(height), Int32(bytesPerLine), format.rawValue, nil)
     }
 
-    public func convertToFormat(format: Format) -> QImage {
-        QImage(ptr: QImage_convertToFormat(ptr, format.rawValue))
-    }
-
     deinit {
         guard self.ptr != nil else {
             return
         }
         QImage_delete(self.ptr)
         self.ptr = nil
+    }
+
+    public func convertToFormat(format: Format) -> QImage {
+        QImage(ptr: QImage_convertToFormat(ptr, format.rawValue))
+    }
+
+    public func scaled(w: Int32, h: Int32,
+                       aspectMode: Qt.AspectRatioMode = .IgnoreAspectRatio,
+                       mode: Qt.TransformationMode = .FastTransformation ) -> QImage {
+        QImage(ptr: QImage_scaled(ptr, w, h, aspectMode.rawValue, mode.rawValue))
+    }
+
+    public func scaled(s: QSize,
+                       aspectMode: Qt.AspectRatioMode = .IgnoreAspectRatio,
+                       mode: Qt.TransformationMode = .FastTransformation ) -> QImage {
+        QImage(ptr: QImage_scaledQsize(ptr, s.ptr, aspectMode.rawValue, mode.rawValue))
+    }
+
+    public func scaledToWidth(_ w: Int32,
+                              mode: Qt.TransformationMode = .FastTransformation ) -> QImage {
+        QImage(ptr: QImage_scaledToWidth(ptr, w, mode.rawValue))
+    }
+
+    public func scaledToHeight(_ h: Int32,
+                               mode: Qt.TransformationMode = .FastTransformation ) -> QImage {
+        QImage(ptr: QImage_scaledToHeight(ptr, h, mode.rawValue))
     }
 }

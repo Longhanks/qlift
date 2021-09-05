@@ -174,4 +174,15 @@ public struct Qt {
         case ScrollEnd
         case ScrollMomentum
     }
+
+    public enum AspectRatioMode: Int32 {
+        case IgnoreAspectRatio = 0
+        case KeepAspectRatio
+        case KeepAspectRatioByExpanding
+    }
+
+    public enum TransformationMode: Int32 {
+        case FastTransformation = 0
+        case SmoothTransformation
+    }
 }
