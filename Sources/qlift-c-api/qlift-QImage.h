@@ -23,6 +23,8 @@ LIBRARY_API void *QImage_scaled(void *image, int w, int h, int aspectMode, int m
 LIBRARY_API void *QImage_scaledQsize(void *image, void *s, int aspectMode, int mode);
 LIBRARY_API void *QImage_scaledToWidth(void *image, int w, int mode);
 LIBRARY_API void *QImage_scaledToHeight(void *image, int h, int mode);
+LIBRARY_API int QImage_width(void *image);
+LIBRARY_API int QImage_height(void *image);
 
 #ifdef __cplusplus
 }

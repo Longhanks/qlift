@@ -50,6 +50,11 @@ open class QLabel: QFrame {
         }
     }
 
+    public var pixmap: QPixmap? {
+        guard let pixmapPtr = QLabel_pixmap(ptr) else { return nil }
+        return QPixmap(ptr: pixmapPtr)
+    }
+
     public func setPixmap(_ pixmap: QPixmap) {
         QLabel_setPixmap(ptr, pixmap.ptr)
     }

@@ -54,3 +54,11 @@
     return static_cast<void *>(new QImage(static_cast<QImage *>(image)->
                                           scaledToHeight(h, static_cast<Qt::TransformationMode>(mode)) ));
 }
+
+[[maybe_unused]] int QImage_width(void *image) {
+    return static_cast<QImage *>(image)->width();
+}
+
+[[maybe_unused]] int QImage_height(void *image) {
+    return static_cast<QImage *>(image)->height();
+}

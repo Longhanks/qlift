@@ -56,3 +56,11 @@
     return static_cast<void *>(new QPixmap(static_cast<QPixmap *>(pixmap)->
                                            scaledToHeight(h, static_cast<Qt::TransformationMode>(mode)) ));
 }
+
+[[maybe_unused]] int QPixmap_width(void *pixmap) {
+    return static_cast<QPixmap *>(pixmap)->width();
+}
+
+[[maybe_unused]] int QPixmap_height(void *pixmap) {
+    return static_cast<QPixmap *>(pixmap)->height();
+}

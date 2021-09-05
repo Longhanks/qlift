@@ -65,4 +65,12 @@ open class QPixmap {
                                mode: Qt.TransformationMode = .FastTransformation ) -> QPixmap {
         QPixmap(ptr: QPixmap_scaledToHeight(ptr, h, mode.rawValue))
     }
+
+    public var height: Int32 {
+        QPixmap_height(ptr)
+    }
+
+    public var width: Int32 {
+        QPixmap_width(ptr)
+    }
 }

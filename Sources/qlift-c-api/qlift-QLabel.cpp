@@ -66,3 +66,13 @@
 [[maybe_unused]] void QLabel_setIndent(void *label, int indent) {
     static_cast<QLabel *>(label)->setIndent(indent);
 }
+
+[[maybe_unused]] void *QLabel_pixmap(void *label) {
+#if QT_VERSION < QT_VERSION_CHECK(5, 15, 0)
+    return (void *)(static_cast<QLabel *>(label)->pixmap());
+#else
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+    QPixmap pixmap = static_cast<QLabel *>(label)->pixmap(Qt::ReturnByValue);
+    return static_cast<void *> (new QPixmap(pixmap));
+#endif
+}

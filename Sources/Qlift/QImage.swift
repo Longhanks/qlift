@@ -108,4 +108,12 @@ open class QImage {
                                mode: Qt.TransformationMode = .FastTransformation ) -> QImage {
         QImage(ptr: QImage_scaledToHeight(ptr, h, mode.rawValue))
     }
+
+    public var height: Int32 {
+        QImage_height(ptr)
+    }
+
+    public var width: Int32 {
+        QImage_width(ptr)
+    }
 }

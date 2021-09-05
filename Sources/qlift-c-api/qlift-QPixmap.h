@@ -23,6 +23,8 @@ LIBRARY_API void *QPixmap_scaled(void *pixmap, int w, int h, int aspectMode, int
 LIBRARY_API void *QPixmap_scaledQsize(void *pixmap, void *s, int aspectMode, int mode);
 LIBRARY_API void *QPixmap_scaledToWidth(void *pixmap, int w, int mode);
 LIBRARY_API void *QPixmap_scaledToHeight(void *pixmap, int h, int mode);
+LIBRARY_API int QPixmap_width(void *pixmap);
+LIBRARY_API int QPixmap_height(void *pixmap);
 
 #ifdef __cplusplus
 }
