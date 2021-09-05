@@ -25,7 +25,7 @@ open class QScrollArea: QFrame {
         }
     }
 
-    public func setWidget(widget: QWidget) {
+    public func setWidget(_ widget: QWidget) {
         QScrollArea_setWidget(ptr, widget.ptr)
     }
 
