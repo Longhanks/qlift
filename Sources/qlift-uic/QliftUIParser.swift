@@ -171,7 +171,9 @@ public class QliftUIParser: NSObject {
                 // TODO: Pallette make
                 break
             case "sizePolicy":
-                break;
+                let hSizeType = node.children[0].attributes["hsizetype"]!
+                let vSizeType = node.children[0].attributes["vsizetype"]!
+                ui += "        \(node.parent!.attributes["name"]!).sizePolicy = QSizePolicy(horizontal: .\(hSizeType), vertical: .\(vSizeType))\n"
             case "leftMargin", "topMargin", "rightMargin", "bottomMargin":
                 break
             case "pixmap":
