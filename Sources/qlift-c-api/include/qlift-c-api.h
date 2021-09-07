@@ -46,6 +46,7 @@
 #include "../qlift-QPoint.h"
 #include "../qlift-QProgressBar.h"
 #include "../qlift-QPushButton.h"
+#include "../qlift-QRadioButton.h"
 #include "../qlift-QRect.h"
 #include "../qlift-QResource.h"
 #include "../qlift-QScrollArea.h"
