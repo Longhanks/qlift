@@ -54,6 +54,7 @@
 #include "../qlift-QSizePolicy.h"
 #include "../qlift-QSpacerItem.h"
 #include "../qlift-QSpinBox.h"
+#include "../qlift-QStatusBar.h"
 #include "../qlift-QTimer.h"
 #include "../qlift-QToolButton.h"
 #include "../qlift-QVBoxLayout.h"

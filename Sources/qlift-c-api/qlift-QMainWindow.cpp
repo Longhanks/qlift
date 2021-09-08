@@ -39,6 +39,16 @@
         ->setMenuBar(static_cast<QMenuBar *>(menuBar));
 }
 
+[[maybe_unused]] void *QMainWindow_statusBar(void *mainWindow) {
+    return static_cast<void *>(
+        static_cast<QMainWindow *>(mainWindow)->statusBar());
+}
+
+[[maybe_unused]] void QMainWindow_setStatusBar(void *mainWindow, void *statusbar) {
+    static_cast<QMainWindow *>(mainWindow)->setStatusBar(static_cast<QStatusBar *>(statusbar));
+}
+
+
 [[maybe_unused]] void QMainWindow_closeEvent(void *mainWindow, void *event) {
     static_cast<QliftMainWindow *>(mainWindow)
         ->closeEventSuper(static_cast<QCloseEvent *>(event));

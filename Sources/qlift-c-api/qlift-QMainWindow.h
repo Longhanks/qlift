@@ -7,18 +7,15 @@ extern "C" {
 #endif
 
 LIBRARY_API void *QMainWindow_new(void *parent, int flags);
-
 LIBRARY_API void QMainWindow_delete(void *mainWindow);
-
 LIBRARY_API void *QMainWindow_centralWidget(void *mainWindow);
-
 LIBRARY_API void QMainWindow_setCentralWidget(void *mainWindow, void *widget);
-
 LIBRARY_API void *QMainWindow_menuBar(void *mainWindow);
-
 LIBRARY_API void QMainWindow_setMenuBar(void *mainWindow, void *menuBar);
-
 LIBRARY_API void QMainWindow_closeEvent(void *mainWindow, void *event);
+
+LIBRARY_API void *QMainWindow_statusBar(void *mainWindow);
+LIBRARY_API void QMainWindow_setStatusBar(void *mainWindow, void *statusbar);
 
 LIBRARY_API void
 QMainWindow_closeEvent_Override(void *mainWindow,
