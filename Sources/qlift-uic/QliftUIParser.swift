@@ -60,6 +60,10 @@ public class QliftUIParser: NSObject {
             if className == "Line" {
                 continue
             }
+            if className == "QStatusBar" {
+                continue
+            }
+
             swiftUI += "    var " + property.attributes["name"]! + ": " + className + "!\n"
         }
 
@@ -230,6 +234,11 @@ public class QliftUIParser: NSObject {
                 }
                 ui += "        \(node.parent!.attributes["name"]!).menuBar = \(node.attributes["name"]!)\n"
 
+            case "QStatusBar":
+                for subNode in node.children {
+                    ui += subNode2Swift(node: subNode)
+                }
+
             case "QMenu":
                 namesOfQMenusForAddAction.append(node.attributes["name"]!)
                 for subNode in node.children {
@@ -248,9 +257,6 @@ public class QliftUIParser: NSObject {
                     ui += subNode2Swift(node: subNode)
                 }
                 ui += "        \(node.parent!.attributes["name"]!).add(toolBar: \(node.attributes["name"]!), area: \(area))\n"
-
-            case "QStatusBar":
-                ui += "        \(node.parent!.attributes["name"]!).statusBar = \(node.attributes["name"]!)\n"
 
             case "QDockWidget":
                 var areaNumberString = ""
