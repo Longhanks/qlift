@@ -36,11 +36,11 @@
 }
 
 [[maybe_unused]] bool    QScrollArea_widgetResizable(void *scrollArea) {
-    static_cast<QScrollArea *>(scrollArea)->widgetResizable();
+    return static_cast<QScrollArea *>(scrollArea)->widgetResizable();
 }
 
 [[maybe_unused]] int     QScrollArea_sizeAdjustPolicy(void *scrollArea) {
-    static_cast<QScrollArea *>(scrollArea)->sizeAdjustPolicy();
+    return static_cast<QScrollArea *>(scrollArea)->sizeAdjustPolicy();
 }
 
 [[maybe_unused]] void    QScrollArea_setHorizontalScrollBarPolicy(void *scrollArea, int scrollBarPolicy) {
