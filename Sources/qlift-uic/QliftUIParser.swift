@@ -220,6 +220,8 @@ public class QliftUIParser: NSObject {
             // 2. Construct widget itself.
             if node.parent?.attributes["class"] == "QScrollArea" {
                 ui += "        \(node.attributes["name"]!) = \(node.attributes["class"]!)()\n"
+            } else if node.attributes["class"]! == "QStatusBar" {
+                ui += "        let \(node.attributes["name"]!) = \(node.attributes["class"]!)(parent: \(parentName))\n"
             } else {
                 ui += "        \(node.attributes["name"]!) = \(node.attributes["class"]!)(parent: \(parentName))\n"
             }
@@ -238,6 +240,7 @@ public class QliftUIParser: NSObject {
                 for subNode in node.children {
                     ui += subNode2Swift(node: subNode)
                 }
+                ui += "        \(node.parent!.attributes["name"]!).statusBar = \(node.attributes["name"]!)\n"
 
             case "QMenu":
                 namesOfQMenusForAddAction.append(node.attributes["name"]!)
