@@ -2,7 +2,6 @@ import CQlift
 
 
 open class QFrame: QWidget {
-
     public enum Shape: Int32 {
         case NoFrame = 0    // no frame
         case Box            // rectangular box
@@ -25,21 +24,13 @@ open class QFrame: QWidget {
     }
 
     public var frameShape: Shape {
-        get {
-            Shape(rawValue: QFrame_shape(ptr)) ?? .NoFrame
-        }
-        set {
-            QFrame_setShape(ptr, newValue.rawValue)
-        }
+        get { Shape(rawValue: QFrame_shape(ptr)) ?? .NoFrame }
+        set { QFrame_setShape(ptr, newValue.rawValue) }
     }
 
     public var frameShadow: Shadow {
-        get {
-            Shadow(rawValue: QFrame_shadow(ptr)) ?? .Plain
-        }
-        set {
-            QFrame_setShadow(ptr, newValue.rawValue)
-        }
+        get { Shadow(rawValue: QFrame_shadow(ptr)) ?? .Plain }
+        set { QFrame_setShadow(ptr, newValue.rawValue) }
     }
 
     public override init(parent: QWidget? = nil, flags: Qt.WindowFlags = .Widget) {
@@ -58,7 +49,6 @@ open class QFrame: QWidget {
             let _self = Unmanaged<QFrame>.fromOpaque(context!).takeUnretainedValue()
             _self.mousePressEvent(event: QMouseEvent(ptr: mouseEvent!))
         }
-
         QFrame_mousePressEvent_Override(self.ptr, rawSelf, functorMousePressEvent)
     }
 
@@ -67,11 +57,9 @@ open class QFrame: QWidget {
     }
 
     deinit {
-        if self.ptr != nil {
-            if QObject_parent(self.ptr) == nil {
-                QFrame_delete(self.ptr)
-            }
-            self.ptr = nil
+        guard self.ptr != nil else { return }
+        if QObject_parent(self.ptr) == nil {
+            QFrame_delete(self.ptr)
         }
     }
 }

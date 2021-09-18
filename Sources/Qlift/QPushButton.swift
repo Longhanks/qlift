@@ -46,11 +46,7 @@ open class QPushButton: QAbstractButton {
     }
 
     public var isFlat: Bool {
-        get {
-            QPushButton_isFlat(self.ptr)
-        }
-        set {
-            QPushButton_setFlat(self.ptr, newValue)
-        }
+        get { QPushButton_isFlat(ptr) }
+        set { QPushButton_setFlat(ptr, newValue) }
     }
 }
