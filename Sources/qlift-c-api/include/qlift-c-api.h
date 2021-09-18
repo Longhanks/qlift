@@ -6,6 +6,7 @@
 #include "../qlift-dispatchToQThread.h"
 
 #include "../qlift-QAbstractButton.h"
+#include "../qlift-QAbstractSlider.h"
 #include "../qlift-QAbstractSpinBox.h"
 #include "../qlift-QAction.h"
 #include "../qlift-QApplication.h"
@@ -52,6 +53,7 @@
 #include "../qlift-QScrollArea.h"
 #include "../qlift-QSize.h"
 #include "../qlift-QSizePolicy.h"
+#include "../qlift-QSlider.h"
 #include "../qlift-QSpacerItem.h"
 #include "../qlift-QSpinBox.h"
 #include "../qlift-QStatusBar.h"
