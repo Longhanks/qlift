@@ -19,12 +19,7 @@ open class QRadioButton: QAbstractButton {
     }
 
     deinit {
-        if self.ptr != nil {
-            if QObject_parent(self.ptr) == nil {
-                QRadioButton_delete(self.ptr)
-            }
-            self.ptr = nil
-        }
+        checkDeleteQtObj(QRadioButton_delete)
     }
 
     open override func mousePressEvent(event: QMouseEvent) {

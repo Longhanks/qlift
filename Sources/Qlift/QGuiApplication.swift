@@ -14,12 +14,7 @@ public class QGuiApplication: QCoreApplication {
     }
 
     deinit {
-        if self.ptr != nil {
-            if QObject_parent(self.ptr) == nil {
-                QGuiApplication_delete(self.ptr)
-            }
-            self.ptr = nil
-        }
+        checkDeleteQtObj(QGuiApplication_delete)
     }
 
     static func setAttribute(attribute: Qt.ApplicationAttribute, on: Bool) {

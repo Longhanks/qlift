@@ -73,12 +73,7 @@ open class QLabel: QFrame {
     }
 
     deinit {
-        if self.ptr != nil {
-            if QObject_parent(self.ptr) == nil {
-                QLabel_delete(self.ptr)
-            }
-            self.ptr = nil
-        }
+        checkDeleteQtObj(QLabel_delete)
     }
 }
 

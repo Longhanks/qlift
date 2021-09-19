@@ -24,12 +24,7 @@ open class QGroupBox: QWidget {
     }
 
     deinit {
-        if self.ptr != nil {
-            if QObject_parent(self.ptr) == nil {
-                QGroupBox_delete(self.ptr)
-            }
-            self.ptr = nil
-        }
+        checkDeleteQtObj(QGroupBox_delete)
     }
 }
 

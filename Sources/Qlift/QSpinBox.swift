@@ -38,12 +38,7 @@ open class QSpinBox: QAbstractSpinBox {
     }
 
     deinit {
-        if self.ptr != nil {
-            if QObject_parent(self.ptr) == nil {
-                QSpinBox_delete(self.ptr)
-            }
-            self.ptr = nil
-        }
+        checkDeleteQtObj(QSpinBox_delete)
     }
 }
 

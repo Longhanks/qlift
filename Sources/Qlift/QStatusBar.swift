@@ -11,12 +11,7 @@ open class QStatusBar: QWidget {
     }
 
     deinit {
-        if self.ptr != nil {
-            if QObject_parent(self.ptr) == nil {
-                QStatusBar_delete(self.ptr)
-            }
-            self.ptr = nil
-        }
+        checkDeleteQtObj(QStatusBar_delete)
     }
 
     public var sizeGripEnabled: Bool {

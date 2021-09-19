@@ -14,21 +14,13 @@ open class QGridLayout: QObject, QLayout {
     }
 
     public var horizontalSpacing: Int32 {
-        get {
-            QGridLayout_horizontalSpacing(ptr)
-        }
-        set {
-            QGridLayout_setHorizontalSpacing(ptr, newValue)
-        }
+        get { QGridLayout_horizontalSpacing(ptr) }
+        set { QGridLayout_setHorizontalSpacing(ptr, newValue) }
     }
 
     public var verticalSpacing: Int32 {
-        get {
-            QGridLayout_verticalSpacing(ptr)
-        }
-        set {
-            QGridLayout_setVerticalSpacing(ptr, spacing)
-        }
+        get { QGridLayout_verticalSpacing(ptr) }
+        set { QGridLayout_setVerticalSpacing(ptr, spacing) }
     }
 
     public func add(item: QLayoutItem) {
@@ -60,12 +52,7 @@ open class QGridLayout: QObject, QLayout {
     }
 
     deinit {
-        if self.ptr != nil {
-            if QObject_parent(self.ptr) == nil {
-                QGridLayout_delete(self.ptr)
-            }
-            self.ptr = nil
-        }
+        checkDeleteQtObj(QGridLayout_delete)
     }
 }
 

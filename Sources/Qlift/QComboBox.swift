@@ -19,12 +19,7 @@ open class QComboBox: QWidget {
     }
 
     deinit {
-        if self.ptr != nil {
-            if QObject_parent(self.ptr) == nil {
-                QComboBox_delete(self.ptr)
-            }
-            self.ptr = nil
-        }
+        checkDeleteQtObj(QComboBox_delete)
     }
 
     open func connectCurrentIndexChanged(receiver: QObject? = nil, to slot: @escaping ((Int32) -> Void)) {

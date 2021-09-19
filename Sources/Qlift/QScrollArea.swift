@@ -17,12 +17,7 @@ open class QScrollArea: QFrame {
     }
 
     deinit {
-        if self.ptr != nil {
-            if QObject_parent(self.ptr) == nil {
-                QScrollArea_delete(self.ptr)
-            }
-            self.ptr = nil
-        }
+        checkDeleteQtObj(QScrollArea_delete)
     }
 
     public func setWidget(_ widget: QWidget) {

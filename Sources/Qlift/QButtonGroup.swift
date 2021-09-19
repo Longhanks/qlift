@@ -15,12 +15,7 @@ open class QButtonGroup: QObject {
     }
 
     deinit {
-        if self.ptr != nil {
-            if QObject_parent(self.ptr) == nil {
-                QButtonGroup_delete(self.ptr)
-            }
-            self.ptr = nil
-        }
+        checkDeleteQtObj(QButtonGroup_delete)
     }
 
     public func addButton(_ button: QAbstractButton, id: Int32 = -1) {

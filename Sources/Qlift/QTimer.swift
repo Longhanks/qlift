@@ -19,12 +19,7 @@ open class QTimer: QObject {
     }
 
     deinit {
-        if self.ptr != nil {
-            if QObject_parent(self.ptr) == nil {
-                QTimer_delete(self.ptr)
-            }
-            self.ptr = nil
-        }
+        checkDeleteQtObj(QTimer_delete)
     }
 
     public func start(msec: Int32) {

@@ -21,12 +21,7 @@ open class QAction: QObject {
     }
 
     deinit {
-        if self.ptr != nil {
-            if QObject_parent(self.ptr) == nil {
-                QAction_delete(self.ptr)
-            }
-            self.ptr = nil
-        }
+        checkDeleteQtObj(QAction_delete)
     }
 
     open func connectTriggered(receiver: QObject? = nil, to slot: @escaping ((Bool) -> Void)) {

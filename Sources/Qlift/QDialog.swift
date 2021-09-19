@@ -11,12 +11,7 @@ open class QDialog: QWidget {
     }
 
     deinit {
-        if self.ptr != nil {
-            if QObject_parent(self.ptr) == nil {
-                QDialog_delete(self.ptr)
-            }
-            self.ptr = nil
-        }
+        checkDeleteQtObj(QDialog_delete)
     }
 
     public var modal: Bool {

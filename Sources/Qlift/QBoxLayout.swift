@@ -31,11 +31,6 @@ open class QBoxLayout: QObject, QLayout {
     }
 
     deinit {
-        if self.ptr != nil {
-            if QObject_parent(self.ptr) == nil {
-                QBoxLayout_delete(self.ptr)
-            }
-            self.ptr = nil
-        }
+        checkDeleteQtObj(QBoxLayout_delete)
     }
 }

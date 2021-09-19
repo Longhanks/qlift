@@ -57,9 +57,6 @@ open class QFrame: QWidget {
     }
 
     deinit {
-        guard self.ptr != nil else { return }
-        if QObject_parent(self.ptr) == nil {
-            QFrame_delete(self.ptr)
-        }
+        checkDeleteQtObj(QFrame_delete)
     }
 }

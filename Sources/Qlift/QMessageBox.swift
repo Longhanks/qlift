@@ -39,12 +39,7 @@ open class QMessageBox: QDialog {
     }
 
     deinit {
-        if self.ptr != nil {
-            if QObject_parent(self.ptr) == nil {
-                QMessageBox_delete(self.ptr)
-            }
-            self.ptr = nil
-        }
+        checkDeleteQtObj(QMessageBox_delete)
     }
 
     public func setDefaultStandardButton(_ button: QMessageBox.StandardButton) {

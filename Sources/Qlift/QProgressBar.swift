@@ -67,12 +67,7 @@ open class QProgressBar: QWidget {
     }
 
     deinit {
-        if self.ptr != nil {
-            if QObject_parent(self.ptr) == nil {
-                QProgressBar_delete(self.ptr)
-            }
-            self.ptr = nil
-        }
+        checkDeleteQtObj(QProgressBar_delete)
     }
 }
 

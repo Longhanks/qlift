@@ -15,12 +15,7 @@ public class QCoreApplication: QObject {
     }
 
     deinit {
-        if self.ptr != nil {
-            if QObject_parent(self.ptr) == nil {
-                QCoreApplication_delete(self.ptr)
-            }
-            self.ptr = nil
-        }
+        checkDeleteQtObj(QCoreApplication_delete)
     }
 
     public func quit() {

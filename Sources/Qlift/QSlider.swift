@@ -24,12 +24,7 @@ open class QSlider: QAbstractSlider {
     }
 
     deinit {
-        if self.ptr != nil {
-            if QObject_parent(self.ptr) == nil {
-                QSlider_delete(self.ptr)
-            }
-            self.ptr = nil
-        }
+        checkDeleteQtObj(QSlider_delete)
     }
 
     public var tickInterval: Int32 {

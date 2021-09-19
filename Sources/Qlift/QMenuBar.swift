@@ -11,12 +11,6 @@ open class QMenuBar: QWidget {
     }
 
     deinit {
-        if self.ptr != nil {
-            if QObject_parent(self.ptr) == nil {
-                QMenuBar_delete(self.ptr)
-            }
-            self.ptr = nil
-        }
+        checkDeleteQtObj(QMenuBar_delete)
     }
 }
-

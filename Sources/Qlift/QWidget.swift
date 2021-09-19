@@ -209,12 +209,7 @@ open class QWidget: QObject {
     }
 
     deinit {
-        if self.ptr != nil {
-            if QObject_parent(self.ptr) == nil {
-                QWidget_delete(self.ptr)
-            }
-            self.ptr = nil
-        }
+        checkDeleteQtObj(QWidget_delete)
     }
 
     open func mousePressEvent(event: QMouseEvent) {
