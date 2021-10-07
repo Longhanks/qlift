@@ -6,10 +6,6 @@
     return static_cast<void *>(new QProgressBar{static_cast<QWidget *>(parent)});
 }
 
-[[maybe_unused]] void QProgressBar_delete(void *progressBar) {
-    delete static_cast<QProgressBar *>(progressBar);
-}
-
 [[maybe_unused]] int QProgressBar_value(void *progressBar) {
     return static_cast<QProgressBar *>(progressBar)->value();
 }

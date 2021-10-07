@@ -30,7 +30,7 @@ LIBRARY_API void QButtonGroup_setExclusive(void *buttonGroup, bool on);
 LIBRARY_API int QButtonGroup_id(void *buttonGroup, void *abstractButton);
 LIBRARY_API void QButtonGroup_setId(void *buttonGroup, void *abstractButton, int id);
 LIBRARY_API void *QButtonGroup_new(void *parent);
-LIBRARY_API void QButtonGroup_delete(void *buttonGroup);
+
 #ifdef __cplusplus
 }
 #endif

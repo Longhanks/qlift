@@ -8,8 +8,6 @@ extern "C" {
 
 LIBRARY_API void *QBoxLayout_new(int direction, void *parent);
 
-LIBRARY_API void QBoxLayout_delete(void *boxLayout);
-
 LIBRARY_API void QBoxLayout_addItem(void *boxLayout, void *layoutItem);
 
 LIBRARY_API void

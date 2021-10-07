@@ -11,7 +11,7 @@ open class QStatusBar: QWidget {
     }
 
     deinit {
-        checkDeleteQtObj(QStatusBar_delete)
+        checkDeleteQtObj()
     }
 
     public var sizeGripEnabled: Bool {

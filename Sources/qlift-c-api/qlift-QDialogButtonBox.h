@@ -8,8 +8,6 @@ extern "C" {
 
 LIBRARY_API void *QDialogButtonBox_new(void *parent);
 
-LIBRARY_API void QDialogButtonBox_delete(void *dialogButtonBox);
-
 LIBRARY_API int QDialogButtonBox_orientation(void *dialogButtonBox);
 
 LIBRARY_API void QDialogButtonBox_setOrientation(void *dialogButtonBox,

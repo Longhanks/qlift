@@ -8,8 +8,6 @@ extern "C" {
 
 LIBRARY_API void *QSpinBox_new(void *parent);
 
-LIBRARY_API void QSpinBox_delete(void *spinBox);
-
 LIBRARY_API int QSpinBox_value(void *spinBox);
 
 LIBRARY_API void QSpinBox_setValue(void *spinBox, int value);

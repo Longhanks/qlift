@@ -11,6 +11,6 @@ open class QMenuBar: QWidget {
     }
 
     deinit {
-        checkDeleteQtObj(QMenuBar_delete)
+        checkDeleteQtObj()
     }
 }

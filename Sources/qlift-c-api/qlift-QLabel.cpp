@@ -9,10 +9,6 @@
                    static_cast<QFlags<Qt::WindowType>>(flags)});
 }
 
-[[maybe_unused]] void QLabel_delete(void *label) {
-    delete static_cast<QLabel *>(label);
-}
-
 [[maybe_unused]] void QLabel_setAlignment(void *label, int alignment) {
     static_cast<QLabel *>(label)->setAlignment(
         static_cast<QFlags<Qt::AlignmentFlag>>(alignment));

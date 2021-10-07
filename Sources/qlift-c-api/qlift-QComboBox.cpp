@@ -6,10 +6,6 @@
     return static_cast<void *>(new QComboBox{static_cast<QWidget *>(parent)});
 }
 
-[[maybe_unused]] void QComboBox_delete(void *comboBox) {
-    delete static_cast<QComboBox *>(comboBox);
-}
-
 [[maybe_unused]] void
 QComboBox_addItem(void *comboBox, const char *text, void *userData) {
     if (userData != nullptr) {

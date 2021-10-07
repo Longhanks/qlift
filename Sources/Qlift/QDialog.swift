@@ -11,7 +11,7 @@ open class QDialog: QWidget {
     }
 
     deinit {
-        checkDeleteQtObj(QDialog_delete)
+        checkDeleteQtObj()
     }
 
     public var modal: Bool {

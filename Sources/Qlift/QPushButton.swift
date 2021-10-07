@@ -33,7 +33,7 @@ open class QPushButton: QAbstractButton {
     }
 
     deinit {
-        checkDeleteQtObj(QPushButton_delete)
+        checkDeleteQtObj()
     }
 
     open override func mousePressEvent(event: QMouseEvent) {

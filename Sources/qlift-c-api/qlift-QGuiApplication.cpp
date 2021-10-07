@@ -7,10 +7,6 @@
     return new QGuiApplication{*argc, argv};
 }
 
-[[maybe_unused]] void QGuiApplication_delete(void *guiApplication) {
-    delete static_cast<QGuiApplication *>(guiApplication);
-}
-
 [[maybe_unused]] void QGuiApplication_setAttribute(int attribute, bool on) {
     QCoreApplication::setAttribute(static_cast<Qt::ApplicationAttribute>(attribute), on);
 }

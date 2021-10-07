@@ -21,7 +21,7 @@ open class QAction: QObject {
     }
 
     deinit {
-        checkDeleteQtObj(QAction_delete)
+        checkDeleteQtObj()
     }
 
     open func connectTriggered(receiver: QObject? = nil, to slot: @escaping ((Bool) -> Void)) {

@@ -7,7 +7,6 @@ extern "C" {
 #endif
 
 LIBRARY_API void *QProgressBar_new(void *parent);
-LIBRARY_API void QProgressBar_delete(void *progressBar);
 LIBRARY_API int QProgressBar_value(void *progressBar);
 LIBRARY_API void QProgressBar_setValue(void *progressBar, int value);
 LIBRARY_API int QProgressBar_minimum(void *progressBar);

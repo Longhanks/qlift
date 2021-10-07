@@ -14,10 +14,6 @@
                             static_cast<QFlags<Qt::WindowType>>(flags)});
 }
 
-[[maybe_unused]] void QMainWindow_delete(void *mainWindow) {
-    delete static_cast<QliftMainWindow *>(mainWindow);
-}
-
 [[maybe_unused]] void *QMainWindow_centralWidget(void *mainWindow) {
     return static_cast<void *>(
         static_cast<QMainWindow *>(mainWindow)->centralWidget());

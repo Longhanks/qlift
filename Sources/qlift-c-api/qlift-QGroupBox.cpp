@@ -7,10 +7,6 @@
         new QGroupBox{title, static_cast<QWidget *>(parent)});
 }
 
-[[maybe_unused]] void QGroupBox_delete(void *groupBox) {
-    delete static_cast<QGroupBox *>(groupBox);
-}
-
 [[maybe_unused]] void QGroupBox_setAlignment(void *groupBox, int alignment) {
     static_cast<QGroupBox *>(groupBox)->setAlignment(alignment);
 }

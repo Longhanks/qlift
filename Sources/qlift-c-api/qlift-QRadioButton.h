@@ -7,7 +7,6 @@ extern "C" {
 #endif
 
 LIBRARY_API void *QRadioButton_new(const char *text, void *parent);
-LIBRARY_API void QRadioButton_delete(void *radioButton);
 LIBRARY_API void QRadioButton_setFlat(void *radioButton, bool enabled);
 LIBRARY_API bool QRadioButton_isFlat(void *radioButton);
 LIBRARY_API void QRadioButton_mousePressEvent(void *radioButton, void *mouseEvent);

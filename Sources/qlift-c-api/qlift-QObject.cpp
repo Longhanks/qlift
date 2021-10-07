@@ -18,12 +18,17 @@
     static_cast<QObject *>(object)->setObjectName(name);
 }
 
-[[maybe_unused]] void QObject_destroyed_connect(void *object,
+[[maybe_unused]] void *QObject_destroyed_connect(void *object,
                                                 void *receiver,
                                                 void *context,
                                                 void (*slot_ptr)(void *)) {
-    QObject::connect(static_cast<QObject *>(object),
+    auto handle = QObject::connect(static_cast<QObject *>(object),
                      &QObject::destroyed,
                      static_cast<QObject *>(receiver),
                      [context, slot_ptr]() { (*slot_ptr)(context); });
+    return static_cast<void *>(new QMetaObject::Connection(handle));
+}
+
+[[maybe_unused]] void *QObject_destroyed_disconnect(void *connection) {
+    QObject::disconnect(*static_cast<QMetaObject::Connection *>(connection));
 }

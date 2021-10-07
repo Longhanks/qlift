@@ -19,7 +19,7 @@ open class QRadioButton: QAbstractButton {
     }
 
     deinit {
-        checkDeleteQtObj(QRadioButton_delete)
+        checkDeleteQtObj()
     }
 
     open override func mousePressEvent(event: QMouseEvent) {

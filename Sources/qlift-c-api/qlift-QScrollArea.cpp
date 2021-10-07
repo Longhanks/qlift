@@ -7,10 +7,6 @@
         new QScrollArea{static_cast<QWidget *>(parent)});
 }
 
-[[maybe_unused]] void QScrollArea_delete(void *scrollArea) {
-    delete static_cast<QScrollArea *>(scrollArea);
-}
-
 [[maybe_unused]] void    QScrollArea_setWidget(void *scrollArea, void *widget) {
     static_cast<QScrollArea *>(scrollArea)->setWidget(static_cast<QWidget *>(widget));
 }

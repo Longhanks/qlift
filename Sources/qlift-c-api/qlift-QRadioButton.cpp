@@ -16,10 +16,6 @@ QRadioButton_new(const char *text, void *parent) {
         new QliftRadioButton{text, static_cast<QWidget *>(parent)});
 }
 
-[[maybe_unused]] void QRadioButton_delete(void *radioButton) {
-    delete static_cast<QliftRadioButton *>(radioButton);
-}
-
 [[maybe_unused]] void QRadioButton_mousePressEvent(void *radioButton,
                                                   void *mouseEvent) {
     static_cast<QliftRadioButton *>(radioButton)

@@ -17,7 +17,7 @@ open class QScrollArea: QFrame {
     }
 
     deinit {
-        checkDeleteQtObj(QScrollArea_delete)
+        checkDeleteQtObj()
     }
 
     public func setWidget(_ widget: QWidget) {

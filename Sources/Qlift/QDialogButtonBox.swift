@@ -26,7 +26,7 @@ open class QDialogButtonBox: QWidget {
     }
 
     deinit {
-        checkDeleteQtObj(QDialogButtonBox_delete)
+        checkDeleteQtObj()
     }
 }
 

@@ -36,7 +36,7 @@ open class QToolButton: QAbstractButton {
     }
 
     deinit {
-        checkDeleteQtObj(QToolButton_delete)
+        checkDeleteQtObj()
     }
 
     open override func mousePressEvent(event: QMouseEvent) {

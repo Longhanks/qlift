@@ -52,7 +52,7 @@ open class QGridLayout: QObject, QLayout {
     }
 
     deinit {
-        checkDeleteQtObj(QGridLayout_delete)
+        checkDeleteQtObj()
     }
 }
 

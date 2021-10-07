@@ -8,10 +8,6 @@
                                new QTimer{static_cast<QObject *>(parent)});
 }
 
-[[maybe_unused]] void QTimer_delete(void *timer) {
-    delete static_cast<QTimer *>(timer);
-}
-
 [[maybe_unused]] void QTimer_singleShot(int msec,
                                         int timerType,
                                         void *context,

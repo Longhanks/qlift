@@ -5,6 +5,7 @@ open class QObject {
     public var ptr: UnsafeMutableRawPointer!
     private var parent_ptr: UnsafeMutableRawPointer?
     public weak var parent: QObject?
+    private var connection_destroy: UnsafeMutableRawPointer?
 
     public init(parent: QObject? = nil) {
         self.ptr = QObject_new(parent?.ptr)
@@ -29,7 +30,7 @@ open class QObject {
         parent_ptr = QObject_parent(ptr)
 
         let rawSelf = Unmanaged.passUnretained(self).toOpaque()
-        QObject_destroyed_connect(self.ptr, self.ptr, rawSelf) { (raw) in
+        connection_destroy = QObject_destroyed_connect(self.ptr, self.ptr, rawSelf) { (raw) in
             if let raw = raw {
                 Unmanaged<QObject>.fromOpaque(raw).takeUnretainedValue().ptr = nil
             }
@@ -37,11 +38,12 @@ open class QObject {
     }
 
     deinit {
-        checkDeleteQtObj(QObject_delete)
+        checkDeleteQtObj()
     }
 
-    func checkDeleteQtObj(_ delFunc: (UnsafeMutableRawPointer?) -> Void) {
+    func checkDeleteQtObj() {
         if self.ptr != nil {
+            QObject_destroyed_disconnect(connection_destroy)
             if parent_ptr == nil {
                 QObject_delete(self.ptr)
             }

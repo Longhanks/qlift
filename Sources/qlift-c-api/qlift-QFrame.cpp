@@ -14,10 +14,6 @@
                        static_cast<QFlags<Qt::WindowType>>(flags)});
 }
 
-[[maybe_unused]] void QFrame_delete(void *frame) {
-    delete static_cast<QliftFrame *>(frame);
-}
-
 [[maybe_unused]] void QFrame_mousePressEvent(void *frame, void *mouseEvent) {
     static_cast<QliftFrame *>(frame)->mousePressEventSuper(
         static_cast<QMouseEvent *>(mouseEvent));

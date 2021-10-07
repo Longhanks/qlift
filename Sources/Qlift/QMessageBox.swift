@@ -39,7 +39,7 @@ open class QMessageBox: QDialog {
     }
 
     deinit {
-        checkDeleteQtObj(QMessageBox_delete)
+        checkDeleteQtObj()
     }
 
     public func setDefaultStandardButton(_ button: QMessageBox.StandardButton) {

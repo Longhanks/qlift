@@ -11,7 +11,7 @@ open class QAbstractSpinBox: QWidget {
     }
 
     deinit {
-        checkDeleteQtObj(QAbstractSpinBox_delete)
+        checkDeleteQtObj()
     }
 }
 

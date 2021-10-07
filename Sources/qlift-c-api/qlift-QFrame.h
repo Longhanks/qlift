@@ -8,8 +8,6 @@ extern "C" {
 
 LIBRARY_API void *QFrame_new(void *parent, int flags);
 
-LIBRARY_API void QFrame_delete(void *frame);
-
 LIBRARY_API void QFrame_mousePressEvent(void *frame, void *mouseEvent);
 
 LIBRARY_API void QFrame_mousePressEvent_Override(

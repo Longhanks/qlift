@@ -7,7 +7,6 @@ extern "C" {
 #endif
 
 LIBRARY_API void *QScrollArea_new(void *parent);
-LIBRARY_API void  QScrollArea_delete(void *scrollArea);
 LIBRARY_API void  QScrollArea_setWidget(void *scrollArea, void *widget);
 LIBRARY_API void  QScrollArea_ensureVisible(void *scrollArea, int x, int y, int xmargin, int ymargin);
 LIBRARY_API void  QScrollArea_ensureWidgetVisible(void *scrollArea, void *childWidget, int xmargin, int ymargin);

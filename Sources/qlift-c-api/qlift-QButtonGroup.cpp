@@ -70,7 +70,3 @@
     return static_cast<void *>(
         new QButtonGroup{static_cast<QObject *>(parent)});
 }
-
-[[maybe_unused]] void QButtonGroup_delete(void *buttonGroup) {
-    delete static_cast<QButtonGroup *>(buttonGroup);
-}

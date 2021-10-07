@@ -7,10 +7,6 @@
         new QMessageBox{static_cast<QWidget *>(parent)});
 }
 
-[[maybe_unused]] void QMessageBox_delete(void *messageBox) {
-    delete static_cast<QMessageBox *>(messageBox);
-}
-
 [[maybe_unused]] void QMessageBox_setWindowModality(void *messageBox,
                                                     int windowModality) {
     static_cast<QMessageBox *>(messageBox)

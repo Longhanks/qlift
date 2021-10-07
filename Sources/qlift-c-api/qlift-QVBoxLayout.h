@@ -8,8 +8,6 @@ extern "C" {
 
 LIBRARY_API void *QVBoxLayout_new(void *parent);
 
-LIBRARY_API void QVBoxLayout_delete(void *vBoxLayout);
-
 #ifdef __cplusplus
 }
 #endif

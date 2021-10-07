@@ -7,10 +7,6 @@
         new QDialogButtonBox{static_cast<QWidget *>(parent)});
 }
 
-[[maybe_unused]] void QDialogButtonBox_delete(void *dialogButtonBox) {
-    delete static_cast<QDialogButtonBox *>(dialogButtonBox);
-}
-
 [[maybe_unused]] int QDialogButtonBox_orientation(void *dialogButtonBox) {
     return static_cast<QDialogButtonBox *>(dialogButtonBox)->orientation();
 }

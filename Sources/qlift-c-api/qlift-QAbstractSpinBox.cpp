@@ -6,7 +6,3 @@
     return static_cast<void *>(
         new QAbstractSpinBox{static_cast<QWidget *>(parent)});
 }
-
-[[maybe_unused]] void QAbstractSpinBox_delete(void *abstractSpinBox) {
-    delete static_cast<QAbstractSpinBox *>(abstractSpinBox);
-}

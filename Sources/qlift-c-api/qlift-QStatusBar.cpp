@@ -6,10 +6,6 @@
     return static_cast<void *>(new QStatusBar{static_cast<QWidget *>(parent)});
 }
 
-[[maybe_unused]] void QStatusBar_delete(void *statusBar) {
-    delete static_cast<QStatusBar *>(statusBar);
-}
-
 [[maybe_unused]] void QStatusBar_addPermanentWidget(void *statusBar, void *widget, int stretch) {
     static_cast<QStatusBar *>(statusBar)->addPermanentWidget(static_cast<QWidget *>(widget), stretch);
 }

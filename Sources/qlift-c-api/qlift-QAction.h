@@ -8,8 +8,6 @@ extern "C" {
 
 LIBRARY_API void *QAction_new(void *icon, const char *text, void *parent);
 
-LIBRARY_API void QAction_delete(void *pushButton);
-
 LIBRARY_API const char *QAction_text(void *action);
 
 LIBRARY_API void QAction_setText(void *action, const char *text);

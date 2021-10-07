@@ -10,10 +10,6 @@
     return static_cast<void *>(new QMenu{static_cast<QWidget *>(parent)});
 }
 
-[[maybe_unused]] void QMenu_delete(void *menu) {
-    delete static_cast<QMenu *>(menu);
-}
-
 [[maybe_unused]] const char *QMenu_title(void *menu) {
     return static_cast<QMenu *>(menu)->title().toLocal8Bit().data();
 }

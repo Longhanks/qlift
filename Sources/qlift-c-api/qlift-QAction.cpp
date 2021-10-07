@@ -19,10 +19,6 @@ QAction_new(void *icon, const char *text, void *parent) {
     return static_cast<void *>(new QAction{static_cast<QWidget *>(parent)});
 }
 
-[[maybe_unused]] void QAction_delete(void *action) {
-    delete static_cast<QAction *>(action);
-}
-
 [[maybe_unused]] const char *QAction_text(void *action) {
     return static_cast<QAction *>(action)->text().toLocal8Bit().data();
 }

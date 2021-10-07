@@ -20,10 +20,6 @@ QSlider_new(void *parent) {
     return static_cast<void *>(new QSlider{static_cast<QWidget *>(parent)});
 }
 
-[[maybe_unused]] void QSlider_delete(void *slider) {
-    delete static_cast<QSlider *>(slider);
-}
-
 [[maybe_unused]] void QSlider_setTickPosition(void *slider, int position) {
     static_cast<QSlider *>(slider)->setTickPosition(static_cast<QSlider::TickPosition>(position));
 }

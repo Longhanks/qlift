@@ -7,8 +7,6 @@ extern "C" {
 #endif
 
 LIBRARY_API void *QStatusBar_new(void *parent);
-LIBRARY_API void QStatusBar_delete(void *statusBar);
-
 LIBRARY_API void QStatusBar_addPermanentWidget(void *statusBar, void *widget, int stretch);
 LIBRARY_API void QStatusBar_addWidget(void *statusBar, void *widget, int stretch);
 LIBRARY_API int  QStatusBar_insertPermanentWidget(void *statusBar, int index, void *widget, int stretch);

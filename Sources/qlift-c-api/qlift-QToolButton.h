@@ -8,8 +8,6 @@ extern "C" {
 
 LIBRARY_API void *QToolButton_new(void *parent);
 
-LIBRARY_API void QToolButton_delete(void *toolButton);
-
 LIBRARY_API void QToolButton_mousePressEvent(void *toolButton,
                                              void *mouseEvent);
 

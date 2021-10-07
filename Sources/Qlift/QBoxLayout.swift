@@ -31,6 +31,6 @@ open class QBoxLayout: QObject, QLayout {
     }
 
     deinit {
-        checkDeleteQtObj(QBoxLayout_delete)
+        checkDeleteQtObj()
     }
 }

@@ -67,7 +67,7 @@ open class QProgressBar: QWidget {
     }
 
     deinit {
-        checkDeleteQtObj(QProgressBar_delete)
+        checkDeleteQtObj()
     }
 }
 

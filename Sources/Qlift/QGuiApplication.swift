@@ -14,7 +14,7 @@ public class QGuiApplication: QCoreApplication {
     }
 
     deinit {
-        checkDeleteQtObj(QGuiApplication_delete)
+        checkDeleteQtObj()
     }
 
     static func setAttribute(attribute: Qt.ApplicationAttribute, on: Bool) {

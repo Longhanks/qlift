@@ -12,7 +12,7 @@ public class QApplication: QGuiApplication {
     }
 
     deinit {
-        checkDeleteQtObj(QApplication_delete)
+        checkDeleteQtObj()
     }
 
     @discardableResult

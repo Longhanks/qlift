@@ -14,10 +14,6 @@ QToolButton_new(void *parent) {
         new QliftToolButton{static_cast<QWidget *>(parent)});
 }
 
-[[maybe_unused]] void QToolButton_delete(void *toolButton) {
-    delete static_cast<QliftToolButton *>(toolButton);
-}
-
 [[maybe_unused]] void QToolButton_setStyle(void *toolButton, int style) {
     static_cast<QliftToolButton *>(toolButton)->setToolButtonStyle(static_cast<Qt::ToolButtonStyle>(style));
 }

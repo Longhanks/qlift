@@ -15,7 +15,7 @@ open class QButtonGroup: QObject {
     }
 
     deinit {
-        checkDeleteQtObj(QButtonGroup_delete)
+        checkDeleteQtObj()
     }
 
     public func addButton(_ button: QAbstractButton, id: Int32 = -1) {

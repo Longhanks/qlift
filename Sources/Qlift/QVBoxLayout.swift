@@ -12,7 +12,7 @@ open class QVBoxLayout: QBoxLayout {
     }
 
     deinit {
-        checkDeleteQtObj(QVBoxLayout_delete)
+        checkDeleteQtObj()
     }
 }
 

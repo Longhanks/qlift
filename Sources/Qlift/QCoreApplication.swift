@@ -15,7 +15,7 @@ public class QCoreApplication: QObject {
     }
 
     deinit {
-        checkDeleteQtObj(QCoreApplication_delete)
+        checkDeleteQtObj()
     }
 
     public func quit() {

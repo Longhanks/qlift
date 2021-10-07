@@ -6,10 +6,6 @@
     return static_cast<void *>(new QSpinBox{static_cast<QWidget *>(parent)});
 }
 
-[[maybe_unused]] void QSpinBox_delete(void *spinBox) {
-    delete static_cast<QSpinBox *>(spinBox);
-}
-
 [[maybe_unused]] int QSpinBox_value(void *spinBox) {
     return static_cast<QSpinBox *>(spinBox)->value();
 }

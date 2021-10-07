@@ -7,10 +7,6 @@
                                               static_cast<QWidget *>(parent)});
 }
 
-[[maybe_unused]] void QBoxLayout_delete(void *boxLayout) {
-    delete static_cast<QBoxLayout *>(boxLayout);
-}
-
 [[maybe_unused]] void QBoxLayout_addItem(void *boxLayout, void *layoutItem) {
     static_cast<QBoxLayout *>(boxLayout)->addItem(
         static_cast<QLayoutItem *>(layoutItem));

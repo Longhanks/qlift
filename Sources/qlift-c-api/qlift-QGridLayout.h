@@ -8,8 +8,6 @@ extern "C" {
 
 LIBRARY_API void *QGridLayout_new(void *parent);
 
-LIBRARY_API void QGridLayout_delete(void *gridLayout);
-
 LIBRARY_API void QGridLayout_addItem(void *gridLayout,
                                      void *layoutItem,
                                      int row,

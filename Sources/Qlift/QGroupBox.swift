@@ -24,7 +24,7 @@ open class QGroupBox: QWidget {
     }
 
     deinit {
-        checkDeleteQtObj(QGroupBox_delete)
+        checkDeleteQtObj()
     }
 }
 

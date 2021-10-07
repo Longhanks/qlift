@@ -14,10 +14,6 @@
                         static_cast<QFlags<Qt::WindowType>>(flags)});
 }
 
-[[maybe_unused]] void QWidget_delete(void *widget) {
-    delete static_cast<QliftWidget *>(widget);
-}
-
 [[maybe_unused]] bool QWidget_close(void *widget) {
     return static_cast<QWidget *>(widget)->close();
 }

@@ -20,10 +20,6 @@ QPushButton_new(void *icon, const char *text, void *parent) {
         new QliftPushButton{text, static_cast<QWidget *>(parent)});
 }
 
-[[maybe_unused]] void QPushButton_delete(void *pushButton) {
-    delete static_cast<QliftPushButton *>(pushButton);
-}
-
 [[maybe_unused]] void QPushButton_setFlat(void *pushButton, bool enabled) {
     static_cast<QliftPushButton *>(pushButton)->setFlat(enabled);
 }

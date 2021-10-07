@@ -8,8 +8,6 @@ extern "C" {
 
 LIBRARY_API void *QWidget_new(void *parent, int flags);
 
-LIBRARY_API void QWidget_delete(void *widget);
-
 LIBRARY_API bool QWidget_close(void *widget);
 
 LIBRARY_API void QWidget_show(void *widget);

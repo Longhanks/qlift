@@ -8,8 +8,6 @@ extern "C" {
 
 LIBRARY_API void *QMenu_new(const char *title, void *parent);
 
-LIBRARY_API void QMenu_delete(void *menu);
-
 LIBRARY_API const char *QMenu_title(void *menu);
 
 LIBRARY_API void QMenu_setTitle(void *menu, const char *title);

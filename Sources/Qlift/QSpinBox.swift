@@ -38,7 +38,7 @@ open class QSpinBox: QAbstractSpinBox {
     }
 
     deinit {
-        checkDeleteQtObj(QSpinBox_delete)
+        checkDeleteQtObj()
     }
 }
 

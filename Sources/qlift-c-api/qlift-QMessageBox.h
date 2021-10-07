@@ -8,8 +8,6 @@ extern "C" {
 
 LIBRARY_API void *QMessageBox_new(void *parent);
 
-LIBRARY_API void QMessageBox_delete(void *messageBox);
-
 LIBRARY_API void QMessageBox_setWindowModality(void *messageBox,
                                                int windowModality);
 

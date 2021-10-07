@@ -19,7 +19,7 @@ open class QTimer: QObject {
     }
 
     deinit {
-        checkDeleteQtObj(QTimer_delete)
+        checkDeleteQtObj()
     }
 
     public func start(msec: Int32) {

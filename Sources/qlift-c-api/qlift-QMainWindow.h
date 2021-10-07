@@ -7,7 +7,6 @@ extern "C" {
 #endif
 
 LIBRARY_API void *QMainWindow_new(void *parent, int flags);
-LIBRARY_API void QMainWindow_delete(void *mainWindow);
 LIBRARY_API void *QMainWindow_centralWidget(void *mainWindow);
 LIBRARY_API void QMainWindow_setCentralWidget(void *mainWindow, void *widget);
 LIBRARY_API void *QMainWindow_menuBar(void *mainWindow);

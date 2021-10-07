@@ -57,6 +57,6 @@ open class QFrame: QWidget {
     }
 
     deinit {
-        checkDeleteQtObj(QFrame_delete)
+        checkDeleteQtObj()
     }
 }

@@ -73,7 +73,7 @@ open class QLabel: QFrame {
     }
 
     deinit {
-        checkDeleteQtObj(QLabel_delete)
+        checkDeleteQtObj()
     }
 }
 

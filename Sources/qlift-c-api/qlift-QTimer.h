@@ -6,8 +6,6 @@
 extern "C" {
 #endif
 LIBRARY_API void *QTimer_new(void *parent);
-LIBRARY_API void QTimer_delete(void *timer);
-
 LIBRARY_API void QTimer_singleShot(int msec,
                                    int timerType,
                                    void *context,

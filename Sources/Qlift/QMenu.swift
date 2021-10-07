@@ -22,7 +22,7 @@ open class QMenu: QWidget {
     }
 
     deinit {
-        checkDeleteQtObj(QMenu_delete)
+        checkDeleteQtObj()
     }
 }
 

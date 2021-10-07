@@ -55,7 +55,7 @@ open class QMainWindow: QWidget {
     }
 
     deinit {
-        checkDeleteQtObj(QMainWindow_delete)
+        checkDeleteQtObj()
     }
 
     open func closeEvent(event: QCloseEvent) {

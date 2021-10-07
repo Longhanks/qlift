@@ -8,10 +8,6 @@
                     static_cast<QFlags<Qt::WindowType>>(flags)});
 }
 
-[[maybe_unused]] void QDialog_delete(void *dialog) {
-    delete static_cast<QDialog *>(dialog);
-}
-
 [[maybe_unused]] int QDialog_exec(void *dialog) {
     return static_cast<QDialog *>(dialog)->exec();
 }

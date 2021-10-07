@@ -7,10 +7,6 @@
         new QGridLayout{static_cast<QWidget *>(parent)});
 }
 
-[[maybe_unused]] void QGridLayout_delete(void *gridLayout) {
-    delete static_cast<QGridLayout *>(gridLayout);
-}
-
 [[maybe_unused]] void QGridLayout_addItem(void *gridLayout,
                                           void *layoutItem,
                                           int row,

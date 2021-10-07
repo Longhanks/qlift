@@ -24,7 +24,7 @@ open class QSlider: QAbstractSlider {
     }
 
     deinit {
-        checkDeleteQtObj(QSlider_delete)
+        checkDeleteQtObj()
     }
 
     public var tickInterval: Int32 {
