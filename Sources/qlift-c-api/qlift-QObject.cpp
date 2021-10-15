@@ -29,6 +29,6 @@
     return static_cast<void *>(new QMetaObject::Connection(handle));
 }
 
-[[maybe_unused]] void *QObject_destroyed_disconnect(void *connection) {
-    QObject::disconnect(*static_cast<QMetaObject::Connection *>(connection));
+[[maybe_unused]] bool QObject_destroyed_disconnect(void *connection) {
+    return QObject::disconnect(*static_cast<QMetaObject::Connection *>(connection));
 }
