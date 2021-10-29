@@ -382,12 +382,14 @@ public class QliftUIParser: NSObject {
     private func propertyNode2Swift(node: Node) -> String {
         switch node.text {
         case "string", "pixmap":
-            guard
-                node.attributes.first?.key == "notr",
-                node.attributes.first?.value == "true" else {
+            if node.attributes.first?.key == "notr" &&
+                node.attributes.first?.value == "true" ||
+                node.value.contains("\"")
+            {
+                return "\"\"\"\n" + node.value + "\n\"\"\""
+            } else {
                 return "\"" + node.value + "\""
             }
-            return "\"\"\"\n" + node.value + "\n\"\"\""
 
         case "enum":
             return "." + node.value.components(separatedBy: "::").last!
