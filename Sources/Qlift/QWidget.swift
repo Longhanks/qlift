@@ -176,8 +176,8 @@ open class QWidget: QObject {
         QWidget_move(self.ptr, to.ptr)
     }
 
-    public func move(x: Int, y: Int) {
-        QWidget_movexy(self.ptr, Int32(x), Int32(y))
+    public func move(x: Int32, y: Int32) {
+        QWidget_movexy(self.ptr, x, y)
     }
 
     open func close() -> Bool {
@@ -207,7 +207,7 @@ open class QWidget: QObject {
     public func testAttribute(_ attribute: Qt.WidgetAttribute) -> Bool {
         QWidget_testAttribute(ptr, attribute.rawValue)
     }
-    
+
     public func mapToGlobal(point: QPoint) -> QPoint {
         QPoint(ptr: QWidget_mapToGlobal(self.ptr, point.ptr))
     }
