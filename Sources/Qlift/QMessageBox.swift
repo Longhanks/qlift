@@ -2,12 +2,6 @@ import CQlift
 
 
 open class QMessageBox: QDialog {
-    public var windowModality: Qt.WindowModality = .ApplicationModal {
-        didSet {
-            QMessageBox_setWindowModality(self.ptr, windowModality.rawValue)
-        }
-    }
-
     override func setWindowTitle() {
         QMessageBox_setWindowTitle(self.ptr, windowTitle)
     }

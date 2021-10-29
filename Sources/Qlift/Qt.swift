@@ -98,19 +98,14 @@ public struct Qt {
         public static let NoButton: MouseButton = []
         public static let LeftButton = MouseButton(rawValue: 1)
         public static let RightButton = MouseButton(rawValue: 2)
+        public static let MiddleButton = MouseButton(rawValue: 4)
         // Incomplete!
     }
 
-    public struct WindowModality: OptionSet {
-        public let rawValue: Int32
-
-        public init(rawValue: Int32) {
-            self.rawValue = rawValue
-        }
-
-        public static let NonModal: WindowModality = []
-        public static let WindowModal = WindowModality(rawValue: 1)
-        public static let ApplicationModal = WindowModality(rawValue: 2)
+    public enum WindowModality: Int32 {
+        case NonModal = 0
+        case WindowModal
+        case ApplicationModal
     }
 
     public enum ApplicationAttribute: Int32 {

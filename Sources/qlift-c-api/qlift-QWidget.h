@@ -45,27 +45,17 @@ LIBRARY_API void *QWidget_window(void *widget);
 LIBRARY_API void *QWidget_rect(void *widget);
 
 LIBRARY_API void *QWidget_size(void *widget);
-
 LIBRARY_API void QWidget_resize(void *widget, int w, int h);
-
 LIBRARY_API void QWidget_adjustSize(void *widget);
-
 LIBRARY_API void QWidget_setFixedSize(void *widget, void *size);
-
 LIBRARY_API void *QWidget_frameGeometry(void *widget);
-
 LIBRARY_API bool QWidget_isWindow(void *widget);
-
 LIBRARY_API void *QWidget_maximumSize(void *widget);
-
 LIBRARY_API void QWidget_setMaximumSize(void *widget, void *size);
-
 LIBRARY_API void* QWidget_minimumSize(void *widget);
-
 LIBRARY_API void QWidget_setMinimumSize(void *widget, void *size);
 
 LIBRARY_API void QWidget_mousePressEvent(void *widget, void *mouseEvent);
-
 LIBRARY_API void QWidget_mousePressEvent_Override(
     void *widget,
     void *context,
@@ -74,19 +64,15 @@ LIBRARY_API void QWidget_mousePressEvent_Override(
 LIBRARY_API void *QWidget_sizeHint(void *widget);
 
 LIBRARY_API void QWidget_setAutoFillBackground(void *widget, bool enable);
-
 LIBRARY_API bool QWidget_autoFillBackground(void *widget);
-
 LIBRARY_API void QWidget_sizeHint_Override(void *widget,
                                            void *context,
                                            void *(*sizeHint_Functor)(void *));
 
 LIBRARY_API void *QWidget_sizePolicy(void *widget);
-
 LIBRARY_API void QWidget_setSizePolicy(void *widget, void *policy);
 
 LIBRARY_API const char *QWidget_styleSheet(void *widget);
-
 LIBRARY_API void QWidget_setStyleSheet(void *widget, const char *styleSheet);
 
 LIBRARY_API void QWidget_setPalette(void *widget, const void *palette);
@@ -99,6 +85,8 @@ LIBRARY_API bool QWidget_isFullScreen(void *widget);
 LIBRARY_API void QWidget_setWindowState(void *widget, int state);
 LIBRARY_API void QWidget_overrideWindowState(void *widget, int state);
 LIBRARY_API int QWidget_windowState(void *widget);
+LIBRARY_API int QWidget_windowModality(void *widget);
+LIBRARY_API void QWidget_setWindowModality(void *widget, int windowModality);
 
 LIBRARY_API void *QWidget_mapToGlobal(void *widget, void *point);
 LIBRARY_API void *QWidget_mapFromGlobal(void *widget, void *point);

@@ -13,79 +13,48 @@ open class QWidget: QObject {
     }
 
     public var maximumSize: QSize {
-        get {
-            return QSize(ptr: QWidget_maximumSize(self.ptr))
-        }
-        set {
-            QWidget_setMaximumSize(self.ptr, newValue.ptr)
-        }
+        get { QSize(ptr: QWidget_maximumSize(self.ptr)) }
+        set { QWidget_setMaximumSize(self.ptr, newValue.ptr) }
     }
 
     public var minimumSize: QSize {
-        get {
-            return QSize(ptr: QWidget_minimumSize(self.ptr))
-        }
-        set {
-            QWidget_setMinimumSize(self.ptr, newValue.ptr)
-        }
+        get { QSize(ptr: QWidget_minimumSize(self.ptr)) }
+        set { QWidget_setMinimumSize(self.ptr, newValue.ptr) }
     }
 
     open var sizeHint: QSize {
-        get {
-            return QSize(ptr: QWidget_sizeHint(self.ptr))
-        }
+        get { QSize(ptr: QWidget_sizeHint(self.ptr)) }
     }
 
     public var sizePolicy: QSizePolicy {
-        get {
-            return QSizePolicy(ptr: QWidget_sizePolicy(self.ptr))
-        }
-        set {
-            QWidget_setSizePolicy(self.ptr, newValue.ptr)
-        }
+        get { QSizePolicy(ptr: QWidget_sizePolicy(self.ptr)) }
+        set { QWidget_setSizePolicy(self.ptr, newValue.ptr) }
     }
 
     public var styleSheet: String {
-        get {
-            return String(cString: QWidget_styleSheet(self.ptr))
-        }
-        set {
-            QWidget_setStyleSheet(self.ptr, newValue)
-        }
+        get { String(cString: QWidget_styleSheet(self.ptr)) }
+        set { QWidget_setStyleSheet(self.ptr, newValue) }
     }
 
     public var geometry: QRect? {
-        get {
-            return QRect(ptr: QWidget_geometry(self.ptr))
-        }
-        set(newGeometry) {
-            QWidget_setGeometry(self.ptr, newGeometry?.ptr)
-        }
+        get { QRect(ptr: QWidget_geometry(self.ptr)) }
+        set { QWidget_setGeometry(self.ptr, newValue?.ptr) }
     }
 
     public var enabled: Bool {
-        get {
-            return QWidget_isEnabled(self.ptr)
-        }
-        set(newEnabled) {
-            QWidget_setEnabled(self.ptr, newEnabled)
-        }
+        get { QWidget_isEnabled(self.ptr) }
+        set { QWidget_setEnabled(ptr, newValue) }
     }
 
     public var height: Int32 {
-        get {
-            return QWidget_height(self.ptr)
-        }
+        get { QWidget_height(self.ptr) }
     }
 
     public var width: Int32 {
-        get {
-            return QWidget_width(self.ptr)
-        }
+        get { QWidget_width(self.ptr) }
     }
 
-    public func setPallette(palette: QPalette)
-    {
+    public func setPallette(palette: QPalette) {
         QWidget_setPalette(ptr, palette.ptr)
     }
 
@@ -109,51 +78,38 @@ open class QWidget: QObject {
     }
 
     public var pos: QPoint {
-        get {
-            return QPoint(ptr: QWidget_pos(self.ptr))
-        }
+        get { QPoint(ptr: QWidget_pos(self.ptr)) }
     }
 
     public var rect: QRect {
-        get {
-            return QRect(ptr: QWidget_rect(self.ptr))
-        }
+        get { QRect(ptr: QWidget_rect(self.ptr)) }
     }
 
     public var size: QSize {
-        get {
-            return QSize(ptr: QWidget_size(self.ptr))
-        }
+        get { QSize(ptr: QWidget_size(self.ptr)) }
     }
 
     public var frameGeometry: QRect {
-        get {
-            return QRect(ptr: QWidget_frameGeometry(self.ptr))
-        }
+        get { QRect(ptr: QWidget_frameGeometry(self.ptr)) }
     }
 
     public var isWindow: Bool {
-        get {
-            return QWidget_isWindow(self.ptr)
-        }
+        get { QWidget_isWindow(self.ptr) }
     }
 
     public var autoFillBackground: Bool {
-        get {
-            QWidget_autoFillBackground(self.ptr)
-        }
-        set {
-            QWidget_setAutoFillBackground(self.ptr, newValue)
-        }
+        get { QWidget_autoFillBackground(self.ptr) }
+        set { QWidget_setAutoFillBackground(self.ptr, newValue) }
     }
 
     public var visible: Bool {
-        get {
-            QWidget_isVisible(ptr)
-        }
-        set {
-            QWidget_setVisible(ptr, newValue)
-        }
+        get { QWidget_isVisible(ptr) }
+        set { QWidget_setVisible(ptr, newValue) }
+    }
+
+    public var windowModality: Qt.WindowModality {
+        get { Qt.WindowModality(rawValue: QWidget_windowModality(ptr)) ?? .NonModal }
+        set { QWidget_setWindowModality(ptr, newValue.rawValue) }
     }
 
     public var isMinimized: Bool {
@@ -267,7 +223,6 @@ open class QWidget: QObject {
     public func mapFrom(parent: QWidget, point: QPoint) -> QPoint {
         QPoint(ptr: QWidget_mapFrom(self.ptr, parent.ptr, point.ptr))
     }
-
 }
 
 extension QWidget {
@@ -284,11 +239,12 @@ extension QWidget {
     }
 
     private func parentWidget() -> QWidget? {
-        if let p = self.parent {
-            if let w = p as? QWidget {
-                return w
-            }
+        guard
+            let p = self.parent,
+            let widget = p as? QWidget
+        else {
+            return nil
         }
-        return nil;
+        return widget
     }
 }

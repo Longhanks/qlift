@@ -246,6 +246,14 @@
     return static_cast<QWidget *>(widget)->windowState();
 }
 
+[[maybe_unused]] int QWidget_windowModality(void *widget) {
+    return static_cast<QWidget *>(widget)->windowModality();
+}
+
+[[maybe_unused]] void QWidget_setWindowModality(void *widget, int windowModality) {
+    static_cast<QWidget *>(widget)->setWindowModality(static_cast<Qt::WindowModality>(windowModality));
+}
+
 [[maybe_unused]] void *QWidget_mapToGlobal(void *widget, void *point) {
     auto mapPoint = static_cast<QWidget *>(widget)->mapToGlobal(*static_cast<QPoint *>(point));
     return static_cast<void *>(new QPoint{mapPoint.x(), mapPoint.y()});

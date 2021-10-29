@@ -7,12 +7,6 @@
         new QMessageBox{static_cast<QWidget *>(parent)});
 }
 
-[[maybe_unused]] void QMessageBox_setWindowModality(void *messageBox,
-                                                    int windowModality) {
-    static_cast<QMessageBox *>(messageBox)
-        ->setWindowModality(static_cast<Qt::WindowModality>(windowModality));
-}
-
 [[maybe_unused]] void QMessageBox_setWindowTitle(void *messageBox,
                                                  const char *title) {
     static_cast<QMessageBox *>(messageBox)->setWindowTitle(title);
