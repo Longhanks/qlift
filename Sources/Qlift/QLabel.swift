@@ -55,6 +55,15 @@ open class QLabel: QFrame {
         return QPixmap(ptr: pixmapPtr)
     }
 
+    public var textFormat: Qt.TextFormat {
+        get {
+            Qt.TextFormat(rawValue: QLabel_textFormat(ptr)) ?? .PlainText
+        }
+        set {
+            QLabel_setTextFormat(ptr, newValue.rawValue)
+        }
+    }
+
     public func setPixmap(_ pixmap: QPixmap) {
         QLabel_setPixmap(ptr, pixmap.ptr)
     }

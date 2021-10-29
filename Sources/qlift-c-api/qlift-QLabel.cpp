@@ -63,6 +63,14 @@
     static_cast<QLabel *>(label)->setIndent(indent);
 }
 
+[[maybe_unused]] int QLabel_textFormat(void *label) {
+    return static_cast<Qt::TextFormat>( static_cast<QLabel *>(label)->textFormat());
+}
+
+[[maybe_unused]] void QLabel_setTextFormat(void *label, int format) {
+    static_cast<QLabel *>(label)->setTextFormat(static_cast<Qt::TextFormat>(format));
+}
+
 [[maybe_unused]] void *QLabel_pixmap(void *label) {
 #if QT_VERSION < QT_VERSION_CHECK(5, 15, 0)
     return (void *)(static_cast<QLabel *>(label)->pixmap());

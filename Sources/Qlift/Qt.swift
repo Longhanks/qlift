@@ -185,4 +185,11 @@ public struct Qt {
         case FastTransformation = 0
         case SmoothTransformation
     }
+
+    public enum TextFormat: Int32 {
+        case PlainText = 0
+        case RichText
+        case AutoText
+        case MarkdownText
+    }
 }

@@ -21,6 +21,8 @@ LIBRARY_API void QLabel_setWordWrap(void *label, bool on);
 LIBRARY_API int QLabel_indent(void *label);
 LIBRARY_API void QLabel_setIndent(void *label, int indent);
 LIBRARY_API void *QLabel_pixmap(void *label);
+LIBRARY_API int QLabel_textFormat(void *label);
+LIBRARY_API void QLabel_setTextFormat(void *label, int format);
 
 #ifdef __cplusplus
 }
