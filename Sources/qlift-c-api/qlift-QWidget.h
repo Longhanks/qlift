@@ -94,6 +94,8 @@ LIBRARY_API void *QWidget_mapToParent(void *widget, void *point);
 LIBRARY_API void *QWidget_mapFromParent(void *widget, void *point);
 LIBRARY_API void *QWidget_mapTo(void *widget, void *parentWidget, void *point);
 LIBRARY_API void *QWidget_mapFrom(void *widget, void *parentWidget, void *point);
+LIBRARY_API void QWidget_setAttribute(void * widget, int attribute, bool on);
+LIBRARY_API bool QWidget_testAttribute(void * widget, int attribute);
 
 #ifdef __cplusplus
 }

@@ -199,6 +199,14 @@ open class QWidget: QObject {
     open func show() {
         QWidget_show(self.ptr)
     }
+
+    public func setAttribute(_ attribute: Qt.WidgetAttribute, on: Bool = true) {
+        QWidget_setAttribute(ptr, attribute.rawValue, on)
+    }
+
+    public func testAttribute(_ attribute: Qt.WidgetAttribute) -> Bool {
+        QWidget_testAttribute(ptr, attribute.rawValue)
+    }
     
     public func mapToGlobal(point: QPoint) -> QPoint {
         QPoint(ptr: QWidget_mapToGlobal(self.ptr, point.ptr))

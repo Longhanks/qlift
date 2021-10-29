@@ -222,6 +222,14 @@
     static_cast<QWidget *>(widget)->setVisible(visible);
 }
 
+[[maybe_unused]] void QWidget_setAttribute(void * widget, int attribute, bool on) {
+    static_cast<QWidget *>(widget)->setAttribute(static_cast<Qt::WidgetAttribute>(attribute), on);
+}
+
+[[maybe_unused]] bool QWidget_testAttribute(void * widget, int attribute) {
+    return static_cast<QWidget *>(widget)->testAttribute(static_cast<Qt::WidgetAttribute>(attribute));
+}
+
 [[maybe_unused]] bool QWidget_isMinimized(void *widget) {
     return static_cast<QWidget *>(widget)->isMinimized();
 }

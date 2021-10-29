@@ -187,4 +187,141 @@ public struct Qt {
         case AutoText
         case MarkdownText
     }
+
+    public enum WidgetAttribute: Int32 {
+        case WA_Disabled = 0
+        case WA_UnderMouse = 1
+        case WA_MouseTracking = 2
+        case WA_ContentsPropagated = 3
+        case WA_OpaquePaintEvent = 4
+        case WA_StaticContents = 5
+        case WA_LaidOut = 7
+        case WA_PaintOnScreen = 8
+        case WA_NoSystemBackground = 9
+        case WA_UpdatesDisabled = 10
+        case WA_Mapped = 11
+        case WA_MacNoClickThrough = 12
+        case WA_InputMethodEnabled = 14
+        case WA_WState_Visible = 15
+        case WA_WState_Hidden = 16
+
+        case WA_ForceDisabled = 32
+        case WA_KeyCompression = 33
+        case WA_PendingMoveEvent = 34
+        case WA_PendingResizeEvent = 35
+        case WA_SetPalette = 36
+        case WA_SetFont = 37
+        case WA_SetCursor = 38
+        case WA_NoChildEventsFromChildren = 39
+        case WA_WindowModified = 41
+        case WA_Resized = 42
+        case WA_Moved = 43
+        case WA_PendingUpdate = 44
+        case WA_InvalidSize = 45
+        case WA_MacMetalStyle = 46
+        case WA_CustomWhatsThis = 47
+        case WA_LayoutOnEntireRect = 48
+        case WA_OutsideWSRange = 49
+        case WA_GrabbedShortcut = 50
+        case WA_TransparentForMouseEvents = 51
+        case WA_PaintUnclipped = 52
+        case WA_SetWindowIcon = 53
+        case WA_NoMouseReplay = 54
+        case WA_DeleteOnClose = 55
+        case WA_RightToLeft = 56
+        case WA_SetLayoutDirection = 57
+        case WA_NoChildEventsForParent = 58
+        case WA_ForceUpdatesDisabled = 59
+
+        case WA_WState_Created = 60
+        case WA_WState_CompressKeys = 61
+        case WA_WState_InPaintEvent = 62
+        case WA_WState_Reparented = 63
+        case WA_WState_ConfigPending = 64
+        case WA_WState_Polished = 66
+        case WA_WState_DND = 67
+        case WA_WState_OwnSizePolicy = 68
+        case WA_WState_ExplicitShowHide = 69
+
+        case WA_ShowModal = 70
+        case WA_MouseNoMask = 71
+        case WA_GroupLeader = 72
+        case WA_NoMousePropagation = 73
+        case WA_Hover = 74
+        case WA_InputMethodTransparent = 75
+        case WA_QuitOnClose = 76
+
+        case WA_KeyboardFocusChange = 77
+
+        case WA_AcceptDrops = 78
+        case WA_DropSiteRegistered = 79
+        case WA_WindowPropagation = 80
+
+        case WA_NoX11EventCompression = 81
+        case WA_TintedBackground = 82
+        case WA_X11OpenGLOverlay = 83
+        case WA_AlwaysShowToolTips = 84
+        case WA_MacOpaqueSizeGrip = 85
+        case WA_SetStyle = 86
+
+        case WA_SetLocale = 87
+        case WA_MacShowFocusRect = 88
+
+        case WA_MacNormalSize = 89
+        case WA_MacSmallSize = 90
+        case WA_MacMiniSize = 91
+
+        case WA_LayoutUsesWidgetRect = 92
+        case WA_StyledBackground = 93
+        case WA_MSWindowsUseDirect3D = 94
+        case WA_CanHostQMdiSubWindowTitleBar = 95
+
+        case WA_MacAlwaysShowToolWindow = 96
+
+        case WA_StyleSheet = 97
+
+        case WA_ShowWithoutActivating = 98
+
+        case WA_X11BypassTransientForHint = 99
+
+        case WA_NativeWindow = 100
+        case WA_DontCreateNativeAncestors = 101
+
+        case WA_MacVariableSize = 102
+
+        case WA_DontShowOnScreen = 103
+
+        case WA_X11NetWmWindowTypeDesktop = 104
+        case WA_X11NetWmWindowTypeDock = 105
+        case WA_X11NetWmWindowTypeToolBar = 106
+        case WA_X11NetWmWindowTypeMenu = 107
+        case WA_X11NetWmWindowTypeUtility = 108
+        case WA_X11NetWmWindowTypeSplash = 109
+        case WA_X11NetWmWindowTypeDialog = 110
+        case WA_X11NetWmWindowTypeDropDownMenu = 111
+        case WA_X11NetWmWindowTypePopupMenu = 112
+        case WA_X11NetWmWindowTypeToolTip = 113
+        case WA_X11NetWmWindowTypeNotification = 114
+        case WA_X11NetWmWindowTypeCombo = 115
+        case WA_X11NetWmWindowTypeDND = 116
+        case WA_MacFrameworkScaled = 117
+        case WA_SetWindowModality = 118
+        case WA_WState_WindowOpacitySet = 119
+        case WA_TranslucentBackground = 120
+
+        case WA_AcceptTouchEvents = 121
+        case WA_WState_AcceptedTouchBeginEvent = 122
+        case WA_TouchPadAcceptSingleTouchEvents = 123
+
+        case WA_X11DoNotAcceptFocus = 126
+        case WA_MacNoShadow = 127
+
+        case WA_AlwaysStackOnTop = 128
+
+        case WA_TabletTracking = 129
+
+        case WA_ContentsMarginsRespectsSafeArea = 130
+
+        case WA_StyleSheetTarget = 131
+    }
 }
