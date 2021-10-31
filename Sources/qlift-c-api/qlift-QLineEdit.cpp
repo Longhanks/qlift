@@ -44,6 +44,23 @@ void QLineEdit_textEditedEvent_Override(void *lineEdit, void *context, void (*mo
     return text.utf16();
 }
 
+[[maybe_unused]] int QLineEdit_alignment(void *lineEdit) {
+    return static_cast<QLineEdit*>(lineEdit)->alignment();
+}
+
+[[maybe_unused]] void QLineEdit_setAlignment(void *lineEdit, int flag) {
+    static_cast<QLineEdit*>(lineEdit)->setAlignment(static_cast<Qt::Alignment>(flag));
+}
+
+[[maybe_unused]] int QLineEdit_echoMode(void *lineEdit) {
+    return static_cast<QLineEdit*>(lineEdit)->echoMode();
+}
+
+[[maybe_unused]] void QLineEdit_setEchoMode(void *lineEdit, int mode) {
+    static_cast<QLineEdit*>(lineEdit)->setEchoMode(static_cast<QLineEdit::EchoMode>(mode));
+}
+
+
 
 [[maybe_unused]] void QLineEdit_textChanged_connect(void *lineEdit, void *receiver, void *context, void (*slot_ptr)(void*)) {
     QObject::connect(

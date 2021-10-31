@@ -13,6 +13,10 @@ LIBRARY_API const unsigned short* QLineEdit_text(void *lineEdit, int *len);
 LIBRARY_API const unsigned short* QLineEdit_placeholderText(void *lineEdit, int *len);
 LIBRARY_API const unsigned short* QLineEdit_selectedText(void *lineEdit, int *len);
 LIBRARY_API void QLineEdit_textChanged_connect(void *lineEdit, void *receiver, void *context, void (*slot_ptr)(void*));
+LIBRARY_API int QLineEdit_alignment(void *lineEdit);
+LIBRARY_API void QLineEdit_setAlignment(void *lineEdit, int flag);
+LIBRARY_API int QLineEdit_echoMode(void *lineEdit);
+LIBRARY_API void QLineEdit_setEchoMode(void *lineEdit, int mode);
 
 #ifdef __cplusplus
 }
