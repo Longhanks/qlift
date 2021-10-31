@@ -10,32 +10,42 @@
 
 /*
 void* QLineEdit_new(const char *contents, void *parent);
-void QLineEdit_delete(void *lineEdit);
 void QLineEdit_setPlaceholderText(void *lineEdit, const char *text);
 void QLineEdit_textEditedEvent_Override(void *lineEdit, void *context, void (*mousePressEvent_Functor)(void*, void*));
 */
 
-void* QLineEdit_new(const char *contents, void *parent) {
+[[maybe_unused]] void* QLineEdit_new(const char *contents, void *parent) {
     return static_cast<void*>(new QliftLineEdit { contents, static_cast<QWidget*>(parent) });
 }
 
-void QLineEdit_delete(void *lineEdit) {
-    delete static_cast<QliftLineEdit*>(lineEdit);
-}
-
-void QLineEdit_setPlaceholderText(void *lineEdit, const char *text) {
+[[maybe_unused]] void QLineEdit_setPlaceholderText(void *lineEdit, const char *text) {
     static_cast<QLineEdit*>(lineEdit)->setPlaceholderText(text);
 }
 
-const char* QLineEdit_text(void *lineEdit) {
-    return static_cast<QLineEdit*>(lineEdit)->text().toLocal8Bit().data();
-}
-
-void QLineEdit_setText(void *lineEdit, const char *text) {
+[[maybe_unused]] void QLineEdit_setText(void *lineEdit, const char *text) {
     static_cast<QLineEdit*>(lineEdit)->setText(text);
 }
 
-void QLineEdit_textChanged_connect(void *lineEdit, void *receiver, void *context, void (*slot_ptr)(void*)) {
+[[maybe_unused]] const ushort* QLineEdit_text(void *lineEdit, int *len) {
+    auto text = static_cast<QLineEdit*>(lineEdit)->text();
+    *len = text.size();
+    return text.utf16();
+}
+
+[[maybe_unused]] const ushort* QLineEdit_placeholderText(void *lineEdit, int *len) {
+    auto text = static_cast<QLineEdit*>(lineEdit)->placeholderText();
+    *len = text.size();
+    return text.utf16();
+}
+
+[[maybe_unused]] const ushort* QLineEdit_selectedText(void *lineEdit, int *len) {
+    auto text = static_cast<QLineEdit*>(lineEdit)->selectedText();
+    *len = text.size();
+    return text.utf16();
+}
+
+
+[[maybe_unused]] void QLineEdit_textChanged_connect(void *lineEdit, void *receiver, void *context, void (*slot_ptr)(void*)) {
     QObject::connect(
         static_cast<QLineEdit*>(lineEdit),
         &QLineEdit::textChanged,
