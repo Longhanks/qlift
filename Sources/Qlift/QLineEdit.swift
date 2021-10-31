@@ -10,7 +10,7 @@ open class QLineEdit: QWidget {
         checkDeleteQtObj()
     }
 
-    var text: String {
+    public var text: String {
         get {
             var len: Int32 = 0
             let s = QLineEdit_text(ptr, &len)!
@@ -21,7 +21,7 @@ open class QLineEdit: QWidget {
         }
     }
 
-    var placeholderText: String {
+    public var placeholderText: String {
         get {
             var len: Int32 = 0
             let s = QLineEdit_placeholderText(ptr, &len)!
@@ -32,7 +32,7 @@ open class QLineEdit: QWidget {
         }
     }
 
-    var selectedText: String {
+    public var selectedText: String {
         get {
             var len: Int32 = 0
             let s = QLineEdit_selectedText(ptr, &len)!
