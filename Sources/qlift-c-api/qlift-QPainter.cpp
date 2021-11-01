@@ -50,3 +50,6 @@
 [[maybe_unused]] void QPainter_fillRectColor(void *qpaintdevice, void *rect, void *color) {
     static_cast<QPainter *>(qpaintdevice)->fillRect(*static_cast<const QRect*>(rect), *static_cast<const QColor*>(color));
 }
+[[maybe_unused]] bool QPainter_end(void *qpaintdevice) {
+    return static_cast<QPainter *>(qpaintdevice)->end();
+}

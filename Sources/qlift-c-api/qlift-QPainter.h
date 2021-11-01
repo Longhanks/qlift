@@ -26,6 +26,7 @@ LIBRARY_API void QPainter_drawRect(void *qpaintdevice, void *rect);
 LIBRARY_API void QPainter_drawEllipse(void *qpaintdevice, void *rect);
 LIBRARY_API void QPainter_fillRectBrush(void *qpaintdevice, void *rect, void *brush);
 LIBRARY_API void QPainter_fillRectColor(void *qpaintdevice, void *rect, void *color);
+LIBRARY_API bool QPainter_end(void *qpaintdevice);
 
 #ifdef __cplusplus
 }

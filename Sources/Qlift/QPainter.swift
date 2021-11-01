@@ -8,7 +8,6 @@
 import CQlift
 
 public class QPainter {
-
     public var ptr: UnsafeMutableRawPointer!
 
     public init(pixmap: QPixmap) {
@@ -18,7 +17,6 @@ public class QPainter {
     public init(image: QImage) {
         self.ptr = QPainter_new_device(image.ptr)
     }
-
 
     deinit {
         if self.ptr != nil {
@@ -69,5 +67,9 @@ public class QPainter {
 
     public func fillRect(rect: QRect, color: QColor) {
         QPainter_fillRectColor(ptr, rect.ptr, color.ptr)
+    }
+
+    public func end() {
+        QPainter_end(ptr)
     }
 }
