@@ -31,7 +31,8 @@ QRadioButton_new(const char *text, void *parent) {
 }
 
 [[maybe_unused]] void QRadioButton_swiftHookCleanup(void *radioButton) {
-    static_cast<QliftRadioButton *>(radioButton)->swiftHookCleanup();
+    if (radioButton != nullptr)
+        static_cast<QliftRadioButton *>(radioButton)->swiftHookCleanup();
 }
 
 W_OBJECT_IMPL(QliftRadioButton)

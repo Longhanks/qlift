@@ -61,7 +61,8 @@ void QLineEdit_textEditedEvent_Override(void *lineEdit, void *context, void (*mo
 }
 
 [[maybe_unused]] void QLiftLineEdit_swiftHookCleanup(void *lineEdit) {
-    static_cast<QliftLineEdit*>(lineEdit)->swiftHookCleanup();
+    if (lineEdit != nullptr)
+        static_cast<QliftLineEdit*>(lineEdit)->swiftHookCleanup();
 }
 
 [[maybe_unused]] void QLineEdit_textChanged_connect(void *lineEdit, void *receiver, void *context, void (*slot_ptr)(void*)) {

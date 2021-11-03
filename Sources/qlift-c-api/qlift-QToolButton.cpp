@@ -33,7 +33,8 @@ QToolButton_new(void *parent) {
 }
 
 [[maybe_unused]] void QToolButton_swiftHookCleanup(void *toolButton) {
-    static_cast<QliftToolButton *>(toolButton)->swiftHookCleanup();
+    if (toolButton != nullptr)
+        static_cast<QliftToolButton *>(toolButton)->swiftHookCleanup();
 }
 
 W_OBJECT_IMPL(QliftToolButton)

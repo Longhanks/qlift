@@ -43,7 +43,8 @@ QPushButton_new(void *icon, const char *text, void *parent) {
 }
 
 [[maybe_unused]] void QPushButton_swiftHookCleanup(void *pushButton) {
-    static_cast<QliftPushButton *>(pushButton)->swiftHookCleanup();
+    if (pushButton != nullptr)
+        static_cast<QliftPushButton *>(pushButton)->swiftHookCleanup();
 }
 
 W_OBJECT_IMPL(QliftPushButton)

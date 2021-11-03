@@ -169,7 +169,8 @@
 }
 
 [[maybe_unused]] void QWidget_swiftHookCleanup(void *widget) {
-    static_cast<QliftWidget *>(widget)->swiftHookCleanup();
+    if (widget != nullptr)
+        static_cast<QliftWidget *>(widget)->swiftHookCleanup();
 }
 
 [[maybe_unused]] void *QWidget_sizePolicy(void *widget) {

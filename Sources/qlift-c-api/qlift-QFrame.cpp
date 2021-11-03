@@ -40,7 +40,8 @@
 }
 
 [[maybe_unused]] void QFrame_swiftHookCleanup(void *frame) {
-    static_cast<QliftFrame *>(frame)->swiftHookCleanup();
+    if (frame != nullptr)
+        static_cast<QliftFrame *>(frame)->swiftHookCleanup();
 }
 
 [[maybe_unused]] int QFrame_shape(void *frame) {
