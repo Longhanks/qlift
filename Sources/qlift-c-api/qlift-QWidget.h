@@ -68,6 +68,7 @@ LIBRARY_API bool QWidget_autoFillBackground(void *widget);
 LIBRARY_API void QWidget_sizeHint_Override(void *widget,
                                            void *context,
                                            void *(*sizeHint_Functor)(void *));
+LIBRARY_API void QWidget_swiftHookCleanup(void *widget);
 
 LIBRARY_API void *QWidget_sizePolicy(void *widget);
 LIBRARY_API void QWidget_setSizePolicy(void *widget, void *policy);
@@ -130,6 +131,10 @@ public:
     [[nodiscard]] QSize sizeHintSuper() const;
     void sizeHintOverride(void *context, void *(*sizeHint_Functor)(void *));
     [[nodiscard]] QSize sizeHint() const override;
+    void swiftHookCleanup() {
+        m_mousePressEvent_Functor = nullptr;
+        m_sizeHint_Functor = nullptr;
+    }
 
 protected:
     void mousePressEvent(QMouseEvent *mouseEvent) override;

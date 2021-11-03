@@ -20,6 +20,7 @@ LIBRARY_API void
 QMainWindow_closeEvent_Override(void *mainWindow,
                                 void *context,
                                 void (*closeEvent_Functor)(void *, void *));
+LIBRARY_API void *QMainWindow_swiftHookCleanup(void *mainWindow);
 
 #ifdef __cplusplus
 }
@@ -46,6 +47,9 @@ public:
     QliftMainWindow(QliftMainWindow &&) noexcept = delete;
     QliftMainWindow &operator=(QliftMainWindow &&) noexcept = delete;
 
+    void swiftHookCleanup() {
+        m_closeEvent_Functor = nullptr;
+    }
     void closeEventSuper(QCloseEvent *closeEvent);
     void closeEventOverride(void *context,
                             void (*closeEvent_Functor)(void *, void *));

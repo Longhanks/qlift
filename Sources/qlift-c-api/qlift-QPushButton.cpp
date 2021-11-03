@@ -42,6 +42,10 @@ QPushButton_new(void *icon, const char *text, void *parent) {
         ->mousePressEventOverride(context, mousePressEvent_Functor);
 }
 
+[[maybe_unused]] void QPushButton_swiftHookCleanup(void *pushButton) {
+    static_cast<QliftPushButton *>(pushButton)->swiftHookCleanup();
+}
+
 W_OBJECT_IMPL(QliftPushButton)
 
 [[maybe_unused]] void

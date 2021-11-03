@@ -33,6 +33,7 @@ open class QPushButton: QAbstractButton {
     }
 
     deinit {
+        QPushButton_swiftHookCleanup(ptr)
         checkDeleteQtObj()
     }
 

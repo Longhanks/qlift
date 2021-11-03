@@ -60,7 +60,9 @@ void QLineEdit_textEditedEvent_Override(void *lineEdit, void *context, void (*mo
     static_cast<QLineEdit*>(lineEdit)->setEchoMode(static_cast<QLineEdit::EchoMode>(mode));
 }
 
-
+[[maybe_unused]] void QLiftLineEdit_swiftHookCleanup(void *lineEdit) {
+    static_cast<QliftLineEdit*>(lineEdit)->swiftHookCleanup();
+}
 
 [[maybe_unused]] void QLineEdit_textChanged_connect(void *lineEdit, void *receiver, void *context, void (*slot_ptr)(void*)) {
     QObject::connect(
@@ -77,4 +79,3 @@ W_OBJECT_IMPL(QliftLineEdit)
 
 QliftLineEdit::~QliftLineEdit() {
 }
-

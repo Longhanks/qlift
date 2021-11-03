@@ -57,6 +57,7 @@ open class QFrame: QWidget {
     }
 
     deinit {
+        QFrame_swiftHookCleanup(ptr)
         checkDeleteQtObj()
     }
 }

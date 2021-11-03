@@ -10,10 +10,10 @@ LIBRARY_API void *QRadioButton_new(const char *text, void *parent);
 LIBRARY_API void QRadioButton_setFlat(void *radioButton, bool enabled);
 LIBRARY_API bool QRadioButton_isFlat(void *radioButton);
 LIBRARY_API void QRadioButton_mousePressEvent(void *radioButton, void *mouseEvent);
-LIBRARY_API void QRadioButton_mousePressEvent_Override(
-                                                      void *radioButton,
-                                                      void *context,
-                                                      void (*mousePressEvent_Functor)(void *, void *));
+LIBRARY_API void QRadioButton_mousePressEvent_Override(void *radioButton,
+                                                       void *context,
+                                                       void (*mousePressEvent_Functor)(void *, void *));
+LIBRARY_API void QRadioButton_swiftHookCleanup(void *radioButton);
 
 #ifdef __cplusplus
 }
@@ -44,6 +44,9 @@ public:
     void mousePressEventOverride(void *context,
                                  void (*mousePressEvent_Functor)(void *,
                                                                  void *));
+    void swiftHookCleanup() {
+        m_mousePressEvent_Functor = nullptr;
+    }
 
 protected:
     void mousePressEvent(QMouseEvent *mouseEvent) override;

@@ -165,6 +165,7 @@ open class QWidget: QObject {
     }
 
     deinit {
+        QWidget_swiftHookCleanup(ptr)
         checkDeleteQtObj()
     }
 

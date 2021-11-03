@@ -30,6 +30,10 @@ QRadioButton_new(const char *text, void *parent) {
         ->mousePressEventOverride(context, mousePressEvent_Functor);
 }
 
+[[maybe_unused]] void QRadioButton_swiftHookCleanup(void *radioButton) {
+    static_cast<QliftRadioButton *>(radioButton)->swiftHookCleanup();
+}
+
 W_OBJECT_IMPL(QliftRadioButton)
 
 [[maybe_unused]] void

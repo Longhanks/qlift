@@ -155,7 +155,6 @@
     }
 }
 
-
 [[maybe_unused]] void QWidget_mousePressEvent(void *widget, void *mouseEvent) {
     static_cast<QliftWidget *>(widget)->mousePressEventSuper(
         static_cast<QMouseEvent *>(mouseEvent));
@@ -167,6 +166,10 @@
     void (*mousePressEvent_Functor)(void *, void *)) {
     static_cast<QliftWidget *>(widget)->mousePressEventOverride(
         context, mousePressEvent_Functor);
+}
+
+[[maybe_unused]] void QWidget_swiftHookCleanup(void *widget) {
+    static_cast<QliftWidget *>(widget)->swiftHookCleanup();
 }
 
 [[maybe_unused]] void *QWidget_sizePolicy(void *widget) {

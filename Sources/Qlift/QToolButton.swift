@@ -36,6 +36,7 @@ open class QToolButton: QAbstractButton {
     }
 
     deinit {
+        QToolButton_swiftHookCleanup(ptr);
         checkDeleteQtObj()
     }
 

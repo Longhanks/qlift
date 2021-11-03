@@ -13,6 +13,7 @@ open class QLineEdit: QWidget {
     }
 
     deinit {
+        QLiftLineEdit_swiftHookCleanup(ptr)
         checkDeleteQtObj()
     }
 

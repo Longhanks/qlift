@@ -32,6 +32,10 @@ QToolButton_new(void *parent) {
         ->mousePressEventOverride(context, mousePressEvent_Functor);
 }
 
+[[maybe_unused]] void QToolButton_swiftHookCleanup(void *toolButton) {
+    static_cast<QliftToolButton *>(toolButton)->swiftHookCleanup();
+}
+
 W_OBJECT_IMPL(QliftToolButton)
 
 [[maybe_unused]] void

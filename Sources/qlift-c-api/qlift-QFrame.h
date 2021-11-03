@@ -7,26 +7,20 @@ extern "C" {
 #endif
 
 LIBRARY_API void *QFrame_new(void *parent, int flags);
-
 LIBRARY_API void QFrame_mousePressEvent(void *frame, void *mouseEvent);
-
 LIBRARY_API void QFrame_mousePressEvent_Override(
     void *frame,
     void *context,
     void (*mousePressEvent_Functor)(void *, void *));
-
 LIBRARY_API void *QFrame_sizeHint(void *frame);
-
 LIBRARY_API void QFrame_sizeHint_Override(void *frame,
                                           void *context,
                                           void *(*sizeHint_Functor)(void *));
+LIBRARY_API void QFrame_swiftHookCleanup(void *frame);
 
 LIBRARY_API int QFrame_shape(void *frame);
-
 LIBRARY_API void QFrame_setShape(void *frame, int shape);
-
 LIBRARY_API int QFrame_shadow(void *frame);
-
 LIBRARY_API void QFrame_setShadow(void *frame, int shadow);
 
 #ifdef __cplusplus
@@ -54,6 +48,10 @@ public:
     QliftFrame(QliftFrame &&) noexcept = delete;
     QliftFrame &operator=(QliftFrame &&) noexcept = delete;
 
+    void swiftHookCleanup() {
+        m_mousePressEvent_Functor = nullptr;
+        m_sizeHint_Functor = nullptr;
+    }
     void mousePressEventSuper(QMouseEvent *mouseEvent);
     void mousePressEventOverride(void *context,
                                  void (*mousePressEvent_Functor)(void *,

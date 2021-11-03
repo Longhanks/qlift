@@ -18,6 +18,8 @@ LIBRARY_API void QLineEdit_setAlignment(void *lineEdit, int flag);
 LIBRARY_API int QLineEdit_echoMode(void *lineEdit);
 LIBRARY_API void QLineEdit_setEchoMode(void *lineEdit, int mode);
 
+LIBRARY_API void QLiftLineEdit_swiftHookCleanup(void *lineEdit);
+
 #ifdef __cplusplus
 }
 #endif
@@ -33,10 +35,14 @@ LIBRARY_API void QLineEdit_setEchoMode(void *lineEdit, int mode);
 class QliftLineEdit: public QLineEdit {
     W_OBJECT(QliftLineEdit)
 
-    public:
-        using QLineEdit::QLineEdit;
-        virtual ~QliftLineEdit();
-        void (*mousePressEvent_Functor)(void*, void*) = nullptr;
-        void *context = nullptr;
+public:
+    using QLineEdit::QLineEdit;
+    virtual ~QliftLineEdit();
+    void (*m_mousePressEvent_Functor)(void*, void*) = nullptr;
+    void *context = nullptr;
+    void swiftHookCleanup() {
+        m_mousePressEvent_Functor = nullptr;
+    }
+
 };
 #endif

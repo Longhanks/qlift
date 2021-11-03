@@ -19,6 +19,7 @@ open class QRadioButton: QAbstractButton {
     }
 
     deinit {
+        QRadioButton_swiftHookCleanup(ptr)
         checkDeleteQtObj()
     }
 
