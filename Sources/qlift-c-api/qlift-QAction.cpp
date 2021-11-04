@@ -19,8 +19,10 @@ QAction_new(void *icon, const char *text, void *parent) {
     return static_cast<void *>(new QAction{static_cast<QWidget *>(parent)});
 }
 
-[[maybe_unused]] const char *QAction_text(void *action) {
-    return static_cast<QAction *>(action)->text().toLocal8Bit().data();
+[[maybe_unused]] const ushort *QAction_text(void *action, int *len) {
+    auto text = static_cast<QAction *>(action)->text();
+    *len = text.size();
+    return text.utf16();
 }
 
 [[maybe_unused]] void QAction_setText(void *action, const char *text) {

@@ -9,13 +9,19 @@
                    static_cast<QFlags<Qt::WindowType>>(flags)});
 }
 
+[[maybe_unused]] int QLabel_alignment(void *label) {
+    return static_cast<QLabel *>(label)->alignment();
+}
+
 [[maybe_unused]] void QLabel_setAlignment(void *label, int alignment) {
     static_cast<QLabel *>(label)->setAlignment(
         static_cast<QFlags<Qt::AlignmentFlag>>(alignment));
 }
 
-[[maybe_unused]] const char *QLabel_text(void *label) {
-    return static_cast<QLabel *>(label)->text().toLocal8Bit().data();
+[[maybe_unused]] const ushort *QLabel_text(void *label, int *len) {
+    auto text = static_cast<QLabel *>(label)->text();
+    *len = text.size();
+    return text.utf16();
 }
 
 [[maybe_unused]] void QLabel_setText(void *label, const char *text) {

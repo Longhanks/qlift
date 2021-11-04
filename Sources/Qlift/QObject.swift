@@ -18,9 +18,14 @@ open class QObject {
         })
     }
 
-    public var name: String = "" {
-        didSet {
-            QObject_setObjectName(ptr, name)
+    public var name: String {
+        get {
+            var len: Int32 = 0
+            let s = QObject_objectName(ptr, &len)!
+            return String(utf16CodeUnits: s, count: Int(len))
+        }
+        set {
+            QObject_setObjectName(ptr, newValue)
         }
     }
 

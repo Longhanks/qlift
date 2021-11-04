@@ -17,7 +17,7 @@ QComboBox_addItem(void *comboBox, const char *text, void *userData) {
 }
 
 [[maybe_unused]] void
-QComboBox_currentIndexChangedInt_connect(void *comboBox,
+QComboBox_currentIndexChanged_connect(void *comboBox,
                                          void *receiver,
                                          void *context,
                                          void (*slot_ptr)(void *, int)) {
@@ -26,22 +26,4 @@ QComboBox_currentIndexChangedInt_connect(void *comboBox,
         static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
         static_cast<QObject *>(receiver),
         [context, slot_ptr](int index) { (*slot_ptr)(context, index); });
-}
-
-[[maybe_unused]] void QComboBox_currentIndexChangedString_connect(
-    void *comboBox,
-    void *receiver,
-    void *context,
-    void (*slot_ptr)(void *, const char *)) {
-    QObject::connect(
-        static_cast<QComboBox *>(comboBox),
-        static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged),
-        static_cast<QObject *>(receiver),
-        [comboBox, context, slot_ptr](int index) {
-            (*slot_ptr)(context,
-                        static_cast<QComboBox *>(comboBox)
-                            ->itemText(index)
-                            .toLocal8Bit()
-                            .data());
-        });
 }

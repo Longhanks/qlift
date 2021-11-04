@@ -7,9 +7,14 @@ open class QAbstractButton: QWidget {
     var toggledCallback: ((Bool) -> Void)?
     var pressedCallback: (() -> Void)?
 
-    public var text: String = "" {
-        didSet {
-            QAbstractButton_setText(self.ptr, text)
+    public var text: String{
+        get {
+            var len: Int32 = 0
+            let s = QAbstractButton_text(ptr, &len)!
+            return String(utf16CodeUnits: s, count: Int(len))
+        }
+        set {
+            QAbstractButton_setText(self.ptr, newValue)
         }
     }
 

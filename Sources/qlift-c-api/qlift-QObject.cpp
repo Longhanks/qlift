@@ -14,6 +14,12 @@
     return static_cast<QObject *>(object)->parent();
 }
 
+[[maybe_unused]] const ushort* QObject_objectName(void *object, int *len) {
+    auto text = static_cast<QObject *>(object)->objectName();
+    *len = text.size();
+    return text.utf16();
+}
+
 [[maybe_unused]] void QObject_setObjectName(void *object, const char *name) {
     static_cast<QObject *>(object)->setObjectName(name);
 }

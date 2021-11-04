@@ -2,9 +2,14 @@ import CQlift
 
 
 open class QWidget: QObject {
-    public var windowTitle: String = "" {
-        didSet {
-            setWindowTitle()
+    public var windowTitle: String {
+        get {
+            var len: Int32 = 0
+            let s = QWidget_windowTitle(ptr, &len)!
+            return String(utf16CodeUnits: s, count: Int(len))
+        }
+        set {
+            QWidget_setWindowTitle(self.ptr, newValue)
         }
     }
 
@@ -32,7 +37,11 @@ open class QWidget: QObject {
     }
 
     public var styleSheet: String {
-        get { String(cString: QWidget_styleSheet(self.ptr)) }
+        get {
+            var len: Int32 = 0
+            let s = QWidget_styleSheet(self.ptr, &len)!
+            return String(utf16CodeUnits: s, count: Int(len))
+        }
         set { QWidget_setStyleSheet(self.ptr, newValue) }
     }
 

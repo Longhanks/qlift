@@ -2,11 +2,10 @@
 
 #include "qlift-QAbstractButton.h"
 
-[[maybe_unused]] const char *QAbstractButton_text(void *abstractButton) {
-    return static_cast<QAbstractButton *>(abstractButton)
-        ->text()
-        .toLocal8Bit()
-        .data();
+[[maybe_unused]] const ushort *QAbstractButton_text(void *abstractButton, int *len) {
+    auto text = static_cast<QAbstractButton *>(abstractButton)->text();
+    *len = text.size();
+    return text.utf16();
 }
 
 [[maybe_unused]] void QAbstractButton_setText(void *abstractButton,

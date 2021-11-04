@@ -10,8 +10,10 @@
     return static_cast<void *>(new QMenu{static_cast<QWidget *>(parent)});
 }
 
-[[maybe_unused]] const char *QMenu_title(void *menu) {
-    return static_cast<QMenu *>(menu)->title().toLocal8Bit().data();
+[[maybe_unused]] const ushort *QMenu_title(void *menu, int *len) {
+    auto text = static_cast<QMenu *>(menu)->title();
+    *len = text.size();
+    return text.utf16();
 }
 
 [[maybe_unused]] void QMenu_setTitle(void *menu, const char *title) {

@@ -11,7 +11,7 @@ LIBRARY_API void *QObject_new(void *parent);
 LIBRARY_API void QObject_delete(void *object);
 
 LIBRARY_API void *QObject_parent(void *object);
-
+LIBRARY_API const ushort* QObject_objectName(void *object, int *len);
 LIBRARY_API void QObject_setObjectName(void *object, const char *name);
 LIBRARY_API void *QObject_destroyed_connect(void *object,
                                             void *receiver,

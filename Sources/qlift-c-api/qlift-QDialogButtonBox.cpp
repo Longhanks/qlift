@@ -23,12 +23,10 @@
 }
 
 [[maybe_unused]] void
-QDialogButtonBox_setStandardButtons(void *dialogButtonBox,
-                                    int standardButtons) {
+QDialogButtonBox_setStandardButtons(void *dialogButtonBox, int standardButtons) {
     static_cast<QDialogButtonBox *>(dialogButtonBox)
         ->setStandardButtons(
-            static_cast<QFlags<QDialogButtonBox::StandardButton>>(
-                standardButtons));
+            static_cast<QFlags<QDialogButtonBox::StandardButton>>(standardButtons));
 }
 
 [[maybe_unused]] void

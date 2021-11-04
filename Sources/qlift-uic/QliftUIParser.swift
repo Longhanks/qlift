@@ -561,9 +561,6 @@ extension QliftUIParser: XMLParserDelegate {
     }
 
     public func parser(_ parser: XMLParser, foundCharacters: String) {
-//        let trimmed = foundCharacters.trimmingCharacters(in: .whitespacesAndNewlines)
-//        if !trimmed.isEmpty {
-            currentNode!.value += foundCharacters
-//        }
+        currentNode!.value += foundCharacters
     }
 }

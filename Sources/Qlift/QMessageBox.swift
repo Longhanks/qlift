@@ -12,9 +12,14 @@ open class QMessageBox: QDialog {
         }
     }
 
-    public var text: String = "" {
-        didSet {
-            QMessageBox_setText(self.ptr, text)
+    public var text: String {
+        get {
+            var len: Int32 = 0
+            let s = QMessageBox_text(ptr, &len)!
+            return String(utf16CodeUnits: s, count: Int(len))
+        }
+        set {
+            QMessageBox_setText(self.ptr, newValue)
         }
     }
 

@@ -27,16 +27,21 @@ open class QProgressBar: QWidget {
 
     public var maximum: Int32 {
         get {
-            return QProgressBar_maximum(self.ptr)
+            QProgressBar_maximum(self.ptr)
         }
         set(newMaximum) {
             QProgressBar_setValue(self.ptr, newMaximum)
         }
     }
 
-    public var format: String = "%p" {
-        didSet {
-            QProgressBar_setFormat(self.ptr, format)
+    public var format: String {
+        get {
+            var len: Int32 = 0
+            let s = QProgressBar_format(ptr, &len)!
+            return String(utf16CodeUnits: s, count: Int(len))
+        }
+        set {
+            QProgressBar_setFormat(self.ptr, newValue)
         }
     }
 

@@ -26,8 +26,10 @@
     static_cast<QWidget *>(widget)->addAction(static_cast<QAction *>(action));
 }
 
-[[maybe_unused]] const char *QWidget_windowTitle(void *widget) {
-    return static_cast<QWidget *>(widget)->windowTitle().toLocal8Bit().data();
+[[maybe_unused]] const ushort *QWidget_windowTitle(void *widget, int *len) {
+    auto text = static_cast<QWidget *>(widget)->windowTitle();
+    *len = text.size();
+    return text.utf16();
 }
 
 [[maybe_unused]] void QWidget_setWindowTitle(void *widget, const char *title) {
@@ -185,8 +187,10 @@
         *static_cast<QSizePolicy *>(policy));
 }
 
-[[maybe_unused]] const char *QWidget_styleSheet(void *widget) {
-    return static_cast<QWidget *>(widget)->styleSheet().toLocal8Bit().data();
+[[maybe_unused]] const ushort *QWidget_styleSheet(void *widget, int *len) {
+    auto text = static_cast<QWidget *>(widget)->styleSheet();
+    *len = text.size();
+    return text.utf16();
 }
 
 [[maybe_unused]] void QWidget_setStyleSheet(void *widget,

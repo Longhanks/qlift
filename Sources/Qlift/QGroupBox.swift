@@ -8,14 +8,18 @@ open class QGroupBox: QWidget {
         }
     }
 
-    public var title: String = "" {
-        didSet {
-            QGroupBox_setTitle(self.ptr, title)
+    public var title: String {
+        get {
+            var len: Int32 = 0
+            let s = QGroupBox_title(ptr, &len)!
+            return String(utf16CodeUnits: s, count: Int(len))
+        }
+        set {
+            QGroupBox_setTitle(self.ptr, newValue)
         }
     }
 
     public init(title: String = "", parent: QWidget? = nil) {
-        self.title = title
         super.init(ptr: QGroupBox_new(title, parent?.ptr), parent: parent)
     }
 
