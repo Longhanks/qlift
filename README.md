@@ -1,5 +1,5 @@
 # Qlift
-Swift 5 API for Qt
+Swift 5 API for Qt5
 
 [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/Longhanks/qlift-swift-example/master/LICENSE)
 
@@ -10,7 +10,7 @@ This package provides two things:
 
 ## Building
 
-Qt must be installed, of coures. On Linux, `pkgconfig` is used to find the build flags. On macOS, `.pc` files also is used to find Qt frameworks and build flags, but it requires additional preparation. Add this lines to build target:
+Qt5 must be installed. On macOS, use `brew install qt@5`. On Linux, `pkgconfig` is used to find the build flags. On macOS, `.pc` files also is used to find Qt frameworks and build flags, but it requires additional preparation. Add this lines to build target:
 
 ```swift
 linkerSettings: [
@@ -19,6 +19,7 @@ linkerSettings: [
     .linkedFramework("QtGui", .when(platforms: [.macOS]))
 ]
 ```
+When this [bug fix](https://github.com/apple/swift-package-manager/pull/3801) arrived to Xcode release, additional linker setting may be removed.
 
 ### swiftpm
 
