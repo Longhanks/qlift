@@ -32,12 +32,14 @@ open class QScrollArea: QFrame {
         QScrollArea_ensureWidgetVisible(ptr, child.ptr, xmargin, ymargin)
     }
 
-    public func setHorizontalScrollBarPolicy(_ policy: Qt.ScrollBarPolicy) {
-        QScrollArea_setHorizontalScrollBarPolicy(ptr, policy.rawValue)
+    public var horizontalScrollBarPolicy: Qt.ScrollBarPolicy {
+        get { Qt.ScrollBarPolicy(rawValue: QScrollArea_horizontalScrollBarPolicy(ptr)) ?? .ScrollBarAsNeeded }
+        set { QScrollArea_setHorizontalScrollBarPolicy(ptr, newValue.rawValue) }
     }
 
-    public func setVerticalScrollBarPolicy(_ policy: Qt.ScrollBarPolicy) {
-        QScrollArea_setVerticalScrollBarPolicy(ptr, policy.rawValue)
+    public var verticalScrollBarPolicy: Qt.ScrollBarPolicy {
+        get { Qt.ScrollBarPolicy(rawValue: QScrollArea_verticalScrollBarPolicy(ptr)) ?? .ScrollBarAsNeeded }
+        set { QScrollArea_setVerticalScrollBarPolicy(ptr, newValue.rawValue) }
     }
 
     public var alignment: Qt.Alignment {

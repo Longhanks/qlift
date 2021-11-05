@@ -17,6 +17,8 @@ LIBRARY_API bool  QScrollArea_widgetResizable(void *scrollArea);
 LIBRARY_API int   QScrollArea_sizeAdjustPolicy(void *scrollArea);
 LIBRARY_API void  QScrollArea_setHorizontalScrollBarPolicy(void *scrollArea, int scrollBarPolicy);
 LIBRARY_API void  QScrollArea_setVerticalScrollBarPolicy(void *scrollArea, int scrollBarPolicy);
+LIBRARY_API int   QScrollArea_horizontalScrollBarPolicy(void *scrollArea);
+LIBRARY_API int   QScrollArea_verticalScrollBarPolicy(void *scrollArea);
 LIBRARY_API void  QScrollArea_setSizeAdjustPolicy(void *scrollArea, int sizeAdjustPolicy);
 
 #ifdef __cplusplus
