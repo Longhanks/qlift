@@ -88,3 +88,55 @@
 [[maybe_unused]] int QGridLayout_verticalSpacing(void *gridLayout) {
     return static_cast<QGridLayout *>(gridLayout)->verticalSpacing();
 }
+
+[[maybe_unused]] void    QGridLayout_getItemPosition(void *gridLayout, int index, int *row, int *column, int *rowSpan, int *columnSpan) {
+    static_cast<QGridLayout *>(gridLayout)->getItemPosition(index, row, column, rowSpan, columnSpan);
+}
+
+[[maybe_unused]] int    QGridLayout_columnCount(void *gridLayout) {
+    return static_cast<QGridLayout *>(gridLayout)->columnCount();
+}
+
+[[maybe_unused]] int    QGridLayout_columnMinimumWidth(void *gridLayout, int column) {
+    return static_cast<QGridLayout *>(gridLayout)->columnMinimumWidth(column);
+}
+
+[[maybe_unused]] void    QGridLayout_setColumnMinimumWidth(void *gridLayout, int column, int minSize) {
+    static_cast<QGridLayout *>(gridLayout)->setColumnMinimumWidth(column, minSize);
+}
+
+[[maybe_unused]] int    QGridLayout_columnStretch(void *gridLayout, int column) {
+    return static_cast<QGridLayout *>(gridLayout)->columnStretch(column);
+}
+
+[[maybe_unused]] void    QGridLayout_setColumnStretch(void *gridLayout, int column, int stretch) {
+    static_cast<QGridLayout *>(gridLayout)->setColumnStretch(column, stretch);
+}
+
+[[maybe_unused]] int    QGridLayout_rowCount(void *gridLayout) {
+    return static_cast<QGridLayout *>(gridLayout)->rowCount();
+}
+
+[[maybe_unused]] int    QGridLayout_rowMinimumHeight(void *gridLayout, int row) {
+    return static_cast<QGridLayout *>(gridLayout)->rowMinimumHeight(row);
+}
+
+[[maybe_unused]] void    QGridLayout_setRowMinimumHeight(void *gridLayout, int row, int minSize) {
+    static_cast<QGridLayout *>(gridLayout)->setRowMinimumHeight(row, minSize);
+}
+
+[[maybe_unused]] int    QGridLayout_rowStretch(void *gridLayout, int row) {
+    return static_cast<QGridLayout *>(gridLayout)->rowStretch(row);
+}
+
+[[maybe_unused]] void    QGridLayout_setRowStretch(void *gridLayout, int row, int stretch) {
+    static_cast<QGridLayout *>(gridLayout)->setRowStretch(row, stretch);
+}
+
+[[maybe_unused]] void    QGridLayout_setSpacing(void *gridLayout, int spacing) {
+    static_cast<QGridLayout *>(gridLayout)->setSpacing(spacing);
+}
+
+[[maybe_unused]] int    QGridLayout_spacing(void *gridLayout) {
+    return static_cast<QGridLayout *>(gridLayout)->spacing();
+}
