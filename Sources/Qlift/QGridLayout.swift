@@ -20,7 +20,7 @@ open class QGridLayout: QObject, QLayout {
 
     public var verticalSpacing: Int32 {
         get { QGridLayout_verticalSpacing(ptr) }
-        set { QGridLayout_setVerticalSpacing(ptr, spacing) }
+        set { QGridLayout_setVerticalSpacing(ptr, newValue) }
     }
 
     public var spacing: Int32 {
