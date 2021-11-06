@@ -19,6 +19,8 @@
 #include "../qlift-QDialog.h"
 #include "../qlift-QDialogButtonBox.h"
 #include "../qlift-QEvent.h"
+#include "../qlift-QGraphicsDropShadowEffect.h"
+#include "../qlift-QGraphicsEffect.h"
 #include "../qlift-QFrame.h"
 #include "../qlift-QGridLayout.h"
 #include "../qlift-QGroupBox.h"
