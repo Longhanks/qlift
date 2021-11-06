@@ -140,3 +140,7 @@
 [[maybe_unused]] int    QGridLayout_spacing(void *gridLayout) {
     return static_cast<QGridLayout *>(gridLayout)->spacing();
 }
+
+[[maybe_unused]] int    QGridLayout_count(void *gridLayout) {
+    return static_cast<QGridLayout *>(gridLayout)->count();
+}

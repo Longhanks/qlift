@@ -36,6 +36,10 @@ open class QGridLayout: QObject, QLayout {
         get { QGridLayout_rowCount(ptr) }
     }
 
+    public var count: Int32 {
+        get { QGridLayout_count(ptr) }
+    }
+
     public func getItemPosition(index: Int32) -> (row: Int32, column: Int32, rowSpan: Int32, columnSpan: Int32) {
         var row: Int32 = 0
         var column: Int32 = 0
@@ -86,7 +90,7 @@ open class QGridLayout: QObject, QLayout {
         fatalError("Not implemented")
     }
 
-    public func add(item: QLayoutItem, row: Int32, column: Int32, rowSpan: Int32 = 1, columnSpan: Int32 = 1, alignment: Qt.Alignment = Qt.Alignment(rawValue: 0)) {
+    public func add(item: QLayoutItem, row: Int32, column: Int32, rowSpan: Int32 = 1, columnSpan: Int32 = 1, alignment: Qt.Alignment = []) {
         QGridLayout_addItem(self.ptr, item.ptr, row, column, rowSpan, columnSpan, alignment.rawValue)
     }
 
@@ -94,7 +98,7 @@ open class QGridLayout: QObject, QLayout {
         QGridLayout_addLayout(self.ptr, layout.ptr, row, column, alignment.rawValue)
     }
 
-    public func add(layout: QLayout, row: Int32, column: Int32, rowSpan: Int32, columnSpan: Int32, alignment: Qt.Alignment = Qt.Alignment(rawValue: 0)) {
+    public func add(layout: QLayout, row: Int32, column: Int32, rowSpan: Int32, columnSpan: Int32, alignment: Qt.Alignment = []) {
         QGridLayout_addLayoutWithSpan(self.ptr, layout.ptr, row, column, rowSpan, columnSpan, alignment.rawValue)
     }
 
@@ -102,7 +106,7 @@ open class QGridLayout: QObject, QLayout {
         QGridLayout_addWidget(self.ptr, widget.ptr, row, column, alignment.rawValue)
     }
 
-    public func add(widget: QWidget, fromRow: Int32, fromColumn: Int32, rowSpan: Int32, columnSpan: Int32, alignment: Qt.Alignment = Qt.Alignment(rawValue: 0)) {
+    public func add(widget: QWidget, fromRow: Int32, fromColumn: Int32, rowSpan: Int32, columnSpan: Int32, alignment: Qt.Alignment = []) {
         QGridLayout_addWidgetWithSpan(self.ptr, widget.ptr, fromRow, fromColumn, rowSpan, columnSpan, alignment.rawValue)
     }
 
