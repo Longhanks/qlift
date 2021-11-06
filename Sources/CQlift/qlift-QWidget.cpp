@@ -157,6 +157,10 @@
     }
 }
 
+[[maybe_unused]] void QWidget_setGraphicsEffect(void *widget, void *effect) {
+    static_cast<QWidget*>(widget)->setGraphicsEffect(static_cast<QGraphicsEffect *>(effect));
+}
+
 [[maybe_unused]] void QWidget_mousePressEvent(void *widget, void *mouseEvent) {
     static_cast<QliftWidget *>(widget)->mousePressEventSuper(
         static_cast<QMouseEvent *>(mouseEvent));

@@ -35,6 +35,7 @@ LIBRARY_API void *QWidget_maximumSize(void *widget);
 LIBRARY_API void QWidget_setMaximumSize(void *widget, void *size);
 LIBRARY_API void* QWidget_minimumSize(void *widget);
 LIBRARY_API void QWidget_setMinimumSize(void *widget, void *size);
+LIBRARY_API void QWidget_setGraphicsEffect(void *widget, void *effect);
 
 LIBRARY_API void QWidget_mousePressEvent(void *widget, void *mouseEvent);
 LIBRARY_API void QWidget_mousePressEvent_Override(

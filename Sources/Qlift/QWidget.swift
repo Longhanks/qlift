@@ -241,6 +241,10 @@ open class QWidget: QObject {
     public func mapFrom(parent: QWidget, point: QPoint) -> QPoint {
         QPoint(ptr: QWidget_mapFrom(self.ptr, parent.ptr, point.ptr))
     }
+
+    public func setGraphicsEffect(effect: QGraphicsEffect) {
+        QWidget_setGraphicsEffect(ptr, effect.ptr)
+    }
 }
 
 extension QWidget {
