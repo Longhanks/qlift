@@ -54,3 +54,28 @@
 [[maybe_unused]] void QProgressBar_setOrientation(void *progressBar, int orientation) {
     static_cast<QProgressBar *>(progressBar)->setOrientation(static_cast<Qt::Orientation>(orientation));
 }
+
+[[maybe_unused]] int QProgressBar_alignment(void *progressBar) {
+    return static_cast<QProgressBar *>(progressBar)->alignment();
+}
+
+[[maybe_unused]] void QProgressBar_setAlignment(void *progressBar, int alignment) {
+    static_cast<QProgressBar *>(progressBar)->setAlignment(
+                                static_cast<QFlags<Qt::AlignmentFlag>>(alignment));
+}
+
+[[maybe_unused]] void QProgressBar_setInvertedAppearance(void *progressBar, bool invert) {
+    static_cast<QProgressBar *>(progressBar)->setInvertedAppearance(invert);
+}
+
+[[maybe_unused]] void QProgressBar_setTextDirection(void *progressBar, int textDirection) {
+    static_cast<QProgressBar *>(progressBar)->setTextDirection(static_cast<QProgressBar::Direction>(textDirection));
+}
+
+[[maybe_unused]] bool QProgressBar_invertedAppearance(void *progressBar) {
+    return static_cast<QProgressBar *>(progressBar)->invertedAppearance();
+}
+
+[[maybe_unused]] int QProgressBar_textDirection(void *progressBar) {
+    return static_cast<QProgressBar *>(progressBar)->textDirection();
+}
