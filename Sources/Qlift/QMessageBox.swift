@@ -2,12 +2,6 @@ import CQlift
 
 
 open class QMessageBox: QDialog {
-    public var windowModality: Qt.WindowModality = .ApplicationModal {
-        didSet {
-            QMessageBox_setWindowModality(self.ptr, windowModality.rawValue)
-        }
-    }
-
     override func setWindowTitle() {
         QMessageBox_setWindowTitle(self.ptr, windowTitle)
     }
@@ -18,9 +12,14 @@ open class QMessageBox: QDialog {
         }
     }
 
-    public var text: String = "" {
-        didSet {
-            QMessageBox_setText(self.ptr, text)
+    public var text: String {
+        get {
+            var len: Int32 = 0
+            let s = QMessageBox_text(ptr, &len)!
+            return String(utf16CodeUnits: s, count: Int(len))
+        }
+        set {
+            QMessageBox_setText(self.ptr, newValue)
         }
     }
 
@@ -39,12 +38,7 @@ open class QMessageBox: QDialog {
     }
 
     deinit {
-        if self.ptr != nil {
-            if QObject_parent(self.ptr) == nil {
-                QMessageBox_delete(self.ptr)
-            }
-            self.ptr = nil
-        }
+        checkDeleteQtObj()
     }
 
     public func setDefaultStandardButton(_ button: QMessageBox.StandardButton) {

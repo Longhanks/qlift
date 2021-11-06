@@ -29,7 +29,7 @@ public class QSizePolicy {
         public static let Fixed: Policy = []
         public static let Minimum = Policy(rawValue: 1)
         public static let Maximum = Policy(rawValue: 4)
-        public static let Prefered = Policy(rawValue: 5)
+        public static let Preferred = Policy(rawValue: 5)
         public static let Expanding = Policy(rawValue: 7)
         public static let MinimumExpanding = Policy(rawValue: 3)
         public static let Ignored = Policy(rawValue: 13)

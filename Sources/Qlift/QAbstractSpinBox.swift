@@ -11,12 +11,7 @@ open class QAbstractSpinBox: QWidget {
     }
 
     deinit {
-        if self.ptr != nil {
-            if QObject_parent(self.ptr) == nil {
-                QAbstractSpinBox_delete(self.ptr)
-            }
-            self.ptr = nil
-        }
+        checkDeleteQtObj()
     }
 }
 

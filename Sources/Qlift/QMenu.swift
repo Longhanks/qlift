@@ -2,14 +2,18 @@ import CQlift
 
 
 open class QMenu: QWidget {
-    public var title: String = "" {
-        didSet {
-            QMenu_setTitle(self.ptr, title)
+    public var title: String {
+        get {
+            var len: Int32 = 0
+            let s = QMenu_title(ptr, &len)!
+            return String(utf16CodeUnits: s, count: Int(len))
+        }
+        set {
+            QMenu_setTitle(self.ptr, newValue)
         }
     }
 
     public init(title: String = "", parent: QWidget? = nil) {
-        self.title = title
         super.init(ptr: QMenu_new(title, parent?.ptr), parent: parent)
     }
 
@@ -22,12 +26,7 @@ open class QMenu: QWidget {
     }
 
     deinit {
-        if self.ptr != nil {
-            if QObject_parent(self.ptr) == nil {
-                QMenu_delete(self.ptr)
-            }
-            self.ptr = nil
-        }
+        checkDeleteQtObj()
     }
 }
 

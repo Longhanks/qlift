@@ -8,6 +8,7 @@ public class QliftUIParser: NSObject {
     private var rootNode = Node(parent: nil, text: "root")
     private var currentNode: Node?
     private var namesOfQMenusForAddAction = [String]()
+    private var widgetCount = 1
 
 
     public func parseUI(data: Data) -> String? {
@@ -38,22 +39,65 @@ public class QliftUIParser: NSObject {
         rootWidgetNode!.attributes["name"] = "self"
         let properties = InstancePropertyNodeFinder().getInstancePropertyNodes(root: rootWidgetNode!)
         for property in properties {
-            var cls = ""
+            var className = ""
             if property.attributes["class"] != nil {
-                cls = property.attributes["class"]!
+                className = property.attributes["class"]!
             }
             else if property.text == "spacer" {
-                cls = "QSpacerItem"
+                className = "QSpacerItem"
             }
             else if property.text == "action" {
-                cls = "QAction"
+                className = "QAction"
             }
-            swiftUI += "    var " + property.attributes["name"]! + ": " + cls + "!\n"
+            if property.attributes["name"]!.isEmpty {
+                property.attributes["name"] = "widget\(widgetCount)"
+                widgetCount += 1
+            }
+            if property.attributes["name"]! == "layoutWidget" {
+                property.attributes["name"] = "layoutWidget\(widgetCount)"
+                widgetCount += 1
+            }
+            if className == "Line" {
+                continue
+            }
+            if className == "QStatusBar" {
+                continue
+            }
+
+            swiftUI += "    var " + property.attributes["name"]! + ": " + className + "!\n"
         }
 
-        swiftUI += "\n"
-        swiftUI += "    override init(parent: QWidget? = nil, flags: Qt.WindowFlags = .Widget) {\n"
-        swiftUI += "        super.init(parent: parent, flags: flags)\n"
+        if let buttonGroupsNode = ui.first(where: { $0.text == "buttongroups" }) {
+            for group in buttonGroupsNode.children {
+                let name = group.attributes["name"]!
+                swiftUI += "    var \(name): QButtonGroup!\n"
+            }
+        }
+
+        if let slotsNode = ui.first(where: { $0.text == "slots" }) {
+            swiftUI += "\n"
+            for slot in slotsNode.children {
+                var signature = slot.value
+                if signature.hasSuffix("(bool)") {
+                    signature = signature.prefix { $0 != "(" }.appending("(_ state: Bool)")
+                }
+                swiftUI += "    open func \(signature) {}\n"
+            }
+        }
+
+        swiftUI += """
+
+            override init(parent: QWidget? = nil, flags: Qt.WindowFlags = .Widget) {
+                super.init(parent: parent, flags: flags)
+
+        """
+
+        if let buttonGroupsNode = ui.first(where: { $0.text == "buttongroups" }) {
+            for group in buttonGroupsNode.children {
+                let name = group.attributes["name"]!
+                swiftUI += "        \(name) = QButtonGroup(parent: self)\n"
+            }
+        }
 
         // 1. Actions
         for node in rootWidgetNode!.children.filter({ $0.text == "action" }) {
@@ -64,21 +108,21 @@ public class QliftUIParser: NSObject {
         for node in rootWidgetNode!.children.filter({ $0.text != "action" }) {
             swiftUI += subNode2Swift(node: node)
         }
-        swiftUI += preextractContentsMargins(node: rootWidgetNode!)
+        swiftUI += preextractContentsMargins(node: rootWidgetNode!) ?? ""
 
         // 3. Connections
         let connectionsNodes = ui.filter({ $0.text == "connections" })
-        if connectionsNodes.count > 0 {
+        if !connectionsNodes.isEmpty {
             for connection in connectionsNodes[0].children {
                 let sender = connection.children[0].value
                 let signalWithBraces = connection.children[1].value.capitalized
-                let signal = String(signalWithBraces[..<signalWithBraces.index(signalWithBraces.endIndex, offsetBy: -2)])
+                let signal = signalWithBraces.prefix { $0 != "(" }
                 var receiver = connection.children[2].value
                 if receiver == className {
                     receiver = "self"
                 }
                 let slotWithBraces = connection.children[3].value
-                let slot = String(slotWithBraces[..<slotWithBraces.index(slotWithBraces.endIndex, offsetBy: -2)])
+                let slot = slotWithBraces.prefix { $0 != "(" }
                 swiftUI += "        \(sender).connect\(signal)(to: \(receiver).\(slot))\n"
             }
         }
@@ -88,47 +132,34 @@ public class QliftUIParser: NSObject {
         return swiftUI
     }
 
-    private func isMarginPropertyName(_ name: String) -> Bool {
-        return name == "leftMargin" || name == "topMargin" || name == "rightMargin" || name == "bottomMargin"
-    }
-
-    private func preextractContentsMargins(node: Node) -> String {
+    private func preextractContentsMargins(node: Node) -> String? {
         var left = -1
         var top = -1
         var right = -1
         var bottom = -1
         var foundOneMargin = false
-        for subNode in node.children {
-            guard subNode.text == "property" else { continue }
-            guard isMarginPropertyName(subNode.attributes["name"]!) else { continue }
 
-            if subNode.attributes["name"]! == "leftMargin" {
+        for subNode in node.children where subNode.text == "property" {
+            switch subNode.attributes["name"]! {
+            case "leftMargin":
                 left = Int(subNode.children[0].value)!
                 foundOneMargin = true
-                continue
-            }
-
-            if subNode.attributes["name"]! == "topMargin" {
+            case "topMargin":
                 top = Int(subNode.children[0].value)!
                 foundOneMargin = true
-                continue
-            }
-
-            if subNode.attributes["name"]! == "rightMargin" {
+            case "rightMargin":
                 right = Int(subNode.children[0].value)!
                 foundOneMargin = true
-                continue
-            }
-
-            if subNode.attributes["name"]! == "bottomMargin" {
+            case "bottomMargin":
                 bottom = Int(subNode.children[0].value)!
                 foundOneMargin = true
+            default:
                 continue
             }
         }
 
-        if !foundOneMargin {
-            return ""
+        guard foundOneMargin else {
+            return nil
         }
 
         return "        \(node.attributes["name"]!).contentsMargins = QMargins(left: \(left), top: \(top), right: \(right), bottom: \(bottom))\n"
@@ -137,8 +168,27 @@ public class QliftUIParser: NSObject {
     private func subNode2Swift(node: Node) -> String {
         var ui = ""
 
-        if node.text == "property" {
-            if !isMarginPropertyName(node.attributes["name"]!) {
+        switch node.text {
+        case "property":
+            switch node.attributes["name"]! {
+            case "palette", "icon":
+                // TODO: Pallette make
+                break
+            case "sizePolicy":
+                let hSizeType = node.children[0].attributes["hsizetype"]!
+                let vSizeType = node.children[0].attributes["vsizetype"]!
+                ui += "        \(node.parent!.attributes["name"]!).sizePolicy = QSizePolicy(horizontal: .\(hSizeType), vertical: .\(vSizeType))\n"
+            case "leftMargin", "topMargin", "rightMargin", "bottomMargin":
+                break
+            case "pixmap":
+                ui += "        \(node.parent!.attributes["name"]!).setPixmap(QPixmap(fileName: \(propertyNode2Swift(node: node.children[0]))))\n"
+            case "iconSize":
+                ui += "        \(node.parent!.attributes["name"]!).setIconSize(\(propertyNode2Swift(node: node.children[0])))\n"
+            case "autoFillBackground":
+                ui += "        \(node.parent!.attributes["name"]!).autoFillBackground = \(propertyNode2Swift(node: node.children[0]))\n"
+            case "flat":
+                ui += "        \(node.parent!.attributes["name"]!).isFlat = \(propertyNode2Swift(node: node.children[0]))\n"
+            default:
                 let parentTag = node.parent!.text
                 if parentTag == "item" {
                     ui += "        \(node.parent!.parent!.attributes["name"]!).add(item: \(propertyNode2Swift(node: node.children[0])))\n"
@@ -146,8 +196,7 @@ public class QliftUIParser: NSObject {
                     ui += "        \(node.parent!.attributes["name"]!).\(node.attributes["name"]!) = \(propertyNode2Swift(node: node.children[0]))\n"
                 }
             }
-        }
-        else if node.text == "addaction" {
+        case "addaction":
             var actionName = node.attributes["name"]!
             if actionName == "separator" {
                 ui += "        \(node.parent!.attributes["name"]!).addSeparator()\n"
@@ -157,39 +206,49 @@ public class QliftUIParser: NSObject {
             } else {
                 ui += "        \(node.parent!.attributes["name"]!).add(action: \(actionName))\n"
             }
-        }
-        else if node.text == "action" {
+        case "action":
             ui += "        \(node.attributes["name"]!) = QAction(parent: \(node.parent!.attributes["name"]!))\n"
             for subNode in node.children {
                 ui += subNode2Swift(node: subNode)
             }
-        }
-        else if node.text == "widget" {
+        case "widget":
             // 1. Determine if constructor should be passed a parent variable.
-            var parentName = "nil"
-            if let parentWidget = getParentWidget(node: node) {
-                parentName = parentWidget.attributes["name"]!
+            guard node.attributes["class"]! != "Line" else {
+                break
             }
+            let parentName = getParentWidget(node: node)?.attributes["name"] ?? "nil"
             // 2. Construct widget itself.
-            ui += "        \(node.attributes["name"]!) = \(node.attributes["class"]!)(parent: \(parentName))\n"
-
+            if node.parent?.attributes["class"] == "QScrollArea" {
+                ui += "        \(node.attributes["name"]!) = \(node.attributes["class"]!)()\n"
+            } else if node.attributes["class"]! == "QStatusBar" {
+                ui += "        let \(node.attributes["name"]!) = \(node.attributes["class"]!)(parent: \(parentName))\n"
+            } else {
+                ui += "        \(node.attributes["name"]!) = \(node.attributes["class"]!)(parent: \(parentName))\n"
+            }
+            ui += "        \(node.attributes["name"]!).name = \"\(node.attributes["name"]!)\"\n"
 
             // 3. Handle special cases: QMenuBar, QMenu, QToolBar, QStatusBar, QDockWidget
-            if node.attributes["class"]! == "QMenuBar" {
+            switch node.attributes["class"]! {
+
+            case "QMenuBar":
                 for subNode in node.children {
                     ui += subNode2Swift(node: subNode)
                 }
                 ui += "        \(node.parent!.attributes["name"]!).menuBar = \(node.attributes["name"]!)\n"
-            }
 
-            else if node.attributes["class"]! == "QMenu" {
+            case "QStatusBar":
+                for subNode in node.children {
+                    ui += subNode2Swift(node: subNode)
+                }
+                ui += "        \(node.parent!.attributes["name"]!).statusBar = \(node.attributes["name"]!)\n"
+
+            case "QMenu":
                 namesOfQMenusForAddAction.append(node.attributes["name"]!)
                 for subNode in node.children {
                     ui += subNode2Swift(node: subNode)
                 }
-            }
 
-            else if node.attributes["class"]! == "QToolBar" {
+            case "QToolBar":
                 var area = ""
                 for subNode in node.children.filter({ $0.text == "attribute" }) {
                     if subNode.attributes["name"]! == "toolBarArea" {
@@ -201,13 +260,8 @@ public class QliftUIParser: NSObject {
                     ui += subNode2Swift(node: subNode)
                 }
                 ui += "        \(node.parent!.attributes["name"]!).add(toolBar: \(node.attributes["name"]!), area: \(area))\n"
-            }
 
-            else if node.attributes["class"]! == "QStatusBar" {
-                ui += "        \(node.parent!.attributes["name"]!).statusBar = \(node.attributes["name"]!)\n"
-            }
-
-            else if node.attributes["class"]! == "QDockWidget" {
+            case "QDockWidget":
                 var areaNumberString = ""
                 for subNode in node.children.filter({ $0.text == "attribute" }) {
                     if subNode.attributes["name"]! == "dockWidgetArea" {
@@ -235,10 +289,9 @@ public class QliftUIParser: NSObject {
                         print("Unknown dock area")
                 }
                 ui += "        \(node.parent!.attributes["name"]!).add(dockWidget: \(node.attributes["name"]!), area: \(area))\n"
-            }
 
             // 4. Handle generic QWidget
-            else {
+            default:
                 // Recurse children
                 for subNode in node.children {
                     ui += subNode2Swift(node: subNode)
@@ -246,48 +299,63 @@ public class QliftUIParser: NSObject {
 
                 // Determine if parent is item (in layout) -> needs to add the widget to the layout via add(item:)
                 if node.parent!.text == "item" {
-                    ui += "        \(node.parent!.parent!.attributes["name"]!).add(widget: \(node.attributes["name"]!))\n"
+                    if let row = node.parent!.attributes["row"],
+                       let column = node.parent!.attributes["column"] {
+                        // add(widget: QWidget, row: Int32, column: Int32, alignment: Qt.Alignment? = nil)
+                        ui += "        \(node.parent!.parent!.attributes["name"]!).add(widget: \(node.attributes["name"]!), row: \(row), column: \(column))\n"
+                    }
+                    else {
+                        ui += "        \(node.parent!.parent!.attributes["name"]!).add(widget: \(node.attributes["name"]!))\n"
+                    }
                 }
 
                 // Determine if parent is a QDockWidget or QMainWindow -> needs to set widget / centralWidget
-                else if node.parent!.attributes["class"] != nil {
-                    if node.parent!.attributes["class"]! == "QDockWidget" {
+                else {
+                    switch node.parent!.attributes["class"] {
+                    case "QDockWidget"?:
                         ui += "        \(node.parent!.attributes["name"]!).widget = \(node.attributes["name"]!)\n"
-                    }
-                    else if node.parent!.attributes["class"]! == "QMainWindow" {
+                    case "QMainWindow"?:
                         ui += "        \(node.parent!.attributes["name"]!).centralWidget = \(node.attributes["name"]!)\n"
+                    case "QScrollArea"?:
+                        ui += "        \(node.parent!.attributes["name"]!).setWidget(\(node.attributes["name"]!))\n"
+                    default:
+                        break
                     }
                 }
             }
-        }
-        else if node.text == "layout" {
-            ui += "        \(node.attributes["name"]!) = \(node.attributes["class"]!)(parent: "
-            if node.parent!.text == "widget" {
-                ui += node.parent!.attributes["name"]!
+        case "layout":
+            let parent = node.parent!.text == "widget" ? node.parent!.attributes["name"]! : "nil"
+            ui += "        \(node.attributes["name"]!) = \(node.attributes["class"]!)(parent: \(parent))\n"
+            if let contentMargins =  preextractContentsMargins(node: node) {
+                ui += contentMargins
             } else {
-                ui += "nil"
+                ui += "        \(node.attributes["name"]!).contentsMargins = QMargins(left: 0, top: 0, right: 0, bottom: 0)\n"
             }
-            ui += ")\n"
             for subNode in node.children {
                 ui += subNode2Swift(node: subNode)
             }
             if node.parent!.text == "item" {
                 ui += "        \(node.parent!.parent!.attributes["name"]!).add(layout: \(node.attributes["name"]!))\n"
             }
-        }
-        else if node.text == "item" {
+            return ui
+
+        case "item":
             for subNode in node.children {
                 ui += subNode2Swift(node: subNode)
             }
-        }
-        else if node.text == "spacer" {
+        case "spacer":
             ui += spacerNode2Swift(node: node)
-        }
-        else {
+        case "attribute":
+            guard
+                node.attributes["name"] == "buttonGroup",
+                let group = node.children.first?.value
+            else { fallthrough }
+            ui += "        \(group).addButton(\(node.parent!.attributes["name"]!))\n"
+        default:
             ui += "        \(node.description)\n"
         }
 
-        ui += preextractContentsMargins(node: node)
+        ui += preextractContentsMargins(node: node) ?? ""
 
         return ui
     }
@@ -312,13 +380,21 @@ public class QliftUIParser: NSObject {
     }
 
     private func propertyNode2Swift(node: Node) -> String {
-        if node.text == "string" {
-            return "\"" + node.value + "\""
-        }
-        else if node.text == "enum" {
+        switch node.text {
+        case "string", "pixmap":
+            if node.attributes.first?.key == "notr" &&
+                node.attributes.first?.value == "true" ||
+                node.value.contains("\"")
+            {
+                return "\"\"\"\n" + node.value + "\n\"\"\""
+            } else {
+                return "\"" + node.value + "\""
+            }
+
+        case "enum":
             return "." + node.value.components(separatedBy: "::").last!
-        }
-        else if node.text == "set" {
+
+        case "set":
             var separated = node.value.components(separatedBy: "|")
             for (index, element) in separated.enumerated() {
                 let enumCase = element.components(separatedBy: "::").last!
@@ -329,11 +405,11 @@ public class QliftUIParser: NSObject {
             } else {
                 return separated[0]
             }
-        }
-        else if node.text == "bool" || node.text == "number" {
+
+        case "bool", "number":
             return node.value
-        }
-        else if node.text == "rect" {
+
+        case "rect":
             var x = 0
             var y = 0
             var width = 0
@@ -353,8 +429,26 @@ public class QliftUIParser: NSObject {
                 }
             }
             return "QRect(x: \(x), y: \(y), width: \(width), height: \(height))"
+
+        case "size":
+            var width = 0
+            var height = 0
+            for child in node.children {
+                switch child.text {
+                case "width":
+                    width = Int(child.value)!
+                case "height":
+                    height = Int(child.value)!
+                default:
+                    print("unknown size:", child.text)
+                }
+            }
+            return "QSize(width: \(width), height: \(height))"
+
+        default:
+            return node.text
         }
-        return node.text
+
     }
 
     private func spacerNode2Swift(node: Node) -> String {
@@ -363,17 +457,33 @@ public class QliftUIParser: NSObject {
         var height: Int = 0
         var horizontalPolicy: String = ""
         var verticalPolicy: String = ""
+        var orientation = ""
+
         for subNode in node.children {
-            if subNode.attributes["name"]! == "orientation" {
-                if subNode.children[0].value == "Qt::Horizontal" {
+            switch subNode.attributes["name"]! {
+            case "orientation":
+                orientation = subNode.children[0].value
+                switch orientation {
+                case "Qt::Horizontal":
                     horizontalPolicy = ".Expanding"
                     verticalPolicy = ".Minimum"
-                } else if subNode.children[0].value == "Qt::Vertical" {
+                case "Qt::Vertical":
                     horizontalPolicy = ".Minimum"
                     verticalPolicy = ".Expanding"
+                default:
+                    break
                 }
-            }
-            else if subNode.attributes["name"]! == "sizeHint" {
+            case "sizeType":
+                let sizeType = subNode.children[0].value.replacingOccurrences(of: "QSizePolicy::", with: ".")
+                switch orientation {
+                case "Qt::Horizontal":
+                    horizontalPolicy = sizeType
+                case "Qt::Vertical":
+                    verticalPolicy = sizeType
+                default:
+                    break
+                }
+            case "sizeHint":
                 let sizeNode = subNode.children[0]
                 for sizeSubNode in sizeNode.children {
                     if sizeSubNode.text == "width" {
@@ -382,6 +492,8 @@ public class QliftUIParser: NSObject {
                         height = Int(sizeSubNode.value)!
                     }
                 }
+            default:
+                break
             }
         }
 
@@ -449,9 +561,6 @@ extension QliftUIParser: XMLParserDelegate {
     }
 
     public func parser(_ parser: XMLParser, foundCharacters: String) {
-        let trimmed = foundCharacters.trimmingCharacters(in: .whitespacesAndNewlines)
-        if !trimmed.isEmpty {
-            currentNode!.value += trimmed
-        }
+        currentNode!.value += foundCharacters
     }
 }

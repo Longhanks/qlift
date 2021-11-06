@@ -22,20 +22,15 @@ open class QBoxLayout: QObject, QLayout {
         QBoxLayout_addLayout(self.ptr, layout.ptr, stretch)
     }
 
-    public func add(widget: QWidget, stretch: Int32 = 0, alignment: Int32 = 0) {
-        QBoxLayout_addWidget(self.ptr, widget.ptr, stretch, alignment)
+    public func add(widget: QWidget, stretch: Int32 = 0, alignment: Qt.Alignment = Qt.Alignment(rawValue: 0)) {
+        QBoxLayout_addWidget(self.ptr, widget.ptr, stretch, alignment.rawValue)
     }
 
     public func add(widget: QWidget) {
-        self.add(widget: widget, stretch: 0, alignment: 0)
+        self.add(widget: widget, stretch: 0)
     }
 
     deinit {
-        if self.ptr != nil {
-            if QObject_parent(self.ptr) == nil {
-                QBoxLayout_delete(self.ptr)
-            }
-            self.ptr = nil
-        }
+        checkDeleteQtObj()
     }
 }

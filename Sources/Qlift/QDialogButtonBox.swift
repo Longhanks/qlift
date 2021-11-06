@@ -5,15 +5,21 @@ open class QDialogButtonBox: QWidget {
     var acceptedCallback: (() -> Void)?
     var rejectedCallback: (() -> Void)?
 
-    public var standardButtons: StandardButton = .NoButton {
-        didSet {
-            QDialogButtonBox_setStandardButtons(self.ptr, standardButtons.rawValue)
+    public var standardButtons: StandardButton {
+        get {
+            StandardButton(rawValue: QDialogButtonBox_standardButtons(ptr))
+        }
+        set {
+            QDialogButtonBox_setStandardButtons(self.ptr, newValue.rawValue)
         }
     }
 
-    public var orientation: Qt.Orientation = .Horizontal {
-        didSet {
-            QDialogButtonBox_setOrientation(self.ptr, orientation.rawValue)
+    public var orientation: Qt.Orientation {
+        get {
+            Qt.Orientation(rawValue: QDialogButtonBox_orientation(ptr)) ?? .Horizontal
+        }
+        set {
+            QDialogButtonBox_setOrientation(self.ptr, newValue.rawValue)
         }
     }
 
@@ -26,12 +32,7 @@ open class QDialogButtonBox: QWidget {
     }
 
     deinit {
-        if self.ptr != nil {
-            if QObject_parent(self.ptr) == nil {
-                QDialogButtonBox_delete(self.ptr)
-            }
-            self.ptr = nil
-        }
+        checkDeleteQtObj()
     }
 }
 

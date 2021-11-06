@@ -9,6 +9,7 @@ open class QMainWindow: QWidget {
     }
 
     private var _menuBar: QMenuBar? = nil
+    private var _statusBar: QStatusBar? = nil
 
     public var menuBar: QMenuBar! {
         get {
@@ -20,6 +21,19 @@ open class QMainWindow: QWidget {
         set {
             QMainWindow_setMenuBar(self.ptr, newValue?.ptr)
             self._menuBar = newValue
+        }
+    }
+
+    public var statusBar: QStatusBar! {
+        get {
+            if _statusBar == nil {
+                _statusBar = QStatusBar(ptr: QMainWindow_statusBar(self.ptr))
+            }
+            return self._statusBar!
+        }
+        set {
+            QMainWindow_setStatusBar(ptr, newValue?.ptr)
+            self._statusBar = newValue
         }
     }
 
@@ -41,12 +55,7 @@ open class QMainWindow: QWidget {
     }
 
     deinit {
-        if self.ptr != nil {
-            if QObject_parent(self.ptr) == nil {
-                QMainWindow_delete(self.ptr)
-            }
-            self.ptr = nil
-        }
+        checkDeleteQtObj()
     }
 
     open func closeEvent(event: QCloseEvent) {

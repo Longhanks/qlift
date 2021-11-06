@@ -4,15 +4,19 @@ import CQlift
 open class QAction: QObject {
     var triggeredCallback: ((Bool) -> Void)?
 
-    public var text: String = "" {
-        didSet {
-            QAction_setText(self.ptr, text)
+    public var text: String {
+        get {
+            var len: Int32 = 0
+            let s = QAction_text(ptr, &len)!
+            return String(utf16CodeUnits: s, count: Int(len))
+        }
+        set {
+            QAction_setText(self.ptr, newValue)
         }
     }
 
     // Icon not supported at the moment
     public init(text: String = "", parent: QObject? = nil) {
-        self.text = text
         super.init(ptr: QAction_new(nil, text, parent?.ptr), parent: parent)
     }
 
@@ -21,12 +25,7 @@ open class QAction: QObject {
     }
 
     deinit {
-        if self.ptr != nil {
-            if QObject_parent(self.ptr) == nil {
-                QAction_delete(self.ptr)
-            }
-            self.ptr = nil
-        }
+        checkDeleteQtObj()
     }
 
     open func connectTriggered(receiver: QObject? = nil, to slot: @escaping ((Bool) -> Void)) {

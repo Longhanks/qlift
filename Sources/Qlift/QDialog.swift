@@ -2,6 +2,11 @@ import CQlift
 
 
 open class QDialog: QWidget {
+    public enum DialogCode: Int32 {
+        case Rejected = 0
+        case Accepted
+    }
+
     public override init(parent: QWidget? = nil, flags: Qt.WindowFlags = .Widget) {
         super.init(ptr: QDialog_new(parent?.ptr, flags.rawValue), parent: parent)
     }
@@ -11,16 +16,29 @@ open class QDialog: QWidget {
     }
 
     deinit {
-        if self.ptr != nil {
-            if QObject_parent(self.ptr) == nil {
-                QDialog_delete(self.ptr)
-            }
-            self.ptr = nil
+        checkDeleteQtObj()
+    }
+
+    public var modal: Bool {
+        get {
+            QDialog_isModal(ptr)
+        }
+        set {
+            QDialog_setModal(ptr, newValue)
+        }
+    }
+
+    public var sizeGripEnabled: Bool {
+        get {
+            QDialog_isSizeGripEnabled(ptr)
+        }
+        set {
+            QDialog_setSizeGripEnabled(ptr, newValue)
         }
     }
 
     open func exec() -> DialogCode {
-        return DialogCode(rawValue: QDialog_exec(self.ptr))
+        return DialogCode(rawValue: QDialog_exec(self.ptr)) ?? .Rejected
     }
 
     open func accept() {
@@ -29,18 +47,5 @@ open class QDialog: QWidget {
 
     open func reject() {
         QDialog_reject(self.ptr)
-    }
-}
-
-extension QDialog {
-    public struct DialogCode: OptionSet {
-        public let rawValue: Int32
-
-        public init(rawValue: Int32) {
-            self.rawValue = rawValue
-        }
-
-        public static let Accepted = DialogCode(rawValue: 1)
-        public static let Rejected: DialogCode = []
     }
 }

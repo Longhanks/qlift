@@ -1,0 +1,3 @@
+module CQt5Widgets [system] {
+    export *
+}

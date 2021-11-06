@@ -19,12 +19,7 @@ open class QComboBox: QWidget {
     }
 
     deinit {
-        if self.ptr != nil {
-            if QObject_parent(self.ptr) == nil {
-                QComboBox_delete(self.ptr)
-            }
-            self.ptr = nil
-        }
+        checkDeleteQtObj()
     }
 
     open func connectCurrentIndexChanged(receiver: QObject? = nil, to slot: @escaping ((Int32) -> Void)) {
@@ -44,31 +39,7 @@ open class QComboBox: QWidget {
 
         let rawSelf = Unmanaged.passUnretained(self).toOpaque()
 
-        QComboBox_currentIndexChangedInt_connect(self.ptr, object.ptr, rawSelf, functor)
-    }
-
-    open func connectCurrentIndexChanged(receiver: QObject? = nil, to slot: @escaping ((String) -> Void)) {
-        var object: QObject = self
-        if receiver != nil {
-            object = receiver!
-        }
-
-        self.currentIndexChangedStringCallback = slot
-
-        let functor: @convention(c) (UnsafeMutableRawPointer?, UnsafePointer<Int8>?) -> Void = { raw, text in
-            if raw != nil {
-                var str = ""
-                if let cStr = text {
-                    str = String(cString: cStr)
-                }
-                let _self = Unmanaged<QComboBox>.fromOpaque(raw!).takeUnretainedValue()
-                _self.currentIndexChangedStringCallback!(str)
-            }
-        }
-
-        let rawSelf = Unmanaged.passUnretained(self).toOpaque()
-
-        QComboBox_currentIndexChangedString_connect(self.ptr, object.ptr, rawSelf, functor)
+        QComboBox_currentIndexChanged_connect(self.ptr, object.ptr, rawSelf, functor)
     }
 }
 
