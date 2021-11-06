@@ -331,6 +331,31 @@ public class QliftUIParser: NSObject {
             } else {
                 ui += "        \(node.attributes["name"]!).contentsMargins = QMargins(left: 0, top: 0, right: 0, bottom: 0)\n"
             }
+            if let stretch = node.attributes["stretch"]?.split(separator: ",").map({ Int($0)! }) {
+                for index in stretch.indices where stretch[index] != 0 {
+                    ui += "        \(node.attributes["name"]!).setStretch(index: \(index), stretch: \(stretch[index]))\n"
+                }
+            }
+            if let minSize = node.attributes["rowminimumheight"]?.split(separator: ",").map({ Int($0)! }) {
+                for row in minSize.indices where minSize[row] != 0 {
+                    ui += "        \(node.attributes["name"]!).setRowMinimumHeight(row: \(row), minSize: \(minSize[row]))\n"
+                }
+            }
+            if let minSize = node.attributes["columnminimumwidth"]?.split(separator: ",").map({ Int($0)! }) {
+                for column in minSize.indices where minSize[column] != 0 {
+                    ui += "        \(node.attributes["name"]!).setColumnMinimumWidth(column: \(column), minSize: \(minSize[column]))\n"
+                }
+            }
+            if let stretch = node.attributes["rowstretch"]?.split(separator: ",").map({ Int($0)! }) {
+                for index in stretch.indices where stretch[index] != 0 {
+                    ui += "        \(node.attributes["name"]!).setRowStretch(row: \(index), stretch: \(stretch[index]))\n"
+                }
+            }
+            if let stretch = node.attributes["columnstretch"]?.split(separator: ",").map({ Int($0)! }) {
+                for index in stretch.indices where stretch[index] != 0 {
+                    ui += "        \(node.attributes["name"]!).setColumnStretch(column: \(index), stretch: \(stretch[index]))\n"
+                }
+            }
             for subNode in node.children {
                 ui += subNode2Swift(node: subNode)
             }
