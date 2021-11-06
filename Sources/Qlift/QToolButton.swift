@@ -4,14 +4,14 @@ import CQlift
 open class QToolButton: QAbstractButton {
 
     public enum ToolButtonStyle: Int32 {
-        case toolButtonIconOnly = 0
-        case toolButtonTextOnly
-        case toolButtonTextBesideIcon
-        case toolButtonTextUnderIcon
-        case toolButtonFollowStyle
+        case ToolButtonIconOnly = 0
+        case ToolButtonTextOnly
+        case ToolButtonTextBesideIcon
+        case ToolButtonTextUnderIcon
+        case ToolButtonFollowStyle
     }
 
-    public var style: ToolButtonStyle = .toolButtonIconOnly {
+    public var style: ToolButtonStyle = .ToolButtonIconOnly {
         didSet {
             QToolButton_setStyle(ptr, style.rawValue)
         }
