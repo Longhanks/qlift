@@ -54,4 +54,9 @@ public class QColor {
     public func setRgb(r: Int, g: Int, b: Int, a: Int = 255) {
         QColor_setRgb(self.ptr, Int32(r), Int32(g), Int32(b), Int32(a))
     }
+
+    public func setRgbF(r: Double, g: Double, b: Double, a: Double) {
+        QColor_setRgbF(ptr, r, g, b, a)
+    }
+
 }

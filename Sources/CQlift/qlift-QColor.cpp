@@ -37,3 +37,6 @@
     static_cast<QColor *>(color)->setRgb(r, g, b, a);
 }
 
+[[maybe_unused]] void QColor_setRgbF(void *color, double r, double g, double b, double a) {
+    static_cast<QColor *>(color)->setRgbF(r, g, b, a);
+}

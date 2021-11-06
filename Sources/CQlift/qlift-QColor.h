@@ -20,6 +20,7 @@ LIBRARY_API void *QColor_new_name(const char *name);
 LIBRARY_API void *QColor_new_rgba(int r, int g, int b, int a);
 LIBRARY_API void QColor_setNamedColor(void *color, const char *name);
 LIBRARY_API void QColor_setRgb(void *color, int r, int g, int b, int a);
+LIBRARY_API void QColor_setRgbF(void *color, double r, double g, double b, double a);
 
 #ifdef __cplusplus
 }
