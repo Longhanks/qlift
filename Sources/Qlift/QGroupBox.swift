@@ -10,9 +10,8 @@ open class QGroupBox: QWidget {
 
     public var title: String {
         get {
-            var len: Int32 = 0
-            let s = QGroupBox_title(ptr, &len)!
-            return String(utf16CodeUnits: s, count: Int(len))
+            let s = QGroupBox_title(ptr)
+            return String(utf16CodeUnits: s.utf16, count: Int(s.size))
         }
         set {
             QGroupBox_setTitle(self.ptr, newValue)

@@ -11,10 +11,9 @@
     static_cast<QGroupBox *>(groupBox)->setAlignment(alignment);
 }
 
-[[maybe_unused]] const ushort *QGroupBox_title(void *groupBox, int *len) {
+[[maybe_unused]] CQString QGroupBox_title(void *groupBox) {
     auto text = static_cast<QGroupBox *>(groupBox)->title();
-    *len = text.size();
-    return text.utf16();
+    return CQString { text.utf16(), text.size() };
 }
 
 [[maybe_unused]] void QGroupBox_setTitle(void *groupBox, const char *title) {

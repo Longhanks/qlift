@@ -36,9 +36,8 @@ open class QProgressBar: QWidget {
 
     public var format: String {
         get {
-            var len: Int32 = 0
-            let s = QProgressBar_format(ptr, &len)!
-            return String(utf16CodeUnits: s, count: Int(len))
+            let s = QProgressBar_format(ptr)
+            return String(utf16CodeUnits: s.utf16, count: Int(s.size))
         }
         set {
             QProgressBar_setFormat(self.ptr, newValue)

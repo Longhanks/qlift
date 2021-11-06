@@ -9,9 +9,8 @@ open class QAbstractButton: QWidget {
 
     public var text: String{
         get {
-            var len: Int32 = 0
-            let s = QAbstractButton_text(ptr, &len)!
-            return String(utf16CodeUnits: s, count: Int(len))
+            let s = QAbstractButton_text(ptr)
+            return String(utf16CodeUnits: s.utf16, count: Int(s.size))
         }
         set {
             QAbstractButton_setText(self.ptr, newValue)

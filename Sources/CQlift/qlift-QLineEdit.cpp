@@ -9,8 +9,6 @@
 #include "qlift-QLineEdit.h"
 
 /*
-void* QLineEdit_new(const char *contents, void *parent);
-void QLineEdit_setPlaceholderText(void *lineEdit, const char *text);
 void QLineEdit_textEditedEvent_Override(void *lineEdit, void *context, void (*mousePressEvent_Functor)(void*, void*));
 */
 
@@ -26,22 +24,19 @@ void QLineEdit_textEditedEvent_Override(void *lineEdit, void *context, void (*mo
     static_cast<QLineEdit*>(lineEdit)->setText(text);
 }
 
-[[maybe_unused]] const ushort* QLineEdit_text(void *lineEdit, int *len) {
+[[maybe_unused]] CQString QLineEdit_text(void *lineEdit) {
     auto text = static_cast<QLineEdit*>(lineEdit)->text();
-    *len = text.size();
-    return text.utf16();
+    return CQString { text.utf16(), text.size() };
 }
 
-[[maybe_unused]] const ushort* QLineEdit_placeholderText(void *lineEdit, int *len) {
+[[maybe_unused]] CQString QLineEdit_placeholderText(void *lineEdit) {
     auto text = static_cast<QLineEdit*>(lineEdit)->placeholderText();
-    *len = text.size();
-    return text.utf16();
+    return CQString { text.utf16(), text.size() };
 }
 
-[[maybe_unused]] const ushort* QLineEdit_selectedText(void *lineEdit, int *len) {
+[[maybe_unused]] CQString QLineEdit_selectedText(void *lineEdit) {
     auto text = static_cast<QLineEdit*>(lineEdit)->selectedText();
-    *len = text.size();
-    return text.utf16();
+    return CQString { text.utf16(), text.size() };
 }
 
 [[maybe_unused]] int QLineEdit_alignment(void *lineEdit) {

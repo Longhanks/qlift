@@ -18,10 +18,9 @@
         static_cast<QFlags<Qt::AlignmentFlag>>(alignment));
 }
 
-[[maybe_unused]] const ushort *QLabel_text(void *label, int *len) {
+[[maybe_unused]] CQString QLabel_text(void *label) {
     auto text = static_cast<QLabel *>(label)->text();
-    *len = text.size();
-    return text.utf16();
+    return CQString { text.utf16(), text.size() };
 }
 
 [[maybe_unused]] void QLabel_setText(void *label, const char *text) {

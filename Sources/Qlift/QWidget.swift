@@ -4,9 +4,8 @@ import CQlift
 open class QWidget: QObject {
     public var windowTitle: String {
         get {
-            var len: Int32 = 0
-            let s = QWidget_windowTitle(ptr, &len)!
-            return String(utf16CodeUnits: s, count: Int(len))
+            let s = QWidget_windowTitle(ptr)
+            return String(utf16CodeUnits: s.utf16, count: Int(s.size))
         }
         set {
             QWidget_setWindowTitle(self.ptr, newValue)
@@ -38,9 +37,8 @@ open class QWidget: QObject {
 
     public var styleSheet: String {
         get {
-            var len: Int32 = 0
-            let s = QWidget_styleSheet(self.ptr, &len)!
-            return String(utf16CodeUnits: s, count: Int(len))
+            let s = QWidget_styleSheet(self.ptr)
+            return String(utf16CodeUnits: s.utf16, count: Int(s.size))
         }
         set { QWidget_setStyleSheet(self.ptr, newValue) }
     }

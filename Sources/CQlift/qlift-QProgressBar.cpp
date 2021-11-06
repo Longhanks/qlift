@@ -30,10 +30,9 @@
     static_cast<QProgressBar *>(progressBar)->setMaximum(max);
 }
 
-[[maybe_unused]] const ushort *QProgressBar_format(void *progressBar, int *len) {
+[[maybe_unused]] CQString QProgressBar_format(void *progressBar) {
     auto text = static_cast<QProgressBar *>(progressBar)->format();
-    *len = text.size();
-    return text.utf16();
+    return CQString { text.utf16(), text.size() };
 }
 
 [[maybe_unused]] void QProgressBar_setFormat(void *progressBar, const char *format) {

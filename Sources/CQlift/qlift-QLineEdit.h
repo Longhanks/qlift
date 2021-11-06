@@ -9,9 +9,9 @@ extern "C" {
 LIBRARY_API void* QLineEdit_new(const char *contents, void *parent);
 LIBRARY_API void QLineEdit_setPlaceholderText(void *lineEdit, const char *text);
 LIBRARY_API void QLineEdit_setText(void *lineEdit, const char *text);
-LIBRARY_API const ushort* QLineEdit_text(void *lineEdit, int *len);
-LIBRARY_API const ushort* QLineEdit_placeholderText(void *lineEdit, int *len);
-LIBRARY_API const ushort* QLineEdit_selectedText(void *lineEdit, int *len);
+LIBRARY_API CQString QLineEdit_text(void *lineEdit);
+LIBRARY_API CQString QLineEdit_placeholderText(void *lineEdit);
+LIBRARY_API CQString QLineEdit_selectedText(void *lineEdit);
 LIBRARY_API void QLineEdit_textChanged_connect(void *lineEdit, void *receiver, void *context, void (*slot_ptr)(void*));
 LIBRARY_API int QLineEdit_alignment(void *lineEdit);
 LIBRARY_API void QLineEdit_setAlignment(void *lineEdit, int flag);

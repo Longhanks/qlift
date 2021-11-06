@@ -13,7 +13,7 @@ LIBRARY_API int QProgressBar_minimum(void *progressBar);
 LIBRARY_API void QProgressBar_setMinimum(void *progressBar, int min);
 LIBRARY_API int QProgressBar_maximum(void *progressBar);
 LIBRARY_API void QProgressBar_setMaximum(void *progressBar, int max);
-LIBRARY_API const ushort *QProgressBar_format(void *progressBar, int *len);
+LIBRARY_API CQString QProgressBar_format(void *progressBar);
 LIBRARY_API void QProgressBar_setFormat(void *progressBar, const char *format);
 LIBRARY_API bool QProgressBar_isTextVisible(void *progressBar);
 LIBRARY_API void QProgressBar_setTextVisible(void *progressBar, bool visible);

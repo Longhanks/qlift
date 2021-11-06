@@ -6,9 +6,8 @@ open class QAction: QObject {
 
     public var text: String {
         get {
-            var len: Int32 = 0
-            let s = QAction_text(ptr, &len)!
-            return String(utf16CodeUnits: s, count: Int(len))
+            let s = QAction_text(ptr)
+            return String(utf16CodeUnits: s.utf16, count: Int(s.size))
         }
         set {
             QAction_setText(self.ptr, newValue)

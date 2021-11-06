@@ -9,7 +9,7 @@ extern "C" {
 LIBRARY_API void *QLabel_new(const char *text, void *parent, int flags);
 LIBRARY_API int QLabel_alignment(void *label);
 LIBRARY_API void QLabel_setAlignment(void *label, int alignment);
-LIBRARY_API const ushort *QLabel_text(void *label, int *len);
+LIBRARY_API CQString QLabel_text(void *label);
 LIBRARY_API void QLabel_setText(void *label, const char *text);
 LIBRARY_API void QLabel_setPixmap(void *label, const void *pixmap);
 LIBRARY_API void QLabel_setImage(void *label, const void *image);

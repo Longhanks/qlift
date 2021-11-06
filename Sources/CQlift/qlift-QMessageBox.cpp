@@ -17,10 +17,9 @@
         ->setIcon(static_cast<QMessageBox::Icon>(icon));
 }
 
-[[maybe_unused]] const ushort *QMessageBox_text(void *messageBox, int *len) {
+[[maybe_unused]] CQString QMessageBox_text(void *messageBox) {
     auto text = static_cast<QMessageBox *>(messageBox)->text();
-    *len = text.size();
-    return text.utf16();
+    return CQString { text.utf16(), text.size() };
 }
 
 [[maybe_unused]] void QMessageBox_setText(void *messageBox, const char *text) {

@@ -10,7 +10,7 @@ LIBRARY_API void *QWidget_new(void *parent, int flags);
 LIBRARY_API bool QWidget_close(void *widget);
 LIBRARY_API void QWidget_show(void *widget);
 LIBRARY_API void QWidget_addAction(void *widget, void *action);
-LIBRARY_API const ushort *QWidget_windowTitle(void *widget, int *len);
+LIBRARY_API CQString QWidget_windowTitle(void *widget);
 LIBRARY_API void QWidget_setWindowTitle(void *widget, const char *title);
 LIBRARY_API void *QWidget_geometry(void *widget);
 LIBRARY_API void QWidget_setGeometry(void *widget, void *rect);
@@ -55,7 +55,7 @@ LIBRARY_API void QWidget_swiftHookCleanup(void *widget);
 LIBRARY_API void *QWidget_sizePolicy(void *widget);
 LIBRARY_API void QWidget_setSizePolicy(void *widget, void *policy);
 
-LIBRARY_API const ushort *QWidget_styleSheet(void *widget, int *len);
+LIBRARY_API CQString QWidget_styleSheet(void *widget);
 LIBRARY_API void QWidget_setStyleSheet(void *widget, const char *styleSheet);
 LIBRARY_API void QWidget_setPalette(void *widget, const void *palette);
 LIBRARY_API bool QWidget_isVisible(void *widget);

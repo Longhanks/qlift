@@ -14,9 +14,8 @@ open class QLabel: QFrame {
 
     public var text: String {
         get {
-            var len: Int32 = 0
-            let s = QLabel_text(ptr, &len)!
-            return String(utf16CodeUnits: s, count: Int(len))
+            let s = QLabel_text(ptr)
+            return String(utf16CodeUnits: s.utf16, count: Int(s.size))
         }
         set {
             QLabel_setText(self.ptr, newValue)

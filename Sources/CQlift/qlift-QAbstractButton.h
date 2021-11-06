@@ -6,7 +6,7 @@
 extern "C" {
 #endif
 
-LIBRARY_API const ushort *QAbstractButton_text(void *abstractButton, int *len);
+LIBRARY_API CQString QAbstractButton_text(void *abstractButton);
 LIBRARY_API void QAbstractButton_setText(void *abstractButton,
                                          const char *text);
 LIBRARY_API void QAbstractButton_clicked_connect(void *abstractButton,

@@ -19,9 +19,8 @@ open class QLineEdit: QWidget {
 
     public var text: String {
         get {
-            var len: Int32 = 0
-            let s = QLineEdit_text(ptr, &len)!
-            return String(utf16CodeUnits: s, count: Int(len))
+            let s = QLineEdit_text(ptr)
+            return String(utf16CodeUnits: s.utf16, count: Int(s.size))
         }
         set {
             QLineEdit_setText(ptr, newValue)
@@ -30,9 +29,8 @@ open class QLineEdit: QWidget {
 
     public var placeholderText: String {
         get {
-            var len: Int32 = 0
-            let s = QLineEdit_placeholderText(ptr, &len)!
-            return String(utf16CodeUnits: s, count: Int(len))
+            let s = QLineEdit_placeholderText(ptr)
+            return String(utf16CodeUnits: s.utf16, count: Int(s.size))
         }
         set {
             QLineEdit_setPlaceholderText(ptr, newValue)
@@ -41,9 +39,8 @@ open class QLineEdit: QWidget {
 
     public var selectedText: String {
         get {
-            var len: Int32 = 0
-            let s = QLineEdit_selectedText(ptr, &len)!
-            return String(utf16CodeUnits: s, count: Int(len))
+            let s = QLineEdit_selectedText(ptr)
+            return String(utf16CodeUnits: s.utf16, count: Int(s.size))
         }
     }
 
