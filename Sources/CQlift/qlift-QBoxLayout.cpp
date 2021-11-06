@@ -27,3 +27,11 @@ QBoxLayout_addLayout(void *boxLayout, void *layout, int stretch) {
         stretch,
         static_cast<QFlags<Qt::AlignmentFlag>>(alignment));
 }
+
+[[maybe_unused]] void QBoxLayout_setStretch(void *boxLayout, int index, int stretch) {
+    static_cast<QBoxLayout *>(boxLayout)->setStretch(index, stretch);
+}
+
+[[maybe_unused]] int QBoxLayout_stretch(void *boxLayout, int index) {
+    return static_cast<QBoxLayout *>(boxLayout)->stretch(index);
+}

@@ -13,6 +13,10 @@ open class QBoxLayout: QObject, QLayout {
         super.init(ptr: ptr, parent: parent)
     }
 
+    deinit {
+        checkDeleteQtObj()
+    }
+
     public func add(item: QLayoutItem) {
         QBoxLayout_addItem(self.ptr, item.ptr)
         item.needsDelete = false
@@ -30,7 +34,11 @@ open class QBoxLayout: QObject, QLayout {
         self.add(widget: widget, stretch: 0)
     }
 
-    deinit {
-        checkDeleteQtObj()
+    public func setStretch(index: Int32, stretch: Int32) {
+        QBoxLayout_setStretch(ptr, index, stretch)
+    }
+
+    public func stretch(index: Int32) -> Int32 {
+        QBoxLayout_stretch(ptr, index)
     }
 }

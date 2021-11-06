@@ -18,6 +18,9 @@ LIBRARY_API void QBoxLayout_addWidget(void *boxLayout,
                                       int stretch,
                                       int alignment);
 
+LIBRARY_API void QBoxLayout_setStretch(void *boxLayout, int index, int stretch);
+LIBRARY_API int QBoxLayout_stretch(void *boxLayout, int index);
+
 #ifdef __cplusplus
 }
 #endif
