@@ -189,8 +189,7 @@ public class QliftUIParser: NSObject {
             case "flat":
                 ui += "        \(node.parent!.attributes["name"]!).isFlat = \(propertyNode2Swift(node: node.children[0]))\n"
             default:
-                let parentTag = node.parent!.text
-                if parentTag == "item" {
+                if node.parent!.text == "item" {
                     ui += "        \(node.parent!.parent!.attributes["name"]!).add(item: \(propertyNode2Swift(node: node.children[0])))\n"
                 } else {
                     ui += "        \(node.parent!.attributes["name"]!).\(node.attributes["name"]!) = \(propertyNode2Swift(node: node.children[0]))\n"
@@ -299,13 +298,21 @@ public class QliftUIParser: NSObject {
 
                 // Determine if parent is item (in layout) -> needs to add the widget to the layout via add(item:)
                 if node.parent!.text == "item" {
+                    ui += "        \(node.parent!.parent!.attributes["name"]!)."
                     if let row = node.parent!.attributes["row"],
                        let column = node.parent!.attributes["column"] {
-                        // add(widget: QWidget, row: Int32, column: Int32, alignment: Qt.Alignment? = nil)
-                        ui += "        \(node.parent!.parent!.attributes["name"]!).add(widget: \(node.attributes["name"]!), row: \(row), column: \(column))\n"
+                        let colSpan = node.parent!.attributes["colspan"]
+                        let rowSpan = node.parent!.attributes["rowspan"]
+                        if colSpan != nil || rowSpan != nil {
+                            // add(widget: QWidget, fromRow: Int32, fromColumn: Int32, rowSpan: Int32, columnSpan: Int32, alignment: Qt.Alignment = [])
+                            ui += "add(widget: \(node.attributes["name"]!), fromRow: \(row), fromColumn: \(column), rowSpan: \(rowSpan ?? "1"), columnSpan: \(colSpan ?? "1"))\n"
+                        } else {
+                            // add(widget: QWidget, row: Int32, column: Int32, alignment: Qt.Alignment? = nil)
+                            ui += "add(widget: \(node.attributes["name"]!), row: \(row), column: \(column))\n"
+                        }
                     }
                     else {
-                        ui += "        \(node.parent!.parent!.attributes["name"]!).add(widget: \(node.attributes["name"]!))\n"
+                        ui += "add(widget: \(node.attributes["name"]!))\n"
                     }
                 }
 
@@ -331,6 +338,11 @@ public class QliftUIParser: NSObject {
             } else {
                 ui += "        \(node.attributes["name"]!).contentsMargins = QMargins(left: 0, top: 0, right: 0, bottom: 0)\n"
             }
+
+            for subNode in node.children {
+                ui += subNode2Swift(node: subNode)
+            }
+
             if let stretch = node.attributes["stretch"]?.split(separator: ",").map({ Int($0)! }) {
                 for index in stretch.indices where stretch[index] != 0 {
                     ui += "        \(node.attributes["name"]!).setStretch(index: \(index), stretch: \(stretch[index]))\n"
@@ -356,10 +368,8 @@ public class QliftUIParser: NSObject {
                     ui += "        \(node.attributes["name"]!).setColumnStretch(column: \(index), stretch: \(stretch[index]))\n"
                 }
             }
-            for subNode in node.children {
-                ui += subNode2Swift(node: subNode)
-            }
             if node.parent!.text == "item" {
+                // May be needed col, row, span
                 ui += "        \(node.parent!.parent!.attributes["name"]!).add(layout: \(node.attributes["name"]!))\n"
             }
             return ui
