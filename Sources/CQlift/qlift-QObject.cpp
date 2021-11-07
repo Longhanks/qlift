@@ -37,3 +37,12 @@
 [[maybe_unused]] bool QObject_destroyed_disconnect(void *connection) {
     return QObject::disconnect(*static_cast<QMetaObject::Connection *>(connection));
 }
+
+[[maybe_unused]] void QObject_dumpObjectInfo(void *object) {
+    static_cast<QObject *>(object)->dumpObjectInfo();
+}
+
+[[maybe_unused]] void QObject_dumpObjectTree(void *object) {
+    static_cast<QObject *>(object)->dumpObjectTree();
+}
+

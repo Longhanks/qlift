@@ -19,6 +19,9 @@ LIBRARY_API void *QObject_destroyed_connect(void *object,
                                             void (*slot_ptr)(void *));
 LIBRARY_API bool QObject_destroyed_disconnect(void *connection);
 
+LIBRARY_API void QObject_dumpObjectInfo(void *object);
+LIBRARY_API void QObject_dumpObjectTree(void *object);
+
 #ifdef __cplusplus
 }
 #endif

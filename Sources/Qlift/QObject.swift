@@ -54,4 +54,12 @@ open class QObject {
             self.ptr = nil
         }
     }
+
+    public func dumpObjectInfo() {
+        QObject_dumpObjectInfo(ptr)
+    }
+
+    public func dumpObjectTree() {
+        QObject_dumpObjectTree(ptr)
+    }
 }
