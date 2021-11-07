@@ -21,6 +21,9 @@ LIBRARY_API bool QObject_destroyed_disconnect(void *connection);
 
 LIBRARY_API void QObject_dumpObjectInfo(void *object);
 LIBRARY_API void QObject_dumpObjectTree(void *object);
+LIBRARY_API void *QObject_getSwiftObject(void *object);
+LIBRARY_API void QObject_setSwiftObject(void *object, void *swiftObject);
+LIBRARY_API void QObject_clearSwiftObject(void *object);
 
 #ifdef __cplusplus
 }

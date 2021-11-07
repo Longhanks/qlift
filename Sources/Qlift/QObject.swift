@@ -11,20 +11,11 @@ open class QObject {
         self.ptr = QObject_new(parent?.ptr)
         self.parent = parent
         let rawSelf = Unmanaged.passUnretained(self).toOpaque()
-        QObject_destroyed_connect(self.ptr, self.ptr, rawSelf, { (raw) in
+        QObject_setSwiftObject(ptr, rawSelf)
+        QObject_destroyed_connect(self.ptr, self.ptr, rawSelf) { raw in
             if let raw = raw {
                 Unmanaged<QObject>.fromOpaque(raw).takeUnretainedValue().ptr = nil
             }
-        })
-    }
-
-    public var name: String {
-        get {
-            let s = QObject_objectName(ptr)
-            return String(utf16CodeUnits: s.utf16, count: Int(s.size))
-        }
-        set {
-            QObject_setObjectName(ptr, newValue)
         }
     }
 
@@ -34,7 +25,8 @@ open class QObject {
         parent_ptr = QObject_parent(ptr)
 
         let rawSelf = Unmanaged.passUnretained(self).toOpaque()
-        connection_destroy = QObject_destroyed_connect(self.ptr, self.ptr, rawSelf) { (raw) in
+        QObject_setSwiftObject(ptr, rawSelf)
+        connection_destroy = QObject_destroyed_connect(self.ptr, self.ptr, rawSelf) { raw in
             if let raw = raw {
                 Unmanaged<QObject>.fromOpaque(raw).takeUnretainedValue().ptr = nil
             }
@@ -47,11 +39,22 @@ open class QObject {
 
     func checkDeleteQtObj() {
         if self.ptr != nil {
+            QObject_clearSwiftObject(self.ptr)
             QObject_destroyed_disconnect(connection_destroy)
-            if parent_ptr == nil {
+            if QObject_parent(ptr) == nil {
                 QObject_delete(self.ptr)
             }
             self.ptr = nil
+        }
+    }
+
+    public var objectName: String {
+        get {
+            let s = QObject_objectName(ptr)
+            return String(utf16CodeUnits: s.utf16, count: Int(s.size))
+        }
+        set {
+            QObject_setObjectName(ptr, newValue)
         }
     }
 
@@ -61,5 +64,10 @@ open class QObject {
 
     public func dumpObjectTree() {
         QObject_dumpObjectTree(ptr)
+    }
+
+    static public func swiftQObject(from ptr: UnsafeMutableRawPointer) -> QObject? {
+        guard let raw = QObject_getSwiftObject(ptr) else { return nil }
+        return Unmanaged<QObject>.fromOpaque(raw).takeUnretainedValue()
     }
 }

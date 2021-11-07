@@ -2,6 +2,35 @@ import CQlift
 
 
 open class QWidget: QObject {
+    public init(parent: QWidget? = nil, flags: Qt.WindowFlags = .Widget) {
+        super.init(ptr: QWidget_new(parent?.ptr, flags.rawValue), parent: parent)
+
+        let rawSelf = Unmanaged.passUnretained(self).toOpaque()
+
+        let functorSizeHint: @convention(c) (UnsafeMutableRawPointer?) -> UnsafeMutableRawPointer? = { context in
+            let _self = Unmanaged<QWidget>.fromOpaque(context!).takeUnretainedValue()
+            return _self.sizeHint.ptr
+        }
+
+        QWidget_sizeHint_Override(self.ptr, rawSelf, functorSizeHint)
+
+        let functorMousePressEvent: @convention(c) (UnsafeMutableRawPointer?, UnsafeMutableRawPointer?) -> Void = { context, mouseEvent in
+            let _self = Unmanaged<QWidget>.fromOpaque(context!).takeUnretainedValue()
+            _self.mousePressEvent(event: QMouseEvent(ptr: mouseEvent!))
+        }
+
+        QWidget_mousePressEvent_Override(self.ptr, rawSelf, functorMousePressEvent)
+    }
+
+    public init(ptr: UnsafeMutableRawPointer, parent: QWidget? = nil) {
+        super.init(ptr: ptr, parent: parent)
+    }
+
+    deinit {
+        QWidget_swiftHookCleanup(ptr)
+        checkDeleteQtObj()
+    }
+
     public var windowTitle: String {
         get {
             let s = QWidget_windowTitle(ptr)
@@ -143,37 +172,8 @@ open class QWidget: QObject {
         Qt.WindowStates(rawValue: QWidget_windowState(ptr))
     }
 
-    public init(parent: QWidget? = nil, flags: Qt.WindowFlags = .Widget) {
-        super.init(ptr: QWidget_new(parent?.ptr, flags.rawValue), parent: parent)
-
-        let rawSelf = Unmanaged.passUnretained(self).toOpaque()
-
-        let functorSizeHint: @convention(c) (UnsafeMutableRawPointer?) -> UnsafeMutableRawPointer? = { context in
-            let _self = Unmanaged<QWidget>.fromOpaque(context!).takeUnretainedValue()
-            return _self.sizeHint.ptr
-        }
-
-        QWidget_sizeHint_Override(self.ptr, rawSelf, functorSizeHint)
-
-        let functorMousePressEvent: @convention(c) (UnsafeMutableRawPointer?, UnsafeMutableRawPointer?) -> Void = { context, mouseEvent in
-            let _self = Unmanaged<QWidget>.fromOpaque(context!).takeUnretainedValue()
-            _self.mousePressEvent(event: QMouseEvent(ptr: mouseEvent!))
-        }
-
-        QWidget_mousePressEvent_Override(self.ptr, rawSelf, functorMousePressEvent)
-    }
-
-    public init(ptr: UnsafeMutableRawPointer, parent: QWidget? = nil) {
-        super.init(ptr: ptr, parent: parent)
-    }
-
     public func add(action: QAction) {
         QWidget_addAction(self.ptr, action.ptr)
-    }
-
-    deinit {
-        QWidget_swiftHookCleanup(ptr)
-        checkDeleteQtObj()
     }
 
     open func mousePressEvent(event: QMouseEvent) {

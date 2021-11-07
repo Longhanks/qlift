@@ -1,4 +1,6 @@
 #include <QObject>
+#include <QVariant>
+#include <iostream>
 
 #include "qlift-QObject.h"
 
@@ -46,3 +48,16 @@
     static_cast<QObject *>(object)->dumpObjectTree();
 }
 
+[[maybe_unused]] void *QObject_getSwiftObject(void *object) {
+    auto property = static_cast<QObject *>(object)->property("_swift_object");
+    return property.value<void*>();
+}
+
+[[maybe_unused]] void QObject_setSwiftObject(void *object, void *swiftObject) {
+    QVariant property = QVariant::fromValue(swiftObject);
+    static_cast<QObject *>(object)->setProperty("_swift_object", property);
+}
+
+[[maybe_unused]] void QObject_clearSwiftObject(void *object) {
+    static_cast<QObject *>(object)->setProperty("_swift_object", {});
+}

@@ -224,7 +224,7 @@ public class QliftUIParser: NSObject {
             } else {
                 ui += "        \(node.attributes["name"]!) = \(node.attributes["class"]!)(parent: \(parentName))\n"
             }
-            ui += "        \(node.attributes["name"]!).name = \"\(node.attributes["name"]!)\"\n"
+            ui += "        \(node.attributes["name"]!).objectName = \"\(node.attributes["name"]!)\"\n"
 
             // 3. Handle special cases: QMenuBar, QMenu, QToolBar, QStatusBar, QDockWidget
             switch node.attributes["class"]! {
@@ -318,7 +318,7 @@ public class QliftUIParser: NSObject {
         case "layout":
             let parent = node.parent!.text == "widget" ? node.parent!.attributes["name"]! : "nil"
             ui += "        \(node.attributes["name"]!) = \(node.attributes["class"]!)(parent: \(parent))\n"
-            ui += "        \(node.attributes["name"]!).name = \"\(node.attributes["name"]!)\"\n"
+            ui += "        \(node.attributes["name"]!).objectName = \"\(node.attributes["name"]!)\"\n"
             if let contentMargins =  preextractContentsMargins(node: node) {
                 ui += contentMargins
             } else {
