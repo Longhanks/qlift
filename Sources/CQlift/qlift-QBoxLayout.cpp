@@ -35,3 +35,22 @@ QBoxLayout_addLayout(void *boxLayout, void *layout, int stretch) {
 [[maybe_unused]] int QBoxLayout_stretch(void *boxLayout, int index) {
     return static_cast<QBoxLayout *>(boxLayout)->stretch(index);
 }
+
+[[maybe_unused]] void *QBoxLayout_geometry(void *boxLayout) {
+    auto stackRect = static_cast<QBoxLayout *>(boxLayout)->geometry();
+    return static_cast<void *>(new QRect{
+        stackRect.x(), stackRect.y(), stackRect.width(), stackRect.height()});
+}
+
+[[maybe_unused]] void QBoxLayout_setGeometry(void *boxLayout, void *rect) {
+    if (rect != nullptr) {
+        static_cast<QBoxLayout *>(boxLayout)->setGeometry(
+                                                    *static_cast<QRect *>(rect));
+    } else {
+        static_cast<QBoxLayout *>(boxLayout)->setGeometry(QRect());
+    }
+}
+
+[[maybe_unused]] int QBoxLayout_count(void *boxLayout) {
+    return static_cast<QBoxLayout *>(boxLayout)->count();
+}

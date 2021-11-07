@@ -17,6 +17,11 @@ open class QBoxLayout: QObject, QLayout {
         checkDeleteQtObj()
     }
 
+    public var geometry: QRect? {
+        get { QRect(ptr: QBoxLayout_geometry(self.ptr)) }
+        set { QBoxLayout_setGeometry(self.ptr, newValue?.ptr) }
+    }
+
     public func add(item: QLayoutItem) {
         QBoxLayout_addItem(self.ptr, item.ptr)
         item.needsDelete = false
@@ -40,5 +45,9 @@ open class QBoxLayout: QObject, QLayout {
 
     public func stretch(index: Int32) -> Int32 {
         QBoxLayout_stretch(ptr, index)
+    }
+
+    public func count() -> Int32 {
+        QBoxLayout_count(ptr)
     }
 }
