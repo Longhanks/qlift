@@ -18,20 +18,20 @@ typedef struct {
     double y;
 } CQPointF;
 
-void *QGraphicsDropShadowEffect_new(void *parent);
-void QGraphicsDropShadowEffect_delete(void *graphicsEffect);
-double QGraphicsDropShadowEffect_blurRadius(void *graphicsEffect);
-double QGraphicsDropShadowEffect_xOffset(void *graphicsEffect);
-double QGraphicsDropShadowEffect_yOffset(void *graphicsEffect);
-void* QGraphicsDropShadowEffect_color(void *graphicsEffect);
-CQPointF QGraphicsDropShadowEffect_offset(void *graphicsEffect);
+LIBRARY_API void *QGraphicsDropShadowEffect_new(void *parent);
+LIBRARY_API void QGraphicsDropShadowEffect_delete(void *graphicsEffect);
+LIBRARY_API double QGraphicsDropShadowEffect_blurRadius(void *graphicsEffect);
+LIBRARY_API double QGraphicsDropShadowEffect_xOffset(void *graphicsEffect);
+LIBRARY_API double QGraphicsDropShadowEffect_yOffset(void *graphicsEffect);
+LIBRARY_API void* QGraphicsDropShadowEffect_color(void *graphicsEffect);
+LIBRARY_API CQPointF QGraphicsDropShadowEffect_offset(void *graphicsEffect);
 
-void QGraphicsDropShadowEffect_setBlurRadius(void *graphicsEffect, double blurRadius);
-void QGraphicsDropShadowEffect_setColor(void *graphicsEffect, void *color);
-void QGraphicsDropShadowEffect_setOffset(void *graphicsEffect, double dx, double dy);
-void QGraphicsDropShadowEffect_setOffsetD(void *graphicsEffect, double d);
-void QGraphicsDropShadowEffect_setXOffset(void *graphicsEffect, double dx);
-void QGraphicsDropShadowEffect_setYOffset(void *graphicsEffect, double dy);
+LIBRARY_API void QGraphicsDropShadowEffect_setBlurRadius(void *graphicsEffect, double blurRadius);
+LIBRARY_API void QGraphicsDropShadowEffect_setColor(void *graphicsEffect, void *color);
+LIBRARY_API void QGraphicsDropShadowEffect_setOffset(void *graphicsEffect, double dx, double dy);
+LIBRARY_API void QGraphicsDropShadowEffect_setOffsetD(void *graphicsEffect, double d);
+LIBRARY_API void QGraphicsDropShadowEffect_setXOffset(void *graphicsEffect, double dx);
+LIBRARY_API void QGraphicsDropShadowEffect_setYOffset(void *graphicsEffect, double dy);
 
 #ifdef __cplusplus
 }
