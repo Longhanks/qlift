@@ -92,6 +92,7 @@ open class QGridLayout: QObject, QLayout {
 
     public func add(item: QLayoutItem, row: Int32, column: Int32, rowSpan: Int32 = 1, columnSpan: Int32 = 1, alignment: Qt.Alignment = []) {
         QGridLayout_addItem(self.ptr, item.ptr, row, column, rowSpan, columnSpan, alignment.rawValue)
+        item.needsDelete = false
     }
 
     public func add(layout: QLayout, row: Int32, column: Int32, alignment: Qt.Alignment = Qt.Alignment(rawValue: 0)) {

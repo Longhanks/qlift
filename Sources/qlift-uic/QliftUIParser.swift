@@ -298,22 +298,7 @@ public class QliftUIParser: NSObject {
 
                 // Determine if parent is item (in layout) -> needs to add the widget to the layout via add(item:)
                 if node.parent!.text == "item" {
-                    ui += "        \(node.parent!.parent!.attributes["name"]!)."
-                    if let row = node.parent!.attributes["row"],
-                       let column = node.parent!.attributes["column"] {
-                        let colSpan = node.parent!.attributes["colspan"]
-                        let rowSpan = node.parent!.attributes["rowspan"]
-                        if colSpan != nil || rowSpan != nil {
-                            // add(widget: QWidget, fromRow: Int32, fromColumn: Int32, rowSpan: Int32, columnSpan: Int32, alignment: Qt.Alignment = [])
-                            ui += "add(widget: \(node.attributes["name"]!), fromRow: \(row), fromColumn: \(column), rowSpan: \(rowSpan ?? "1"), columnSpan: \(colSpan ?? "1"))\n"
-                        } else {
-                            // add(widget: QWidget, row: Int32, column: Int32, alignment: Qt.Alignment? = nil)
-                            ui += "add(widget: \(node.attributes["name"]!), row: \(row), column: \(column))\n"
-                        }
-                    }
-                    else {
-                        ui += "add(widget: \(node.attributes["name"]!))\n"
-                    }
+                    ui += "        \(node.parent!.parent!.attributes["name"]!).add(widget: \(node.attributes["name"]!)" + itemNodeTail(node: node.parent!)
                 }
 
                 // Determine if parent is a QDockWidget or QMainWindow -> needs to set widget / centralWidget
@@ -333,6 +318,7 @@ public class QliftUIParser: NSObject {
         case "layout":
             let parent = node.parent!.text == "widget" ? node.parent!.attributes["name"]! : "nil"
             ui += "        \(node.attributes["name"]!) = \(node.attributes["class"]!)(parent: \(parent))\n"
+            ui += "        \(node.attributes["name"]!).name = \"\(node.attributes["name"]!)\"\n"
             if let contentMargins =  preextractContentsMargins(node: node) {
                 ui += contentMargins
             } else {
@@ -369,8 +355,7 @@ public class QliftUIParser: NSObject {
                 }
             }
             if node.parent!.text == "item" {
-                // May be needed col, row, span
-                ui += "        \(node.parent!.parent!.attributes["name"]!).add(layout: \(node.attributes["name"]!))\n"
+                ui += "        \(node.parent!.parent!.attributes["name"]!).add(layout: \(node.attributes["name"]!)" + itemNodeTail(node: node.parent!)
             }
             return ui
 
@@ -412,6 +397,24 @@ public class QliftUIParser: NSObject {
             current = parent
         }
         return current
+    }
+
+    private func itemNodeTail(node: Node) -> String {
+        if let row = node.attributes["row"],
+           let column = node.attributes["column"] {
+            let colSpan = node.attributes["colspan"]
+            let rowSpan = node.attributes["rowspan"]
+            if colSpan != nil || rowSpan != nil {
+                // add(widget: QWidget, fromRow: Int32, fromColumn: Int32, rowSpan: Int32, columnSpan: Int32, alignment: Qt.Alignment = [])
+                return ", fromRow: \(row), fromColumn: \(column), rowSpan: \(rowSpan ?? "1"), columnSpan: \(colSpan ?? "1"))\n"
+            } else {
+                // add(widget: QWidget, row: Int32, column: Int32, alignment: Qt.Alignment? = nil)
+                return ", row: \(row), column: \(column))\n"
+            }
+        }
+        else {
+            return ")\n"
+        }
     }
 
     private func propertyNode2Swift(node: Node) -> String {
@@ -533,7 +536,8 @@ public class QliftUIParser: NSObject {
         }
 
         ui += "        \(node.attributes["name"]!) = QSpacerItem(width: \(width), height: \(height), horizontalPolicy: \(horizontalPolicy), verticalPolicy: \(verticalPolicy))\n"
-        ui += "        \(node.parent!.parent!.attributes["name"]!).add(item: \(node.attributes["name"]!))\n"
+        ui += "        \(node.parent!.parent!.attributes["name"]!).add(item: \(node.attributes["name"]!)" + itemNodeTail(node: node.parent!)
+
         return ui
     }
 }
