@@ -181,6 +181,11 @@ void QLineEdit_textEditedEvent_Override(void *lineEdit, void *context, void (*mo
     return new QMargins(m.left(), m.top(), m.right(), m.bottom());
 }
 
+[[maybe_unused]] void *QLineEdit_addAction(void *lineEdit, const void *icon, int position) {
+    return static_cast<QLineEdit*>(lineEdit)->addAction(*static_cast<const QIcon *>(icon),
+                                                        static_cast<QLineEdit::ActionPosition>(position));
+}
+
 [[maybe_unused]] void QLiftLineEdit_swiftHookCleanup(void *lineEdit) {
     if (lineEdit != nullptr)
         static_cast<QliftLineEdit*>(lineEdit)->swiftHookCleanup();

@@ -19,7 +19,6 @@ LIBRARY_API void QLineEdit_setAlignment(void *lineEdit, int flag);
 LIBRARY_API int QLineEdit_echoMode(void *lineEdit);
 LIBRARY_API void QLineEdit_setEchoMode(void *lineEdit, int mode);
 
-//LIBRARY_API QAction *QLineEdit_addAction(const QIcon &icon, QLineEdit::ActionPosition position);
 LIBRARY_API void QLineEdit_backspace(void *lineEdit);
 LIBRARY_API void QLineEdit_cursorBackward(void *lineEdit, bool mark, int steps);
 LIBRARY_API void QLineEdit_cursorForward(void *lineEdit, bool mark, int steps);
@@ -62,6 +61,8 @@ LIBRARY_API int QLineEdit_selectionStart(void *lineEdit);
 LIBRARY_API void *QLineEdit_textMargins(void *lineEdit);
 
 #pragma clang assume_nonnull begin
+LIBRARY_API void *QLineEdit_addAction(void *lineEdit, void *icon, int position);
+
 LIBRARY_API void QLineEdit_textChanged_connect(void *lineEdit,
                                                void *receiver,
                                                void *context,

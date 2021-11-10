@@ -28,23 +28,14 @@ open class QAction: QObject {
     }
 
     open func connectTriggered(receiver: QObject? = nil, to slot: @escaping ((Bool) -> Void)) {
-        var object: QObject = self
-        if receiver != nil {
-            object = receiver!
-        }
+        let object: QObject = receiver ?? self
 
         self.triggeredCallback = slot
-
-        let functor: @convention(c) (UnsafeMutableRawPointer?, Bool) -> Void = { raw, checked in
-            if raw != nil {
-                let _self = Unmanaged<QAction>.fromOpaque(raw!).takeUnretainedValue()
-                _self.triggeredCallback!(checked)
-            }
-        }
-
         let rawSelf = Unmanaged.passUnretained(self).toOpaque()
-
-        QAction_triggered_connect(self.ptr, object.ptr, rawSelf, functor)
+        QAction_triggered_connect(self.ptr, object.ptr, rawSelf) { raw, checked in
+            let _self = Unmanaged<QAction>.fromOpaque(raw).takeUnretainedValue()
+            _self.triggeredCallback?(checked)
+        }
     }
 }
 

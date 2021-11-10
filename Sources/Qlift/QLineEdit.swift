@@ -103,6 +103,11 @@ open class QLineEdit: QWidget {
         return String(utf16CodeUnits: s.utf16, count: Int(s.size))
     }
 
+    public func addAction(icon: QIcon, position: ActionPosition) -> QAction {
+        let actionPtr = QLineEdit_addAction(ptr, icon.ptr, position.rawValue)
+        return QAction(ptr: actionPtr)
+    }
+
     open func connectTextEdited(receiver: QObject? = nil, to slot: @escaping ((String) -> Void)) {
         let object: QObject = receiver ?? self
         self.textEditedCallback = slot
