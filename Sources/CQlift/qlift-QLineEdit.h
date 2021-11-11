@@ -28,12 +28,12 @@ LIBRARY_API void QLineEdit_del(void *lineEdit);
 LIBRARY_API void QLineEdit_deselect(void *lineEdit);
 LIBRARY_API void QLineEdit_end(void *lineEdit, bool mark);
 LIBRARY_API void QLineEdit_home(void *lineEdit, bool mark);
-LIBRARY_API void QLineEdit_insert(void *lineEdit, const void *newText);
+LIBRARY_API void QLineEdit_insert(void *lineEdit, const char *newText);
 LIBRARY_API void QLineEdit_setClearButtonEnabled(void *lineEdit, bool enable);
 LIBRARY_API void QLineEdit_setCursorPosition(void *lineEdit, int position);
 LIBRARY_API void QLineEdit_setDragEnabled(void *lineEdit, bool b);
 LIBRARY_API void QLineEdit_setFrame(void *lineEdit, bool frame);
-LIBRARY_API void QLineEdit_setInputMask(void *lineEdit, const void *inputMask);
+LIBRARY_API void QLineEdit_setInputMask(void *lineEdit, const char *inputMask);
 LIBRARY_API void QLineEdit_setMaxLength(void *lineEdit, int len);
 LIBRARY_API void QLineEdit_setModified(void *lineEdit, bool modified);
 LIBRARY_API void QLineEdit_setReadOnly(void *lineEdit, bool readOnly);
@@ -61,7 +61,7 @@ LIBRARY_API int QLineEdit_selectionStart(void *lineEdit);
 LIBRARY_API void *QLineEdit_textMargins(void *lineEdit);
 
 #pragma clang assume_nonnull begin
-LIBRARY_API void *QLineEdit_addAction(void *lineEdit, void *icon, int position);
+LIBRARY_API void *QLineEdit_addAction(void *lineEdit, const void *icon, int position);
 
 LIBRARY_API void QLineEdit_textChanged_connect(void *lineEdit,
                                                void *receiver,
