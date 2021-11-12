@@ -6,15 +6,14 @@ open class QAbstractButton: QWidget {
     var clickedCallback: (() -> Void)?
     var toggledCallback: ((Bool) -> Void)?
     var pressedCallback: (() -> Void)?
+    var releasedCallback: (() -> Void)?
 
     public var text: String{
         get {
             let s = QAbstractButton_text(ptr)
             return String(utf16CodeUnits: s.utf16, count: Int(s.size))
         }
-        set {
-            QAbstractButton_setText(self.ptr, newValue)
-        }
+        set { QAbstractButton_setText(self.ptr, newValue) }
     }
 
     override init(ptr: UnsafeMutableRawPointer, parent: QWidget? = nil) {
@@ -30,101 +29,72 @@ open class QAbstractButton: QWidget {
     }
 
     public var checkable: Bool {
-        get {
-            QAbstractButton_getCheckable(ptr)
-        }
-        set {
-            QAbstractButton_setCheckable(ptr, newValue)
-        }
+        get { QAbstractButton_getCheckable(ptr) }
+        set { QAbstractButton_setCheckable(ptr, newValue) }
     }
 
     public var checked: Bool {
-        get {
-            QAbstractButton_getChecked(ptr)
-        }
-        set {
-            QAbstractButton_setChecked(ptr, newValue)
-        }
+        get { QAbstractButton_getChecked(ptr) }
+        set { QAbstractButton_setChecked(ptr, newValue) }
+    }
+
+    public var down: Bool {
+        get { QAbstractButton_isDown(ptr) }
+        set { QAbstractButton_setDown(ptr, newValue) }
     }
 
     open func connectClicked(receiver: QObject? = nil, to slot: @escaping ((Bool) -> Void)) {
-        var object: QObject = self
-        if receiver != nil {
-            object = receiver!
-        }
-
+        let object: QObject = receiver ?? self
         self.clickedBoolCallback = slot
 
-        let functor: @convention(c) (UnsafeMutableRawPointer?, Bool) -> Void = { raw, checked in
-            if raw != nil {
-                let _self = Unmanaged<QAbstractButton>.fromOpaque(raw!).takeUnretainedValue()
-                _self.clickedBoolCallback!(checked)
-            }
-        }
-
         let rawSelf = Unmanaged.passUnretained(self).toOpaque()
-
-        QAbstractButton_clicked_connect(self.ptr, object.ptr, rawSelf, functor)
+        QAbstractButton_clicked_connect(self.ptr, object.ptr, rawSelf) { raw, checked in
+            let _self = Unmanaged<QAbstractButton>.fromOpaque(raw!).takeUnretainedValue()
+            _self.clickedBoolCallback!(checked)
+        }
     }
 
     open func connectClicked(receiver: QObject? = nil, to slot: @escaping (() -> Void)) {
-        var object: QObject = self
-        if receiver != nil {
-            object = receiver!
-        }
-
+        let object: QObject = receiver ?? self
         self.clickedCallback = slot
 
-        let functor: @convention(c) (UnsafeMutableRawPointer?, Bool) -> Void = { raw, checked in
-            if raw != nil {
-                let _self = Unmanaged<QAbstractButton>.fromOpaque(raw!).takeUnretainedValue()
-                _self.clickedCallback!()
-            }
-        }
-
         let rawSelf = Unmanaged.passUnretained(self).toOpaque()
-
-        QAbstractButton_clicked_connect(self.ptr, object.ptr, rawSelf, functor)
+        QAbstractButton_clicked_connect(self.ptr, object.ptr, rawSelf) { raw, checked in
+            let _self = Unmanaged<QAbstractButton>.fromOpaque(raw!).takeUnretainedValue()
+            _self.clickedCallback!()
+        }
     }
 
     open func connectToggled(receiver: QObject? = nil, to slot: @escaping ((Bool) -> Void)) {
-        var object: QObject = self
-        if receiver != nil {
-            object = receiver!
-        }
-
+        let object: QObject = receiver ?? self
         self.toggledCallback = slot
 
-        let functor: @convention(c) (UnsafeMutableRawPointer?, Bool) -> Void = { raw, checked in
-            if raw != nil {
-                let _self = Unmanaged<QAbstractButton>.fromOpaque(raw!).takeUnretainedValue()
-                _self.toggledCallback!(checked)
-            }
-        }
-
         let rawSelf = Unmanaged.passUnretained(self).toOpaque()
-
-        QAbstractButton_toggled_connect(self.ptr, object.ptr, rawSelf, functor)
+        QAbstractButton_toggled_connect(self.ptr, object.ptr, rawSelf) { raw, checked in
+            let _self = Unmanaged<QAbstractButton>.fromOpaque(raw!).takeUnretainedValue()
+            _self.toggledCallback!(checked)
+        }
     }
 
     open func connectPressed(receiver: QObject? = nil, to slot: @escaping (() -> Void)) {
-        var object: QObject = self
-        if receiver != nil {
-            object = receiver!
-        }
-
+        let object: QObject = receiver ?? self
         self.pressedCallback = slot
 
-        let functor: @convention(c) (UnsafeMutableRawPointer?) -> Void = { raw in
-            if raw != nil {
-                let _self = Unmanaged<QAbstractButton>.fromOpaque(raw!).takeUnretainedValue()
-                _self.pressedCallback!()
-            }
+        let rawSelf = Unmanaged.passUnretained(self).toOpaque()
+        QAbstractButton_pressed_connect(self.ptr, object.ptr, rawSelf) { raw in
+            let _self = Unmanaged<QAbstractButton>.fromOpaque(raw!).takeUnretainedValue()
+            _self.pressedCallback!()
         }
+    }
+
+    open func connectReleased(receiver: QObject? = nil, to slot: @escaping (() -> Void)) {
+        let object: QObject = receiver ?? self
+        self.releasedCallback = slot
 
         let rawSelf = Unmanaged.passUnretained(self).toOpaque()
-
-        QAbstractButton_pressed_connect(self.ptr, object.ptr, rawSelf, functor)
+        QAbstractButton_released_connect(self.ptr, object.ptr, rawSelf) { raw in
+            let _self = Unmanaged<QAbstractButton>.fromOpaque(raw!).takeUnretainedValue()
+            _self.releasedCallback!()
+        }
     }
 }
-

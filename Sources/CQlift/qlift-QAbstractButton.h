@@ -21,17 +21,18 @@ LIBRARY_API void QAbstractButton_pressed_connect(void *abstractButton,
                                                  void *receiver,
                                                  void *context,
                                                  void (*slot_ptr)(void *));
-
-LIBRARY_API void QAbstractButton_setIcon(void *abstractButton,
-                                         void *icon);
-LIBRARY_API void QAbstractButton_setIconSize(void *abstractButton,
-                                             void *size);
-LIBRARY_API void QAbstractButton_setCheckable(void *abstractButton,
-                                              bool checkable);
+LIBRARY_API void QAbstractButton_released_connect(void *abstractButton,
+                                                  void *receiver,
+                                                  void *context,
+                                                  void (*slot_ptr)(void *));
+LIBRARY_API void QAbstractButton_setIcon(void *abstractButton, void *icon);
+LIBRARY_API void QAbstractButton_setIconSize(void *abstractButton, void *size);
+LIBRARY_API void QAbstractButton_setCheckable(void *abstractButton, bool checkable);
 LIBRARY_API bool QAbstractButton_getCheckable(void *abstractButton);
-LIBRARY_API void QAbstractButton_setChecked(void *abstractButton,
-                                              bool checked);
+LIBRARY_API void QAbstractButton_setChecked(void *abstractButton, bool checked);
 LIBRARY_API bool QAbstractButton_getChecked(void *abstractButton);
+LIBRARY_API void QAbstractButton_setDown(void *abstractButton, bool down);
+LIBRARY_API bool QAbstractButton_isDown(void *abstractButton);
 
 #ifdef __cplusplus
 }

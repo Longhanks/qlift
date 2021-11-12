@@ -39,10 +39,21 @@
                                                       void *context,
                                                       void (*slot_ptr)(void *)) {
     QObject::connect(
-                     static_cast<QAbstractButton *>(abstractButton),
-                     &QAbstractButton::pressed,
-                     static_cast<QObject *>(receiver),
-                     [context, slot_ptr]() { (*slot_ptr)(context); });
+         static_cast<QAbstractButton *>(abstractButton),
+         &QAbstractButton::pressed,
+         static_cast<QObject *>(receiver),
+         [context, slot_ptr]() { (*slot_ptr)(context); });
+}
+
+[[maybe_unused]] void QAbstractButton_released_connect(void *abstractButton,
+                                                       void *receiver,
+                                                       void *context,
+                                                       void (*slot_ptr)(void *)) {
+    QObject::connect(
+         static_cast<QAbstractButton *>(abstractButton),
+         &QAbstractButton::released,
+         static_cast<QObject *>(receiver),
+         [context, slot_ptr]() { (*slot_ptr)(context); });
 }
 
 [[maybe_unused]] void QAbstractButton_setIcon(void *abstractButton,
@@ -73,4 +84,12 @@
 
 [[maybe_unused]] bool QAbstractButton_getChecked(void *abstractButton) {
     return static_cast<QAbstractButton *>(abstractButton)->isChecked();
+}
+
+[[maybe_unused]] void QAbstractButton_setDown(void *abstractButton, bool down) {
+    static_cast<QAbstractButton *>(abstractButton)->setDown(down);
+}
+
+[[maybe_unused]] bool QAbstractButton_isDown(void *abstractButton) {
+    return static_cast<QAbstractButton *>(abstractButton)->isDown();
 }
