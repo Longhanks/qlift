@@ -38,6 +38,12 @@ open class QLayout: QObject, QLayoutItem {
     public func removeWidget(_ widget: QWidget) {
         QLayout_removeWidget(ptr, widget.ptr)
     }
+    public func removeItemAt(_ index: Int32) {
+        QLayout_removeItemAt(ptr, index)
+    }
+    public func removeWidgetAt(_ index: Int32) {
+        QLayout_removeWidgetAt(ptr, index)
+    }
 
     func add(item: QLayoutItem) {}
     func add(widget: QWidget) {}

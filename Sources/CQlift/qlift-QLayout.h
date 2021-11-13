@@ -21,6 +21,8 @@ LIBRARY_API int QLayout_indexOfWidget(void *layout, void *widget);
 LIBRARY_API void *QLayout_parentWidget(void *layout);
 LIBRARY_API void QLayout_removeItem(void *layout, void *item);
 LIBRARY_API void QLayout_removeWidget(void *layout, void *widget);
+LIBRARY_API void QLayout_removeWidgetAt(void *layout, int index);
+LIBRARY_API void QLayout_removeItemAt(void *layout, int index);
 
 #ifdef __cplusplus
 }
