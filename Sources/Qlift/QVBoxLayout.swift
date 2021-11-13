@@ -15,4 +15,3 @@ open class QVBoxLayout: QBoxLayout {
         checkDeleteQtObj()
     }
 }
-

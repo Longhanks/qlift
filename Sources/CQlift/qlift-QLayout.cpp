@@ -41,3 +41,19 @@
     static_cast<QLayout *>(layout)->setSizeConstraint(
         static_cast<QLayout::SizeConstraint>(sizeConstraint));
 }
+
+LIBRARY_API int QLayout_indexOfItem(void *layout, void *layoutItem) {
+    return static_cast<QLayout *>(layout)->indexOf(static_cast<QLayoutItem*>(layoutItem));
+}
+LIBRARY_API int QLayout_indexOfWidget(void *layout, void *widget) {
+    return static_cast<QLayout *>(layout)->indexOf(static_cast<QWidget*>(widget));
+}
+LIBRARY_API void *QLayout_parentWidget(void *layout) {
+    return static_cast<QLayout *>(layout)->parentWidget();
+}
+LIBRARY_API void QLayout_removeItem(void *layout, void *item) {
+    static_cast<QLayout *>(layout)->removeItem(static_cast<QLayoutItem*>(item));
+}
+LIBRARY_API void QLayout_removeWidget(void *layout, void *widget) {
+    static_cast<QLayout *>(layout)->removeWidget(static_cast<QWidget *>(widget));
+}
