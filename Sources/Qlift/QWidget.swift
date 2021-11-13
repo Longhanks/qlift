@@ -1,25 +1,20 @@
 import CQlift
 
-
 open class QWidget: QObject {
     public init(parent: QWidget? = nil, flags: Qt.WindowFlags = .Widget) {
         super.init(ptr: QWidget_new(parent?.ptr, flags.rawValue), parent: parent)
 
         let rawSelf = Unmanaged.passUnretained(self).toOpaque()
 
-        let functorSizeHint: @convention(c) (UnsafeMutableRawPointer?) -> UnsafeMutableRawPointer? = { context in
+        QWidget_sizeHint_Override(self.ptr, rawSelf) { context in
             let _self = Unmanaged<QWidget>.fromOpaque(context!).takeUnretainedValue()
             return _self.sizeHint.ptr
         }
 
-        QWidget_sizeHint_Override(self.ptr, rawSelf, functorSizeHint)
-
-        let functorMousePressEvent: @convention(c) (UnsafeMutableRawPointer?, UnsafeMutableRawPointer?) -> Void = { context, mouseEvent in
+        QWidget_mousePressEvent_Override(self.ptr, rawSelf) { context, mouseEvent in
             let _self = Unmanaged<QWidget>.fromOpaque(context!).takeUnretainedValue()
             _self.mousePressEvent(event: QMouseEvent(ptr: mouseEvent!))
         }
-
-        QWidget_mousePressEvent_Override(self.ptr, rawSelf, functorMousePressEvent)
     }
 
     public init(ptr: UnsafeMutableRawPointer, parent: QWidget? = nil) {
@@ -94,22 +89,10 @@ open class QWidget: QObject {
         QWidget_setPalette(ptr, palette.ptr)
     }
 
-    private var _layout: QLayout? = nil
-
     public var layout: QLayout? {
-        get {
-            return self._layout
-        }
-        set {
-            guard let newLayout = newValue else {
-                self._layout = nil
-                QWidget_setLayout(self.ptr, nil)
-                return
-            }
-
-            self._layout = newLayout
-            self._layout!.needsDelete = false
-            QWidget_setLayout(self.ptr, self._layout!.ptr)
+        didSet {
+            layout?.needsDelete = false
+            QWidget_setLayout(ptr, layout?.ptr)
         }
     }
 
