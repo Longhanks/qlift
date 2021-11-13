@@ -69,3 +69,7 @@
     if (item == nullptr) return;
     static_cast<QLayout *>(layout)->removeItem(item);
 }
+
+[[maybe_unused]] void QLayout_invalidate(void *layout) {
+    static_cast<QLayout *>(layout)->invalidate();
+}

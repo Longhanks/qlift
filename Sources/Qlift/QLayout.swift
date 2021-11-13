@@ -44,6 +44,9 @@ open class QLayout: QObject, QLayoutItem {
     public func removeWidgetAt(_ index: Int32) {
         QLayout_removeWidgetAt(ptr, index)
     }
+    public func invalidate() {
+        QLayout_invalidate(ptr)
+    }
 
     func add(item: QLayoutItem) {}
     func add(widget: QWidget) {}
