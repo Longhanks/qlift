@@ -11,19 +11,15 @@ LIBRARY_API void QAbstractButton_setText(void *abstractButton,
                                          const char *text);
 LIBRARY_API void QAbstractButton_clicked_connect(void *abstractButton,
                                                  void *receiver,
-                                                 void *context,
                                                  void (*slot_ptr)(void *, bool));
 LIBRARY_API void QAbstractButton_toggled_connect(void *abstractButton,
                                                  void *receiver,
-                                                 void *context,
                                                  void (*slot_ptr)(void *, bool));
 LIBRARY_API void QAbstractButton_pressed_connect(void *abstractButton,
                                                  void *receiver,
-                                                 void *context,
                                                  void (*slot_ptr)(void *));
 LIBRARY_API void QAbstractButton_released_connect(void *abstractButton,
                                                   void *receiver,
-                                                  void *context,
                                                   void (*slot_ptr)(void *));
 LIBRARY_API void QAbstractButton_setIcon(void *abstractButton, void *icon);
 LIBRARY_API void QAbstractButton_setIconSize(void *abstractButton, void *size);

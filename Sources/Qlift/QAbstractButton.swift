@@ -47,8 +47,7 @@ open class QAbstractButton: QWidget {
         let object: QObject = receiver ?? self
         self.clickedBoolCallback = slot
 
-        let rawSelf = Unmanaged.passUnretained(self).toOpaque()
-        QAbstractButton_clicked_connect(self.ptr, object.ptr, rawSelf) { raw, checked in
+        QAbstractButton_clicked_connect(self.ptr, object.ptr) { raw, checked in
             let _self = Unmanaged<QAbstractButton>.fromOpaque(raw!).takeUnretainedValue()
             _self.clickedBoolCallback!(checked)
         }
@@ -58,8 +57,7 @@ open class QAbstractButton: QWidget {
         let object: QObject = receiver ?? self
         self.clickedCallback = slot
 
-        let rawSelf = Unmanaged.passUnretained(self).toOpaque()
-        QAbstractButton_clicked_connect(self.ptr, object.ptr, rawSelf) { raw, checked in
+        QAbstractButton_clicked_connect(self.ptr, object.ptr) { raw, checked in
             let _self = Unmanaged<QAbstractButton>.fromOpaque(raw!).takeUnretainedValue()
             _self.clickedCallback!()
         }
@@ -69,8 +67,7 @@ open class QAbstractButton: QWidget {
         let object: QObject = receiver ?? self
         self.toggledCallback = slot
 
-        let rawSelf = Unmanaged.passUnretained(self).toOpaque()
-        QAbstractButton_toggled_connect(self.ptr, object.ptr, rawSelf) { raw, checked in
+        QAbstractButton_toggled_connect(self.ptr, object.ptr) { raw, checked in
             let _self = Unmanaged<QAbstractButton>.fromOpaque(raw!).takeUnretainedValue()
             _self.toggledCallback!(checked)
         }
@@ -80,8 +77,7 @@ open class QAbstractButton: QWidget {
         let object: QObject = receiver ?? self
         self.pressedCallback = slot
 
-        let rawSelf = Unmanaged.passUnretained(self).toOpaque()
-        QAbstractButton_pressed_connect(self.ptr, object.ptr, rawSelf) { raw in
+        QAbstractButton_pressed_connect(self.ptr, object.ptr) { raw in
             let _self = Unmanaged<QAbstractButton>.fromOpaque(raw!).takeUnretainedValue()
             _self.pressedCallback!()
         }
@@ -91,8 +87,7 @@ open class QAbstractButton: QWidget {
         let object: QObject = receiver ?? self
         self.releasedCallback = slot
 
-        let rawSelf = Unmanaged.passUnretained(self).toOpaque()
-        QAbstractButton_released_connect(self.ptr, object.ptr, rawSelf) { raw in
+        QAbstractButton_released_connect(self.ptr, object.ptr) { raw in
             let _self = Unmanaged<QAbstractButton>.fromOpaque(raw!).takeUnretainedValue()
             _self.releasedCallback!()
         }

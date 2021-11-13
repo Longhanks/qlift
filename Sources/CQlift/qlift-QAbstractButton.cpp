@@ -1,6 +1,7 @@
 #include <QAbstractButton>
 
 #include "qlift-QAbstractButton.h"
+#include "qlift-QObject.h"
 
 [[maybe_unused]] CQString QAbstractButton_text(void *abstractButton) {
     auto text = static_cast<QAbstractButton *>(abstractButton)->text();
@@ -14,46 +15,58 @@
 
 [[maybe_unused]] void QAbstractButton_clicked_connect(void *abstractButton,
                                                       void *receiver,
-                                                      void *context,
                                                       void (*slot_ptr)(void *, bool)) {
     QObject::connect(
         static_cast<QAbstractButton *>(abstractButton),
         &QAbstractButton::clicked,
         static_cast<QObject *>(receiver),
-        [context, slot_ptr](bool checked) { (*slot_ptr)(context, checked); });
+        [abstractButton, slot_ptr](bool checked) {
+            auto context = QObject_getSwiftObject(abstractButton);
+            if (context != nullptr)
+                (*slot_ptr)(context, checked);
+        });
 }
 
 [[maybe_unused]] void QAbstractButton_toggled_connect(void *abstractButton,
                                                       void *receiver,
-                                                      void *context,
                                                       void (*slot_ptr)(void *, bool)) {
     QObject::connect(
         static_cast<QAbstractButton *>(abstractButton),
         &QAbstractButton::toggled,
         static_cast<QObject *>(receiver),
-        [context, slot_ptr](bool checked) { (*slot_ptr)(context, checked); });
+        [abstractButton, slot_ptr](bool checked) {
+            auto context = QObject_getSwiftObject(abstractButton);
+            if (context != nullptr)
+                (*slot_ptr)(context, checked);
+        });
 }
 
 [[maybe_unused]] void QAbstractButton_pressed_connect(void *abstractButton,
                                                       void *receiver,
-                                                      void *context,
                                                       void (*slot_ptr)(void *)) {
     QObject::connect(
          static_cast<QAbstractButton *>(abstractButton),
          &QAbstractButton::pressed,
          static_cast<QObject *>(receiver),
-         [context, slot_ptr]() { (*slot_ptr)(context); });
+         [abstractButton, slot_ptr]() {
+             auto context = QObject_getSwiftObject(abstractButton);
+             if (context != nullptr)
+                 (*slot_ptr)(context);
+         });
 }
 
 [[maybe_unused]] void QAbstractButton_released_connect(void *abstractButton,
                                                        void *receiver,
-                                                       void *context,
                                                        void (*slot_ptr)(void *)) {
     QObject::connect(
          static_cast<QAbstractButton *>(abstractButton),
          &QAbstractButton::released,
          static_cast<QObject *>(receiver),
-         [context, slot_ptr]() { (*slot_ptr)(context); });
+         [abstractButton, slot_ptr]() {
+             auto context = QObject_getSwiftObject(abstractButton);
+             if (context != nullptr)
+                 (*slot_ptr)(context);
+         });
 }
 
 [[maybe_unused]] void QAbstractButton_setIcon(void *abstractButton,
