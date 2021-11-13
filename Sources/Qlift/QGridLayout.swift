@@ -1,10 +1,8 @@
 import CQlift
 
 
-open class QGridLayout: QObject, QLayout {
+open class QGridLayout: QLayout {
     // Irrelevant because QGridLayout is a QObject.
-    public var needsDelete = false
-
     public init(parent: QWidget? = nil) {
         super.init(ptr: QGridLayout_new(parent?.ptr), parent: parent)
     }
@@ -23,9 +21,9 @@ open class QGridLayout: QObject, QLayout {
         set { QGridLayout_setVerticalSpacing(ptr, newValue) }
     }
 
-    public var spacing: Int32 {
+    public override var spacing: Int32 {
         get { QGridLayout_spacing(ptr) }
-        set { QGridLayout_setSpacing(ptr, newValue) }
+        set  { QGridLayout_setSpacing(ptr, newValue) }
     }
 
     public var columnCount: Int32 {
@@ -82,25 +80,25 @@ open class QGridLayout: QObject, QLayout {
         QGridLayout_setRowStretch(ptr, row, stretch)
     }
 
-    public func add(item: QLayoutItem) {
+    public override func add(item: QLayoutItem) {
         fatalError("Not implemented")
     }
 
-    public func add(widget: QWidget) {
+    public override func add(widget: QWidget) {
         fatalError("Not implemented")
     }
 
     public func add(item: QLayoutItem, row: Int32, column: Int32, rowSpan: Int32 = 1, columnSpan: Int32 = 1, alignment: Qt.Alignment = []) {
-        QGridLayout_addItem(self.ptr, item.ptr, row, column, rowSpan, columnSpan, alignment.rawValue)
-        item.needsDelete = false
+        QGridLayout_addItem(self.ptr, item.qtPtr, row, column, rowSpan, columnSpan, alignment.rawValue)
+        item.swiftOwership = false
     }
 
     public func add(layout: QLayout, row: Int32, column: Int32, alignment: Qt.Alignment = Qt.Alignment(rawValue: 0)) {
-        QGridLayout_addLayout(self.ptr, layout.ptr, row, column, alignment.rawValue)
+        QGridLayout_addLayout(self.ptr, layout.qtPtr, row, column, alignment.rawValue)
     }
 
     public func add(layout: QLayout, row: Int32, column: Int32, rowSpan: Int32, columnSpan: Int32, alignment: Qt.Alignment = []) {
-        QGridLayout_addLayoutWithSpan(self.ptr, layout.ptr, row, column, rowSpan, columnSpan, alignment.rawValue)
+        QGridLayout_addLayoutWithSpan(self.ptr, layout.qtPtr, row, column, rowSpan, columnSpan, alignment.rawValue)
     }
 
     public func add(widget: QWidget, row: Int32, column: Int32, alignment: Qt.Alignment = Qt.Alignment(rawValue: 0)) {

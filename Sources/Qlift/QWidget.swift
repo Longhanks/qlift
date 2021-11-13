@@ -91,8 +91,8 @@ open class QWidget: QObject {
 
     public var layout: QLayout? {
         didSet {
-            layout?.needsDelete = false
-            QWidget_setLayout(ptr, layout?.ptr)
+            layout?.swiftOwership = false
+            QWidget_setLayout(ptr, layout?.qtPtr)
         }
     }
 
@@ -242,12 +242,9 @@ extension QWidget {
     }
 
     private func parentWidget() -> QWidget? {
-        guard
-            let p = self.parent,
-            let widget = p as? QWidget
-        else {
+        guard let parentptr = QObject_parent(ptr) else {
             return nil
         }
-        return widget
+        return QObject.swiftQObject(from: parentptr) as? QWidget
     }
 }

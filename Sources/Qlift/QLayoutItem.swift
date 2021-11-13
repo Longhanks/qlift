@@ -2,8 +2,8 @@ import CQlift
 
 
 public protocol QLayoutItem: AnyObject {
-    var ptr: UnsafeMutableRawPointer! { get set }
+    var qtPtr: UnsafeMutableRawPointer! { get }
     // When noone has ownership of the item, deinit must call the appropriate
     // deconstructor, else, the underlying C++ object leaks
-    var needsDelete: Bool { get set }
+    var swiftOwership: Bool { get set }
 }

@@ -1,12 +1,16 @@
 import CQlift
 
 
-public protocol QLayout: QLayoutItem {
-    func add(item: QLayoutItem)
-    func add(widget: QWidget)
-}
+open class QLayout: QObject, QLayoutItem {
+    public var qtPtr: UnsafeMutableRawPointer! {
+        ptr
+    }
 
-extension QLayout {
+    public var swiftOwership: Bool {
+        get { false }
+        set {}
+    }
+
     public var contentsMargins: QMargins {
         get {
             return QMargins(ptr: QLayout_contentsMargins(self.ptr))
@@ -33,4 +37,6 @@ extension QLayout {
             QLayout_setSizeConstraint(self.ptr, newSizeConstraint.rawValue)
         }
     }
+    func add(item: QLayoutItem) {}
+    func add(widget: QWidget) {}
 }

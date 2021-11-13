@@ -2,17 +2,15 @@ import CQlift
 
 
 open class QObject {
-    public var ptr: UnsafeMutableRawPointer!
-    private var parent_ptr: UnsafeMutableRawPointer?
-    public weak var parent: QObject?
+    var ptr: UnsafeMutableRawPointer!
     private var connection_destroy: UnsafeMutableRawPointer?
 
     public init(parent: QObject? = nil) {
         self.ptr = QObject_new(parent?.ptr)
-        self.parent = parent
         let rawSelf = Unmanaged.passUnretained(self).toOpaque()
         QObject_setSwiftObject(ptr, rawSelf)
-        QObject_destroyed_connect(self.ptr, self.ptr, rawSelf) { raw in
+
+        connection_destroy = QObject_destroyed_connect(self.ptr, self.ptr, rawSelf) { raw in
             if let raw = raw {
                 Unmanaged<QObject>.fromOpaque(raw).takeUnretainedValue().ptr = nil
             }
@@ -21,11 +19,9 @@ open class QObject {
 
     init(ptr: UnsafeMutableRawPointer, parent: QObject? = nil) {
         self.ptr = ptr
-        self.parent = parent
-        parent_ptr = QObject_parent(ptr)
-
         let rawSelf = Unmanaged.passUnretained(self).toOpaque()
         QObject_setSwiftObject(ptr, rawSelf)
+
         connection_destroy = QObject_destroyed_connect(self.ptr, self.ptr, rawSelf) { raw in
             if let raw = raw {
                 Unmanaged<QObject>.fromOpaque(raw).takeUnretainedValue().ptr = nil
