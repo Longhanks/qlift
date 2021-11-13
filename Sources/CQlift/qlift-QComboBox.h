@@ -26,6 +26,7 @@ LIBRARY_API CQString QComboBox_itemText(void *comboBox, int index);
 LIBRARY_API int QComboBox_count(void *comboBox);
 LIBRARY_API void QComboBox_setMaxCount(void *comboBox, int max);
 LIBRARY_API int QComboBox_maxCount(void *comboBox);
+LIBRARY_API void QComboBox_setQStyledItemDelegate(void *comboBox);
 
 LIBRARY_API void
 QComboBox_currentIndexChanged_connect(void *comboBox,

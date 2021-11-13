@@ -1,4 +1,5 @@
 #include <QComboBox>
+#include <QStyledItemDelegate>
 
 #include "qlift-QComboBox.h"
 
@@ -68,6 +69,11 @@ QComboBox_addItem(void *comboBox, const char *text) {
 }
 [[maybe_unused]] int QComboBox_maxCount(void *comboBox) {
     return static_cast<QComboBox*>(comboBox)->maxCount();
+}
+
+[[maybe_unused]] void QComboBox_setQStyledItemDelegate(void *comboBox) {
+    auto box = static_cast<QComboBox *>(comboBox);
+    box->setItemDelegate(new QStyledItemDelegate(box));
 }
 
 [[maybe_unused]] void

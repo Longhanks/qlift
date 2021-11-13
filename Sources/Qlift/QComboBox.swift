@@ -94,6 +94,10 @@ open class QComboBox: QWidget {
         return String(utf16CodeUnits: s.utf16, count: Int(s.size))
     }
 
+    public func setQStyledItemDelegate() {
+        QComboBox_setQStyledItemDelegate(ptr)
+    }
+
     open func connectCurrentIndexChanged(receiver: QObject? = nil, to slot: @escaping ((Int32) -> Void)) {
         let object: QObject = receiver ?? self
         self.currentIndexChangedIntCallback = slot
