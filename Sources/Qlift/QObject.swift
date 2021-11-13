@@ -11,9 +11,7 @@ open class QObject {
         QObject_setSwiftObject(ptr, rawSelf)
 
         connection_destroy = QObject_destroyed_connect(self.ptr, self.ptr, rawSelf) { raw in
-            if let raw = raw {
-                Unmanaged<QObject>.fromOpaque(raw).takeUnretainedValue().ptr = nil
-            }
+            Unmanaged<QObject>.fromOpaque(raw!).takeUnretainedValue().ptr = nil
         }
     }
 
@@ -23,9 +21,7 @@ open class QObject {
         QObject_setSwiftObject(ptr, rawSelf)
 
         connection_destroy = QObject_destroyed_connect(self.ptr, self.ptr, rawSelf) { raw in
-            if let raw = raw {
-                Unmanaged<QObject>.fromOpaque(raw).takeUnretainedValue().ptr = nil
-            }
+            Unmanaged<QObject>.fromOpaque(raw!).takeUnretainedValue().ptr = nil
         }
     }
 
@@ -52,6 +48,16 @@ open class QObject {
         set {
             QObject_setObjectName(ptr, newValue)
         }
+    }
+
+    public var parent: QObject? {
+        get {
+            guard let parentPtr = QObject_parent(ptr) else {
+                return nil
+            }
+            return QObject.swiftQObject(from: parentPtr)
+        }
+        set { QObject_setParent(ptr, newValue?.ptr) }
     }
 
     public func dumpObjectInfo() {
