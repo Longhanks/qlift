@@ -3,11 +3,11 @@ import CQlift
 
 open class QBoxLayout: QLayout {
     public init(direction: Int32 = 0, parent: QWidget? = nil) {
-        super.init(ptr: QBoxLayout_new(direction, parent?.ptr), parent: parent)
+        super.init(ptr: QBoxLayout_new(direction, parent?.ptr))
     }
 
-    init(ptr: UnsafeMutableRawPointer, parent: QWidget? = nil) {
-        super.init(ptr: ptr, parent: parent)
+    override init(ptr: UnsafeMutableRawPointer) {
+        super.init(ptr: ptr)
     }
 
     deinit {

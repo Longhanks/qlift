@@ -2,7 +2,7 @@ import CQlift
 
 open class QWidget: QObject {
     public init(parent: QWidget? = nil, flags: Qt.WindowFlags = .Widget) {
-        super.init(ptr: QWidget_new(parent?.ptr, flags.rawValue), parent: parent)
+        super.init(ptr: QWidget_new(parent?.ptr, flags.rawValue))
 
         let rawSelf = Unmanaged.passUnretained(self).toOpaque()
 
@@ -17,8 +17,8 @@ open class QWidget: QObject {
         }
     }
 
-    public init(ptr: UnsafeMutableRawPointer, parent: QWidget? = nil) {
-        super.init(ptr: ptr, parent: parent)
+    public override init(ptr: UnsafeMutableRawPointer) {
+        super.init(ptr: ptr)
     }
 
     deinit {

@@ -19,7 +19,7 @@ open class QToolButton: QAbstractButton {
     
     // Icon not supported at the moment
     public init(parent: QWidget? = nil) {
-        super.init(ptr: QToolButton_new(parent?.ptr), parent: parent)
+        super.init(ptr: QToolButton_new(parent?.ptr))
 
         let rawSelf = Unmanaged.passUnretained(self).toOpaque()
 
@@ -31,8 +31,8 @@ open class QToolButton: QAbstractButton {
         QToolButton_mousePressEvent_Override(self.ptr, rawSelf, functor)
     }
 
-    override init(ptr: UnsafeMutableRawPointer, parent: QWidget? = nil) {
-        super.init(ptr: ptr, parent: parent)
+    override init(ptr: UnsafeMutableRawPointer) {
+        super.init(ptr: ptr)
     }
 
     deinit {

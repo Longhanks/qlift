@@ -4,11 +4,11 @@ import CQlift
 open class QGridLayout: QLayout {
     // Irrelevant because QGridLayout is a QObject.
     public init(parent: QWidget? = nil) {
-        super.init(ptr: QGridLayout_new(parent?.ptr), parent: parent)
+        super.init(ptr: QGridLayout_new(parent?.ptr))
     }
 
-    init(ptr: UnsafeMutableRawPointer, parent: QWidget? = nil) {
-        super.init(ptr: ptr, parent: parent)
+    override init(ptr: UnsafeMutableRawPointer) {
+        super.init(ptr: ptr)
     }
 
     public var horizontalSpacing: Int32 {

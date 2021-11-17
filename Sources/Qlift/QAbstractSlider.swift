@@ -20,8 +20,8 @@ open class QAbstractSlider: QWidget {
     var sliderReleasedCallback: (() ->Void)?
     var valueChangedCallback: ((Int32) ->Void)?
 
-    override init(ptr: UnsafeMutableRawPointer, parent: QWidget? = nil) {
-        super.init(ptr: ptr, parent: parent)
+    override init(ptr: UnsafeMutableRawPointer) {
+        super.init(ptr: ptr)
     }
 
     deinit {

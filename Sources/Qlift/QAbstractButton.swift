@@ -16,8 +16,8 @@ open class QAbstractButton: QWidget {
         set { QAbstractButton_setText(self.ptr, newValue) }
     }
 
-    override init(ptr: UnsafeMutableRawPointer, parent: QWidget? = nil) {
-        super.init(ptr: ptr, parent: parent)
+    override init(ptr: UnsafeMutableRawPointer) {
+        super.init(ptr: ptr)
     }
 
     public func addIcon(_ icon: QIcon) {

@@ -34,7 +34,7 @@ open class QFrame: QWidget {
     }
 
     public override init(parent: QWidget? = nil, flags: Qt.WindowFlags = .Widget) {
-        super.init(ptr: QFrame_new(parent?.ptr, flags.rawValue), parent: parent)
+        super.init(ptr: QFrame_new(parent?.ptr, flags.rawValue))
 
         let rawSelf = Unmanaged.passUnretained(self).toOpaque()
 
@@ -52,8 +52,8 @@ open class QFrame: QWidget {
         QFrame_mousePressEvent_Override(self.ptr, rawSelf, functorMousePressEvent)
     }
 
-    override init(ptr: UnsafeMutableRawPointer, parent: QWidget? = nil) {
-        super.init(ptr: ptr, parent: parent)
+    override init(ptr: UnsafeMutableRawPointer) {
+        super.init(ptr: ptr)
     }
 
     deinit {

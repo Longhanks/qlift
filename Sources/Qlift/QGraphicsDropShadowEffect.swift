@@ -13,8 +13,8 @@ public class QGraphicsDropShadowEffect: QGraphicsEffect {
         checkDeleteQtObj()
     }
 
-    override public init(parent: QObject? = nil) {
-        super.init(ptr: QGraphicsDropShadowEffect_new(parent?.ptr), parent: parent)
+    public override init(parent: QObject? = nil) {
+        super.init(ptr: QGraphicsDropShadowEffect_new(parent?.ptr))
     }
 
 

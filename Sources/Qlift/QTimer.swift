@@ -11,11 +11,11 @@ open class QTimer: QObject {
     var timeoutCallback: (() -> Void)?
 
     public init(parent: QWidget? = nil) {
-        super.init(ptr: QTimer_new(parent?.ptr), parent: parent)
+        super.init(ptr: QTimer_new(parent?.ptr))
     }
 
-    init(ptr: UnsafeMutableRawPointer, parent: QWidget? = nil) {
-        super.init(ptr: ptr, parent: parent)
+    override init(ptr: UnsafeMutableRawPointer) {
+        super.init(ptr: ptr)
     }
 
     deinit {

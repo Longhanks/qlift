@@ -19,11 +19,11 @@ open class QGroupBox: QWidget {
     }
 
     public init(title: String = "", parent: QWidget? = nil) {
-        super.init(ptr: QGroupBox_new(title, parent?.ptr), parent: parent)
+        super.init(ptr: QGroupBox_new(title, parent?.ptr))
     }
 
-    override init(ptr: UnsafeMutableRawPointer, parent: QWidget? = nil) {
-        super.init(ptr: ptr, parent: parent)
+    override init(ptr: UnsafeMutableRawPointer) {
+        super.init(ptr: ptr)
     }
 
     deinit {

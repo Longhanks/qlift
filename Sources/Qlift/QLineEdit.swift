@@ -21,7 +21,7 @@ open class QLineEdit: QWidget {
     var inputRejectedCallback: (() -> Void)?
 
     public init(text: String = "", parent: QWidget? = nil) {
-        super.init(ptr: QLineEdit_new(text, parent?.ptr), parent: parent)
+        super.init(ptr: QLineEdit_new(text, parent?.ptr))
     }
 
     deinit {

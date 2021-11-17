@@ -2,8 +2,8 @@ import CQlift
 
 
 public class QDesktopWidget: QWidget {
-    init(ptr: UnsafeMutableRawPointer) {
-        super.init(ptr: ptr, parent: nil)
+    override init(ptr: UnsafeMutableRawPointer) {
+        super.init(ptr: ptr)
     }
 
     public func availableGeometry(for widget: QWidget) -> QRect {

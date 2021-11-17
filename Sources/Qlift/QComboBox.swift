@@ -19,12 +19,13 @@ open class QComboBox: QWidget {
     }
 
     var currentIndexChangedIntCallback: ((Int32) -> Void)?
+
     public init(parent: QWidget? = nil) {
-        super.init(ptr: QComboBox_new(parent?.ptr), parent: parent)
+        super.init(ptr: QComboBox_new(parent?.ptr))
     }
 
-    override init(ptr: UnsafeMutableRawPointer, parent: QWidget? = nil) {
-        super.init(ptr: ptr, parent: parent)
+    override init(ptr: UnsafeMutableRawPointer) {
+        super.init(ptr: ptr)
     }
 
     deinit {
@@ -109,4 +110,3 @@ open class QComboBox: QWidget {
         }
     }
 }
-

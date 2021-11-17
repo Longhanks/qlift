@@ -6,12 +6,12 @@ open class QButtonGroup: QObject {
     var idPressedCallback: ((Int32) -> Void)?
     var idReleasedCallback: ((Int32) -> Void)?
 
-    override init(ptr: UnsafeMutableRawPointer, parent: QObject? = nil) {
-        super.init(ptr: ptr, parent: parent)
+    override init(ptr: UnsafeMutableRawPointer) {
+        super.init(ptr: ptr)
     }
 
     public init(parent: QWidget? = nil) {
-        super.init(ptr: QButtonGroup_new(parent?.ptr), parent: parent)
+        super.init(ptr: QButtonGroup_new(parent?.ptr))
     }
 
     deinit {

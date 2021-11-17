@@ -8,11 +8,11 @@ open class QDialog: QWidget {
     }
 
     public override init(parent: QWidget? = nil, flags: Qt.WindowFlags = .Widget) {
-        super.init(ptr: QDialog_new(parent?.ptr, flags.rawValue), parent: parent)
+        super.init(ptr: QDialog_new(parent?.ptr, flags.rawValue))
     }
 
-    override init(ptr: UnsafeMutableRawPointer, parent: QWidget? = nil) {
-        super.init(ptr: ptr, parent: parent)
+    override init(ptr: UnsafeMutableRawPointer) {
+        super.init(ptr: ptr)
     }
 
     deinit {

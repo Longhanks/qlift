@@ -38,7 +38,7 @@ open class QMainWindow: QWidget {
     }
 
     public override init(parent: QWidget? = nil, flags: Qt.WindowFlags = .Widget) {
-        super.init(ptr: QMainWindow_new(parent?.ptr, flags.rawValue), parent: parent)
+        super.init(ptr: QMainWindow_new(parent?.ptr, flags.rawValue))
 
         let rawSelf = Unmanaged.passUnretained(self).toOpaque()
 
@@ -50,8 +50,8 @@ open class QMainWindow: QWidget {
         QMainWindow_closeEvent_Override(self.ptr, rawSelf, functor)
     }
 
-    override init(ptr: UnsafeMutableRawPointer, parent: QWidget? = nil) {
-        super.init(ptr: ptr, parent: parent)
+    override init(ptr: UnsafeMutableRawPointer) {
+        super.init(ptr: ptr)
     }
 
     deinit {

@@ -3,7 +3,7 @@ import CQlift
 
 open class QRadioButton: QAbstractButton {
     public init(text: String = "", parent: QWidget? = nil) {
-        super.init(ptr: QRadioButton_new(text, parent?.ptr), parent: parent)
+        super.init(ptr: QRadioButton_new(text, parent?.ptr))
 
         let rawSelf = Unmanaged.passUnretained(self).toOpaque()
 
@@ -14,8 +14,8 @@ open class QRadioButton: QAbstractButton {
         QRadioButton_mousePressEvent_Override(self.ptr, rawSelf, functor)
     }
 
-    override init(ptr: UnsafeMutableRawPointer, parent: QWidget? = nil) {
-        super.init(ptr: ptr, parent: parent)
+    override init(ptr: UnsafeMutableRawPointer) {
+        super.init(ptr: ptr)
     }
 
     deinit {

@@ -3,11 +3,11 @@ import CQlift
 
 open class QStatusBar: QWidget {
     public init(parent: QWidget? = nil) {
-        super.init(ptr: QStatusBar_new(parent?.ptr), parent: parent)
+        super.init(ptr: QStatusBar_new(parent?.ptr))
     }
 
-    override init(ptr: UnsafeMutableRawPointer, parent: QWidget? = nil) {
-        super.init(ptr: ptr, parent: parent)
+    override init(ptr: UnsafeMutableRawPointer) {
+        super.init(ptr: ptr)
     }
 
     deinit {

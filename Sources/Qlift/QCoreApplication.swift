@@ -10,7 +10,7 @@ public class QCoreApplication: QObject {
         QCoreApplication.instance = self
     }
 
-    init(ptr: UnsafeMutableRawPointer) {
+    override init(ptr: UnsafeMutableRawPointer) {
         super.init(ptr: ptr)
     }
 

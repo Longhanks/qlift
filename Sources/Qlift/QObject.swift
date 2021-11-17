@@ -15,7 +15,7 @@ open class QObject {
         }
     }
 
-    init(ptr: UnsafeMutableRawPointer, parent: QObject? = nil) {
+    init(ptr: UnsafeMutableRawPointer) {
         self.ptr = ptr
         let rawSelf = Unmanaged.passUnretained(self).toOpaque()
         QObject_setSwiftObject(ptr, rawSelf)

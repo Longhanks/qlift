@@ -3,7 +3,7 @@ import CQlift
 
 open class QPushButton: QAbstractButton {
     public init(text: String = "", parent: QWidget? = nil) {
-        super.init(ptr: QPushButton_new(nil, text, parent?.ptr), parent: parent)
+        super.init(ptr: QPushButton_new(nil, text, parent?.ptr))
 
         let rawSelf = Unmanaged.passUnretained(self).toOpaque()
 
@@ -16,7 +16,7 @@ open class QPushButton: QAbstractButton {
     }
 
     public init(icon: QIcon, text: String = "", parent: QWidget? = nil) {
-        super.init(ptr: QPushButton_new(icon.ptr, text, parent?.ptr), parent: parent)
+        super.init(ptr: QPushButton_new(icon.ptr, text, parent?.ptr))
 
         let rawSelf = Unmanaged.passUnretained(self).toOpaque()
 
@@ -28,8 +28,8 @@ open class QPushButton: QAbstractButton {
         QPushButton_mousePressEvent_Override(self.ptr, rawSelf, functor)
     }
 
-    override init(ptr: UnsafeMutableRawPointer, parent: QWidget? = nil) {
-        super.init(ptr: ptr, parent: parent)
+    override init(ptr: UnsafeMutableRawPointer) {
+        super.init(ptr: ptr)
     }
 
     deinit {
