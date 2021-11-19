@@ -20,6 +20,8 @@ LIBRARY_API void  QScrollArea_setVerticalScrollBarPolicy(void *scrollArea, int s
 LIBRARY_API int   QScrollArea_horizontalScrollBarPolicy(void *scrollArea);
 LIBRARY_API int   QScrollArea_verticalScrollBarPolicy(void *scrollArea);
 LIBRARY_API void  QScrollArea_setSizeAdjustPolicy(void *scrollArea, int sizeAdjustPolicy);
+LIBRARY_API void *QScrollArea_verticalScrollBar(void *scrollArea);
+LIBRARY_API void *QScrollArea_horizontalScrollBar(void *scrollArea);
 
 #ifdef __cplusplus
 }

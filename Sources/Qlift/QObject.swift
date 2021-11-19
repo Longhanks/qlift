@@ -72,4 +72,9 @@ open class QObject {
         guard let raw = QObject_getSwiftObject(ptr) else { return nil }
         return Unmanaged<QObject>.fromOpaque(raw).takeUnretainedValue()
     }
+
+    static public func swiftObject<T: QObject>(from ptr: UnsafeMutableRawPointer, ofType: T.Type) -> T? {
+        guard let raw = QObject_getSwiftObject(ptr) else { return nil }
+        return Unmanaged<T>.fromOpaque(raw).takeUnretainedValue()
+    }
 }

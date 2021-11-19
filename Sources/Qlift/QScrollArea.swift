@@ -1,3 +1,10 @@
+//
+//  QScrollArea.swift
+//
+//
+//  Created by Dmitriy Borovikov on 19.11.2021.
+//
+
 import CQlift
 
 
@@ -43,30 +50,33 @@ open class QScrollArea: QFrame {
     }
 
     public var alignment: Qt.Alignment {
-        get {
-            Qt.Alignment(rawValue: QScrollArea_alignment(ptr))
-        }
-        set {
-            QScrollArea_setAlignment(ptr, newValue.rawValue)
-        }
+        get { Qt.Alignment(rawValue: QScrollArea_alignment(ptr)) }
+        set { QScrollArea_setAlignment(ptr, newValue.rawValue) }
     }
 
     public var widgetResizable: Bool {
-        get {
-            QScrollArea_widgetResizable(ptr)
-        }
-        set {
-            QScrollArea_setWidgetResizable(ptr, newValue)
-        }
+        get { QScrollArea_widgetResizable(ptr) }
+        set { QScrollArea_setWidgetResizable(ptr, newValue) }
     }
 
     public var sizeAdjustPolicy: SizeAdjustPolicy {
-        get {
-            SizeAdjustPolicy(rawValue: QScrollArea_sizeAdjustPolicy(ptr)) ?? .AdjustIgnored
+        get { SizeAdjustPolicy(rawValue: QScrollArea_sizeAdjustPolicy(ptr)) ?? .AdjustIgnored }
+        set { QScrollArea_setSizeAdjustPolicy(ptr, newValue.rawValue) }
+    }
+
+    public func horizontalScrollBar() -> QScrollBar {
+        if let scrollBarPtr = QScrollArea_horizontalScrollBar(ptr),
+           let scrollBar = QObject.swiftQObject(from: scrollBarPtr) as? QScrollBar {
+            return scrollBar
         }
-        set {
-            QScrollArea_setSizeAdjustPolicy(ptr, newValue.rawValue)
+        return QScrollBar(ptr: ptr)
+    }
+
+    public func verticalScrollBar() -> QScrollBar {
+        if let scrollBarPtr = QScrollArea_verticalScrollBar(ptr),
+           let scrollBar = QObject.swiftQObject(from: scrollBarPtr) as? QScrollBar {
+            return scrollBar
         }
+        return QScrollBar(ptr: ptr)
     }
 }
-

@@ -58,3 +58,11 @@
 [[maybe_unused]] void    QScrollArea_setSizeAdjustPolicy(void *scrollArea, int sizeAdjustPolicy) {
     static_cast<QScrollArea *>(scrollArea)->setSizeAdjustPolicy(static_cast<QAbstractScrollArea::SizeAdjustPolicy>(sizeAdjustPolicy));
 }
+
+[[maybe_unused]] void *QScrollArea_verticalScrollBar(void *scrollArea) {
+    return static_cast<QScrollArea *>(scrollArea)->verticalScrollBar();
+}
+
+[[maybe_unused]] void *QScrollArea_horizontalScrollBar(void *scrollArea) {
+    return static_cast<QScrollArea *>(scrollArea)->horizontalScrollBar();
+}

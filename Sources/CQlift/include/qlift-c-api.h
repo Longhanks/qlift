@@ -53,6 +53,7 @@
 #include "../qlift-QRect.h"
 #include "../qlift-QResource.h"
 #include "../qlift-QScrollArea.h"
+#include "../qlift-QScrollBar.h"
 #include "../qlift-QSize.h"
 #include "../qlift-QSizePolicy.h"
 #include "../qlift-QSlider.h"
