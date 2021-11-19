@@ -156,6 +156,31 @@ public struct Qt {
         public static let WindowActive = WindowStates(rawValue: 8)
     }
 
+    public struct FocusPolicy: OptionSet {
+        public let rawValue: Int32
+
+        public init(rawValue: Int32) {
+            self.rawValue = rawValue
+        }
+        public static let NoFocus = FocusPolicy([])
+        public static let TabFocus = FocusPolicy(rawValue: 0x1)
+        public static let ClickFocus = FocusPolicy(rawValue: 0x2)
+        public static let StrongFocus = FocusPolicy(rawValue: TabFocus.rawValue | ClickFocus.rawValue | 0x8)
+        public static let WheelFocus = FocusPolicy(rawValue: StrongFocus.rawValue | 0x4)
+    }
+
+    public enum FocusReason: Int32 {
+        case MouseFocusReason = 0
+        case TabFocusReason
+        case BacktabFocusReason
+        case ActiveWindowFocusReason
+        case PopupFocusReason
+        case ShortcutFocusReason
+        case MenuBarFocusReason
+        case OtherFocusReason
+        case NoFocusReason
+    }
+
     public enum ScrollBarPolicy: Int32 {
         case ScrollBarAsNeeded = 0
         case ScrollBarAlwaysOff

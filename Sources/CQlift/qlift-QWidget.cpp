@@ -334,6 +334,31 @@
     static_cast<QWidget *>(widget)->update();
 }
 
+[[maybe_unused]] void QWidget_setFocusReason(void * widget, int reason) {
+    static_cast<QWidget *>(widget)->setFocus(static_cast<Qt::FocusReason>(reason));
+}
+
+[[maybe_unused]] bool QWidget_setFocus(void * widget) {
+    static_cast<QWidget *>(widget)->setFocus();
+}
+
+[[maybe_unused]] bool QWidget_hasFocus(void * widget) {
+    return static_cast<QWidget *>(widget)->hasFocus();
+}
+
+[[maybe_unused]] int QWidget_focusPolicy(void * widget) {
+    return static_cast<QWidget *>(widget)->focusPolicy();
+}
+
+[[maybe_unused]] void QWidget_setFocusPolicy(void * widget, int policy) {
+    static_cast<QWidget *>(widget)->setFocusPolicy(static_cast<Qt::FocusPolicy>(policy));
+}
+
+[[maybe_unused]] void QWidget_clearFocus(void * widget) {
+    static_cast<QWidget *>(widget)->clearFocus();
+}
+
+
 
 
 W_OBJECT_IMPL(QliftWidget)

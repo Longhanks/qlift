@@ -143,6 +143,27 @@ open class QWidget: QObject {
         QWidget_isFullScreen(ptr)
     }
 
+    public var focus: Bool {
+        QWidget_hasFocus(ptr)
+    }
+
+    public var focusPolicy: Qt.FocusPolicy {
+        get { Qt.FocusPolicy(rawValue: QWidget_focusPolicy(ptr)) }
+        set { QWidget_setFocusPolicy(ptr, newValue.rawValue) }
+    }
+
+    public func setFocus() {
+        QWidget_setFocus(ptr)
+    }
+
+    public func clearFocus() {
+        QWidget_clearFocus(ptr)
+    }
+
+    public func setFocus(reason: Qt.FocusReason) {
+        QWidget_setFocusReason(ptr, reason.rawValue)
+    }
+
     public func setWindowState(state: Qt.WindowStates) {
         QWidget_setWindowState(ptr, state.rawValue)
     }

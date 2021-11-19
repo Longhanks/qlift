@@ -85,6 +85,12 @@ LIBRARY_API void QWidget_showMaximized(void * widget);
 LIBRARY_API void QWidget_showMinimized(void * widget);
 LIBRARY_API void QWidget_showNormal(void * widget);
 LIBRARY_API void QWidget_update(void * widget);
+LIBRARY_API void QWidget_setFocusReason(void * widget, int reason);
+LIBRARY_API bool QWidget_setFocus(void * widget);
+LIBRARY_API bool QWidget_hasFocus(void * widget);
+LIBRARY_API int  QWidget_focusPolicy(void * widget);
+LIBRARY_API void QWidget_setFocusPolicy(void * widget, int policy);
+LIBRARY_API void QWidget_clearFocus(void * widget);
 
 #ifdef __cplusplus
 }
