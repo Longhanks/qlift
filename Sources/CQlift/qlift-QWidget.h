@@ -77,6 +77,14 @@ LIBRARY_API void *QWidget_mapTo(void *widget, void *parentWidget, void *point);
 LIBRARY_API void *QWidget_mapFrom(void *widget, void *parentWidget, void *point);
 LIBRARY_API void QWidget_setAttribute(void * widget, int attribute, bool on);
 LIBRARY_API bool QWidget_testAttribute(void * widget, int attribute);
+LIBRARY_API void QWidget_updateXY(void * widget, int x, int y, int w, int h);
+LIBRARY_API void QWidget_updateR(void * widget, void *rect);
+LIBRARY_API void QWidget_updateGeometry(void * widget);
+LIBRARY_API void QWidget_showFullScreen(void * widget);
+LIBRARY_API void QWidget_showMaximized(void * widget);
+LIBRARY_API void QWidget_showMinimized(void * widget);
+LIBRARY_API void QWidget_showNormal(void * widget);
+LIBRARY_API void QWidget_update(void * widget);
 
 #ifdef __cplusplus
 }

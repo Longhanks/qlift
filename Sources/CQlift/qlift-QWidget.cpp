@@ -302,6 +302,40 @@
     return static_cast<void *>(new QPoint{mapPoint.x(), mapPoint.y()});
 }
 
+[[maybe_unused]] void QWidget_updateXY(void * widget, int x, int y, int w, int h) {
+    static_cast<QWidget *>(widget)->update(x, y, w, h);
+}
+
+[[maybe_unused]] void QWidget_updateR(void * widget, void *rect) {
+    static_cast<QWidget *>(widget)->update(*static_cast<QRect *>(rect));
+}
+
+[[maybe_unused]] void QWidget_updateGeometry(void * widget) {
+    static_cast<QWidget *>(widget)->updateGeometry();
+}
+
+[[maybe_unused]] void QWidget_showFullScreen(void * widget) {
+    static_cast<QWidget *>(widget)->showFullScreen();
+}
+
+[[maybe_unused]] void QWidget_showMaximized(void * widget) {
+    static_cast<QWidget *>(widget)->showMaximized();
+}
+
+[[maybe_unused]] void QWidget_showMinimized(void * widget) {
+    static_cast<QWidget *>(widget)->showMinimized();
+}
+
+[[maybe_unused]] void QWidget_showNormal(void * widget) {
+    static_cast<QWidget *>(widget)->showNormal();
+}
+
+[[maybe_unused]] void QWidget_update(void * widget) {
+    static_cast<QWidget *>(widget)->update();
+}
+
+
+
 W_OBJECT_IMPL(QliftWidget)
 
 [[maybe_unused]] void

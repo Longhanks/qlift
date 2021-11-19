@@ -226,6 +226,39 @@ open class QWidget: QObject {
     public func setGraphicsEffect(effect: QGraphicsEffect) {
         QWidget_setGraphicsEffect(ptr, effect.ptr)
     }
+
+    public func update(x: Int32, y: Int32, w: Int32, h: Int32) {
+        QWidget_updateXY(ptr, x, y, w, h)
+    }
+
+    public func update(rect: QRect) {
+        QWidget_updateR(ptr, rect.ptr)
+    }
+
+    public func updateGeometry() {
+        QWidget_updateGeometry(ptr)
+    }
+
+    public func showFullScreen() {
+        QWidget_showFullScreen(ptr)
+    }
+
+    public func showMaximized() {
+        QWidget_showMaximized(ptr)
+    }
+
+    public func showMinimized() {
+        QWidget_showMinimized(ptr)
+    }
+
+    public func showNormal() {
+        QWidget_showNormal(ptr)
+    }
+
+    public func update() {
+        QWidget_update(ptr)
+    }
+
 }
 
 extension QWidget {
