@@ -65,18 +65,18 @@ open class QScrollArea: QFrame {
     }
 
     public func horizontalScrollBar() -> QScrollBar {
-        if let scrollBarPtr = QScrollArea_horizontalScrollBar(ptr),
-           let scrollBar = QObject.swiftQObject(from: scrollBarPtr) as? QScrollBar {
+        let scrollBarPtr = QScrollArea_horizontalScrollBar(ptr)!
+        if let scrollBar = QObject.swiftQObject(from: scrollBarPtr) as? QScrollBar {
             return scrollBar
         }
-        return QScrollBar(ptr: ptr)
+        return QScrollBar(ptr: scrollBarPtr)
     }
 
     public func verticalScrollBar() -> QScrollBar {
-        if let scrollBarPtr = QScrollArea_verticalScrollBar(ptr),
-           let scrollBar = QObject.swiftQObject(from: scrollBarPtr) as? QScrollBar {
+        let scrollBarPtr = QScrollArea_verticalScrollBar(ptr)!
+        if let scrollBar = QObject.swiftQObject(from: scrollBarPtr) as? QScrollBar {
             return scrollBar
         }
-        return QScrollBar(ptr: ptr)
+        return QScrollBar(ptr: scrollBarPtr)
     }
 }
