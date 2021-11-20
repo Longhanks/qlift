@@ -15,6 +15,11 @@ public class QApplication: QGuiApplication {
         checkDeleteQtObj()
     }
 
+    public var windowIcon: QIcon {
+        get { QIcon(ptr: QApplication_windowIcon(ptr)) }
+        set { QApplication_setWindowIcon(ptr, newValue.ptr) }
+    }
+
     @discardableResult
     public func setStyle(_ style: String) -> Bool {
         QApplication_set_style(ptr, style)

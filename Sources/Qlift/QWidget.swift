@@ -146,7 +146,7 @@ open class QWidget: QObject {
         set { QWidget_setFocusPolicy(ptr, newValue.rawValue) }
     }
 
-    public var setWindowIcon: QIcon {
+    public var windowIcon: QIcon {
         get { QIcon(ptr: QWidget_windowIcon(ptr)) }
         set { QWidget_setWindowIcon(ptr, newValue.ptr) }
     }
