@@ -3,15 +3,21 @@ import CQlift
 
 public class QEvent {
     var ptr: UnsafeMutableRawPointer!
-    var needsDelete = false
+    var swiftOwership: Bool
 
     init(ptr: UnsafeMutableRawPointer) {
         self.ptr = ptr
+        swiftOwership = false
     }
 
     deinit {
-        if self.ptr != nil && self.needsDelete {
+        checkDeleteQtObj()
+    }
+
+    func checkDeleteQtObj() {
+        if ptr != nil, swiftOwership {
             QEvent_delete(self.ptr)
+            ptr = nil
         }
     }
 
