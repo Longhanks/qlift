@@ -38,41 +38,33 @@ open class QDialogButtonBox: QWidget {
 
 extension QDialogButtonBox {
     open func connectAccepted(receiver: QObject? = nil, to slot: @escaping (() -> Void)) {
-        var object: QObject = self
-        if receiver != nil {
-            object = receiver!
-        }
+        let object: QObject = receiver ?? self
 
         self.acceptedCallback = slot
 
-        let functor: @convention(c) (UnsafeMutableRawPointer?) -> Void = { raw in
+        let rawSelf = Unmanaged.passUnretained(self).toOpaque()
+        QDialogButtonBox_accepted_connect(self.ptr, object.ptr, rawSelf) { raw in
             if raw != nil {
                 let _self = Unmanaged<QDialogButtonBox>.fromOpaque(raw!).takeUnretainedValue()
                 _self.acceptedCallback!()
             }
         }
 
-        let rawSelf = Unmanaged.passUnretained(self).toOpaque()
-        QDialogButtonBox_accepted_connect(self.ptr, object.ptr, rawSelf, functor)
     }
 
     open func connectRejected(receiver: QObject? = nil, to slot: @escaping (() -> Void)) {
-        var object: QObject = self
-        if receiver != nil {
-            object = receiver!
-        }
+        let object: QObject = receiver ?? self
 
         self.rejectedCallback = slot
 
-        let functor: @convention(c) (UnsafeMutableRawPointer?) -> Void = { raw in
+        let rawSelf = Unmanaged.passUnretained(self).toOpaque()
+        QDialogButtonBox_rejected_connect(self.ptr, object.ptr, rawSelf) { raw in
             if raw != nil {
                 let _self = Unmanaged<QDialogButtonBox>.fromOpaque(raw!).takeUnretainedValue()
                 _self.rejectedCallback!()
             }
         }
 
-        let rawSelf = Unmanaged.passUnretained(self).toOpaque()
-        QDialogButtonBox_rejected_connect(self.ptr, object.ptr, rawSelf, functor)
     }
 }
 

@@ -20,15 +20,14 @@ private class ClosureBox {
 }
 
 public func dispatchQt(block: @escaping () -> Void) {
-    let functor: @convention(c) (UnsafeMutableRawPointer?) -> Void = { raw in
+    let box = ClosureBox(block)
+    let rawClosure = Unmanaged.passRetained(box).toOpaque()
+    DispatchToQTMainThread(rawClosure) { raw in
         if raw != nil {
             let box = Unmanaged<ClosureBox>.fromOpaque(raw!).takeRetainedValue()
             box.closure()
         }
     }
-    let box = ClosureBox(block)
-    let rawClosure = Unmanaged.passRetained(box).toOpaque()
-    DispatchToQTMainThread(rawClosure, functor)
 }
 
 #if os(Linux)

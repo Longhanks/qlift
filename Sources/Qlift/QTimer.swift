@@ -35,35 +35,26 @@ open class QTimer: QObject {
     }
 
     public static func singleShot(msec: Int32, timerType: Qt.TimerType, handler: @escaping () -> Void) {
-        let functor: @convention(c) (UnsafeMutableRawPointer?) -> Void = { raw in
+        let box = ClosureBox(handler)
+        let rawClosure = Unmanaged.passRetained(box).toOpaque()
+        QTimer_singleShot(msec, timerType.rawValue, rawClosure) { raw in
             if raw != nil {
                 let box = Unmanaged<ClosureBox>.fromOpaque(raw!).takeRetainedValue()
                 box.closure()
             }
         }
-        let box = ClosureBox(handler)
-        let rawClosure = Unmanaged.passRetained(box).toOpaque()
-        QTimer_singleShot(msec, timerType.rawValue, rawClosure, functor)
     }
-}
 
-extension QTimer {
     open func connect(receiver: QObject? = nil, to slot: @escaping (() -> Void)) {
-        var object: QObject = self
-        if receiver != nil {
-            object = receiver!
-        }
+        let object: QObject = receiver ?? self
 
         self.timeoutCallback = slot
-
-        let functor: @convention(c) (UnsafeMutableRawPointer?) -> Void = { raw in
+        let rawSelf = Unmanaged.passUnretained(self).toOpaque()
+        QTimer_connect(self.ptr, object.ptr, rawSelf) { raw in
             if raw != nil {
                 let _self = Unmanaged<QTimer>.fromOpaque(raw!).takeUnretainedValue()
                 _self.timeoutCallback!()
             }
         }
-
-        let rawSelf = Unmanaged.passUnretained(self).toOpaque()
-        QTimer_connect(self.ptr, object.ptr, rawSelf, functor)
     }
 }

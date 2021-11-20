@@ -78,16 +78,13 @@ open class QAbstractSlider: QWidget {
         let object: QObject = receiver ?? self
 
         self.sliderReleasedCallback = slot
-
-        let functor: @convention(c) (UnsafeMutableRawPointer?) -> Void = { raw in
+        let rawSelf = Unmanaged.passUnretained(self).toOpaque()
+        QAbstractSlider_sliderReleased_connect(self.ptr, object.ptr, rawSelf) { raw in
             if raw != nil {
                 let _self = Unmanaged<QAbstractSlider>.fromOpaque(raw!).takeUnretainedValue()
                 _self.sliderReleasedCallback!()
             }
         }
-
-        let rawSelf = Unmanaged.passUnretained(self).toOpaque()
-        QAbstractSlider_sliderReleased_connect(self.ptr, object.ptr, rawSelf, functor)
     }
 
     open func connectValueChanged(receiver: QObject? = nil, to slot: @escaping ((Int32) -> Void)) {

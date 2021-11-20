@@ -38,18 +38,15 @@ open class QFrame: QWidget {
 
         let rawSelf = Unmanaged.passUnretained(self).toOpaque()
 
-        let functorSizeHint: @convention(c) (UnsafeMutableRawPointer?) -> UnsafeMutableRawPointer? = { context in
+        QFrame_sizeHint_Override(self.ptr, rawSelf) { context in
             let _self = Unmanaged<QFrame>.fromOpaque(context!).takeUnretainedValue()
             return _self.sizeHint.ptr
         }
 
-        QFrame_sizeHint_Override(self.ptr, rawSelf, functorSizeHint)
-
-        let functorMousePressEvent: @convention(c) (UnsafeMutableRawPointer?, UnsafeMutableRawPointer?) -> Void = { context, mouseEvent in
+        QFrame_mousePressEvent_Override(self.ptr, rawSelf) { context, mouseEvent in
             let _self = Unmanaged<QFrame>.fromOpaque(context!).takeUnretainedValue()
             _self.mousePressEvent(event: QMouseEvent(ptr: mouseEvent!))
         }
-        QFrame_mousePressEvent_Override(self.ptr, rawSelf, functorMousePressEvent)
     }
 
     override init(ptr: UnsafeMutableRawPointer) {
