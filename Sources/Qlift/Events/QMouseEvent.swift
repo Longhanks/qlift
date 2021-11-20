@@ -3,9 +3,7 @@ import CQlift
 
 public class QMouseEvent: QInputEvent {
     public var button: Qt.MouseButton {
-        get {
-            return Qt.MouseButton(rawValue: QMouseEvent_button(self.ptr))
-        }
+        get { Qt.MouseButton(rawValue: QMouseEvent_button(self.ptr)) }
     }
 
     override init(ptr: UnsafeMutableRawPointer) {
