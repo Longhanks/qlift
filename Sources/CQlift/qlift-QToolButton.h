@@ -7,9 +7,9 @@ extern "C" {
 #endif
 
 LIBRARY_API void *QToolButton_new(void *parent);
-LIBRARY_API void QToolButton_mousePressEvent(void *toolButton,
-                                             void *mouseEvent);
-LIBRARY_API void QToolButton_setStyle(void *toolButton, int style);
+LIBRARY_API void QToolButton_mousePressEvent(void *toolButton, void *mouseEvent);
+LIBRARY_API void QToolButton_setToolButtonStyle(void *toolButton, int style);
+LIBRARY_API int QToolButton_toolButtonStyle(void *toolButton);
 LIBRARY_API void QToolButton_mousePressEvent_Override(void *toolButton,
                                                       void *context,
                                                       void (*mousePressEvent_Functor)(void *, void *));

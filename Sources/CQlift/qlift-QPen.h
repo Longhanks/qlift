@@ -20,6 +20,10 @@ LIBRARY_API void QPen_setWidth(void *pen, int width);
 LIBRARY_API void QPen_setColor(void *pen, void *color);
 LIBRARY_API void QPen_setBrush(void *pen, void *brush);
 LIBRARY_API void QPen_setCosmetic(void *pen, bool cosmetic);
+LIBRARY_API int QPen_style(void *pen);
+LIBRARY_API int QPen_width(void *pen);
+LIBRARY_API bool QPen_isCosmetic(void *pen);
+
 
 #ifdef __cplusplus
 }

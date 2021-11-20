@@ -2,14 +2,10 @@ import CQlift
 
 
 open class QMessageBox: QDialog {
-    override func setWindowTitle() {
-        QMessageBox_setWindowTitle(self.ptr, windowTitle)
-    }
 
-    public var icon: QMessageBox.Icon = .NoIcon {
-        didSet {
-            QMessageBox_setIcon(self.ptr, icon.rawValue)
-        }
+    public var icon: QMessageBox.Icon {
+        get { QMessageBox.Icon(rawValue: QMessageBox_icon(ptr)) }
+        set { QMessageBox_setIcon(self.ptr, newValue.rawValue) }
     }
 
     public var text: String {
@@ -17,15 +13,20 @@ open class QMessageBox: QDialog {
             let s = QMessageBox_text(ptr)
             return String(utf16CodeUnits: s.utf16, count: Int(s.size))
         }
-        set {
-            QMessageBox_setText(self.ptr, newValue)
-        }
+        set { QMessageBox_setText(self.ptr, newValue) }
     }
 
-    public var standardButtons: QMessageBox.StandardButton = .NoButton {
-        didSet {
-            QMessageBox_setStandardButtons(self.ptr, standardButtons.rawValue)
+    public override var windowTitle: String {
+        get {
+            let s = QMessageBox_windowTitle(ptr)
+            return String(utf16CodeUnits: s.utf16, count: Int(s.size))
         }
+        set { QMessageBox_setWindowTitle(ptr, newValue) }
+    }
+
+    public var standardButtons: QMessageBox.StandardButton {
+        get { .init(rawValue: QMessageBox_standardButtons(ptr)) }
+        set { QMessageBox_setStandardButtons(self.ptr, newValue.rawValue) }
     }
 
     public init(parent: QWidget? = nil) {

@@ -2,10 +2,9 @@ import CQlift
 
 
 open class QGroupBox: QWidget {
-    public var alignment: Qt.Alignment = .AlignLeft {
-        didSet {
-            QGroupBox_setAlignment(self.ptr, alignment.rawValue)
-        }
+    public var alignment: Qt.Alignment {
+        get { Qt.Alignment(rawValue: QGroupBox_alignment(ptr)) }
+        set { QGroupBox_setAlignment(self.ptr, newValue.rawValue) }
     }
 
     public var title: String {

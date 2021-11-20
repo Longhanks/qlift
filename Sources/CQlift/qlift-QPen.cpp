@@ -36,3 +36,15 @@
 [[maybe_unused]] void QPen_setCosmetic(void *pen, bool cosmetic) {
     static_cast<QPen *>(pen)->setCosmetic(cosmetic);
 }
+
+[[maybe_unused]] int QPen_style(void *pen) {
+    return static_cast<QPen *>(pen)->style();
+}
+
+[[maybe_unused]] int QPen_width(void *pen) {
+    return static_cast<QPen *>(pen)->width();
+}
+
+[[maybe_unused]] bool QPen_isCosmetic(void *pen) {
+    return static_cast<QPen *>(pen)->isCosmetic();
+}

@@ -1,4 +1,5 @@
 #include <QWidget>
+#include <QIcon>
 
 #ifndef SWIFT_PACKAGE
 #include <wobjectimpl.h>
@@ -358,7 +359,23 @@
     static_cast<QWidget *>(widget)->clearFocus();
 }
 
+[[maybe_unused]] void QWidget_setWindowIcon(void * widget, void *icon) {
+    static_cast<QWidget *>(widget)->setWindowIcon(*static_cast<QIcon *>(icon));
+}
 
+[[maybe_unused]] void *QWidget_windowIcon(void * widget) {
+    auto wicon = static_cast<QWidget *>(widget)->windowIcon();
+    return new QIcon(wicon);
+}
+
+[[maybe_unused]] void QWidget_setWindowIconText(void * widget, const char *text) {
+    static_cast<QWidget *>(widget)->setWindowIconText(text);
+}
+
+[[maybe_unused]] CQString QWidget_windowIconText(void * widget) {
+    auto text = static_cast<QWidget *>(widget)->windowIconText();
+    return CQString { text.utf16(), text.size() };
+}
 
 
 W_OBJECT_IMPL(QliftWidget)

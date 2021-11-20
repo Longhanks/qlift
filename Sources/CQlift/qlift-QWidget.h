@@ -91,6 +91,10 @@ LIBRARY_API bool QWidget_hasFocus(void * widget);
 LIBRARY_API int  QWidget_focusPolicy(void * widget);
 LIBRARY_API void QWidget_setFocusPolicy(void * widget, int policy);
 LIBRARY_API void QWidget_clearFocus(void * widget);
+LIBRARY_API void QWidget_setWindowIcon(void * widget, void *icon);
+LIBRARY_API void *QWidget_windowIcon(void * widget);
+LIBRARY_API void QWidget_setWindowIconText(void * widget, const char *text);
+LIBRARY_API CQString QWidget_windowIconText(void * widget);
 
 #ifdef __cplusplus
 }

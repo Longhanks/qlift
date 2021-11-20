@@ -31,6 +31,10 @@ open class QIcon {
         self.ptr = QIcon_new_from_file(fileName)
     }
 
+    init(ptr: UnsafeMutableRawPointer) {
+        self.ptr = ptr
+    }
+
     public func add(pixmap: QPixmap, mode: Mode = .normal, state: State = .off) {
         QIcon_addPixmap(ptr, pixmap.ptr, mode.rawValue, state.rawValue)
     }

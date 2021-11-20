@@ -14,8 +14,12 @@ QToolButton_new(void *parent) {
         new QliftToolButton{static_cast<QWidget *>(parent)});
 }
 
-[[maybe_unused]] void QToolButton_setStyle(void *toolButton, int style) {
+[[maybe_unused]] void QToolButton_setToolButtonStyle(void *toolButton, int style) {
     static_cast<QliftToolButton *>(toolButton)->setToolButtonStyle(static_cast<Qt::ToolButtonStyle>(style));
+}
+
+[[maybe_unused]] int QToolButton_toolButtonStyle(void *toolButton) {
+    return static_cast<QliftToolButton *>(toolButton)->toolButtonStyle();
 }
 
 [[maybe_unused]] void QToolButton_mousePressEvent(void *toolButton,

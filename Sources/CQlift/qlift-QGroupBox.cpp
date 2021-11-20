@@ -7,6 +7,10 @@
         new QGroupBox{title, static_cast<QWidget *>(parent)});
 }
 
+[[maybe_unused]] int QGroupBox_alignment(void *groupBox) {
+    return static_cast<QGroupBox *>(groupBox)->alignment();
+}
+
 [[maybe_unused]] void QGroupBox_setAlignment(void *groupBox, int alignment) {
     static_cast<QGroupBox *>(groupBox)->setAlignment(alignment);
 }

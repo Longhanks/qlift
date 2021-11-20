@@ -31,22 +31,19 @@ public class QPen {
         }
     }
 
-    public var style = PenStyle.SolidLine {
-        didSet {
-            QPen_setStyle(ptr, style.rawValue)
-        }
+    public var style: PenStyle {
+        get { .init(rawValue: QPen_style(ptr)) ?? .SolidLine }
+        set { QPen_setStyle(ptr, newValue.rawValue) }
     }
 
-    public var width: Int32 = 0 {
-        didSet {
-            QPen_setWidth(ptr, width)
-        }
+    public var width: Int32 {
+        get { QPen_width(ptr) }
+        set { QPen_setWidth(ptr, newValue) }
     }
 
-    public var cosmetic = false {
-        didSet {
-            QPen_setCosmetic(ptr, cosmetic)
-        }
+    public var cosmetic: Bool {
+        get { QPen_isCosmetic(ptr) }
+        set { QPen_setCosmetic(ptr, newValue) }
     }
 
     public func setColor(_ color: QColor) {

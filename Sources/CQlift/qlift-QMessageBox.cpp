@@ -7,9 +7,21 @@
         new QMessageBox{static_cast<QWidget *>(parent)});
 }
 
-[[maybe_unused]] void QMessageBox_setWindowTitle(void *messageBox,
-                                                 const char *title) {
+[[maybe_unused]] void QMessageBox_setWindowTitle(void *messageBox, const char *title) {
     static_cast<QMessageBox *>(messageBox)->setWindowTitle(title);
+}
+
+[[maybe_unused]] CQString QMessageBox_windowTitle(void *messageBox) {
+    auto text = static_cast<QMessageBox *>(messageBox)->windowTitle();
+    return CQString { text.utf16(), text.size() };
+}
+
+[[maybe_unused]] int QMessageBox_icon(void *messageBox) {
+    return static_cast<QMessageBox *>(messageBox)->icon();
+}
+
+[[maybe_unused]] int QMessageBox_standardButtons(void *messageBox) {
+    return static_cast<QMessageBox *>(messageBox)->standardButtons();
 }
 
 [[maybe_unused]] void QMessageBox_setIcon(void *messageBox, int icon) {

@@ -3,51 +3,37 @@ import CQlift
 
 open class QMainWindow: QWidget {
     public var centralWidget: QWidget? = nil {
-        didSet {
-            QMainWindow_setCentralWidget(self.ptr, centralWidget?.ptr)
+        didSet { QMainWindow_setCentralWidget(self.ptr, centralWidget?.ptr) }
+    }
+
+    public var menuBar: QMenuBar {
+        get {
+            let menuBarPtr = QMainWindow_menuBar(self.ptr)!
+            return QObject.swiftObject(from: menuBarPtr, ofType: QMenuBar.self) ??
+                QMenuBar(ptr: menuBarPtr)
+        }
+        set {
+            QMainWindow_setMenuBar(self.ptr, newValue.ptr)
         }
     }
 
-    private var _menuBar: QMenuBar? = nil
-    private var _statusBar: QStatusBar? = nil
-
-    public var menuBar: QMenuBar! {
+    public var statusBar: QStatusBar {
         get {
-            if self._menuBar == nil {
-                self._menuBar = QMenuBar(ptr: QMainWindow_menuBar(self.ptr))
-            }
-            return self._menuBar!
+            let statusBarPtr = QMainWindow_statusBar(ptr)!
+            return QObject.swiftObject(from: statusBarPtr, ofType: QStatusBar.self) ??
+                QStatusBar(ptr: statusBarPtr)
         }
-        set {
-            QMainWindow_setMenuBar(self.ptr, newValue?.ptr)
-            self._menuBar = newValue
-        }
-    }
-
-    public var statusBar: QStatusBar! {
-        get {
-            if _statusBar == nil {
-                _statusBar = QStatusBar(ptr: QMainWindow_statusBar(self.ptr))
-            }
-            return self._statusBar!
-        }
-        set {
-            QMainWindow_setStatusBar(ptr, newValue?.ptr)
-            self._statusBar = newValue
-        }
+        set { QMainWindow_setStatusBar(ptr, newValue.ptr) }
     }
 
     public override init(parent: QWidget? = nil, flags: Qt.WindowFlags = .Widget) {
         super.init(ptr: QMainWindow_new(parent?.ptr, flags.rawValue))
 
         let rawSelf = Unmanaged.passUnretained(self).toOpaque()
-
-        let functor: @convention(c) (UnsafeMutableRawPointer?, UnsafeMutableRawPointer?) -> Void = { context, closeEvent in
+        QMainWindow_closeEvent_Override(self.ptr, rawSelf) { context, closeEvent in
             let _self = Unmanaged<QMainWindow>.fromOpaque(context!).takeUnretainedValue()
             _self.closeEvent(event: QCloseEvent(ptr: closeEvent!))
         }
-
-        QMainWindow_closeEvent_Override(self.ptr, rawSelf, functor)
     }
 
     override init(ptr: UnsafeMutableRawPointer) {

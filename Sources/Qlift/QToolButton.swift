@@ -11,10 +11,9 @@ open class QToolButton: QAbstractButton {
         case ToolButtonFollowStyle
     }
 
-    public var style: ToolButtonStyle = .ToolButtonIconOnly {
-        didSet {
-            QToolButton_setStyle(ptr, style.rawValue)
-        }
+    public var style: ToolButtonStyle {
+        get { .init(rawValue: QToolButton_toolButtonStyle(ptr)) ?? .ToolButtonFollowStyle }
+        set { QToolButton_setToolButtonStyle(ptr, newValue.rawValue) }
     }
     
     // Icon not supported at the moment
@@ -23,12 +22,10 @@ open class QToolButton: QAbstractButton {
 
         let rawSelf = Unmanaged.passUnretained(self).toOpaque()
 
-        let functor: @convention(c) (UnsafeMutableRawPointer?, UnsafeMutableRawPointer?) -> Void = { context, mouseEvent in
+        QToolButton_mousePressEvent_Override(self.ptr, rawSelf) { context, mouseEvent in
             let _self = Unmanaged<QToolButton>.fromOpaque(context!).takeUnretainedValue()
             _self.mousePressEvent(event: QMouseEvent(ptr: mouseEvent!))
         }
-
-        QToolButton_mousePressEvent_Override(self.ptr, rawSelf, functor)
     }
 
     override init(ptr: UnsafeMutableRawPointer) {
@@ -43,5 +40,4 @@ open class QToolButton: QAbstractButton {
     open override func mousePressEvent(event: QMouseEvent) {
         QToolButton_mousePressEvent(self.ptr, event.ptr)
     }
-
 }
