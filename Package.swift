@@ -9,7 +9,9 @@ let package = Package(
     ],
     targets: [
         .target(name: "Qlift", dependencies: ["CQlift"]),
-        .target(name: "CQlift", dependencies: ["CQt5Widgets"]),
+        .target(name: "CQlift",
+                dependencies: ["CQt5Widgets"],
+                cxxSettings: [.headerSearchPath("private")]),
         .systemLibrary(name: "CQt5Widgets", pkgConfig: "Qt5Widgets"),
         .target(name: "qlift-uic")
     ],

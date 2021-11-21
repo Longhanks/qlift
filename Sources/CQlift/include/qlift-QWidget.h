@@ -103,12 +103,7 @@ LIBRARY_API CQString QWidget_windowIconText(void * widget);
 #ifdef __cplusplus
 
 #include <QWidget>
-
-#ifndef SWIFT_PACKAGE
 #include <wobjectdefs.h>
-#else
-#include "../../include/wobjectdefs.h"
-#endif
 
 class QliftWidget : public QWidget {
     W_OBJECT(QliftWidget)

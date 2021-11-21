@@ -1,5 +1,7 @@
 #pragma once
 
+#include <stdbool.h>
+
 #ifdef __cplusplus
 #define LIBRARY_API [[maybe_unused]]
 #else

@@ -30,12 +30,7 @@ LIBRARY_API void QFrame_setShadow(void *frame, int shadow);
 #ifdef __cplusplus
 
 #include <QFrame>
-
-#ifndef SWIFT_PACKAGE
 #include <wobjectdefs.h>
-#else
-#include "../../include/wobjectdefs.h"
-#endif
 
 class QliftFrame : public QFrame {
     W_OBJECT(QliftFrame)

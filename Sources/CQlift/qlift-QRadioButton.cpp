@@ -1,13 +1,5 @@
-
-
 #include <QRadioButton>
-
-#ifndef SWIFT_PACKAGE
 #include <wobjectimpl.h>
-#else
-#include "../../include/wobjectimpl.h"
-#endif
-
 #include "qlift-QRadioButton.h"
 
 [[maybe_unused]] void *

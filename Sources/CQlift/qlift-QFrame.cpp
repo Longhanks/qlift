@@ -1,11 +1,5 @@
 #include <QFrame>
-
-#ifndef SWIFT_PACKAGE
 #include <wobjectimpl.h>
-#else
-#include "../../include/wobjectimpl.h"
-#endif
-
 #include "qlift-QFrame.h"
 
 [[maybe_unused]] void *QFrame_new(void *parent, int flags) {

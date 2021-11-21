@@ -22,12 +22,7 @@ LIBRARY_API void QRadioButton_swiftHookCleanup(void *radioButton);
 #ifdef __cplusplus
 
 #include <QRadioButton>
-
-#ifndef SWIFT_PACKAGE
 #include <wobjectdefs.h>
-#else
-#include "../../include/wobjectdefs.h"
-#endif
 
 class QliftRadioButton : public QRadioButton {
     W_OBJECT(QliftRadioButton)

@@ -1,11 +1,5 @@
 #include <QToolButton>
-
-#ifndef SWIFT_PACKAGE
 #include <wobjectimpl.h>
-#else
-#include "../../include/wobjectimpl.h"
-#endif
-
 #include "qlift-QToolButton.h"
 
 [[maybe_unused]] void *

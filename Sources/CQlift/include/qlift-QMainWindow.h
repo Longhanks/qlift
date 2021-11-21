@@ -29,12 +29,7 @@ LIBRARY_API void *QMainWindow_swiftHookCleanup(void *mainWindow);
 #ifdef __cplusplus
 
 #include <QMainWindow>
-
-#ifndef SWIFT_PACKAGE
 #include <wobjectdefs.h>
-#else
-#include "../../include/wobjectdefs.h"
-#endif
 
 class QliftMainWindow : public QMainWindow {
     W_OBJECT(QliftMainWindow)

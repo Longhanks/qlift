@@ -1,12 +1,6 @@
 #include <QWidget>
 #include <QIcon>
-
-#ifndef SWIFT_PACKAGE
 #include <wobjectimpl.h>
-#else
-#include "../../include/wobjectimpl.h"
-#endif
-
 #include "qlift-QWidget.h"
 
 [[maybe_unused]] void *QWidget_new(void *parent, int flags) {

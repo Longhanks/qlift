@@ -93,11 +93,7 @@ LIBRARY_API void QLiftLineEdit_swiftHookCleanup(void *lineEdit);
 
 #ifdef __cplusplus
 
-#ifndef SWIFT_PACKAGE
 #include <wobjectdefs.h>
-#else
-#include "../../include/wobjectdefs.h"
-#endif
 
 class QliftLineEdit: public QLineEdit {
     W_OBJECT(QliftLineEdit)

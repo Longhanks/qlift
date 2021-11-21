@@ -1,11 +1,5 @@
 #include <QPushButton>
-
-#ifndef SWIFT_PACKAGE
 #include <wobjectimpl.h>
-#else
-#include "../../include/wobjectimpl.h"
-#endif
-
 #include "qlift-QPushButton.h"
 
 [[maybe_unused]] void *

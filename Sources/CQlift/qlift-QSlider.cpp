@@ -1,13 +1,5 @@
-
-
 #include <QSlider>
-
-#ifndef SWIFT_PACKAGE
 #include <wobjectimpl.h>
-#else
-#include "../../include/wobjectimpl.h"
-#endif
-
 #include "qlift-QSlider.h"
 
 [[maybe_unused]] void *

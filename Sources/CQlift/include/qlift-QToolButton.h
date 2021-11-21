@@ -22,12 +22,7 @@ LIBRARY_API void QToolButton_swiftHookCleanup(void *toolButton);
 #ifdef __cplusplus
 
 #include <QToolButton>
-
-#ifndef SWIFT_PACKAGE
 #include <wobjectdefs.h>
-#else
-#include "../../include/wobjectdefs.h"
-#endif
 
 class QliftToolButton : public QToolButton {
     W_OBJECT(QliftToolButton)
