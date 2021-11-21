@@ -1,17 +1,21 @@
 import CQlift
 
 open class QWidget: QObject {
+
+    // MARK: Init/deinit
+
     public init(parent: QWidget? = nil, flags: Qt.WindowFlags = .Widget) {
         super.init(ptr: QWidget_new(parent?.ptr, flags.rawValue))
 
         let rawSelf = Unmanaged.passUnretained(self).toOpaque()
+        QWidget_saveSwiftObject(ptr, rawSelf)
 
-        QWidget_sizeHint_Override(self.ptr, rawSelf) { context in
+        QWidget_sizeHint_Override(ptr) { context in
             let _self = Unmanaged<QWidget>.fromOpaque(context!).takeUnretainedValue()
             return _self.sizeHint.ptr
         }
 
-        QWidget_mousePressEvent_Override(self.ptr, rawSelf) { context, mouseEvent in
+        QWidget_mousePressEvent_Override(ptr) { context, mouseEvent in
             let _self = Unmanaged<QWidget>.fromOpaque(context!).takeUnretainedValue()
             _self.mousePressEvent(event: QMouseEvent(ptr: mouseEvent!))
         }
@@ -25,6 +29,14 @@ open class QWidget: QObject {
         QWidget_swiftHookCleanup(ptr)
         checkDeleteQtObj()
     }
+
+    // MARK: Events
+
+    open func mousePressEvent(event: QMouseEvent) {
+        QWidget_mousePressEvent(ptr, event.ptr)
+    }
+
+    // MARK: Propeties
 
     public var windowTitle: String {
         get {
@@ -159,6 +171,8 @@ open class QWidget: QObject {
         set { QWidget_setWindowIconText(ptr, newValue) }
     }
 
+    // MARK: Functions
+
     public func setFocus() {
         QWidget_setFocus(ptr)
     }
@@ -185,10 +199,6 @@ open class QWidget: QObject {
 
     public func add(action: QAction) {
         QWidget_addAction(ptr, action.ptr)
-    }
-
-    open func mousePressEvent(event: QMouseEvent) {
-        QWidget_mousePressEvent(ptr, event.ptr)
     }
 
     public func move(to: QPoint) {
@@ -287,6 +297,14 @@ open class QWidget: QObject {
         QWidget_update(ptr)
     }
 
+    public func x() -> Int32 {
+        QWidget_x(ptr)
+    }
+
+    public func y() -> Int32 {
+        QWidget_y(ptr)
+    }
+
 }
 
 extension QWidget {
@@ -303,9 +321,9 @@ extension QWidget {
     }
 
     private func parentWidget() -> QWidget? {
-        guard let parentptr = QObject_parent(ptr) else {
-            return nil
+        if let parentptr = QObject_parent(ptr) {
+            return QObject.swiftQObject(from: parentptr) as? QWidget
         }
-        return QObject.swiftQObject(from: parentptr) as? QWidget
+        return nil
     }
 }

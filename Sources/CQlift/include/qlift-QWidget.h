@@ -38,23 +38,18 @@ LIBRARY_API void QWidget_setMinimumSize(void *widget, void *size);
 LIBRARY_API void QWidget_setGraphicsEffect(void *widget, void *effect);
 
 LIBRARY_API void QWidget_mousePressEvent(void *widget, void *mouseEvent);
-LIBRARY_API void QWidget_mousePressEvent_Override(
-    void *widget,
-    void *context,
-    void (*mousePressEvent_Functor)(void *, void *));
-
-LIBRARY_API void *QWidget_sizeHint(void *widget);
-
-LIBRARY_API void QWidget_setAutoFillBackground(void *widget, bool enable);
-LIBRARY_API bool QWidget_autoFillBackground(void *widget);
+LIBRARY_API void QWidget_saveSwiftObject(void *widget, void *swiftObject);
+LIBRARY_API void QWidget_mousePressEvent_Override(void *widget,
+                                                  void (*mousePressEvent_Functor)(void *, void *));
 LIBRARY_API void QWidget_sizeHint_Override(void *widget,
-                                           void *context,
                                            void *(*sizeHint_Functor)(void *));
 LIBRARY_API void QWidget_swiftHookCleanup(void *widget);
 
+LIBRARY_API void *QWidget_sizeHint(void *widget);
 LIBRARY_API void *QWidget_sizePolicy(void *widget);
 LIBRARY_API void QWidget_setSizePolicy(void *widget, void *policy);
-
+LIBRARY_API void QWidget_setAutoFillBackground(void *widget, bool enable);
+LIBRARY_API bool QWidget_autoFillBackground(void *widget);
 LIBRARY_API CQString QWidget_styleSheet(void *widget);
 LIBRARY_API void QWidget_setStyleSheet(void *widget, const char *styleSheet);
 LIBRARY_API void QWidget_setPalette(void *widget, const void *palette);
@@ -95,6 +90,8 @@ LIBRARY_API void QWidget_setWindowIcon(void * widget, void *icon);
 LIBRARY_API void *QWidget_windowIcon(void * widget);
 LIBRARY_API void QWidget_setWindowIconText(void * widget, const char *text);
 LIBRARY_API CQString QWidget_windowIconText(void * widget);
+LIBRARY_API int QWidget_x(void * widget);
+LIBRARY_API int QWidget_y(void * widget);
 
 #ifdef __cplusplus
 }
@@ -117,26 +114,17 @@ public:
     QliftWidget &operator=(QliftWidget &&) noexcept = delete;
 
     void mousePressEventSuper(QMouseEvent *mouseEvent);
-    void mousePressEventOverride(void *context,
-                                 void (*mousePressEvent_Functor)(void *,
-                                                                 void *));
-
     [[nodiscard]] QSize sizeHintSuper() const;
-    void sizeHintOverride(void *context, void *(*sizeHint_Functor)(void *));
     [[nodiscard]] QSize sizeHint() const override;
-    void swiftHookCleanup() {
-        m_mousePressEvent_Functor = nullptr;
-        m_sizeHint_Functor = nullptr;
-    }
+
+    void *swiftObject = nullptr;
+    void (*m_mousePressEvent_Functor)(void *, void *) = nullptr;
+    void *(*m_sizeHint_Functor)(void *) = nullptr;
 
 protected:
     void mousePressEvent(QMouseEvent *mouseEvent) override;
 
 private:
-    void (*m_mousePressEvent_Functor)(void *, void *) = nullptr;
-    void *m_mousePressEvent_Context = nullptr;
-    void *(*m_sizeHint_Functor)(void *) = nullptr;
-    void *m_sizeHint_Context = nullptr;
 };
 
 #endif

@@ -6,6 +6,10 @@ open class QLayout: QObject, QLayoutItem {
         ptr
     }
 
+    override init(ptr: UnsafeMutableRawPointer) {
+        super.init(ptr: ptr)
+    }
+
     public var swiftOwership: Bool {
         get { false }
         set {}

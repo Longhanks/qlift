@@ -155,24 +155,6 @@
     static_cast<QWidget*>(widget)->setGraphicsEffect(static_cast<QGraphicsEffect *>(effect));
 }
 
-[[maybe_unused]] void QWidget_mousePressEvent(void *widget, void *mouseEvent) {
-    static_cast<QliftWidget *>(widget)->mousePressEventSuper(
-        static_cast<QMouseEvent *>(mouseEvent));
-}
-
-[[maybe_unused]] void QWidget_mousePressEvent_Override(
-    void *widget,
-    void *context,
-    void (*mousePressEvent_Functor)(void *, void *)) {
-    static_cast<QliftWidget *>(widget)->mousePressEventOverride(
-        context, mousePressEvent_Functor);
-}
-
-[[maybe_unused]] void QWidget_swiftHookCleanup(void *widget) {
-    if (widget != nullptr)
-        static_cast<QliftWidget *>(widget)->swiftHookCleanup();
-}
-
 [[maybe_unused]] void *QWidget_sizePolicy(void *widget) {
     auto stackPolicy = static_cast<QWidget *>(widget)->sizePolicy();
     return static_cast<void *>(new QSizePolicy{stackPolicy.horizontalPolicy(),
@@ -197,14 +179,7 @@
 
 [[maybe_unused]] void *QWidget_sizeHint(void *widget) {
     auto stackSize = static_cast<QliftWidget *>(widget)->sizeHintSuper();
-    return static_cast<void *>(
-        new QSize{stackSize.width(), stackSize.height()});
-}
-
-[[maybe_unused]] void QWidget_sizeHint_Override(
-    void *widget, void *context, void *(*sizeHint_Functor)(void *)) {
-    static_cast<QliftWidget *>(widget)->sizeHintOverride(context,
-                                                         sizeHint_Functor);
+    return static_cast<void *>(new QSize{stackSize.width(), stackSize.height()});
 }
 
 [[maybe_unused]] void QWidget_setAutoFillBackground(void *widget, bool enabled) {
@@ -371,23 +346,47 @@
     return CQString { text.utf16(), text.size() };
 }
 
+[[maybe_unused]] void QWidget_mousePressEvent(void *widget, void *mouseEvent) {
+    static_cast<QliftWidget *>(widget)->mousePressEventSuper(static_cast<QMouseEvent *>(mouseEvent));
+}
+
+[[maybe_unused]] void QWidget_mousePressEvent_Override(void *widget,
+                                                       void (*mousePressEvent_Functor)(void *, void *)) {
+    static_cast<QliftWidget *>(widget)->m_mousePressEvent_Functor = mousePressEvent_Functor;
+}
+
+[[maybe_unused]] void QWidget_sizeHint_Override(void *widget,
+                                                void *(*sizeHint_Functor)(void *)) {
+    static_cast<QliftWidget *>(widget)->m_sizeHint_Functor = sizeHint_Functor;
+}
+
+[[maybe_unused]] void QWidget_swiftHookCleanup(void *widget) {
+    if (widget != nullptr)
+        static_cast<QliftWidget *>(widget)->swiftObject = nullptr;
+}
+
+[[maybe_unused]] void QWidget_saveSwiftObject(void *widget, void *swiftObject) {
+    static_cast<QliftWidget *>(widget)->swiftObject = swiftObject;
+}
+
+[[maybe_unused]] int QWidget_x(void * widget) {
+    return static_cast<QWidget *>(widget)->x();
+}
+
+[[maybe_unused]] int QWidget_y(void * widget) {
+    return static_cast<QWidget *>(widget)->y();
+}
+
 
 W_OBJECT_IMPL(QliftWidget)
 
-[[maybe_unused]] void
-QliftWidget::mousePressEventSuper(QMouseEvent *mouseEvent) {
+[[maybe_unused]] void QliftWidget::mousePressEventSuper(QMouseEvent *mouseEvent) {
     QWidget::mousePressEvent(mouseEvent);
 }
 
-[[maybe_unused]] void QliftWidget::mousePressEventOverride(
-    void *context, void (*mousePressEvent_Functor)(void *, void *)) {
-    m_mousePressEvent_Context = context;
-    m_mousePressEvent_Functor = mousePressEvent_Functor;
-}
-
 [[maybe_unused]] void QliftWidget::mousePressEvent(QMouseEvent *mouseEvent) {
-    if (m_mousePressEvent_Functor != nullptr) {
-        (*m_mousePressEvent_Functor)(m_mousePressEvent_Context, mouseEvent);
+    if (swiftObject != nullptr) {
+        (*m_mousePressEvent_Functor)(swiftObject, mouseEvent);
         return;
     }
     QWidget::mousePressEvent(mouseEvent);
@@ -397,17 +396,9 @@ QliftWidget::mousePressEventSuper(QMouseEvent *mouseEvent) {
     return QWidget::sizeHint();
 }
 
-[[maybe_unused]] void
-QliftWidget::sizeHintOverride(void *context,
-                              void *(*sizeHint_Functor)(void *)) {
-    m_sizeHint_Context = context;
-    m_sizeHint_Functor = sizeHint_Functor;
-}
-
 [[maybe_unused]] QSize QliftWidget::sizeHint() const {
-    if (m_sizeHint_Functor != nullptr) {
-        auto *size =
-            static_cast<QSize *>((*m_sizeHint_Functor)(m_sizeHint_Context));
+    if (swiftObject != nullptr) {
+        auto *size = static_cast<QSize *>((*m_sizeHint_Functor)(swiftObject));
         return QSize{size->width(), size->height()};
     }
     return QWidget::sizeHint();

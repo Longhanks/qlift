@@ -1139,3 +1139,7 @@ QT_WARNING_POP
 /// (Requires support for c++17 inline variables)
 #define W_NAMESPACE_IMPL_INLINE(...) \
     W_OBJECT_IMPL_COMMON(inline, __VA_ARGS__)
+
+extern "C" {
+    void * QObject_getSwiftObject(void * object);
+}
