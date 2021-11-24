@@ -54,3 +54,27 @@ QBoxLayout_addLayout(void *boxLayout, void *layout, int stretch) {
 [[maybe_unused]] int QBoxLayout_count(void *boxLayout) {
     return static_cast<QBoxLayout *>(boxLayout)->count();
 }
+
+[[maybe_unused]] void QBoxLayout_insertItem(void *boxLayout, int index, void *item) {
+    static_cast<QBoxLayout *>(boxLayout)->insertItem(index, static_cast<QLayoutItem *>(item));
+}
+
+[[maybe_unused]] void QBoxLayout_insertLayout(void *boxLayout, int index, void *layout, int stretch) {
+    static_cast<QBoxLayout *>(boxLayout)->insertLayout(index, static_cast<QLayout *>(layout), stretch);
+}
+
+[[maybe_unused]] void QBoxLayout_insertSpacerItem(void *boxLayout, int index, void *spacerItem) {
+    static_cast<QBoxLayout *>(boxLayout)->insertSpacerItem(index, static_cast<QSpacerItem *>(spacerItem));
+}
+
+[[maybe_unused]] void QBoxLayout_insertSpacing(void *boxLayout, int index, int size) {
+    static_cast<QBoxLayout *>(boxLayout)->insertSpacing(index, size);
+}
+
+[[maybe_unused]] void QBoxLayout_insertStretch(void *boxLayout, int index, int stretch) {
+    static_cast<QBoxLayout *>(boxLayout)->insertStretch(index, stretch);
+}
+
+[[maybe_unused]] void QBoxLayout_insertWidget(void *boxLayout, int index, void *widget, int stretch, int alignment) {
+    static_cast<QBoxLayout *>(boxLayout)->insertWidget(index, static_cast<QWidget *>(widget), stretch, static_cast<QFlags<Qt::AlignmentFlag>>(alignment));
+}

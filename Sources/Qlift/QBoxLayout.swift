@@ -47,4 +47,29 @@ open class QBoxLayout: QLayout {
     public func count() -> Int32 {
         QBoxLayout_count(ptr)
     }
+
+    public func insertItem(index: Int32, item: QLayoutItem) {
+        QBoxLayout_insertItem(ptr, index, item.qtPtr)
+        item.swiftOwership = false
+    }
+
+    public func insertLayout(index: Int32, layout: QLayout, stretch: Int32 = 0) {
+        QBoxLayout_insertLayout(ptr, index, layout.ptr, stretch)
+    }
+
+    public func insertSpacerItem(index: Int32, spacerItem: QSpacerItem) {
+        QBoxLayout_insertSpacerItem(ptr, index, spacerItem.ptr)
+    }
+
+    public func insertSpacing(index: Int32, size: Int32) {
+        QBoxLayout_insertSpacing(ptr, index, size)
+    }
+
+    public func insertStretch(index: Int32, stretch: Int32 = 0) {
+        QBoxLayout_insertStretch(ptr, index, stretch)
+    }
+
+    public func insertWidget(index: Int32, widget: QWidget, stretch: Int32 = 0, alignment: Qt.Alignment = []) {
+        QBoxLayout_insertWidget(ptr, index, widget.ptr, stretch, alignment.rawValue)
+    }
 }
