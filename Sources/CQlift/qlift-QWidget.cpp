@@ -308,7 +308,7 @@
     static_cast<QWidget *>(widget)->setFocus(static_cast<Qt::FocusReason>(reason));
 }
 
-[[maybe_unused]] bool QWidget_setFocus(void * widget) {
+[[maybe_unused]] void QWidget_setFocus(void * widget) {
     static_cast<QWidget *>(widget)->setFocus();
 }
 
