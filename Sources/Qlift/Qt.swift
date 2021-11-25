@@ -99,7 +99,52 @@ public struct Qt {
         public static let LeftButton = MouseButton(rawValue: 1)
         public static let RightButton = MouseButton(rawValue: 2)
         public static let MiddleButton = MouseButton(rawValue: 4)
-        // Incomplete!
+        public static let BackButton = MouseButton(rawValue: 0x00000008)
+        public static let XButton1 = BackButton
+        public static let ExtraButton1 = XButton1
+        public static let ForwardButton = MouseButton(rawValue: 0x00000010)
+        public static let XButton2 = ForwardButton
+        public static let ExtraButton2 = ForwardButton
+        public static let TaskButton = MouseButton(rawValue: 0x00000020)
+        public static let ExtraButton3 = TaskButton
+        public static let ExtraButton4 = MouseButton(rawValue: 0x00000040)
+        public static let ExtraButton5 = MouseButton(rawValue: 0x00000080)
+        public static let ExtraButton6 = MouseButton(rawValue: 0x00000100)
+        public static let ExtraButton7 = MouseButton(rawValue: 0x00000200)
+        public static let ExtraButton8 = MouseButton(rawValue: 0x00000400)
+        public static let ExtraButton9 = MouseButton(rawValue: 0x00000800)
+        public static let ExtraButton10 = MouseButton(rawValue: 0x00001000)
+        public static let ExtraButton11 = MouseButton(rawValue: 0x00002000)
+        public static let ExtraButton12 = MouseButton(rawValue: 0x00004000)
+        public static let ExtraButton13 = MouseButton(rawValue: 0x00008000)
+        public static let ExtraButton14 = MouseButton(rawValue: 0x00010000)
+        public static let ExtraButton15 = MouseButton(rawValue: 0x00020000)
+        public static let ExtraButton16 = MouseButton(rawValue: 0x00040000)
+        public static let ExtraButton17 = MouseButton(rawValue: 0x00080000)
+        public static let ExtraButton18 = MouseButton(rawValue: 0x00100000)
+        public static let ExtraButton19 = MouseButton(rawValue: 0x00200000)
+        public static let ExtraButton20 = MouseButton(rawValue: 0x00400000)
+        public static let ExtraButton21 = MouseButton(rawValue: 0x00800000)
+        public static let ExtraButton22 = MouseButton(rawValue: 0x01000000)
+        public static let ExtraButton23 = MouseButton(rawValue: 0x02000000)
+        public static let ExtraButton24 = MouseButton(rawValue: 0x04000000)
+    }
+
+    public struct MouseEventFlag: OptionSet {
+        public let rawValue: Int32
+
+        public init(rawValue: Int32) {
+            self.rawValue = rawValue
+        }
+
+        public static let MouseEventCreatedDoubleClick =  MouseEventFlag(rawValue: 0x01)
+    }
+
+    public enum MouseEventSource: Int32 {
+        case MouseEventNotSynthesized
+        case MouseEventSynthesizedBySystem
+        case MouseEventSynthesizedByQt
+        case MouseEventSynthesizedByApplication
     }
 
     public enum WindowModality: Int32 {
@@ -349,4 +394,23 @@ public struct Qt {
 
         case WA_StyleSheetTarget = 131
     }
+
+
+    public struct KeyboardModifiers: OptionSet {
+        public let rawValue: Int32
+
+        public init(rawValue: Int32) {
+            self.rawValue = rawValue
+        }
+
+        public static let NoModifier: KeyboardModifiers = []
+        public static let ShiftModifier = KeyboardModifiers(rawValue: 0x02000000)
+        public static let ControlModifier = KeyboardModifiers(rawValue: 0x04000000)
+        public static let AltModifier = KeyboardModifiers(rawValue: 0x08000000)
+        public static let MetaModifier = KeyboardModifiers(rawValue: 0x10000000)
+        public static let KeypadModifier = KeyboardModifiers(rawValue: 0x20000000)
+        public static let GroupSwitchModifier = KeyboardModifiers(rawValue: 0x40000000)
+    }
+
+
 }
