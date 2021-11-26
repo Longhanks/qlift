@@ -8,20 +8,22 @@ extern "C" {
 
 #pragma clang diagnostic ignored "-Wnullability-completeness"
 
-LIBRARY_API void *QWidget_new(void *parent, int flags);
+#pragma clang assume_nonnull begin
+
+LIBRARY_API void *QWidget_new(void * _Nullable parent, int flags);
 LIBRARY_API bool QWidget_close(void *widget);
 LIBRARY_API void QWidget_show(void *widget);
 LIBRARY_API void QWidget_addAction(void *widget, void *action);
 LIBRARY_API CQString QWidget_windowTitle(void *widget);
 LIBRARY_API void QWidget_setWindowTitle(void *widget, const char *title);
 LIBRARY_API void *QWidget_geometry(void *widget);
-LIBRARY_API void QWidget_setGeometry(void *widget, void *rect);
+LIBRARY_API void QWidget_setGeometry(void *widget, void * _Nullable rect);
 LIBRARY_API bool QWidget_isEnabled(void *widget);
 LIBRARY_API void QWidget_setEnabled(void *widget, bool enabled);
 LIBRARY_API int QWidget_height(void *widget);
 LIBRARY_API int QWidget_width(void *widget);
 LIBRARY_API void *QWidget_layout(void *widget);
-LIBRARY_API void QWidget_setLayout(void *widget, void *layout);
+LIBRARY_API void QWidget_setLayout(void *widget, void * _Nullable layout);
 LIBRARY_API void *QWidget_pos(void *widget);
 LIBRARY_API void QWidget_move(void *widget, void *point);
 LIBRARY_API void QWidget_movexy(void *widget, int x, int y);
@@ -86,13 +88,10 @@ LIBRARY_API CQString QWidget_windowIconText(void * widget);
 LIBRARY_API int QWidget_x(void * widget);
 LIBRARY_API int QWidget_y(void * widget);
 
-#pragma clang assume_nonnull begin
-
 LIBRARY_API void QWidget_saveSwiftObject(void *widget, void *swiftObject);
 LIBRARY_API void QWidget_setEventFunctor(void *widget, void (*mousePressEvent_Functor)(void *, CQTEventType, void *));
-LIBRARY_API void QWidget_sizeHint_Override(void *widget,
-                                           void *(*sizeHint_Functor)(void *));
-LIBRARY_API void QWidget_swiftHookCleanup(void *widget);
+LIBRARY_API void QWidget_sizeHint_Override(void *widget, void * _Nonnull (* _Nonnull sizeHint_Functor)(void *));
+LIBRARY_API void QWidget_swiftHookCleanup(void * _Nullable widget);
 
 LIBRARY_API void QWidget_mouseDoubleClickEvent(void *widget, void *event);
 LIBRARY_API void QWidget_mouseMoveEvent(void *widget, void *event);
@@ -100,7 +99,6 @@ LIBRARY_API void QWidget_mousePressEvent(void *widget, void *event);
 LIBRARY_API void QWidget_mouseReleaseEvent(void *widget, void *event);
 LIBRARY_API void QWidget_keyPressEvent(void *widget, void *event);
 LIBRARY_API void QWidget_keyReleaseEvent(void *widget, void *event);
-
 LIBRARY_API void QWidget_actionEvent(void *widget, void *event);
 LIBRARY_API void QWidget_changeEvent(void *widget, void *event);
 LIBRARY_API void QWidget_closeEvent(void *widget, void *event);
