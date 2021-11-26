@@ -9,5 +9,13 @@ public class QInputEvent: QEvent {
     deinit {
         checkDeleteQtObj()
     }
+
+    public func modifiers() -> Qt.KeyboardModifiers {
+        .init(rawValue: QInputEvent_modifiers(ptr))
+    }
+
+    public func timestamp() -> UInt {
+        QInputEvent_timestamp(ptr)
+    }
 }
 

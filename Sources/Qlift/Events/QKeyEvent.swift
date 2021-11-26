@@ -28,7 +28,7 @@ public class QKeyEvent: QInputEvent {
         QKeyEvent_key(ptr)
     }
 
-    public func modifiers() -> Qt.KeyboardModifiers {
+    public override func modifiers() -> Qt.KeyboardModifiers {
         .init(rawValue: QKeyEvent_modifiers(ptr))
     }
 
