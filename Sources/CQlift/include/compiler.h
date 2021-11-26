@@ -39,3 +39,31 @@ typedef struct {
     const int size;
 } CQString;
 #pragma clang assume_nonnull end
+
+typedef enum {
+    CQactionEvent,
+    CQchangeEvent,
+    CQcloseEvent,
+    CQcontextMenuEvent,
+    CQdragEnterEvent,
+    CQdragLeaveEvent,
+    CQdragMoveEvent,
+    CQdropEvent,
+    CQenterEvent,
+    CQfocusInEvent,
+    CQfocusOutEvent,
+    CQhideEvent,
+    CQkeyPressEvent,
+    CQkeyReleaseEvent,
+    CQleaveEvent,
+    CQmouseDoubleClickEvent,
+    CQmouseMoveEvent,
+    CQmousePressEvent,
+    CQmouseReleaseEvent,
+    CQmoveEvent,
+    CQpaintEvent,
+    CQresizeEvent,
+    CQshowEvent,
+    CQtabletEvent,
+    CQwheelEvent
+} CQTEventType;

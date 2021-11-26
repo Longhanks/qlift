@@ -44,7 +44,7 @@ open class QMainWindow: QWidget {
         checkDeleteQtObj()
     }
 
-    open func closeEvent(event: QCloseEvent) {
+    open override func closeEvent(event: QCloseEvent) {
         QMainWindow_closeEvent(self.ptr, event.ptr)
     }
 }

@@ -346,13 +346,16 @@
     return CQString { text.utf16(), text.size() };
 }
 
-[[maybe_unused]] void QWidget_mousePressEvent(void *widget, void *mouseEvent) {
-    static_cast<QliftWidget *>(widget)->mousePressEventSuper(static_cast<QMouseEvent *>(mouseEvent));
+[[maybe_unused]] int QWidget_x(void * widget) {
+    return static_cast<QWidget *>(widget)->x();
 }
 
-[[maybe_unused]] void QWidget_mousePressEvent_Override(void *widget,
-                                                       void (*mousePressEvent_Functor)(void *, void *)) {
-    static_cast<QliftWidget *>(widget)->m_mousePressEvent_Functor = mousePressEvent_Functor;
+[[maybe_unused]] int QWidget_y(void * widget) {
+    return static_cast<QWidget *>(widget)->y();
+}
+
+[[maybe_unused]] void QWidget_setEventFunctor(void *widget, void (*eventFunctor)(void *, CQTEventType, void *)) {
+    static_cast<QliftWidget *>(widget)->m_eventFunctor = eventFunctor;
 }
 
 [[maybe_unused]] void QWidget_sizeHint_Override(void *widget,
@@ -369,27 +372,263 @@
     static_cast<QliftWidget *>(widget)->swiftObject = swiftObject;
 }
 
-[[maybe_unused]] int QWidget_x(void * widget) {
-    return static_cast<QWidget *>(widget)->x();
+[[maybe_unused]] void QWidget_mouseDoubleClickEvent(void *widget, void *event) {
+    static_cast<QliftWidget *>(widget)->mouseDoubleClickEventSuper(static_cast<QMouseEvent *>(event));
+}
+[[maybe_unused]] void QWidget_mouseMoveEvent(void *widget, void *event) {
+    static_cast<QliftWidget *>(widget)->mouseMoveEventSuper(static_cast<QMouseEvent *>(event));
+}
+[[maybe_unused]] void QWidget_mousePressEvent(void *widget, void *event) {
+    static_cast<QliftWidget *>(widget)->mousePressEventSuper(static_cast<QMouseEvent *>(event));
+}
+[[maybe_unused]] void QWidget_mouseReleaseEvent(void *widget, void *event) {
+    static_cast<QliftWidget *>(widget)->mouseReleaseEventSuper(static_cast<QMouseEvent *>(event));
+}
+[[maybe_unused]] void QWidget_keyPressEvent(void *widget, void *event) {
+    static_cast<QliftWidget *>(widget)->keyPressEventSuper(static_cast<QKeyEvent *>(event));
+}
+[[maybe_unused]] void QWidget_keyReleaseEvent(void *widget, void *event) {
+    static_cast<QliftWidget *>(widget)->keyReleaseEventSuper(static_cast<QKeyEvent *>(event));
 }
 
-[[maybe_unused]] int QWidget_y(void * widget) {
-    return static_cast<QWidget *>(widget)->y();
+[[maybe_unused]] void QWidget_actionEvent(void *widget, void *event) {
+    static_cast<QliftWidget *>(widget)->actionEventSuper(static_cast<QActionEvent *>(event));
 }
-
+[[maybe_unused]] void QWidget_changeEvent(void *widget, void *event) {
+    static_cast<QliftWidget *>(widget)->changeEventSuper(static_cast<QEvent *>(event));
+}
+[[maybe_unused]] void QWidget_closeEvent(void *widget, void *event) {
+    static_cast<QliftWidget *>(widget)->closeEventSuper(static_cast<QCloseEvent *>(event));
+}
+[[maybe_unused]] void QWidget_contextMenuEvent(void *widget, void *event) {
+    static_cast<QliftWidget *>(widget)->contextMenuEventSuper(static_cast<QContextMenuEvent *>(event));
+}
+[[maybe_unused]] void QWidget_enterEvent(void *widget, void *event) {
+    static_cast<QliftWidget *>(widget)->enterEventSuper(static_cast<QEvent *>(event));
+}
+[[maybe_unused]] void QWidget_focusInEvent(void *widget, void *event) {
+    static_cast<QliftWidget *>(widget)->focusInEventSuper(static_cast<QFocusEvent *>(event));
+}
+[[maybe_unused]] void QWidget_focusOutEvent(void *widget, void *event) {
+    static_cast<QliftWidget *>(widget)->focusOutEventSuper(static_cast<QFocusEvent *>(event));
+}
+[[maybe_unused]] void QWidget_hideEvent(void *widget, void *event) {
+    static_cast<QliftWidget *>(widget)->hideEventSuper(static_cast<QHideEvent *>(event));
+}
+[[maybe_unused]] void QWidget_leaveEvent(void *widget, void *event) {
+    static_cast<QliftWidget *>(widget)->leaveEventSuper(static_cast<QEvent *>(event));
+}
+[[maybe_unused]] void QWidget_moveEvent(void *widget, void *event) {
+    static_cast<QliftWidget *>(widget)->moveEventSuper(static_cast<QMoveEvent *>(event));
+}
+[[maybe_unused]] void QWidget_paintEvent(void *widget, void *event) {
+    static_cast<QliftWidget *>(widget)->paintEventSuper(static_cast<QPaintEvent *>(event));
+}
+[[maybe_unused]] void QWidget_resizeEvent(void *widget, void *event) {
+    static_cast<QliftWidget *>(widget)->resizeEventSuper(static_cast<QResizeEvent *>(event));
+}
+[[maybe_unused]] void QWidget_showEvent(void *widget, void *event) {
+    static_cast<QliftWidget *>(widget)->showEventSuper(static_cast<QShowEvent *>(event));
+}
+[[maybe_unused]] void QWidget_tabletEvent(void *widget, void *event) {
+    static_cast<QliftWidget *>(widget)->tabletEventSuper(static_cast<QTabletEvent *>(event));
+}
+[[maybe_unused]] void QWidget_wheelEvent(void *widget, void *event) {
+    static_cast<QliftWidget *>(widget)->wheelEventSuper(static_cast<QWheelEvent *>(event));
+}
 
 W_OBJECT_IMPL(QliftWidget)
 
-[[maybe_unused]] void QliftWidget::mousePressEventSuper(QMouseEvent *mouseEvent) {
-    QWidget::mousePressEvent(mouseEvent);
+[[maybe_unused]] void QliftWidget::mouseDoubleClickEventSuper(QMouseEvent *event) {
+    QWidget::mouseDoubleClickEvent(event);
+}
+[[maybe_unused]] void QliftWidget::mouseMoveEventSuper(QMouseEvent *event) {
+    QWidget::mouseMoveEvent(event);
+}
+[[maybe_unused]] void QliftWidget::mousePressEventSuper(QMouseEvent *event) {
+    QWidget::mousePressEvent(event);
+}
+[[maybe_unused]] void QliftWidget::mouseReleaseEventSuper(QMouseEvent *event) {
+    QWidget::mouseReleaseEvent(event);
+}
+[[maybe_unused]] void QliftWidget::keyPressEventSuper(QKeyEvent *event) {
+    QWidget::keyPressEvent(event);
+}
+[[maybe_unused]] void QliftWidget::keyReleaseEventSuper(QKeyEvent *event) {
+    QWidget::keyReleaseEvent(event);
+}
+[[maybe_unused]] void QliftWidget::actionEventSuper(QActionEvent *event) {
+    QWidget::actionEvent(event);
+}
+[[maybe_unused]] void QliftWidget::changeEventSuper(QEvent *event) {
+    QWidget::changeEvent(event);
+}
+[[maybe_unused]] void QliftWidget::closeEventSuper(QCloseEvent *event) {
+    QWidget::closeEvent(event);
+}
+[[maybe_unused]] void QliftWidget::contextMenuEventSuper(QContextMenuEvent *event) {
+    QWidget::contextMenuEvent(event);
+}
+[[maybe_unused]] void QliftWidget::enterEventSuper(QEvent *event) {
+    QWidget::enterEvent(event);
+}
+[[maybe_unused]] void QliftWidget::focusInEventSuper(QFocusEvent *event) {
+    QWidget::focusInEvent(event);
+}
+[[maybe_unused]] void QliftWidget::focusOutEventSuper(QFocusEvent *event) {
+    QWidget::focusOutEvent(event);
+}
+[[maybe_unused]] void QliftWidget::hideEventSuper(QHideEvent *event) {
+    QWidget::hideEvent(event);
+}
+[[maybe_unused]] void QliftWidget::leaveEventSuper(QEvent *event) {
+    QWidget::leaveEvent(event);
+}
+[[maybe_unused]] void QliftWidget::moveEventSuper(QMoveEvent *event) {
+    QWidget::moveEvent(event);
+}
+[[maybe_unused]] void QliftWidget::paintEventSuper(QPaintEvent *event) {
+    QWidget::paintEvent(event);
+}
+[[maybe_unused]] void QliftWidget::resizeEventSuper(QResizeEvent *event) {
+    QWidget::resizeEvent(event);
+}
+[[maybe_unused]] void QliftWidget::showEventSuper(QShowEvent *event) {
+    QWidget::showEvent(event);
+}
+[[maybe_unused]] void QliftWidget::tabletEventSuper(QTabletEvent *event) {
+    QWidget::tabletEvent(event);
+}
+[[maybe_unused]] void QliftWidget::wheelEventSuper(QWheelEvent *event) {
+    QWidget::wheelEvent(event);
 }
 
-[[maybe_unused]] void QliftWidget::mousePressEvent(QMouseEvent *mouseEvent) {
-    if (swiftObject != nullptr) {
-        (*m_mousePressEvent_Functor)(swiftObject, mouseEvent);
-        return;
-    }
-    QWidget::mousePressEvent(mouseEvent);
+[[maybe_unused]] void QliftWidget::mouseDoubleClickEvent(QMouseEvent *event) {
+    if (swiftObject != nullptr)
+        m_eventFunctor(swiftObject, CQmouseDoubleClickEvent, event);
+    else
+        QWidget::mouseDoubleClickEvent(event);
+}
+[[maybe_unused]] void QliftWidget::mouseMoveEvent(QMouseEvent *event) {
+    if (swiftObject != nullptr)
+        m_eventFunctor(swiftObject, CQmouseMoveEvent, event);
+    else
+        QWidget::mouseMoveEvent(event);
+}
+[[maybe_unused]] void QliftWidget::mousePressEvent(QMouseEvent *event) {
+    if (swiftObject != nullptr)
+        m_eventFunctor(swiftObject, CQmousePressEvent, event);
+    else
+        QWidget::mousePressEvent(event);
+}
+[[maybe_unused]] void QliftWidget::mouseReleaseEvent(QMouseEvent *event) {
+    if (swiftObject != nullptr)
+        m_eventFunctor(swiftObject, CQmouseReleaseEvent, event);
+    else
+        QWidget::mouseReleaseEvent(event);
+}
+[[maybe_unused]] void QliftWidget::keyPressEvent(QKeyEvent *event) {
+    if (swiftObject != nullptr)
+        m_eventFunctor(swiftObject, CQkeyPressEvent, event);
+    else
+        QWidget::keyPressEvent(event);
+}
+[[maybe_unused]] void QliftWidget::keyReleaseEvent(QKeyEvent *event) {
+    if (swiftObject != nullptr)
+        m_eventFunctor(swiftObject, CQkeyReleaseEvent, event);
+    else
+        QWidget::keyReleaseEvent(event);
+}
+
+[[maybe_unused]] void QliftWidget::actionEvent(QActionEvent *event) {
+    if (swiftObject != nullptr)
+        m_eventFunctor(swiftObject, CQactionEvent, event);
+    else
+        QWidget::actionEvent(event);
+}
+[[maybe_unused]] void QliftWidget::changeEvent(QEvent *event) {
+    if (swiftObject != nullptr)
+        m_eventFunctor(swiftObject, CQchangeEvent, event);
+    else
+        QWidget::changeEvent(event);
+}
+[[maybe_unused]] void QliftWidget::closeEvent(QCloseEvent *event) {
+    if (swiftObject != nullptr)
+        m_eventFunctor(swiftObject, CQcloseEvent, event);
+    else
+        QWidget::closeEvent(event);
+}
+[[maybe_unused]] void QliftWidget::contextMenuEvent(QContextMenuEvent *event) {
+    if (swiftObject != nullptr)
+        m_eventFunctor(swiftObject, CQcontextMenuEvent, event);
+    else
+        QWidget::contextMenuEvent(event);
+}
+[[maybe_unused]] void QliftWidget::enterEvent(QEvent *event) {
+    if (swiftObject != nullptr)
+        m_eventFunctor(swiftObject, CQenterEvent, event);
+    else
+        QWidget::enterEvent(event);
+}
+[[maybe_unused]] void QliftWidget::focusInEvent(QFocusEvent *event) {
+    if (swiftObject != nullptr)
+        m_eventFunctor(swiftObject, CQfocusInEvent, event);
+    else
+        QWidget::focusInEvent(event);
+}
+[[maybe_unused]] void QliftWidget::focusOutEvent(QFocusEvent *event) {
+    if (swiftObject != nullptr)
+        m_eventFunctor(swiftObject, CQfocusOutEvent, event);
+    else
+        QWidget::focusOutEvent(event);
+}
+[[maybe_unused]] void QliftWidget::hideEvent(QHideEvent *event) {
+    if (swiftObject != nullptr)
+        m_eventFunctor(swiftObject, CQhideEvent, event);
+    else
+        QWidget::hideEvent(event);
+}
+[[maybe_unused]] void QliftWidget::leaveEvent(QEvent *event) {
+    if (swiftObject != nullptr)
+        m_eventFunctor(swiftObject, CQleaveEvent, event);
+    else
+        QWidget::leaveEvent(event);
+}
+[[maybe_unused]] void QliftWidget::moveEvent(QMoveEvent *event) {
+    if (swiftObject != nullptr)
+        m_eventFunctor(swiftObject, CQmoveEvent, event);
+    else
+        QWidget::moveEvent(event);
+}
+[[maybe_unused]] void QliftWidget::paintEvent(QPaintEvent *event) {
+    if (swiftObject != nullptr)
+        m_eventFunctor(swiftObject, CQpaintEvent, event);
+    else
+        QWidget::paintEvent(event);
+}
+[[maybe_unused]] void QliftWidget::resizeEvent(QResizeEvent *event) {
+    if (swiftObject != nullptr)
+        m_eventFunctor(swiftObject, CQresizeEvent, event);
+    else
+        QWidget::resizeEvent(event);
+}
+[[maybe_unused]] void QliftWidget::showEvent(QShowEvent *event) {
+    if (swiftObject != nullptr)
+        m_eventFunctor(swiftObject, CQshowEvent, event);
+    else
+        QWidget::showEvent(event);
+}
+[[maybe_unused]] void QliftWidget::tabletEvent(QTabletEvent *event) {
+    if (swiftObject != nullptr)
+        m_eventFunctor(swiftObject, CQtabletEvent, event);
+    else
+        QWidget::tabletEvent(event);
+}
+[[maybe_unused]] void QliftWidget::wheelEvent(QWheelEvent *event) {
+    if (swiftObject != nullptr)
+        m_eventFunctor(swiftObject, CQwheelEvent, event);
+    else
+        QWidget::wheelEvent(event);
 }
 
 [[maybe_unused]] QSize QliftWidget::sizeHintSuper() const {

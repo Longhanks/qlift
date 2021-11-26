@@ -48,16 +48,4 @@ public class QMouseEvent: QInputEvent {
     public func pos() -> QPoint {
         QPoint(ptr: QMouseEvent_pos(ptr))
     }
-
-//    public func localPos() -> QPointF {
-//        QPointF(
-//        QMouseEvent_
-//    }
-//    public func screenPos() -> QPointF {
-//        QMouseEvent_
-//    }
-//    public func windowPos() -> QPointF {
-//        QMouseEvent_
-//    }
-
 }

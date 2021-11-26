@@ -11,13 +11,38 @@ open class QWidget: QObject {
         QWidget_saveSwiftObject(ptr, rawSelf)
 
         QWidget_sizeHint_Override(ptr) { context in
-            let _self = Unmanaged<QWidget>.fromOpaque(context!).takeUnretainedValue()
+            let _self = Unmanaged<QWidget>.fromOpaque(context).takeUnretainedValue()
             return _self.sizeHint.ptr
         }
 
-        QWidget_mousePressEvent_Override(ptr) { context, mouseEvent in
-            let _self = Unmanaged<QWidget>.fromOpaque(context!).takeUnretainedValue()
-            _self.mousePressEvent(event: QMouseEvent(ptr: mouseEvent!))
+        QWidget_setEventFunctor(ptr) { context, eventType, event in
+            let _self = Unmanaged<QWidget>.fromOpaque(context).takeUnretainedValue()
+            switch eventType {
+            case CQmousePressEvent: _self.mousePressEvent(event: QMouseEvent(ptr: event))
+            case CQmouseDoubleClickEvent: _self.mouseDoubleClickEvent(event: QMouseEvent(ptr: event))
+            case CQmouseMoveEvent: _self.mouseMoveEvent(event: QMouseEvent(ptr: event))
+            case CQmousePressEvent: _self.mousePressEvent(event: QMouseEvent(ptr: event))
+            case CQmouseReleaseEvent: _self.mouseReleaseEvent(event: QMouseEvent(ptr: event))
+            case CQkeyPressEvent: _self.keyPressEvent(event: QKeyEvent(ptr: event))
+            case CQkeyReleaseEvent: _self.keyReleaseEvent(event: QKeyEvent(ptr: event))
+            case CQactionEvent: _self.actionEvent(event: QActionEvent(ptr: event))
+            case CQchangeEvent: _self.changeEvent(event: QEvent(ptr: event))
+            case CQcloseEvent: _self.closeEvent(event: QCloseEvent(ptr: event))
+            case CQcontextMenuEvent: _self.contextMenuEvent(event: QContextMenuEvent(ptr: event))
+            case CQenterEvent: _self.enterEvent(event: QEvent(ptr: event))
+            case CQfocusInEvent: _self.focusInEvent(event: QFocusEvent(ptr: event))
+            case CQfocusOutEvent: _self.focusOutEvent(event: QFocusEvent(ptr: event))
+            case CQhideEvent: _self.hideEvent(event: QHideEvent(ptr: event))
+            case CQleaveEvent: _self.leaveEvent(event: QEvent(ptr: event))
+            case CQmoveEvent: _self.moveEvent(event: QMoveEvent(ptr: event))
+            case CQpaintEvent: _self.paintEvent(event: QPaintEvent(ptr: event))
+            case CQresizeEvent: _self.resizeEvent(event: QResizeEvent(ptr: event))
+            case CQshowEvent: _self.showEvent(event: QShowEvent(ptr: event))
+            case CQtabletEvent: _self.tabletEvent(event: QTabletEvent(ptr: event))
+            case CQwheelEvent: _self.wheelEvent(event: QWheelEvent(ptr: event))
+            default:
+                break
+            }
         }
     }
 
@@ -32,9 +57,70 @@ open class QWidget: QObject {
 
     // MARK: Events
 
+    open func mouseDoubleClickEvent(event: QMouseEvent) {
+        QWidget_mouseDoubleClickEvent(ptr, event.ptr)
+    }
+    open func mouseMoveEvent(event: QMouseEvent) {
+        QWidget_mouseMoveEvent(ptr, event.ptr)
+    }
     open func mousePressEvent(event: QMouseEvent) {
         QWidget_mousePressEvent(ptr, event.ptr)
     }
+    open func mouseReleaseEvent(event: QMouseEvent) {
+        QWidget_mouseReleaseEvent(ptr, event.ptr)
+    }
+    open func keyPressEvent(event: QKeyEvent) {
+        QWidget_keyPressEvent(ptr, event.ptr)
+    }
+    open func keyReleaseEvent(event: QKeyEvent) {
+        QWidget_keyReleaseEvent(ptr, event.ptr)
+    }
+    open func actionEvent(event: QActionEvent) {
+        QWidget_actionEvent(ptr, event.ptr)
+    }
+    open func changeEvent(event: QEvent) {
+        QWidget_changeEvent(ptr, event.ptr)
+    }
+    open func closeEvent(event: QCloseEvent) {
+        QWidget_closeEvent(ptr, event.ptr)
+    }
+    open func contextMenuEvent(event: QContextMenuEvent) {
+        QWidget_contextMenuEvent(ptr, event.ptr)
+    }
+    open func enterEvent(event: QEvent) {
+        QWidget_enterEvent(ptr, event.ptr)
+    }
+    open func focusInEvent(event: QFocusEvent) {
+        QWidget_focusInEvent(ptr, event.ptr)
+    }
+    open func focusOutEvent(event: QFocusEvent) {
+        QWidget_focusOutEvent(ptr, event.ptr)
+    }
+    open func hideEvent(event: QHideEvent) {
+        QWidget_hideEvent(ptr, event.ptr)
+    }
+    open func leaveEvent(event: QEvent) {
+        QWidget_leaveEvent(ptr, event.ptr)
+    }
+    open func moveEvent(event: QMoveEvent) {
+        QWidget_moveEvent(ptr, event.ptr)
+    }
+    open func paintEvent(event: QPaintEvent) {
+        QWidget_paintEvent(ptr, event.ptr)
+    }
+    open func resizeEvent(event: QResizeEvent) {
+        QWidget_resizeEvent(ptr, event.ptr)
+    }
+    open func showEvent(event: QShowEvent) {
+        QWidget_showEvent(ptr, event.ptr)
+    }
+    open func tabletEvent(event: QTabletEvent) {
+        QWidget_tabletEvent(ptr, event.ptr)
+    }
+    open func wheelEvent(event: QWheelEvent) {
+        QWidget_wheelEvent(ptr, event.ptr)
+    }
+
 
     // MARK: Propeties
 

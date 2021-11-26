@@ -6,6 +6,8 @@
 extern "C" {
 #endif
 
+#pragma clang diagnostic ignored "-Wnullability-completeness"
+
 LIBRARY_API void *QWidget_new(void *parent, int flags);
 LIBRARY_API bool QWidget_close(void *widget);
 LIBRARY_API void QWidget_show(void *widget);
@@ -36,15 +38,6 @@ LIBRARY_API void QWidget_setMaximumSize(void *widget, void *size);
 LIBRARY_API void* QWidget_minimumSize(void *widget);
 LIBRARY_API void QWidget_setMinimumSize(void *widget, void *size);
 LIBRARY_API void QWidget_setGraphicsEffect(void *widget, void *effect);
-
-LIBRARY_API void QWidget_mousePressEvent(void *widget, void *mouseEvent);
-LIBRARY_API void QWidget_saveSwiftObject(void *widget, void *swiftObject);
-LIBRARY_API void QWidget_mousePressEvent_Override(void *widget,
-                                                  void (*mousePressEvent_Functor)(void *, void *));
-LIBRARY_API void QWidget_sizeHint_Override(void *widget,
-                                           void *(*sizeHint_Functor)(void *));
-LIBRARY_API void QWidget_swiftHookCleanup(void *widget);
-
 LIBRARY_API void *QWidget_sizeHint(void *widget);
 LIBRARY_API void *QWidget_sizePolicy(void *widget);
 LIBRARY_API void QWidget_setSizePolicy(void *widget, void *policy);
@@ -93,6 +86,39 @@ LIBRARY_API CQString QWidget_windowIconText(void * widget);
 LIBRARY_API int QWidget_x(void * widget);
 LIBRARY_API int QWidget_y(void * widget);
 
+#pragma clang assume_nonnull begin
+
+LIBRARY_API void QWidget_saveSwiftObject(void *widget, void *swiftObject);
+LIBRARY_API void QWidget_setEventFunctor(void *widget, void (*mousePressEvent_Functor)(void *, CQTEventType, void *));
+LIBRARY_API void QWidget_sizeHint_Override(void *widget,
+                                           void *(*sizeHint_Functor)(void *));
+LIBRARY_API void QWidget_swiftHookCleanup(void *widget);
+
+LIBRARY_API void QWidget_mouseDoubleClickEvent(void *widget, void *event);
+LIBRARY_API void QWidget_mouseMoveEvent(void *widget, void *event);
+LIBRARY_API void QWidget_mousePressEvent(void *widget, void *event);
+LIBRARY_API void QWidget_mouseReleaseEvent(void *widget, void *event);
+LIBRARY_API void QWidget_keyPressEvent(void *widget, void *event);
+LIBRARY_API void QWidget_keyReleaseEvent(void *widget, void *event);
+
+LIBRARY_API void QWidget_actionEvent(void *widget, void *event);
+LIBRARY_API void QWidget_changeEvent(void *widget, void *event);
+LIBRARY_API void QWidget_closeEvent(void *widget, void *event);
+LIBRARY_API void QWidget_contextMenuEvent(void *widget, void *event);
+LIBRARY_API void QWidget_enterEvent(void *widget, void *event);
+LIBRARY_API void QWidget_focusInEvent(void *widget, void *event);
+LIBRARY_API void QWidget_focusOutEvent(void *widget, void *event);
+LIBRARY_API void QWidget_hideEvent(void *widget, void *event);
+LIBRARY_API void QWidget_leaveEvent(void *widget, void *event);
+LIBRARY_API void QWidget_moveEvent(void *widget, void *event);
+LIBRARY_API void QWidget_paintEvent(void *widget, void *event);
+LIBRARY_API void QWidget_resizeEvent(void *widget, void *event);
+LIBRARY_API void QWidget_showEvent(void *widget, void *event);
+LIBRARY_API void QWidget_tabletEvent(void *widget, void *event);
+LIBRARY_API void QWidget_wheelEvent(void *widget, void *event);
+
+#pragma clang assume_nonnull end
+
 #ifdef __cplusplus
 }
 #endif
@@ -113,16 +139,59 @@ public:
     QliftWidget(QliftWidget &&) noexcept = delete;
     QliftWidget &operator=(QliftWidget &&) noexcept = delete;
 
-    void mousePressEventSuper(QMouseEvent *mouseEvent);
+    void mouseDoubleClickEventSuper(QMouseEvent *event);
+    void mouseMoveEventSuper(QMouseEvent *event);
+    void mousePressEventSuper(QMouseEvent *event);
+    void mouseReleaseEventSuper(QMouseEvent *event);
+    void keyPressEventSuper(QKeyEvent *event);
+    void keyReleaseEventSuper(QKeyEvent *event);
+
+    void actionEventSuper(QActionEvent *event);
+    void changeEventSuper(QEvent *event);
+    void closeEventSuper(QCloseEvent *event);
+    void contextMenuEventSuper(QContextMenuEvent *event);
+    void enterEventSuper(QEvent *event);
+    void focusInEventSuper(QFocusEvent *event);
+    void focusOutEventSuper(QFocusEvent *event);
+    void hideEventSuper(QHideEvent *event);
+    void leaveEventSuper(QEvent *event);
+    void moveEventSuper(QMoveEvent *event);
+    void paintEventSuper(QPaintEvent *event);
+    void resizeEventSuper(QResizeEvent *event);
+    void showEventSuper(QShowEvent *event);
+    void tabletEventSuper(QTabletEvent *event);
+    void wheelEventSuper(QWheelEvent *event);
+
     [[nodiscard]] QSize sizeHintSuper() const;
     [[nodiscard]] QSize sizeHint() const override;
 
     void *swiftObject = nullptr;
-    void (*m_mousePressEvent_Functor)(void *, void *) = nullptr;
+    void (*m_eventFunctor)(void *, CQTEventType, void *) = nullptr;
     void *(*m_sizeHint_Functor)(void *) = nullptr;
 
 protected:
-    void mousePressEvent(QMouseEvent *mouseEvent) override;
+    void mouseDoubleClickEvent(QMouseEvent *event) override;
+    void mouseMoveEvent(QMouseEvent *event) override;
+    void mousePressEvent(QMouseEvent *event) override;
+    void mouseReleaseEvent(QMouseEvent *event) override;
+    void keyPressEvent(QKeyEvent *event) override;
+    void keyReleaseEvent(QKeyEvent *event) override;
+
+    void actionEvent(QActionEvent *event) override;
+    void changeEvent(QEvent *event) override;
+    void closeEvent(QCloseEvent *event) override;
+    void contextMenuEvent(QContextMenuEvent *event) override;
+    void enterEvent(QEvent *event) override;
+    void focusInEvent(QFocusEvent *event) override;
+    void focusOutEvent(QFocusEvent *event) override;
+    void hideEvent(QHideEvent *event) override;
+    void leaveEvent(QEvent *event) override;
+    void moveEvent(QMoveEvent *event) override;
+    void paintEvent(QPaintEvent *event) override;
+    void resizeEvent(QResizeEvent *event) override;
+    void showEvent(QShowEvent *event) override;
+    void tabletEvent(QTabletEvent *event) override;
+    void wheelEvent(QWheelEvent *event) override;
 
 private:
 };
