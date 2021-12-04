@@ -412,5 +412,18 @@ public struct Qt {
         public static let GroupSwitchModifier = KeyboardModifiers(rawValue: 0x40000000)
     }
 
+    public enum TextElideMode: Int32 {
+        case ElideLeft
+        case ElideRight
+        case ElideMiddle
+        case ElideNone
+    }
+
+    public enum Corner: Int32 {
+        case TopLeftCorner
+        case TopRightCorner
+        case BottomLeftCorner
+        case BottomRightCorner
+    }
 
 }
