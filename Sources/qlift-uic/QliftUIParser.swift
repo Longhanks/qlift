@@ -5,39 +5,31 @@ import FoundationXML
 
 
 public class QliftUIParser: NSObject {
-    private var rootNode = Node(parent: nil, text: "root")
+    private let rootNode = Node(parent: nil, text: "root")
     private var currentNode: Node?
     private var namesOfQMenusForAddAction = [String]()
     private var widgetCount = 1
+    private var tabTitle = ""
 
 
     public func parseUI(data: Data) -> String? {
         let parser = XMLParser(data: data)
         parser.delegate = self
 
-        if !parser.parse() {
-            return nil
-        }
-
+        guard parser.parse() else { return nil }
         return node2Swift(node: rootNode)
     }
 
     private func node2Swift(node: Node) -> String {
         var swiftUI = "import Qlift\n\n\n"
         let ui = node.children[0].children
-        var rootWidgetNode: Node? = nil
+        let rootWidgetNode: Node = ui.first(where: { $0.text == "widget"})!
 
-        for node in ui {
-            if node.text == "widget" {
-                rootWidgetNode = node
-            }
-        }
-
-        let baseClass = rootWidgetNode!.attributes["class"]!
-        let className = rootWidgetNode!.attributes["name"]!
+        let baseClass = rootWidgetNode.attributes["class"]!
+        let className = rootWidgetNode.attributes["name"]!
         swiftUI += "class " + className + ": " + baseClass + " {\n"
-        rootWidgetNode!.attributes["name"] = "self"
-        let properties = InstancePropertyNodeFinder().getInstancePropertyNodes(root: rootWidgetNode!)
+        rootWidgetNode.attributes["name"] = "self"
+        let properties = InstancePropertyNodeFinder().getInstancePropertyNodes(root: rootWidgetNode)
         for property in properties {
             var className = ""
             if property.attributes["class"] != nil {
@@ -100,15 +92,15 @@ public class QliftUIParser: NSObject {
         }
 
         // 1. Actions
-        for node in rootWidgetNode!.children.filter({ $0.text == "action" }) {
+        for node in rootWidgetNode.children.filter({ $0.text == "action" }) {
             swiftUI += subNode2Swift(node: node)
         }
 
         // 2. Everything except actions
-        for node in rootWidgetNode!.children.filter({ $0.text != "action" }) {
+        for node in rootWidgetNode.children.filter({ $0.text != "action" }) {
             swiftUI += subNode2Swift(node: node)
         }
-        swiftUI += preextractContentsMargins(node: rootWidgetNode!) ?? ""
+        swiftUI += preextractContentsMargins(node: rootWidgetNode) ?? ""
 
         // 3. Connections
         let connectionsNodes = ui.filter({ $0.text == "connections" })
@@ -212,12 +204,12 @@ public class QliftUIParser: NSObject {
             }
         case "widget":
             // 1. Determine if constructor should be passed a parent variable.
-            guard node.attributes["class"]! != "Line" else {
-                break
-            }
+            guard node.attributes["class"]! != "Line" else { break }
             let parentName = getParentWidget(node: node)?.attributes["name"] ?? "nil"
             // 2. Construct widget itself.
             if node.parent?.attributes["class"] == "QScrollArea" {
+                ui += "        \(node.attributes["name"]!) = \(node.attributes["class"]!)()\n"
+            } else if node.parent?.attributes["class"] == "QTabWidget" {
                 ui += "        \(node.attributes["name"]!) = \(node.attributes["class"]!)()\n"
             } else if node.attributes["class"]! == "QStatusBar" {
                 ui += "        let \(node.attributes["name"]!) = \(node.attributes["class"]!)(parent: \(parentName))\n"
@@ -228,6 +220,14 @@ public class QliftUIParser: NSObject {
 
             // 3. Handle special cases: QMenuBar, QMenu, QToolBar, QStatusBar, QDockWidget
             switch node.attributes["class"]! {
+
+            case "":
+                for subNode in node.children where subNode.attributes["name"] != "currentIndex" {
+                    ui += subNode2Swift(node: subNode)
+                }
+                for subNode in node.children where subNode.attributes["name"] == "currentIndex" {
+                    ui += subNode2Swift(node: subNode)
+                }
 
             case "QMenuBar":
                 for subNode in node.children {
@@ -270,21 +270,16 @@ public class QliftUIParser: NSObject {
                 for subNode in node.children.filter({ $0.text != "attribute" }) {
                     ui += subNode2Swift(node: subNode)
                 }
-                var area = ""
-                switch Int(areaNumberString)! {
-                    case 0:
-                        area = ".No"
-                    case 1:
-                        area = ".Left"
-                    case 2:
-                        area = ".Right"
-                    case 4:
-                        area = ".Top"
-                    case 8:
-                        area = ".Botom"
-                    case 15:
-                        area = ".All"
+                let area: String
+                switch Int(areaNumberString) {
+                    case 0?: area = ".No"
+                    case 1?: area = ".Left"
+                    case 2?: area = ".Right"
+                    case 4?: area = ".Top"
+                    case 8?: area = ".Botom"
+                    case 15?: area = ".All"
                     default:
+                        area = ""
                         print("Unknown dock area")
                 }
                 ui += "        \(node.parent!.attributes["name"]!).add(dockWidget: \(node.attributes["name"]!), area: \(area))\n"
@@ -310,6 +305,8 @@ public class QliftUIParser: NSObject {
                         ui += "        \(node.parent!.attributes["name"]!).centralWidget = \(node.attributes["name"]!)\n"
                     case "QScrollArea"?:
                         ui += "        \(node.parent!.attributes["name"]!).setWidget(\(node.attributes["name"]!))\n"
+                    case "QTabWidget"?:
+                        ui += "        \(node.parent!.attributes["name"]!).addTab(\(node.attributes["name"]!), label: \(tabTitle))\n"
                     default:
                         break
                     }
@@ -366,11 +363,13 @@ public class QliftUIParser: NSObject {
         case "spacer":
             ui += spacerNode2Swift(node: node)
         case "attribute":
-            guard
-                node.attributes["name"] == "buttonGroup",
-                let group = node.children.first?.value
-            else { fallthrough }
-            ui += "        \(group).addButton(\(node.parent!.attributes["name"]!))\n"
+            if node.attributes["name"] == "buttonGroup", let group = node.children.first?.value {
+                ui += "        \(group).addButton(\(node.parent!.attributes["name"]!))\n"
+            } else if node.attributes["name"] == "title" {
+                tabTitle = node.children.first!.value
+            } else {
+                fallthrough
+            }
         default:
             ui += "        \(node.description)\n"
         }

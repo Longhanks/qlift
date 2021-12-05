@@ -79,10 +79,10 @@ open class QTabWidget: QWidget {
     }
 
 
-    public func addTab(page: QWidget, label: String) -> Int32 {
+    public func addTab(_ page: QWidget, label: String) -> Int32 {
         QTabWidget_addTab(ptr, page.ptr, label)
     }
-    public func addTab(page: QWidget, icon: QIcon, label: String) -> Int32 {
+    public func addTab(_ page: QWidget, icon: QIcon, label: String) -> Int32 {
         QTabWidget_addTabIcon(ptr, page.ptr, icon.ptr, label)
     }
     public func indexOf(_ widget: QWidget) -> Int32 {
