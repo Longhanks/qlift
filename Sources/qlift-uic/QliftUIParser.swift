@@ -366,7 +366,7 @@ public class QliftUIParser: NSObject {
             if node.attributes["name"] == "buttonGroup", let group = node.children.first?.value {
                 ui += "        \(group).addButton(\(node.parent!.attributes["name"]!))\n"
             } else if node.attributes["name"] == "title" {
-                tabTitle = node.children.first!.value
+                tabTitle = "\"" + node.children.first!.value + "\""
             } else {
                 fallthrough
             }

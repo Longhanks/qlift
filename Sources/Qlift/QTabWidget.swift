@@ -78,19 +78,25 @@ open class QTabWidget: QWidget {
         set { QTabWidget_setTabShape(ptr, newValue.rawValue) }
     }
 
-
+    @discardableResult
     public func addTab(_ page: QWidget, label: String) -> Int32 {
         QTabWidget_addTab(ptr, page.ptr, label)
     }
+
+    @discardableResult
     public func addTab(_ page: QWidget, icon: QIcon, label: String) -> Int32 {
         QTabWidget_addTabIcon(ptr, page.ptr, icon.ptr, label)
     }
     public func indexOf(_ widget: QWidget) -> Int32 {
         QTabWidget_indexOf(ptr, widget.ptr)
     }
+
+    @discardableResult
     public func insertTab(index: Int32, page: QWidget, label: String) -> Int32 {
         QTabWidget_insertTab(ptr, index, page.ptr, label)
     }
+
+    @discardableResult
     public func insertTab(index: Int32, page: QWidget, icon: QIcon, label: String) -> Int32 {
         QTabWidget_insertTabIcon(ptr, index, page.ptr, icon.ptr, label)
     }
