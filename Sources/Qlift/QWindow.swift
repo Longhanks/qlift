@@ -115,7 +115,8 @@ open class QWindow: QObject {
         Qt.WindowStates(rawValue: QWindow_windowStates(ptr))
     }
 
-    open func close() -> Bool {
+    @discardableResult
+    public func close() -> Bool {
         return QWindow_close(ptr)
     }
 
@@ -131,7 +132,7 @@ open class QWindow: QObject {
         QPoint(ptr: QWindow_mapFromGlobal(ptr, point.ptr))
     }
 
-    open func show() {
+    public func show() {
         QWindow_show(ptr)
     }
 
