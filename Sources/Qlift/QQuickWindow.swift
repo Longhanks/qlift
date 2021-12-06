@@ -7,12 +7,12 @@
 
 import CQlift
 
-open class QQuickWindow: QObject {
+open class QQuickWindow: QWindow {
 
     // MARK: Init/deinit
 
-    public init(parent: QWindow? = nil) {
-        super.init(ptr: QWindow_new(parent?.ptr))
+    public override init(parent: QWindow? = nil) {
+        super.init(ptr: QQuickWindow_new(parent?.ptr))
     }
 
     public override init(ptr: UnsafeMutableRawPointer) {
