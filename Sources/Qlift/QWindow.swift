@@ -1,5 +1,5 @@
 //
-// qlift-QWindow.h
+// QWindow.swift
 //
 //
 // Created by Dmitriy Borovikov on 06.12.2021.

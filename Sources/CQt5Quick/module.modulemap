@@ -1,0 +1,3 @@
+module CQt5Quick [system] {
+    export *
+}

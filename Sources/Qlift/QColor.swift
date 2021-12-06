@@ -28,6 +28,10 @@ public class QColor {
         self.ptr = QColor_new()
     }
 
+    init(ptr: UnsafeMutableRawPointer) {
+        self.ptr = ptr
+    }
+
     deinit {
         if self.ptr != nil {
             QColor_delete(self.ptr)
