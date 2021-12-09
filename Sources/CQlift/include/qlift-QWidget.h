@@ -89,7 +89,7 @@ LIBRARY_API int QWidget_x(void * widget);
 LIBRARY_API int QWidget_y(void * widget);
 
 LIBRARY_API void QWidget_saveSwiftObject(void *widget, void *swiftObject);
-LIBRARY_API void QWidget_setEventFunctor(void *widget, void (*mousePressEvent_Functor)(void *, CQTEventType, void *));
+LIBRARY_API void QWidget_setEventFunctor(void *widget, void (*event_Functor)(void *, CQTEventType, void *));
 LIBRARY_API void QWidget_sizeHint_Override(void *widget, void * _Nonnull (* _Nonnull sizeHint_Functor)(void *));
 LIBRARY_API void QWidget_swiftHookCleanup(void * _Nullable widget);
 
