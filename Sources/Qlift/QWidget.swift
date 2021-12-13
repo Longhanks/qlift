@@ -169,6 +169,11 @@ open class QWidget: QObject {
         set { QWidget_setEnabled(ptr, newValue) }
     }
 
+    public var updatesEnabled: Bool {
+        get { QWidget_updatesEnabled(ptr) }
+        set { QWidget_setUpdatesEnabled(ptr, newValue) }
+    }
+
     public var height: Int32 {
         get { QWidget_height(ptr) }
     }

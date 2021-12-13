@@ -58,6 +58,8 @@ LIBRARY_API void QWidget_overrideWindowState(void *widget, int state);
 LIBRARY_API int QWidget_windowState(void *widget);
 LIBRARY_API int QWidget_windowModality(void *widget);
 LIBRARY_API void QWidget_setWindowModality(void *widget, int windowModality);
+LIBRARY_API bool QWidget_updatesEnabled(void *widget);
+LIBRARY_API void QWidget_setUpdatesEnabled(void *widget, bool enable);
 
 LIBRARY_API void *QWidget_mapToGlobal(void *widget, void *point);
 LIBRARY_API void *QWidget_mapFromGlobal(void *widget, void *point);
