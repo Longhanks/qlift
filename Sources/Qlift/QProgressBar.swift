@@ -24,7 +24,7 @@ open class QProgressBar: QWidget {
 
     public var maximum: Int32 {
         get { QProgressBar_maximum(self.ptr) }
-        set { QProgressBar_setValue(self.ptr, newValue) }
+        set { QProgressBar_setMaximum(self.ptr, newValue) }
     }
 
     public var format: String {
