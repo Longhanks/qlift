@@ -20,21 +20,13 @@ open class QDialog: QWidget {
     }
 
     public var modal: Bool {
-        get {
-            QDialog_isModal(ptr)
-        }
-        set {
-            QDialog_setModal(ptr, newValue)
-        }
+        get { QDialog_isModal(ptr) }
+        set { QDialog_setModal(ptr, newValue) }
     }
 
     public var sizeGripEnabled: Bool {
-        get {
-            QDialog_isSizeGripEnabled(ptr)
-        }
-        set {
-            QDialog_setSizeGripEnabled(ptr, newValue)
-        }
+        get { QDialog_isSizeGripEnabled(ptr) }
+        set { QDialog_setSizeGripEnabled(ptr, newValue) }
     }
 
     open func exec() -> DialogCode {
@@ -47,5 +39,13 @@ open class QDialog: QWidget {
 
     open func reject() {
         QDialog_reject(self.ptr)
+    }
+
+    open func done(_ result: Int32) {
+        QDialog_done(ptr, result)
+    }
+    
+    open func open() {
+        QDialog_open(ptr)
     }
 }

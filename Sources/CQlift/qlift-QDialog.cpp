@@ -35,3 +35,9 @@
 [[maybe_unused]] void QDialog_setSizeGripEnabled(void *dialog, bool on) {
     static_cast<QDialog *>(dialog)->setSizeGripEnabled(on);
 }
+[[maybe_unused]] void QDialog_done(void *dialog, int r) {
+    static_cast<QDialog *>(dialog)->done(r);
+}
+[[maybe_unused]] void QDialog_open(void *dialog) {
+    static_cast<QDialog *>(dialog)->open();
+}
