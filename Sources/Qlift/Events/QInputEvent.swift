@@ -15,7 +15,7 @@ public class QInputEvent: QEvent {
     }
 
     public func timestamp() -> UInt {
-        QInputEvent_timestamp(ptr)
+        UInt(QInputEvent_timestamp(ptr))
     }
 }
 
