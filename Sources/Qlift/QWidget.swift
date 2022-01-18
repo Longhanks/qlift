@@ -300,6 +300,7 @@ open class QWidget: QObject {
         QWidget_movexy(ptr, x, y)
     }
 
+    @discardableResult
     open func close() -> Bool {
         return QWidget_close(ptr)
     }
