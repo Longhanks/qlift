@@ -65,3 +65,7 @@
 [[maybe_unused]] void QObject_clearSwiftObject(void *object) {
     static_cast<QObject *>(object)->setProperty("_swift_object", {});
 }
+
+[[maybe_unused]] void QObject_deleteLater(void *object) {
+    static_cast<QObject *>(object)->deleteLater();
+}

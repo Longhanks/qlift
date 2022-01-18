@@ -73,6 +73,10 @@ open class QObject {
     public func dumpObjectTree() {
         QObject_dumpObjectTree(ptr)
     }
+    
+    public func deleteLater() {
+        QObject_deleteLater(ptr)
+    }
 
     static public func swiftQObject(from ptr: UnsafeMutableRawPointer) -> QObject? {
         guard let raw = QObject_getSwiftObject(ptr) else { return nil }
