@@ -13,6 +13,12 @@ open class QDialogButtonBox: QWidget {
         checkDeleteQtObj()
     }
     
+    override func swiftCleanup() {
+        super.swiftCleanup()
+        acceptedCallback = nil
+        rejectedCallback = nil
+    }
+    
     public var standardButtons: StandardButton {
         get { StandardButton(rawValue: QDialogButtonBox_standardButtons(ptr)) }
         set { QDialogButtonBox_setStandardButtons(self.ptr, newValue.rawValue) }

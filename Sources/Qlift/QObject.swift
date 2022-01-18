@@ -11,7 +11,8 @@ open class QObject {
         QObject_setSwiftObject(ptr, rawSelf)
 
         connection_destroy = QObject_destroyed_connect(self.ptr, self.ptr, rawSelf) { raw in
-            Unmanaged<QObject>.fromOpaque(raw).takeUnretainedValue().ptr = nil
+            let _self = Unmanaged<QObject>.fromOpaque(raw).takeUnretainedValue()
+            _self.swiftCleanup()
         }
     }
 
@@ -21,7 +22,8 @@ open class QObject {
         QObject_setSwiftObject(ptr, rawSelf)
 
         connection_destroy = QObject_destroyed_connect(self.ptr, self.ptr, rawSelf) { raw in
-            Unmanaged<QObject>.fromOpaque(raw).takeUnretainedValue().ptr = nil
+            let _self = Unmanaged<QObject>.fromOpaque(raw).takeUnretainedValue()
+            _self.swiftCleanup()
         }
     }
 
@@ -29,6 +31,10 @@ open class QObject {
         checkDeleteQtObj()
     }
 
+    func swiftCleanup() {
+        ptr = nil
+    }
+    
     func checkDeleteQtObj() {
         if self.ptr != nil {
             QObject_clearSwiftObject(self.ptr)

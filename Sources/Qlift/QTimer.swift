@@ -22,6 +22,11 @@ open class QTimer: QObject {
         checkDeleteQtObj()
     }
 
+    override func swiftCleanup() {
+        super.swiftCleanup()
+        timeoutCallback = nil
+    }
+
     public func start(msec: Int32) {
         QTimer_startms(ptr, msec)
     }
@@ -53,7 +58,7 @@ open class QTimer: QObject {
         QTimer_connect(self.ptr, object.ptr, rawSelf) { raw in
             if raw != nil {
                 let _self = Unmanaged<QTimer>.fromOpaque(raw!).takeUnretainedValue()
-                _self.timeoutCallback!()
+                _self.timeoutCallback?()
             }
         }
     }

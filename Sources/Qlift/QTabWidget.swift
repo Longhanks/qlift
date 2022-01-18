@@ -17,6 +17,11 @@ open class QTabWidget: QWidget {
         case Rounded, Triangular
     }
 
+    var currentChangedCallBack: ((Int32) -> Void)?
+    var tabBarClickedCallBack: ((Int32) -> Void)?
+    var tabBarDoubleClickedCallBack: ((Int32) -> Void)?
+    var tabCloseRequestedCallBack: ((Int32) -> Void)?
+
     public init(parent: QWidget? = nil) {
         super.init(ptr: QTabWidget_new(parent?.ptr))
     }
@@ -29,6 +34,14 @@ open class QTabWidget: QWidget {
         checkDeleteQtObj()
     }
 
+    override func swiftCleanup() {
+        super.swiftCleanup()
+        currentChangedCallBack = nil
+        tabBarClickedCallBack = nil
+        tabBarDoubleClickedCallBack = nil
+        tabCloseRequestedCallBack = nil
+    }
+    
     public var count: Int32 {
         QTabWidget_count(ptr)
     }
@@ -142,11 +155,6 @@ open class QTabWidget: QWidget {
         let s = QTabWidget_tabWhatsThis(ptr, index)
         return String(utf16CodeUnits: s.utf16, count: Int(s.size))
     }
-
-    var currentChangedCallBack: ((Int32) -> Void)?
-    var tabBarClickedCallBack: ((Int32) -> Void)?
-    var tabBarDoubleClickedCallBack: ((Int32) -> Void)?
-    var tabCloseRequestedCallBack: ((Int32) -> Void)?
 
     open func connectCurrentChanged(receiver: QObject? = nil, to slot: @escaping ((Int32) -> Void)) {
         let object: QObject = receiver ?? self

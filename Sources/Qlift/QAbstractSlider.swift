@@ -27,6 +27,16 @@ open class QAbstractSlider: QWidget {
     deinit {
         checkDeleteQtObj()
     }
+    
+    override func swiftCleanup() {
+        super.swiftCleanup()
+        actionTriggeredCallback = nil
+        rangeChangedCallback = nil
+        sliderMovedCallback = nil
+        sliderPressedCallback = nil
+        sliderReleasedCallback = nil
+        valueChangedCallback = nil
+    }
 
     open func connectActionTriggered(receiver: QObject? = nil, to slot: @escaping ((SliderAction) -> Void)) {
         let object: QObject = receiver ?? self

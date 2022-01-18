@@ -32,6 +32,11 @@ open class QComboBox: QWidget {
         checkDeleteQtObj()
     }
 
+    override func swiftCleanup() {
+        super.swiftCleanup()
+        currentIndexChangedIntCallback = nil
+    }
+    
     public func add(item: String) {
         QComboBox_addItem(self.ptr, item)
     }

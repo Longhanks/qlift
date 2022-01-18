@@ -20,6 +20,15 @@ open class QAbstractButton: QWidget {
         super.init(ptr: ptr)
     }
 
+    override func swiftCleanup() {
+        super.swiftCleanup()
+        clickedBoolCallback = nil
+        clickedCallback = nil
+        toggledCallback = nil
+        pressedCallback = nil
+        releasedCallback = nil
+    }
+
     public func addIcon(_ icon: QIcon) {
         QAbstractButton_setIcon(ptr, icon.ptr)
     }

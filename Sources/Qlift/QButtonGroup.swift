@@ -17,6 +17,14 @@ open class QButtonGroup: QObject {
     deinit {
         checkDeleteQtObj()
     }
+    
+    override func swiftCleanup() {
+        super.swiftCleanup()
+        idClickedCallback = nil
+        idToggledCallback = nil
+        idPressedCallback = nil
+        idReleasedCallback = nil
+    }
 
     public func addButton(_ button: QAbstractButton, id: Int32 = -1) {
         QButtonGroup_addButton(ptr, button.ptr, id)

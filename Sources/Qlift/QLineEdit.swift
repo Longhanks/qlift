@@ -28,6 +28,15 @@ open class QLineEdit: QWidget {
         QLiftLineEdit_swiftHookCleanup(ptr)
         checkDeleteQtObj()
     }
+    
+    override func swiftCleanup() {
+        super.swiftCleanup()
+        textChangedCallback = nil
+        textEditedCallback = nil
+        returnPressedCallback = nil
+        editingFinishedCallback = nil
+        inputRejectedCallback = nil
+    }
 
     public var text: String {
         get {
