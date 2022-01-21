@@ -17,11 +17,15 @@ public class QFont {
     public init() {
         self.ptr = QFont_new2();
     }
-    
-    public init(family: String, pointSize: Int32, weight: Int32, italic: Bool) {
+
+    public init(family: String, pointSize: Int32 = -1, weight: Int32 = -1, italic: Bool = false) {
         ptr = QFont_new1(family, pointSize, weight, italic)
     }
-    
+
+    public init(family: String, pointSize: Int32 = -1, weight: Weight? = nil , italic: Bool = false) {
+        ptr = QFont_new1(family, pointSize, weight?.rawValue ?? -1, italic)
+    }
+
     public init(font: QFont) {
         ptr = QFont_new(font.ptr)
     }
@@ -221,7 +225,6 @@ public class QFont {
         get { .init(rawValue: QFont_styleStrategy(ptr)) }
         set { QFont_setStyleStrategy(ptr, newValue.rawValue) }
     }
-    
 
     public func styleHint() -> StyleHint {
         .init(rawValue: QFont_styleHint(ptr))!
@@ -234,8 +237,17 @@ public class QFont {
     public func letterSpacingType() -> SpacingType {
         .init(rawValue: QFont_letterSpacingType(ptr))!
     }
-    
+
     public func setLetterSpacing(type: SpacingType, spacing: Double) {
         QFont_setLetterSpacing(ptr, type.rawValue, spacing)
+    }
+
+    public func toString() -> String {
+        let s = QFont_toString(ptr)
+        return String(utf16CodeUnits: s.utf16, count: Int(s.size))
+    }
+
+    public func fromString(description: String) {
+        QFont_fromString(ptr, description)
     }
 }
