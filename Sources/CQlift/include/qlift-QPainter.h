@@ -27,6 +27,10 @@ LIBRARY_API void QPainter_drawEllipse(void *qpaintdevice, void *rect);
 LIBRARY_API void QPainter_fillRectBrush(void *qpaintdevice, void *rect, void *brush);
 LIBRARY_API void QPainter_fillRectColor(void *qpaintdevice, void *rect, void *color);
 LIBRARY_API bool QPainter_end(void *qpaintdevice);
+LIBRARY_API void QPainter_drawText(void *qpaintdevice, const void *position, const char *text);
+LIBRARY_API void QPainter_drawText1(void *qpaintdevice, int x, int y, const char *text);
+LIBRARY_API void QPainter_drawText2(void *qpaintdevice, const void *rectangle, int flags, const char *text, void *boundingRect);
+LIBRARY_API void QPainter_drawText3(void *qpaintdevice, int x, int y, int width, int height, int flags, const char *text, void *boundingRect);
 
 #ifdef __cplusplus
 }

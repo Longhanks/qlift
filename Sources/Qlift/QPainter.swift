@@ -72,4 +72,17 @@ public class QPainter {
     public func end() {
         QPainter_end(ptr)
     }
+    
+    public func drawText(position: QPoint, text: String) {
+        QPainter_drawText(ptr, position.ptr, text)
+    }
+    public func drawText(x: Int32, y: Int32, text: String) {
+        QPainter_drawText1(ptr, x, y, text)
+    }
+    public func drawText(rectangle: QRect, flags: Qt.Alignment, text: String, boundingRect: QRect? = nil) {
+        QPainter_drawText2(ptr, rectangle.ptr, flags.rawValue, text, boundingRect?.ptr)
+    }
+    public func drawText(x: Int32, y: Int32, width: Int32, height: Int32, flags: Qt.Alignment, text: String, boundingRect: QRect? = nil) {
+        QPainter_drawText3(ptr, x, y, width, height, flags.rawValue, text, boundingRect?.ptr)
+    }
 }

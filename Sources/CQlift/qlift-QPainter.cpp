@@ -53,3 +53,15 @@
 [[maybe_unused]] bool QPainter_end(void *qpaintdevice) {
     return static_cast<QPainter *>(qpaintdevice)->end();
 }
+[[maybe_unused]] void QPainter_drawText(void *qpaintdevice, const void *position, const char *text) {
+    static_cast<QPainter *>(qpaintdevice)->drawText(*static_cast<const QPoint*>(position), text);
+}
+[[maybe_unused]] void QPainter_drawText1(void *qpaintdevice, int x, int y, const char *text) {
+    static_cast<QPainter *>(qpaintdevice)->drawText(x, y, text);
+}
+[[maybe_unused]] void QPainter_drawText2(void *qpaintdevice, const void *rectangle, int flags, const char *text, void *boundingRect) {
+    static_cast<QPainter *>(qpaintdevice)->drawText(*static_cast<const QRect*>(rectangle), flags, text, static_cast<QRect*>(boundingRect));
+}
+[[maybe_unused]] void QPainter_drawText3(void *qpaintdevice, int x, int y, int width, int height, int flags, const char *text, void *boundingRect) {
+    static_cast<QPainter *>(qpaintdevice)->drawText(x, y, width, height, flags, text, static_cast<QRect*>(boundingRect));
+}
