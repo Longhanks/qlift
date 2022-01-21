@@ -22,7 +22,7 @@
     delete static_cast<QFont *>(font);
 }
 [[maybe_unused]] bool QFont_bold(void *font) {
-    static_cast<QFont *>(font)->bold();
+    return static_cast<QFont *>(font)->bold();
 }
 [[maybe_unused]] int QFont_capitalization(void *font) {
     return static_cast<QFont *>(font)->capitalization();

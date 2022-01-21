@@ -31,6 +31,7 @@ LIBRARY_API void QPainter_drawText(void *qpaintdevice, const void *position, con
 LIBRARY_API void QPainter_drawText1(void *qpaintdevice, int x, int y, const char *text);
 LIBRARY_API void QPainter_drawText2(void *qpaintdevice, const void *rectangle, int flags, const char *text, void *boundingRect);
 LIBRARY_API void QPainter_drawText3(void *qpaintdevice, int x, int y, int width, int height, int flags, const char *text, void *boundingRect);
+LIBRARY_API void QPainter_setFont(void *qpaintdevice, const void *font);
 
 #ifdef __cplusplus
 }

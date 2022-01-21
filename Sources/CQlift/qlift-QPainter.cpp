@@ -65,3 +65,6 @@
 [[maybe_unused]] void QPainter_drawText3(void *qpaintdevice, int x, int y, int width, int height, int flags, const char *text, void *boundingRect) {
     static_cast<QPainter *>(qpaintdevice)->drawText(x, y, width, height, flags, text, static_cast<QRect*>(boundingRect));
 }
+[[maybe_unused]] void QPainter_setFont(void *qpaintdevice, const void *font) {
+    static_cast<QPainter *>(qpaintdevice)->setFont(*static_cast<const QFont *>(font));
+}

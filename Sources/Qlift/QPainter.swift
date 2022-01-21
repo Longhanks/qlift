@@ -85,4 +85,7 @@ public class QPainter {
     public func drawText(x: Int32, y: Int32, width: Int32, height: Int32, flags: Qt.Alignment, text: String, boundingRect: QRect? = nil) {
         QPainter_drawText3(ptr, x, y, width, height, flags.rawValue, text, boundingRect?.ptr)
     }
+    public func setFont(_ font: QFont) {
+        QPainter_setFont(ptr, font.ptr)
+    }
 }
