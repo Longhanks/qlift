@@ -41,16 +41,16 @@ public class QPainter {
         QPainter_setOpacity(ptr, opacity)
     }
 
-    public func drawLine(x1: Int, y1: Int, x2: Int, y2: Int) {
-        QPainter_drawLine(ptr, Int32(x1), Int32(y1), Int32(x2), Int32(y2))
+    public func drawLine(x1: Int32, y1: Int32, x2: Int32, y2: Int32) {
+        QPainter_drawLine(ptr, x1, y1, x2, y2)
     }
 
     public func drawLineP(p1: QPoint, p2: QPoint) {
         QPainter_drawLineP(ptr, p1.ptr, p2.ptr)
     }
 
-    public func drawRect(x1: Int, y1: Int, w: Int, h: Int) {
-        QPainter_drawRectxy(ptr, Int32(x1), Int32(y1), Int32(w), Int32(h))
+    public func drawRect(x1: Int32, y1: Int32, w: Int32, h: Int32) {
+        QPainter_drawRectxy(ptr, x1, y1, w, h)
     }
 
     public func drawRect(rect: QRect) {
