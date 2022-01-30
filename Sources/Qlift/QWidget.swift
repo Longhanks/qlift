@@ -40,9 +40,11 @@ open class QWidget: QObject {
             case CQshowEvent: _self.showEvent(event: QShowEvent(ptr: event))
             case CQtabletEvent: _self.tabletEvent(event: QTabletEvent(ptr: event))
             case CQwheelEvent: _self.wheelEvent(event: QWheelEvent(ptr: event))
+            case CQEvent: return _self.event(event: QEvent(ptr: event))
             default:
                 break
             }
+            return false
         }
     }
 
@@ -119,6 +121,9 @@ open class QWidget: QObject {
     }
     open func wheelEvent(event: QWheelEvent) {
         QWidget_wheelEvent(ptr, event.ptr)
+    }
+    open func event(event: QEvent) -> Bool {
+        QWidget_event(ptr, event.ptr)
     }
 
 

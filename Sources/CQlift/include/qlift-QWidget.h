@@ -91,7 +91,7 @@ LIBRARY_API int QWidget_x(void * widget);
 LIBRARY_API int QWidget_y(void * widget);
 
 LIBRARY_API void QWidget_saveSwiftObject(void *widget, void *swiftObject);
-LIBRARY_API void QWidget_setEventFunctor(void *widget, void (*event_Functor)(void *, CQTEventType, void *));
+LIBRARY_API void QWidget_setEventFunctor(void *widget, bool (*event_Functor)(void *, CQTEventType, void *));
 LIBRARY_API void QWidget_sizeHint_Override(void *widget, void * _Nonnull (* _Nonnull sizeHint_Functor)(void *));
 LIBRARY_API void QWidget_swiftHookCleanup(void * _Nullable widget);
 
@@ -116,6 +116,7 @@ LIBRARY_API void QWidget_resizeEvent(void *widget, void *event);
 LIBRARY_API void QWidget_showEvent(void *widget, void *event);
 LIBRARY_API void QWidget_tabletEvent(void *widget, void *event);
 LIBRARY_API void QWidget_wheelEvent(void *widget, void *event);
+LIBRARY_API bool QWidget_event(void *widget, void *event);
 
 #pragma clang assume_nonnull end
 
@@ -161,12 +162,13 @@ public:
     void showEventSuper(QShowEvent *event);
     void tabletEventSuper(QTabletEvent *event);
     void wheelEventSuper(QWheelEvent *event);
+    bool eventSuper(QEvent *event);
 
     [[nodiscard]] QSize sizeHintSuper() const;
     [[nodiscard]] QSize sizeHint() const override;
 
     void *swiftObject = nullptr;
-    void (*m_eventFunctor)(void *, CQTEventType, void *) = nullptr;
+    bool (*m_eventFunctor)(void *, CQTEventType, void *) = nullptr;
     void *(*m_sizeHint_Functor)(void *) = nullptr;
 
 protected:
@@ -192,6 +194,7 @@ protected:
     void showEvent(QShowEvent *event) override;
     void tabletEvent(QTabletEvent *event) override;
     void wheelEvent(QWheelEvent *event) override;
+    bool event(QEvent *event) override;
 
 private:
 };

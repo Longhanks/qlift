@@ -426,4 +426,15 @@ public struct Qt {
         case BottomRightCorner
     }
 
+    public struct TouchPointState: OptionSet {
+        public let rawValue: Int32
+        public init(rawValue: Int32) {
+            self.rawValue = rawValue
+        }
+
+        public static let TouchPointPressed = TouchPointState(rawValue: 0x01)
+        public static let TouchPointMoved = TouchPointState(rawValue: 0x02)
+        public static let TouchPointStationary = TouchPointState(rawValue: 0x04)
+        public static let TouchPointReleased = TouchPointState(rawValue: 0x08)
+    }
 }

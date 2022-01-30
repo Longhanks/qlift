@@ -65,5 +65,6 @@ typedef enum {
     CQresizeEvent,
     CQshowEvent,
     CQtabletEvent,
-    CQwheelEvent
+    CQwheelEvent,
+    CQEvent
 } CQTEventType;

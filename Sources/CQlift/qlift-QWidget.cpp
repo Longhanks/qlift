@@ -306,7 +306,7 @@
 }
 
 
-[[maybe_unused]] void QWidget_setEventFunctor(void *widget, void (*eventFunctor)(void *, CQTEventType, void *)) {
+[[maybe_unused]] void QWidget_setEventFunctor(void *widget, bool (*eventFunctor)(void *, CQTEventType, void *)) {
     static_cast<QliftWidget *>(widget)->m_eventFunctor = eventFunctor;
 }
 
@@ -388,6 +388,9 @@
 [[maybe_unused]] void QWidget_wheelEvent(void *widget, void *event) {
     static_cast<QliftWidget *>(widget)->wheelEventSuper(static_cast<QWheelEvent *>(event));
 }
+[[maybe_unused]] bool QWidget_event(void *widget, void *event) {
+    static_cast<QliftWidget *>(widget)->eventSuper(static_cast<QEvent *>(event));
+}
 
 W_OBJECT_IMPL(QliftWidget)
 
@@ -453,6 +456,9 @@ W_OBJECT_IMPL(QliftWidget)
 }
 [[maybe_unused]] void QliftWidget::wheelEventSuper(QWheelEvent *event) {
     QWidget::wheelEvent(event);
+}
+[[maybe_unused]] bool QliftWidget::eventSuper(QEvent *event) {
+    return QWidget::event(event);
 }
 
 [[maybe_unused]] void QliftWidget::mouseDoubleClickEvent(QMouseEvent *event) {
@@ -581,6 +587,12 @@ W_OBJECT_IMPL(QliftWidget)
         m_eventFunctor(swiftObject, CQwheelEvent, event);
     else
         QWidget::wheelEvent(event);
+}
+[[maybe_unused]] bool QliftWidget::event(QEvent *event) {
+    if (swiftObject != nullptr)
+        return m_eventFunctor(swiftObject, CQEvent, event);
+    else
+        return QWidget::event(event);
 }
 
 [[maybe_unused]] QSize QliftWidget::sizeHintSuper() const {
