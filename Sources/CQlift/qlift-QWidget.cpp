@@ -391,6 +391,9 @@
 [[maybe_unused]] bool QWidget_event(void *widget, void *event) {
     return static_cast<QliftWidget *>(widget)->eventSuper(static_cast<QEvent *>(event));
 }
+[[maybe_unused]] void QWidget_setWindowFlag(void *widget, int flag, bool on) {
+    static_cast<QliftWidget *>(widget)->setWindowFlag(static_cast<Qt::WindowType>(flag), on);
+}
 
 W_OBJECT_IMPL(QliftWidget)
 

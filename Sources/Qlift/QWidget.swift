@@ -402,6 +402,9 @@ open class QWidget: QObject {
         QWidget_y(ptr)
     }
 
+    public func setWindowFlag(_ flag: Qt.WindowFlags, on: Bool = true) {
+        QWidget_setWindowFlag(ptr, flag.rawValue, on)
+    }
 }
 
 extension QWidget {

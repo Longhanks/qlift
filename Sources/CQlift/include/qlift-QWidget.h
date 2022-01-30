@@ -117,6 +117,7 @@ LIBRARY_API void QWidget_showEvent(void *widget, void *event);
 LIBRARY_API void QWidget_tabletEvent(void *widget, void *event);
 LIBRARY_API void QWidget_wheelEvent(void *widget, void *event);
 LIBRARY_API bool QWidget_event(void *widget, void *event);
+LIBRARY_API void QWidget_setWindowFlag(void *widget, int flag, bool on);
 
 #pragma clang assume_nonnull end
 
