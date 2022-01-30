@@ -17,11 +17,11 @@ public class QGuiApplication: QCoreApplication {
         checkDeleteQtObj()
     }
 
-    static func setAttribute(attribute: Qt.ApplicationAttribute, on: Bool) {
+    public static func setAttribute(_ attribute: Qt.ApplicationAttribute, on: Bool = true) {
         QGuiApplication_setAttribute(attribute.rawValue, on)
     }
 
-    static func testAttribute(attribute: Qt.ApplicationAttribute) {
+    public static func testAttribute(_ attribute: Qt.ApplicationAttribute) -> Bool {
         QGuiApplication_testAttribute(attribute.rawValue)
     }
 
