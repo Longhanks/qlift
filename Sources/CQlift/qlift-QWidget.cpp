@@ -389,7 +389,7 @@
     static_cast<QliftWidget *>(widget)->wheelEventSuper(static_cast<QWheelEvent *>(event));
 }
 [[maybe_unused]] bool QWidget_event(void *widget, void *event) {
-    static_cast<QliftWidget *>(widget)->eventSuper(static_cast<QEvent *>(event));
+    return static_cast<QliftWidget *>(widget)->eventSuper(static_cast<QEvent *>(event));
 }
 
 W_OBJECT_IMPL(QliftWidget)
