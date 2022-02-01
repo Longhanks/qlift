@@ -35,4 +35,8 @@ public class QTouchEvent: QInputEvent {
         }
         return QWindow.init(ptr: ptr)
     }
+    
+    public func device() -> QTouchDevice {
+        QTouchDevice.init(ptr: QTouchEvent_device(ptr))
+    }
 }
