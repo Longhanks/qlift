@@ -11,7 +11,7 @@ This package provides:
 
  - A Swift package that wraps Qt5 to a swifty API.
 
- An executable called `qlift-uic`, that can be used in a similiar fashion to Qt's uic: generate Swift code from Qt user interface files (.ui), moved to separate repository: [https://github.com/DimaRU/QliftUIC]()
+ An executable called `qlift-uic`, that can be used in a similiar fashion to Qt's uic: generate Swift code from Qt user interface files (.ui), moved to separate repository: [https://github.com/DimaRU/QliftUIC](https://github.com/DimaRU/QliftUIC)
 
  #### Tested under:
  - macOS (Intel & Apple Silicon)
