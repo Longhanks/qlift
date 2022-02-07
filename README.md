@@ -7,12 +7,13 @@
 ![Linux](https://img.shields.io/badge/Linux-FCC624?style=for-the-badge&logo=linux&logoColor=black)
 ![Windows](https://img.shields.io/badge/Windows-0078D6?style=for-the-badge&logo=windows&logoColor=white)
 
-This package provides two things:
+This package provides:
 
  - A Swift package that wraps Qt5 to a swifty API.
- - An executable called `qlift-uic`, that can be used in a similiar fashion to Qt's uic: Provided with a file path, it compiles *.ui files to native Swift code.
 
- ### Tested under:
+ An executable called `qlift-uic`, that can be used in a similiar fashion to Qt's uic: generate Swift code from Qt user interface files (.ui), moved to separate repository: [https://github.com/DimaRU/QliftUIC]()
+
+ #### Tested under:
  - macOS (Intel & Apple Silicon)
  - Linux (both Intel x64 & Arm64)
  - Windows 10
@@ -36,12 +37,15 @@ on Intel Mac or Apple Silicon Mac for develop under Rosetta
 
 `swift build`
 
+### Xcode
+
+Add `https://github.com/DimaRU/qlift.git` to Package Dependencies list
+
 ### Examples
 
  - [swiftmine](https://github.com/Longhanks/swiftmine "swiftmine"): Minesweeper in Swift
 
-
 ## Note
 
 This Qt wrapper have incomplete implementation, most of the Qt classes are not implemented. Also, support for already implemented Qt classes may be incomplete.
-Again, the architecture of the project has significant flaws.
+Again, the architecture of the project has some flaws with release objects.
