@@ -4,7 +4,6 @@ import PackageDescription
 let package = Package(
     name: "Qlift",
     products: [
-        .executable(name: "qlift-uic", targets: ["qlift-uic"]),
         .library(name: "Qlift", targets: ["Qlift"]),
     ],
     targets: [
@@ -14,7 +13,6 @@ let package = Package(
                 cxxSettings: [.headerSearchPath("private")]),
         .systemLibrary(name: "CQt5Widgets", pkgConfig: "Qt5Widgets"),
         .systemLibrary(name: "CQt5Quick", pkgConfig: "Qt5Quick"),
-        .target(name: "qlift-uic")
     ],
     cxxLanguageStandard: .cxx1z
 )
