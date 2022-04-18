@@ -110,7 +110,7 @@ open class QComboBox: QWidget {
 
         let rawSelf = Unmanaged.passUnretained(self).toOpaque()
         QComboBox_currentIndexChanged_connect(self.ptr, object.ptr, rawSelf) { raw, index in
-            let _self = Unmanaged<QComboBox>.fromOpaque(raw!).takeUnretainedValue()
+            let _self = Unmanaged<QComboBox>.fromOpaque(raw).takeUnretainedValue()
             _self.currentIndexChangedIntCallback!(index)
         }
     }

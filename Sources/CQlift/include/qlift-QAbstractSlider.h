@@ -6,6 +6,8 @@
 extern "C" {
 #endif
 
+#pragma clang diagnostic ignored "-Wnullability-completeness"
+#pragma clang assume_nonnull begin
 LIBRARY_API void QAbstractSlider_actionTriggered_connect(void *abstractSlider,
                                                          void *receiver,
                                                          void *context,
@@ -30,6 +32,7 @@ LIBRARY_API void QAbstractSlider_valueChanged_connect(void *abstractSlider,
                                                       void *receiver,
                                                       void *context,
                                                       void (*slot_ptr)(void *, int));
+#pragma clang assume_nonnull end
 
 LIBRARY_API void QAbstractSlider_setMinimum(void *abstractSlider, int minimum);
 LIBRARY_API int QAbstractSlider_minimum(void *abstractSlider);

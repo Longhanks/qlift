@@ -44,7 +44,7 @@ open class QAbstractSlider: QWidget {
         self.actionTriggeredCallback = slot
         let rawSelf = Unmanaged.passUnretained(self).toOpaque()
         QAbstractSlider_actionTriggered_connect(ptr, object.ptr, rawSelf) { raw, action in
-            let _self = Unmanaged<QAbstractSlider>.fromOpaque(raw!).takeUnretainedValue()
+            let _self = Unmanaged<QAbstractSlider>.fromOpaque(raw).takeUnretainedValue()
             _self.actionTriggeredCallback!(SliderAction(rawValue: action)!)
         }
     }
@@ -55,7 +55,7 @@ open class QAbstractSlider: QWidget {
         self.rangeChangedCallback = slot
         let rawSelf = Unmanaged.passUnretained(self).toOpaque()
         QAbstractSlider_rangeChanged_connect(ptr, object.ptr, rawSelf) { raw, min, max in
-            let _self = Unmanaged<QAbstractSlider>.fromOpaque(raw!).takeUnretainedValue()
+            let _self = Unmanaged<QAbstractSlider>.fromOpaque(raw).takeUnretainedValue()
             _self.rangeChangedCallback!(min, max)
         }
 
@@ -67,7 +67,7 @@ open class QAbstractSlider: QWidget {
         self.sliderMovedCallback = slot
         let rawSelf = Unmanaged.passUnretained(self).toOpaque()
         QAbstractSlider_sliderMoved_connect(ptr, object.ptr, rawSelf) { raw, position in
-            let _self = Unmanaged<QAbstractSlider>.fromOpaque(raw!).takeUnretainedValue()
+            let _self = Unmanaged<QAbstractSlider>.fromOpaque(raw).takeUnretainedValue()
             _self.sliderMovedCallback!(position)
         }
     }
@@ -78,7 +78,7 @@ open class QAbstractSlider: QWidget {
         self.sliderPressedCallback = slot
         let rawSelf = Unmanaged.passUnretained(self).toOpaque()
         QAbstractSlider_sliderPressed_connect(self.ptr, object.ptr, rawSelf) { raw in
-            let _self = Unmanaged<QAbstractSlider>.fromOpaque(raw!).takeUnretainedValue()
+            let _self = Unmanaged<QAbstractSlider>.fromOpaque(raw).takeUnretainedValue()
             _self.sliderPressedCallback!()
         }
 
@@ -90,10 +90,8 @@ open class QAbstractSlider: QWidget {
         self.sliderReleasedCallback = slot
         let rawSelf = Unmanaged.passUnretained(self).toOpaque()
         QAbstractSlider_sliderReleased_connect(self.ptr, object.ptr, rawSelf) { raw in
-            if raw != nil {
-                let _self = Unmanaged<QAbstractSlider>.fromOpaque(raw!).takeUnretainedValue()
-                _self.sliderReleasedCallback!()
-            }
+            let _self = Unmanaged<QAbstractSlider>.fromOpaque(raw).takeUnretainedValue()
+            _self.sliderReleasedCallback!()
         }
     }
 
@@ -103,7 +101,7 @@ open class QAbstractSlider: QWidget {
         self.valueChangedCallback = slot
         let rawSelf = Unmanaged.passUnretained(self).toOpaque()
         QAbstractSlider_valueChanged_connect(ptr, object.ptr, rawSelf) { raw, value in
-            let _self = Unmanaged<QAbstractSlider>.fromOpaque(raw!).takeUnretainedValue()
+            let _self = Unmanaged<QAbstractSlider>.fromOpaque(raw).takeUnretainedValue()
             _self.valueChangedCallback!(value)
         }
 

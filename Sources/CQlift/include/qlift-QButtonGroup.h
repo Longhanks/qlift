@@ -6,6 +6,9 @@
 extern "C" {
 #endif
 
+#pragma clang diagnostic ignored "-Wnullability-completeness"
+#pragma clang assume_nonnull begin
+
 LIBRARY_API void QButtonGroup_idClicked_connect(void *buttonGroup,
                                                 void *receiver,
                                                 void *context,
@@ -22,6 +25,7 @@ LIBRARY_API void QButtonGroup_idToggled_connect(void *buttonGroup,
                                                 void *receiver,
                                                 void *context,
                                                 void (*slot_ptr)(void *, int, bool));
+#pragma clang assume_nonnull end
 
 LIBRARY_API void QButtonGroup_addButton(void *buttonGroup, void *abstractButton, int id);
 LIBRARY_API int QButtonGroup_checkedId(void *buttonGroup);

@@ -58,10 +58,8 @@ open class QButtonGroup: QObject {
 
         let rawSelf = Unmanaged.passUnretained(self).toOpaque()
         QButtonGroup_idClicked_connect(self.ptr, object.ptr, rawSelf) { raw, id in
-            if raw != nil {
-                let _self = Unmanaged<QButtonGroup>.fromOpaque(raw!).takeUnretainedValue()
-                _self.idClickedCallback!(id)
-            }
+            let _self = Unmanaged<QButtonGroup>.fromOpaque(raw).takeUnretainedValue()
+            _self.idClickedCallback!(id)
         }
 
     }
@@ -73,10 +71,8 @@ open class QButtonGroup: QObject {
 
         let rawSelf = Unmanaged.passUnretained(self).toOpaque()
         QButtonGroup_idToggled_connect(self.ptr, object.ptr, rawSelf) { raw, id, checked in
-            if raw != nil {
-                let _self = Unmanaged<QButtonGroup>.fromOpaque(raw!).takeUnretainedValue()
-                _self.idToggledCallback!(id, checked)
-            }
+            let _self = Unmanaged<QButtonGroup>.fromOpaque(raw).takeUnretainedValue()
+            _self.idToggledCallback!(id, checked)
         }
     }
 
@@ -87,10 +83,8 @@ open class QButtonGroup: QObject {
 
         let rawSelf = Unmanaged.passUnretained(self).toOpaque()
         QButtonGroup_idPressed_connect(self.ptr, object.ptr, rawSelf) { raw, id in
-            if raw != nil {
-                let _self = Unmanaged<QButtonGroup>.fromOpaque(raw!).takeUnretainedValue()
-                _self.idPressedCallback!(id)
-            }
+            let _self = Unmanaged<QButtonGroup>.fromOpaque(raw).takeUnretainedValue()
+            _self.idPressedCallback!(id)
         }
 
     }
@@ -102,10 +96,8 @@ open class QButtonGroup: QObject {
 
         let rawSelf = Unmanaged.passUnretained(self).toOpaque()
         QButtonGroup_idReleased_connect(self.ptr, object.ptr, rawSelf) { raw, id in
-            if raw != nil {
-                let _self = Unmanaged<QButtonGroup>.fromOpaque(raw!).takeUnretainedValue()
-                _self.idReleasedCallback!(id)
-            }
+            let _self = Unmanaged<QButtonGroup>.fromOpaque(raw).takeUnretainedValue()
+            _self.idReleasedCallback!(id)
         }
 
     }

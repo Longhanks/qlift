@@ -23,10 +23,8 @@ public func dispatchQt(block: @escaping () -> Void) {
     let box = ClosureBox(block)
     let rawClosure = Unmanaged.passRetained(box).toOpaque()
     DispatchToQTMainThread(rawClosure) { raw in
-        if raw != nil {
-            let box = Unmanaged<ClosureBox>.fromOpaque(raw!).takeRetainedValue()
-            box.closure()
-        }
+        let box = Unmanaged<ClosureBox>.fromOpaque(raw).takeRetainedValue()
+        box.closure()
     }
 }
 

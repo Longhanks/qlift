@@ -57,7 +57,7 @@ open class QAbstractButton: QWidget {
         self.clickedBoolCallback = slot
 
         QAbstractButton_clicked_connect(self.ptr, object.ptr) { raw, checked in
-            let _self = Unmanaged<QAbstractButton>.fromOpaque(raw!).takeUnretainedValue()
+            let _self = Unmanaged<QAbstractButton>.fromOpaque(raw).takeUnretainedValue()
             _self.clickedBoolCallback!(checked)
         }
     }
@@ -67,7 +67,7 @@ open class QAbstractButton: QWidget {
         self.clickedCallback = slot
 
         QAbstractButton_clicked_connect(self.ptr, object.ptr) { raw, checked in
-            let _self = Unmanaged<QAbstractButton>.fromOpaque(raw!).takeUnretainedValue()
+            let _self = Unmanaged<QAbstractButton>.fromOpaque(raw).takeUnretainedValue()
             _self.clickedCallback!()
         }
     }
@@ -77,7 +77,7 @@ open class QAbstractButton: QWidget {
         self.toggledCallback = slot
 
         QAbstractButton_toggled_connect(self.ptr, object.ptr) { raw, checked in
-            let _self = Unmanaged<QAbstractButton>.fromOpaque(raw!).takeUnretainedValue()
+            let _self = Unmanaged<QAbstractButton>.fromOpaque(raw).takeUnretainedValue()
             _self.toggledCallback!(checked)
         }
     }
@@ -87,7 +87,7 @@ open class QAbstractButton: QWidget {
         self.pressedCallback = slot
 
         QAbstractButton_pressed_connect(self.ptr, object.ptr) { raw in
-            let _self = Unmanaged<QAbstractButton>.fromOpaque(raw!).takeUnretainedValue()
+            let _self = Unmanaged<QAbstractButton>.fromOpaque(raw).takeUnretainedValue()
             _self.pressedCallback!()
         }
     }
@@ -97,7 +97,7 @@ open class QAbstractButton: QWidget {
         self.releasedCallback = slot
 
         QAbstractButton_released_connect(self.ptr, object.ptr) { raw in
-            let _self = Unmanaged<QAbstractButton>.fromOpaque(raw!).takeUnretainedValue()
+            let _self = Unmanaged<QAbstractButton>.fromOpaque(raw).takeUnretainedValue()
             _self.releasedCallback!()
         }
     }

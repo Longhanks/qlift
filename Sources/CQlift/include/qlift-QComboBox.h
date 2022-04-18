@@ -6,6 +6,14 @@
 extern "C" {
 #endif
 
+#pragma clang diagnostic ignored "-Wnullability-completeness"
+#pragma clang assume_nonnull begin
+LIBRARY_API void QComboBox_currentIndexChanged_connect(void *comboBox,
+                                                       void *receiver,
+                                                       void *context,
+                                                       void (*slot_ptr)(void *, int));
+#pragma clang assume_nonnull end
+
 LIBRARY_API void *QComboBox_new(void *parent);
 LIBRARY_API void QComboBox_addItem(void *comboBox, const char *text);
 LIBRARY_API bool QComboBox_hasFrame(void *comboBox);
@@ -27,12 +35,6 @@ LIBRARY_API int QComboBox_count(void *comboBox);
 LIBRARY_API void QComboBox_setMaxCount(void *comboBox, int max);
 LIBRARY_API int QComboBox_maxCount(void *comboBox);
 LIBRARY_API void QComboBox_setQStyledItemDelegate(void *comboBox);
-
-LIBRARY_API void
-QComboBox_currentIndexChanged_connect(void *comboBox,
-                                      void *receiver,
-                                      void *context,
-                                      void (*slot_ptr)(void *, int));
 
 #ifdef __cplusplus
 }

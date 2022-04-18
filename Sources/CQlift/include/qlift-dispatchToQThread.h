@@ -13,7 +13,9 @@
 extern "C" {
 #endif
 
+#pragma clang assume_nonnull begin
 LIBRARY_API void DispatchToQTMainThread(void *callBackObject, void (*callback)(void *));
+#pragma clang assume_nonnull end
 
 #ifdef __cplusplus
 }

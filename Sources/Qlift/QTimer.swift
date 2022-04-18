@@ -43,10 +43,8 @@ open class QTimer: QObject {
         let box = ClosureBox(handler)
         let rawClosure = Unmanaged.passRetained(box).toOpaque()
         QTimer_singleShot(msec, timerType.rawValue, rawClosure) { raw in
-            if raw != nil {
-                let box = Unmanaged<ClosureBox>.fromOpaque(raw!).takeRetainedValue()
-                box.closure()
-            }
+            let box = Unmanaged<ClosureBox>.fromOpaque(raw).takeRetainedValue()
+            box.closure()
         }
     }
 
@@ -56,10 +54,8 @@ open class QTimer: QObject {
         self.timeoutCallback = slot
         let rawSelf = Unmanaged.passUnretained(self).toOpaque()
         QTimer_connect(self.ptr, object.ptr, rawSelf) { raw in
-            if raw != nil {
-                let _self = Unmanaged<QTimer>.fromOpaque(raw!).takeUnretainedValue()
-                _self.timeoutCallback?()
-            }
+            let _self = Unmanaged<QTimer>.fromOpaque(raw).takeUnretainedValue()
+            _self.timeoutCallback?()
         }
     }
 }
