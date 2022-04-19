@@ -48,4 +48,3 @@ Add `https://github.com/DimaRU/qlift.git` to Package Dependencies list
 ## Note
 
 This Qt wrapper have incomplete implementation, most of the Qt classes are not implemented. Also, support for already implemented Qt classes may be incomplete.
-Again, the architecture of the project has some flaws with release objects.
