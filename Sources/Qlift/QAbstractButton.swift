@@ -1,9 +1,7 @@
 import CQlift
 
-
 open class QAbstractButton: QWidget {
-    var clickedBoolCallback: ((Bool) -> Void)?
-    var clickedCallback: (() -> Void)?
+    var clickedCallback: ((Bool) -> Void)?
     var toggledCallback: ((Bool) -> Void)?
     var pressedCallback: (() -> Void)?
     var releasedCallback: (() -> Void)?
@@ -22,7 +20,6 @@ open class QAbstractButton: QWidget {
 
     override func swiftCleanup() {
         super.swiftCleanup()
-        clickedBoolCallback = nil
         clickedCallback = nil
         toggledCallback = nil
         pressedCallback = nil
@@ -52,51 +49,56 @@ open class QAbstractButton: QWidget {
         set { QAbstractButton_setDown(ptr, newValue) }
     }
 
-    open func connectClicked(receiver: QObject? = nil, to slot: @escaping ((Bool) -> Void)) {
-        let object: QObject = receiver ?? self
-        self.clickedBoolCallback = slot
+    open func connectClicked<T: QObject, R: Any>(receiver: QObject? = nil, target: T, to slot: @escaping Slot<T, R, Bool>) {
+        self.clickedCallback = { [weak target] in
+            if let target = target { _ = slot(target)($0) }
+        }
+        connectClickedHook(receiver: receiver)
+    }
 
-        QAbstractButton_clicked_connect(self.ptr, object.ptr) { raw, checked in
+    open func connectClicked<T: QObject, R: Any>(receiver: QObject? = nil, target: T, to slot: @escaping SlotVoid<T, R>) {
+        self.clickedCallback = { [weak target] _ in
+            if let target = target { _ = slot(target)() }
+        }
+        connectClickedHook(receiver: receiver)
+    }
+
+    private func connectClickedHook(receiver: QObject?) {
+        QAbstractButton_clicked_connect(self.ptr, (receiver ?? self).ptr) { raw, checked in
             let _self = Unmanaged<QAbstractButton>.fromOpaque(raw).takeUnretainedValue()
-            _self.clickedBoolCallback!(checked)
+            _self.clickedCallback?(checked)
         }
     }
 
-    open func connectClicked(receiver: QObject? = nil, to slot: @escaping (() -> Void)) {
-        let object: QObject = receiver ?? self
-        self.clickedCallback = slot
 
-        QAbstractButton_clicked_connect(self.ptr, object.ptr) { raw, checked in
+    open func connectToggled<T: QObject, R: Any>(receiver: QObject? = nil, target: T, to slot: @escaping Slot<T, R, Bool>) {
+        self.toggledCallback = { [weak target] in
+            if let target = target { _ = slot(target)($0) }
+        }
+        
+        QAbstractButton_toggled_connect(self.ptr, (receiver ?? self).ptr) { raw, checked in
             let _self = Unmanaged<QAbstractButton>.fromOpaque(raw).takeUnretainedValue()
-            _self.clickedCallback!()
+            _self.toggledCallback?(checked)
         }
     }
 
-    open func connectToggled(receiver: QObject? = nil, to slot: @escaping ((Bool) -> Void)) {
-        let object: QObject = receiver ?? self
-        self.toggledCallback = slot
-
-        QAbstractButton_toggled_connect(self.ptr, object.ptr) { raw, checked in
-            let _self = Unmanaged<QAbstractButton>.fromOpaque(raw).takeUnretainedValue()
-            _self.toggledCallback!(checked)
+    open func connectPressed<T: QObject, R: Any>(receiver: QObject? = nil, target: T, to slot: @escaping SlotVoid<T, R>) {
+        self.pressedCallback = { [weak target] in
+            if let target = target { _ = slot(target)() }
         }
-    }
 
-    open func connectPressed(receiver: QObject? = nil, to slot: @escaping (() -> Void)) {
-        let object: QObject = receiver ?? self
-        self.pressedCallback = slot
-
-        QAbstractButton_pressed_connect(self.ptr, object.ptr) { raw in
+        QAbstractButton_pressed_connect(self.ptr, (receiver ?? self).ptr) { raw in
             let _self = Unmanaged<QAbstractButton>.fromOpaque(raw).takeUnretainedValue()
             _self.pressedCallback!()
         }
     }
 
-    open func connectReleased(receiver: QObject? = nil, to slot: @escaping (() -> Void)) {
-        let object: QObject = receiver ?? self
-        self.releasedCallback = slot
+    open func connectReleased<T: QObject, R: Any>(receiver: QObject? = nil, target: T, to slot: @escaping SlotVoid<T, R>) {
+        self.releasedCallback = { [weak target] in
+            if let target = target { _ = slot(target)() }
+        }
 
-        QAbstractButton_released_connect(self.ptr, object.ptr) { raw in
+        QAbstractButton_released_connect(self.ptr, (receiver ?? self).ptr) { raw in
             let _self = Unmanaged<QAbstractButton>.fromOpaque(raw).takeUnretainedValue()
             _self.releasedCallback!()
         }

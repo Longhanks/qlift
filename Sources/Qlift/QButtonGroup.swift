@@ -51,51 +51,51 @@ open class QButtonGroup: QObject {
         QButtonGroup_checkedId(ptr)
     }
 
-    open func connectIdClicked(receiver: QObject? = nil, to slot: @escaping ((Int32) -> Void)) {
-        let object: QObject = receiver ?? self
-
-        self.idClickedCallback = slot
+    open func connectIdClicked<T: QObject, R: Any>(receiver: QObject? = nil, target: T, to slot: @escaping Slot<T, R, Int32>) {
+        self.idClickedCallback = { [weak target] in
+            if let target = target { _ = slot(target)($0) }
+        }
 
         let rawSelf = Unmanaged.passUnretained(self).toOpaque()
-        QButtonGroup_idClicked_connect(self.ptr, object.ptr, rawSelf) { raw, id in
+        QButtonGroup_idClicked_connect(self.ptr, (receiver ?? self).ptr, rawSelf) { raw, id in
             let _self = Unmanaged<QButtonGroup>.fromOpaque(raw).takeUnretainedValue()
             _self.idClickedCallback!(id)
         }
 
     }
 
-    open func connectIdToggled(receiver: QObject? = nil, to slot: @escaping ((Int32, Bool) -> Void)) {
-        let object: QObject = receiver ?? self
-
-        self.idToggledCallback = slot
+    open func connectIdToggled<T: QObject, R: Any>(receiver: QObject? = nil, target: T, to slot: @escaping SlotTwin<T, R, Int32, Bool>) {
+        self.idToggledCallback = { [weak target] in
+            if let target = target { _ = slot(target)($0, $1) }
+        }
 
         let rawSelf = Unmanaged.passUnretained(self).toOpaque()
-        QButtonGroup_idToggled_connect(self.ptr, object.ptr, rawSelf) { raw, id, checked in
+        QButtonGroup_idToggled_connect(self.ptr, (receiver ?? self).ptr, rawSelf) { raw, id, checked in
             let _self = Unmanaged<QButtonGroup>.fromOpaque(raw).takeUnretainedValue()
             _self.idToggledCallback!(id, checked)
         }
     }
 
-    open func connectIdPressed(receiver: QObject? = nil, to slot: @escaping ((Int32) -> Void)) {
-        let object: QObject = receiver ?? self
-
-        self.idPressedCallback = slot
+    open func connectIdPressed<T: QObject, R: Any>(receiver: QObject? = nil, target: T, to slot: @escaping Slot<T, R, Int32>) {
+        self.idPressedCallback = { [weak target] in
+            if let target = target { _ = slot(target)($0) }
+        }
 
         let rawSelf = Unmanaged.passUnretained(self).toOpaque()
-        QButtonGroup_idPressed_connect(self.ptr, object.ptr, rawSelf) { raw, id in
+        QButtonGroup_idPressed_connect(self.ptr, (receiver ?? self).ptr, rawSelf) { raw, id in
             let _self = Unmanaged<QButtonGroup>.fromOpaque(raw).takeUnretainedValue()
             _self.idPressedCallback!(id)
         }
 
     }
 
-    open func connectIdReleased(receiver: QObject? = nil, to slot: @escaping ((Int32) -> Void)) {
-        let object: QObject = receiver ?? self
-
-        self.idReleasedCallback = slot
+    open func connectIdReleased<T: QObject, R: Any>(receiver: QObject? = nil, target: T, to slot: @escaping Slot<T, R, Int32>) {
+        self.idReleasedCallback = { [weak target] in
+            if let target = target { _ = slot(target)($0) }
+        }
 
         let rawSelf = Unmanaged.passUnretained(self).toOpaque()
-        QButtonGroup_idReleased_connect(self.ptr, object.ptr, rawSelf) { raw, id in
+        QButtonGroup_idReleased_connect(self.ptr, (receiver ?? self).ptr, rawSelf) { raw, id in
             let _self = Unmanaged<QButtonGroup>.fromOpaque(raw).takeUnretainedValue()
             _self.idReleasedCallback!(id)
         }

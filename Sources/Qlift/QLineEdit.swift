@@ -117,57 +117,61 @@ open class QLineEdit: QWidget {
         return QAction(ptr: actionPtr)
     }
 
-    open func connectTextEdited(receiver: QObject? = nil, to slot: @escaping ((String) -> Void)) {
-        let object: QObject = receiver ?? self
-        self.textEditedCallback = slot
+    open func connectTextEdited<T: QObject, R: Any>(receiver: QObject? = nil, target: T, to slot: @escaping Slot<T, R, String>) {
+        self.textEditedCallback = { [weak target] in
+            if let target = target { _ = slot(target)($0) }
+        }
 
         let rawSelf = Unmanaged.passUnretained(self).toOpaque()
-        QLineEdit_textEdited_connect(self.ptr, object.ptr, rawSelf) { raw, s in
+        QLineEdit_textEdited_connect(self.ptr, (receiver ?? self).ptr, rawSelf) { raw, s in
             let _self = Unmanaged<QLineEdit>.fromOpaque(raw).takeUnretainedValue()
             _self.textEditedCallback?(String(utf16CodeUnits: s.utf16, count: Int(s.size)))
         }
-
     }
 
-    open func connectTextChanged(receiver: QObject? = nil, to slot: @escaping ((String) -> Void)) {
-        let object: QObject = receiver ?? self
-        self.textChangedCallback = slot
+    open func connectTextChanged<T: QObject, R: Any>(receiver: QObject? = nil, target: T, to slot: @escaping Slot<T, R, String>) {
+        self.textChangedCallback = { [weak target] in
+            if let target = target { _ = slot(target)($0) }
+        }
 
         let rawSelf = Unmanaged.passUnretained(self).toOpaque()
-        QLineEdit_textChanged_connect(self.ptr, object.ptr, rawSelf) { raw, s in
+        QLineEdit_textChanged_connect(self.ptr, (receiver ?? self).ptr, rawSelf) { raw, s in
             let _self = Unmanaged<QLineEdit>.fromOpaque(raw).takeUnretainedValue()
             _self.textChangedCallback?(String(utf16CodeUnits: s.utf16, count: Int(s.size)))
         }
     }
 
-    open func connectReturnPressed(receiver: QObject? = nil, to slot: @escaping (() -> Void)) {
-        let object: QObject = receiver ?? self
-        self.returnPressedCallback = slot
+    open func connectReturnPressed<T: QObject, R: Any>(receiver: QObject? = nil, target: T, to slot: @escaping SlotVoid<T, R>) {
+        self.returnPressedCallback = { [weak target] in
+            if let target = target { _ = slot(target)() }
+        }
 
         let rawSelf = Unmanaged.passUnretained(self).toOpaque()
-        QLineEdit_returnPressed_connect(self.ptr, object.ptr, rawSelf) { raw in
+        QLineEdit_returnPressed_connect(self.ptr, (receiver ?? self).ptr, rawSelf) { raw in
             let _self = Unmanaged<QLineEdit>.fromOpaque(raw).takeUnretainedValue()
             _self.returnPressedCallback?()
         }
     }
 
-    open func connectEditingFinished(receiver: QObject? = nil, to slot: @escaping (() -> Void)) {
-        let object: QObject = receiver ?? self
-        self.editingFinishedCallback = slot
+    open func connectEditingFinished<T: QObject, R: Any>(receiver: QObject? = nil, target: T, to slot: @escaping SlotVoid<T, R>) {
+        self.editingFinishedCallback = { [weak target] in
+            if let target = target { _ = slot(target)() }
+        }
 
         let rawSelf = Unmanaged.passUnretained(self).toOpaque()
-        QLineEdit_editingFinished_connect(self.ptr, object.ptr, rawSelf) { raw in
+        QLineEdit_editingFinished_connect(self.ptr, (receiver ?? self).ptr, rawSelf) { raw in
             let _self = Unmanaged<QLineEdit>.fromOpaque(raw).takeUnretainedValue()
             _self.editingFinishedCallback?()
         }
     }
 
-    open func connectInputRejected(receiver: QObject? = nil, to slot: @escaping (() -> Void)) {
-        let object: QObject = receiver ?? self
-        self.inputRejectedCallback = slot
+    open func connectInputRejected<T: QObject, R: Any>(receiver: QObject? = nil, target: T, to slot: @escaping SlotVoid<T, R>) {
+        self.inputRejectedCallback = { [weak target] in
+            if let target = target { _ = slot(target)() }
+        }
 
         let rawSelf = Unmanaged.passUnretained(self).toOpaque()
-        QLineEdit_inputRejected_connect(self.ptr, object.ptr, rawSelf) { raw in
+        QLineEdit_inputRejected_connect(self.ptr, (receiver ?? self).ptr, rawSelf) { raw in
             let _self = Unmanaged<QLineEdit>.fromOpaque(raw).takeUnretainedValue()
             _self.inputRejectedCallback?()
         }

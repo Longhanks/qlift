@@ -156,41 +156,45 @@ open class QTabWidget: QWidget {
         return String(utf16CodeUnits: s.utf16, count: Int(s.size))
     }
 
-    open func connectCurrentChanged(receiver: QObject? = nil, to slot: @escaping ((Int32) -> Void)) {
-        let object: QObject = receiver ?? self
-        self.currentChangedCallBack = slot
+    open func connectCurrentChanged<T: QObject, R: Any>(receiver: QObject? = nil, target: T, to slot: @escaping Slot<T, R, Int32>) {
+        self.currentChangedCallBack = { [weak target] in
+            if let target = target { _ = slot(target)($0) }
+        }
 
-        QTabWidget_currentChanged_connect(self.ptr, object.ptr) { raw, index in
+        QTabWidget_currentChanged_connect(self.ptr, (receiver ?? self).ptr) { raw, index in
             let mySelf = Unmanaged<QTabWidget>.fromOpaque(raw).takeUnretainedValue()
             mySelf.currentChangedCallBack?(index)
         }
     }
 
-    open func connectTabBarClicked(receiver: QObject? = nil, to slot: @escaping ((Int32) -> Void)) {
-        let object: QObject = receiver ?? self
-        self.tabBarClickedCallBack = slot
+    open func connectTabBarClicked<T: QObject, R: Any>(receiver: QObject? = nil, target: T, to slot: @escaping Slot<T, R, Int32>) {
+        self.tabBarClickedCallBack = { [weak target] in
+            if let target = target { _ = slot(target)($0) }
+        }
 
-        QTabWidget_tabBarClicked_connect(self.ptr, object.ptr) { raw, index in
+        QTabWidget_tabBarClicked_connect(self.ptr, (receiver ?? self).ptr) { raw, index in
             let mySelf = Unmanaged<QTabWidget>.fromOpaque(raw).takeUnretainedValue()
             mySelf.tabBarClickedCallBack?(index)
         }
     }
 
-    open func connectTabBarDoubleClicked(receiver: QObject? = nil, to slot: @escaping ((Int32) -> Void)) {
-        let object: QObject = receiver ?? self
-        self.tabBarDoubleClickedCallBack = slot
+    open func connectTabBarDoubleClicked<T: QObject, R: Any>(receiver: QObject? = nil, target: T, to slot: @escaping Slot<T, R, Int32>) {
+        self.tabBarDoubleClickedCallBack = { [weak target] in
+            if let target = target { _ = slot(target)($0) }
+        }
 
-        QTabWidget_tabBarDoubleClicked_connect(self.ptr, object.ptr) { raw, index in
+        QTabWidget_tabBarDoubleClicked_connect(self.ptr, (receiver ?? self).ptr) { raw, index in
             let mySelf = Unmanaged<QTabWidget>.fromOpaque(raw).takeUnretainedValue()
             mySelf.tabBarDoubleClickedCallBack?(index)
         }
     }
 
-    open func connectTabCloseRequested(receiver: QObject? = nil, to slot: @escaping ((Int32) -> Void)) {
-        let object: QObject = receiver ?? self
-        self.tabCloseRequestedCallBack = slot
+    open func connectTabCloseRequested<T: QObject, R: Any>(receiver: QObject? = nil, target: T, to slot: @escaping Slot<T, R, Int32>) {
+        self.tabCloseRequestedCallBack = { [weak target] in
+            if let target = target { _ = slot(target)($0) }
+        }
 
-        QTabWidget_tabCloseRequested_connect(self.ptr, object.ptr) { raw, index in
+        QTabWidget_tabCloseRequested_connect(self.ptr, (receiver ?? self).ptr) { raw, index in
             let mySelf = Unmanaged<QTabWidget>.fromOpaque(raw).takeUnretainedValue()
             mySelf.tabCloseRequestedCallBack?(index)
         }

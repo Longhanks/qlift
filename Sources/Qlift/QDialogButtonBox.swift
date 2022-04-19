@@ -38,21 +38,23 @@ open class QDialogButtonBox: QWidget {
         super.init(ptr: QDialogButtonBox_new(parent?.ptr))
     }
 
-    open func connectAccepted(receiver: QObject? = nil, to slot: @escaping (() -> Void)) {
-        let object: QObject = receiver ?? self
-        self.acceptedCallback = slot
+    open func connectAccepted<T: QObject, R: Any>(receiver: QObject? = nil, target: T, to slot: @escaping SlotVoid<T, R>) {
+        self.acceptedCallback = { [weak target] in
+            if let target = target { _ = slot(target)() }
+        }
 
-        QDialogButtonBox_accepted_connect(self.ptr, object.ptr) { raw in
+        QDialogButtonBox_accepted_connect(self.ptr, (receiver ?? self).ptr) { raw in
             let _self = Unmanaged<QDialogButtonBox>.fromOpaque(raw).takeUnretainedValue()
             _self.acceptedCallback?()
         }
     }
 
-    open func connectRejected(receiver: QObject? = nil, to slot: @escaping (() -> Void)) {
-        let object: QObject = receiver ?? self
-        self.rejectedCallback = slot
+    open func connectRejected<T: QObject, R: Any>(receiver: QObject? = nil, target: T, to slot: @escaping SlotVoid<T, R>) {
+        self.rejectedCallback = { [weak target] in
+            if let target = target { _ = slot(target)() }
+        }
 
-        QDialogButtonBox_rejected_connect(self.ptr, object.ptr) { raw in
+        QDialogButtonBox_rejected_connect(self.ptr, (receiver ?? self).ptr) { raw in
             let _self = Unmanaged<QDialogButtonBox>.fromOpaque(raw).takeUnretainedValue()
             _self.rejectedCallback?()
         }

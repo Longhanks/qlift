@@ -1,5 +1,8 @@
 import CQlift
 
+public typealias Slot<QType, RType, Param> = (QType) -> (Param) -> RType
+public typealias SlotTwin<QType, RType, Param1, Param2> = (QType) -> (Param1, Param2) -> RType
+public typealias SlotVoid<QType, RType> = (QType) -> () -> RType
 
 open class QObject {
     var ptr: UnsafeMutableRawPointer!

@@ -38,69 +38,75 @@ open class QAbstractSlider: QWidget {
         valueChangedCallback = nil
     }
 
-    open func connectActionTriggered(receiver: QObject? = nil, to slot: @escaping ((SliderAction) -> Void)) {
-        let object: QObject = receiver ?? self
-
-        self.actionTriggeredCallback = slot
+    open func connectActionTriggered<T: QObject, R: Any>(receiver: QObject? = nil, target: T, to slot: @escaping Slot<T, R, SliderAction>) {
+        self.actionTriggeredCallback = { [weak target] in
+            if let target = target { _ = slot(target)($0) }
+        }
+        
         let rawSelf = Unmanaged.passUnretained(self).toOpaque()
-        QAbstractSlider_actionTriggered_connect(ptr, object.ptr, rawSelf) { raw, action in
+        QAbstractSlider_actionTriggered_connect(self.ptr, (receiver ?? self).ptr, rawSelf) { raw, action in
             let _self = Unmanaged<QAbstractSlider>.fromOpaque(raw).takeUnretainedValue()
             _self.actionTriggeredCallback!(SliderAction(rawValue: action)!)
         }
     }
 
-    open func connectRangeChanged(receiver: QObject? = nil, to slot: @escaping ((Int32, Int32) -> Void)) {
-        let object: QObject = receiver ?? self
-
-        self.rangeChangedCallback = slot
+    open func connectRangeChanged<T: QObject, R: Any>(receiver: QObject? = nil, target: T, to slot: @escaping SlotTwin<T, R, Int32, Int32>) {
+        self.rangeChangedCallback = { [weak target] in
+            if let target = target { _ = slot(target)($0, $1) }
+        }
+        
         let rawSelf = Unmanaged.passUnretained(self).toOpaque()
-        QAbstractSlider_rangeChanged_connect(ptr, object.ptr, rawSelf) { raw, min, max in
+        QAbstractSlider_rangeChanged_connect(self.ptr, (receiver ?? self).ptr, rawSelf) { raw, min, max in
             let _self = Unmanaged<QAbstractSlider>.fromOpaque(raw).takeUnretainedValue()
             _self.rangeChangedCallback!(min, max)
         }
 
     }
 
-    open func connectSliderMoved(receiver: QObject? = nil, to slot: @escaping ((Int32) -> Void)) {
-        let object: QObject = receiver ?? self
-
-        self.sliderMovedCallback = slot
+    open func connectSliderMoved<T: QObject, R: Any>(receiver: QObject? = nil, target: T, to slot: @escaping Slot<T, R, Int32>) {
+        self.sliderMovedCallback = { [weak target] in
+            if let target = target { _ = slot(target)($0) }
+        }
+        
         let rawSelf = Unmanaged.passUnretained(self).toOpaque()
-        QAbstractSlider_sliderMoved_connect(ptr, object.ptr, rawSelf) { raw, position in
+        QAbstractSlider_sliderMoved_connect(self.ptr, (receiver ?? self).ptr, rawSelf) { raw, position in
             let _self = Unmanaged<QAbstractSlider>.fromOpaque(raw).takeUnretainedValue()
             _self.sliderMovedCallback!(position)
         }
     }
 
-    open func connectSliderPressed(receiver: QObject? = nil, to slot: @escaping (() -> Void)) {
-        let object: QObject = receiver ?? self
-
-        self.sliderPressedCallback = slot
+    open func connectSliderPressed<T: QObject, R: Any>(receiver: QObject? = nil, target: T, to slot: @escaping SlotVoid<T, R>) {
+        self.sliderPressedCallback = { [weak target] in
+            if let target = target { _ = slot(target)() }
+        }
+        
         let rawSelf = Unmanaged.passUnretained(self).toOpaque()
-        QAbstractSlider_sliderPressed_connect(self.ptr, object.ptr, rawSelf) { raw in
+        QAbstractSlider_sliderPressed_connect(self.ptr, (receiver ?? self).ptr, rawSelf) { raw in
             let _self = Unmanaged<QAbstractSlider>.fromOpaque(raw).takeUnretainedValue()
             _self.sliderPressedCallback!()
         }
 
     }
 
-    open func connectSliderReleased(receiver: QObject? = nil, to slot: @escaping (() -> Void)) {
-        let object: QObject = receiver ?? self
-
-        self.sliderReleasedCallback = slot
+    open func connectSliderReleased<T: QObject, R: Any>(receiver: QObject? = nil, target: T, to slot: @escaping SlotVoid<T, R>) {
+        self.sliderReleasedCallback = { [weak target] in
+            if let target = target { _ = slot(target)() }
+        }
+        
         let rawSelf = Unmanaged.passUnretained(self).toOpaque()
-        QAbstractSlider_sliderReleased_connect(self.ptr, object.ptr, rawSelf) { raw in
+        QAbstractSlider_sliderReleased_connect(self.ptr, (receiver ?? self).ptr, rawSelf) { raw in
             let _self = Unmanaged<QAbstractSlider>.fromOpaque(raw).takeUnretainedValue()
             _self.sliderReleasedCallback!()
         }
     }
 
-    open func connectValueChanged(receiver: QObject? = nil, to slot: @escaping ((Int32) -> Void)) {
-        let object: QObject = receiver ?? self
-
-        self.valueChangedCallback = slot
+    open func connectValueChanged<T: QObject, R: Any>(receiver: QObject? = nil, target: T, to slot: @escaping Slot<T, R, Int32>) {
+        self.valueChangedCallback = { [weak target] in
+            if let target = target { _ = slot(target)($0) }
+        }
+        
         let rawSelf = Unmanaged.passUnretained(self).toOpaque()
-        QAbstractSlider_valueChanged_connect(ptr, object.ptr, rawSelf) { raw, value in
+        QAbstractSlider_valueChanged_connect(self.ptr, (receiver ?? self).ptr, rawSelf) { raw, value in
             let _self = Unmanaged<QAbstractSlider>.fromOpaque(raw).takeUnretainedValue()
             _self.valueChangedCallback!(value)
         }

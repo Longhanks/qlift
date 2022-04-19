@@ -48,12 +48,13 @@ open class QTimer: QObject {
         }
     }
 
-    open func connect(receiver: QObject? = nil, to slot: @escaping (() -> Void)) {
-        let object: QObject = receiver ?? self
-
-        self.timeoutCallback = slot
+    open func connect<T: QObject, R: Any>(receiver: QObject? = nil, target: T, to slot: @escaping SlotVoid<T, R>) {
+        self.timeoutCallback = { [weak target] in
+            if let target = target { _ = slot(target)() }
+        }
+        
         let rawSelf = Unmanaged.passUnretained(self).toOpaque()
-        QTimer_connect(self.ptr, object.ptr, rawSelf) { raw in
+        QTimer_connect(self.ptr, (receiver ?? self).ptr, rawSelf) { raw in
             let _self = Unmanaged<QTimer>.fromOpaque(raw).takeUnretainedValue()
             _self.timeoutCallback?()
         }

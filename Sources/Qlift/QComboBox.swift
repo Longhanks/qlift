@@ -104,12 +104,13 @@ open class QComboBox: QWidget {
         QComboBox_setQStyledItemDelegate(ptr)
     }
 
-    open func connectCurrentIndexChanged(receiver: QObject? = nil, to slot: @escaping ((Int32) -> Void)) {
-        let object: QObject = receiver ?? self
-        self.currentIndexChangedIntCallback = slot
+    open func connectCurrentIndexChanged<T: QObject, R: Any>(receiver: QObject? = nil, target: T, to slot: @escaping Slot<T, R, Int32>) {
+        self.currentIndexChangedIntCallback = { [weak target] in
+            if let target = target { _ = slot(target)($0) }
+        }
 
         let rawSelf = Unmanaged.passUnretained(self).toOpaque()
-        QComboBox_currentIndexChanged_connect(self.ptr, object.ptr, rawSelf) { raw, index in
+        QComboBox_currentIndexChanged_connect(self.ptr, (receiver ?? self).ptr, rawSelf) { raw, index in
             let _self = Unmanaged<QComboBox>.fromOpaque(raw).takeUnretainedValue()
             _self.currentIndexChangedIntCallback!(index)
         }
